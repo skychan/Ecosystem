@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="User" agentparentclassname="" agentinterfaces="" agentimports="">
+<agent version="1" agentcomment="This is an agent." agentclassname="ComplexUser" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps/>
   <tasksteps/>
   <decisionsteps/>

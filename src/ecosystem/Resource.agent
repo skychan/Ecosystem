@@ -4,7 +4,26 @@
   <tasksteps/>
   <decisionsteps/>
   <joinsteps/>
-  <agentproperties/>
+  <agentproperties>
+    <agentproperty x="65" y="84" comment="This is an agent property." visibility="0" compiledname="velocity" type="double" defaultvalue="0">
+      <label x="70" y="69" text="Velocity"/>
+    </agentproperty>
+    <agentproperty x="169" y="64" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
+      <label x="174" y="49" text="Type"/>
+    </agentproperty>
+    <agentproperty x="74" y="179" comment="This is an agent property." visibility="0" compiledname="capacity" type="int" defaultvalue="0">
+      <label x="79" y="164" text="Capacity"/>
+    </agentproperty>
+    <agentproperty x="171" y="174" comment="This is an agent property." visibility="0" compiledname="quality" type="double" defaultvalue="0">
+      <label x="176" y="159" text="Quality"/>
+    </agentproperty>
+    <agentproperty x="68" y="282" comment="This is an agent property." visibility="0" compiledname="unitCost" type="int" defaultvalue="0">
+      <label x="73" y="267" text="Unit Cost"/>
+    </agentproperty>
+    <agentproperty x="176" y="295" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="this.getCapacity()">
+      <label x="181" y="280" text="Available"/>
+    </agentproperty>
+  </agentproperties>
   <endsteps/>
   <connections>
     <transitions/>

@@ -65,6 +65,96 @@ public class Task  {
 
     /**
      *
+     * This is an agent property.
+     * @field type
+     *
+     */
+    @Parameter (displayName = "Type", usageName = "type")
+    public String getType() {
+        return type
+    }
+    public void setType(String newValue) {
+        type = newValue
+    }
+    public String type = ""
+
+    /**
+     *
+     * This is an agent property.
+     * @field needServiceType
+     *
+     */
+    @Parameter (displayName = "NeedServiceType", usageName = "needServiceType")
+    public Map<String,String> getNeedServiceType() {
+        return needServiceType
+    }
+    public void setNeedServiceType(Map<String,String> newValue) {
+        needServiceType = newValue
+    }
+    public Map<String,String> needServiceType = new HashMap<String,String>()
+
+    /**
+     *
+     * This is an agent property.
+     * @field needServiceCapacity
+     *
+     */
+    @Parameter (displayName = "NeedServiceCapacity", usageName = "needServiceCapacity")
+    public Map<String,Integer> getNeedServiceCapacity() {
+        return needServiceCapacity
+    }
+    public void setNeedServiceCapacity(Map<String,Integer> newValue) {
+        needServiceCapacity = newValue
+    }
+    public Map<String,Integer> needServiceCapacity = new HashMap<String,Integer>()
+
+    /**
+     *
+     * This is an agent property.
+     * @field processingTime
+     *
+     */
+    @Parameter (displayName = "ProcessingTime", usageName = "processingTime")
+    public Map<String,Integer> getProcessingTime() {
+        return processingTime
+    }
+    public void setProcessingTime(Map<String,Integer> newValue) {
+        processingTime = newValue
+    }
+    public Map<String,Integer> processingTime = new HashMap<String,Integer>()
+
+    /**
+     *
+     * This is an agent property.
+     * @field alternations
+     *
+     */
+    @Parameter (displayName = "Alternations", usageName = "alternations")
+    public List<String> getAlternations() {
+        return alternations
+    }
+    public void setAlternations(List<String> newValue) {
+        alternations = newValue
+    }
+    public List<String> alternations = new ArrayList<String>()
+
+    /**
+     *
+     * This is an agent property.
+     * @field selectedResource
+     *
+     */
+    @Parameter (displayName = "Selected Resource", usageName = "selectedResource")
+    public String getSelectedResource() {
+        return selectedResource
+    }
+    public void setSelectedResource(String newValue) {
+        selectedResource = newValue
+    }
+    public String selectedResource = ""
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -86,6 +176,25 @@ public class Task  {
      *
      */
     protected String agentID = "Task " + (agentIDCounter++)
+
+    /**
+     *
+     * This is the step behavior.
+     * @method processing
+     *
+     */
+    public def processing() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Return the results.
+        return returnValue
+
+    }
 
     /**
      *

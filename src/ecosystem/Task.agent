@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Task" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
-  <tasksteps/>
-  <decisionsteps/>
+  <behaviorsteps>
+    <behaviorstep x="153" y="193" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="processing" parameters="" exceptions="">
+      <label x="153" y="178" text="Processing"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="157" y="283" comment="This is a task." command1="String index = this.getSelectedResource()" command2="" command3="" command4="" command5="">
+      <label x="157" y="268" text="Selection"/>
+    </taskstep>
+    <taskstep x="157" y="356" comment="This is a task." command1="int time = this.getProcessingTime().get(index)" command2="time--" command3="this.getProcessingTime().put(index,time)" command4="" command5="">
+      <label x="157" y="341" text="Obtain Remaining Processing Time"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="174" y="439" comment="This is a loop." criteria="" branchType="while">
+      <label x="174" y="424" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
-  <agentproperties/>
+  <agentproperties>
+    <agentproperty x="35" y="31" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
+      <label x="40" y="16" text="Type"/>
+    </agentproperty>
+    <agentproperty x="34" y="183" comment="This is an agent property." visibility="0" compiledname="needServiceType" type="Map&lt;String,String&gt;" defaultvalue="new HashMap&lt;String,String&gt;()">
+      <label x="39" y="168" text="NeedServiceType"/>
+    </agentproperty>
+    <agentproperty x="133" y="107" comment="This is an agent property." visibility="0" compiledname="needServiceCapacity" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
+      <label x="138" y="92" text="NeedServiceCapacity"/>
+    </agentproperty>
+    <agentproperty x="34" y="107" comment="This is an agent property." visibility="0" compiledname="processingTime" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
+      <label x="39" y="92" text="ProcessingTime"/>
+    </agentproperty>
+    <agentproperty x="133" y="29" comment="This is an agent property." visibility="0" compiledname="alternations" type="List&lt;String&gt;" defaultvalue="new ArrayList&lt;String&gt;()">
+      <label x="138" y="14" text="Alternations"/>
+    </agentproperty>
+    <agentproperty x="33" y="272" comment="This is an agent property." visibility="0" compiledname="selectedResource" type="String" defaultvalue="&quot;&quot;">
+      <label x="38" y="257" text="Selected Resource"/>
+    </agentproperty>
+  </agentproperties>
   <endsteps/>
   <connections>
     <transitions/>

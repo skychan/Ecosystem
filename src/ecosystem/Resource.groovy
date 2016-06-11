@@ -66,21 +66,6 @@ public class Resource  {
     /**
      *
      * This is an agent property.
-     * @field velocity
-     *
-     */
-    @Parameter (displayName = "Velocity", usageName = "velocity")
-    public double getVelocity() {
-        return velocity
-    }
-    public void setVelocity(double newValue) {
-        velocity = newValue
-    }
-    public double velocity = 0
-
-    /**
-     *
-     * This is an agent property.
      * @field type
      *
      */
@@ -176,6 +161,27 @@ public class Resource  {
      *
      */
     protected String agentID = "Resource " + (agentIDCounter++)
+
+    /**
+     *
+     * This is the step behavior.
+     * @method step
+     *
+     */
+    public def step() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        int i =1
+        // Return the results.
+        return returnValue
+
+    }
 
     /**
      *

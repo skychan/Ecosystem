@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Resource" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
-  <tasksteps/>
+  <behaviorsteps>
+    <behaviorstep x="165" y="195" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+      <label x="165" y="180" text="Step"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="165" y="294" comment="This is a task." command1="int i =1" command2="" command3="" command4="" command5="">
+      <label x="165" y="279" text="Do Task"/>
+    </taskstep>
+  </tasksteps>
   <decisionsteps/>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="65" y="84" comment="This is an agent property." visibility="0" compiledname="velocity" type="double" defaultvalue="0">
-      <label x="70" y="69" text="Velocity"/>
+    <agentproperty x="59" y="34" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
+      <label x="64" y="19" text="Type"/>
     </agentproperty>
-    <agentproperty x="169" y="64" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
-      <label x="174" y="49" text="Type"/>
+    <agentproperty x="171" y="38" comment="This is an agent property." visibility="0" compiledname="capacity" type="int" defaultvalue="0">
+      <label x="176" y="23" text="Capacity"/>
     </agentproperty>
-    <agentproperty x="74" y="179" comment="This is an agent property." visibility="0" compiledname="capacity" type="int" defaultvalue="0">
-      <label x="79" y="164" text="Capacity"/>
+    <agentproperty x="60" y="124" comment="This is an agent property." visibility="0" compiledname="quality" type="double" defaultvalue="0">
+      <label x="65" y="109" text="Quality"/>
     </agentproperty>
-    <agentproperty x="171" y="174" comment="This is an agent property." visibility="0" compiledname="quality" type="double" defaultvalue="0">
-      <label x="176" y="159" text="Quality"/>
+    <agentproperty x="61" y="203" comment="This is an agent property." visibility="0" compiledname="unitCost" type="int" defaultvalue="0">
+      <label x="66" y="188" text="Unit Cost"/>
     </agentproperty>
-    <agentproperty x="68" y="282" comment="This is an agent property." visibility="0" compiledname="unitCost" type="int" defaultvalue="0">
-      <label x="73" y="267" text="Unit Cost"/>
-    </agentproperty>
-    <agentproperty x="176" y="295" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="this.getCapacity()">
-      <label x="181" y="280" text="Available"/>
+    <agentproperty x="170" y="121" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="this.getCapacity()">
+      <label x="175" y="106" text="Available"/>
     </agentproperty>
   </agentproperties>
-  <endsteps/>
+  <endsteps>
+    <endstep x="170" y="407"/>
+  </endsteps>
   <connections>
-    <transitions/>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
     <booleantransitions/>
   </connections>
 </agent>

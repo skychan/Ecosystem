@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class PureDemander  {
+public class Order  {
 
     /**
      *
@@ -85,45 +85,7 @@ public class PureDemander  {
      * @field agentID
      *
      */
-    protected String agentID = "PureDemander " + (agentIDCounter++)
-
-    /**
-     *
-     * This is the step behavior.
-     * @method GenerateDemand
-     *
-     */
-    public def GenerateDemand() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method PublishOrder
-     *
-     */
-    public def PublishOrder() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Return the results.
-        return returnValue
-
-    }
+    protected String agentID = "Order " + (agentIDCounter++)
 
     /**
      *

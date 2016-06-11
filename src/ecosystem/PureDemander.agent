@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureDemander" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
+  <behaviorsteps>
+    <behaviorstep x="80" y="78" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="GenerateDemand" parameters="" exceptions="">
+      <label x="80" y="63" text="Generate Demand"/>
+    </behaviorstep>
+    <behaviorstep x="277" y="81" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="PublishOrder" parameters="" exceptions="">
+      <label x="277" y="66" text="Publish Order"/>
+    </behaviorstep>
+  </behaviorsteps>
   <tasksteps/>
   <decisionsteps/>
   <joinsteps/>

@@ -12,8 +12,8 @@
     <taskstep x="165" y="294" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
       <label x="165" y="279" text="Occupying"/>
     </taskstep>
-    <taskstep x="290" y="180" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
-      <label x="290" y="165" text="Releasing"/>
+    <taskstep x="283" y="180" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
+      <label x="283" y="165" text="Releasing"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -36,8 +36,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="172" y="412"/>
-    <endstep x="304" y="315"/>
+    <endstep x="170" y="394"/>
+    <endstep x="290" y="309"/>
   </endsteps>
   <connections>
     <transitions>

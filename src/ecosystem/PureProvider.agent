@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureProvider" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
+  <behaviorsteps>
+    <behaviorstep x="200" y="102" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+      <label x="200" y="87" text="Step"/>
+    </behaviorstep>
+  </behaviorsteps>
   <tasksteps/>
   <decisionsteps/>
   <joinsteps/>

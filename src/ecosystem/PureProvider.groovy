@@ -89,6 +89,25 @@ public class PureProvider  {
 
     /**
      *
+     * This is the step behavior.
+     * @method step
+     *
+     */
+    public def step() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

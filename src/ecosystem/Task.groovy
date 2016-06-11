@@ -155,6 +155,21 @@ public class Task  {
 
     /**
      *
+     * This is an agent property.
+     * @field remainingTime
+     *
+     */
+    @Parameter (displayName = "RemainingTime", usageName = "remainingTime")
+    public int getRemainingTime() {
+        return remainingTime
+    }
+    public void setRemainingTime(int newValue) {
+        remainingTime = newValue
+    }
+    public int remainingTime = -1
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -183,17 +198,32 @@ public class Task  {
      * @method processing
      *
      */
-    public def processing() {
-
-        // Define the return value variable.
-        def returnValue
+    public void processing() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Return the results.
-        return returnValue
+        // This is a task.
+        int remaintime = this.getRemainingTime()
+        remaintime--
+        this.setRemainingTime(remaintime)
+    }
 
+    /**
+     *
+     * This is the step behavior.
+     * @method selection
+     *
+     */
+    public void selection(String index) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.setSelectedResource(index)
+        int remaintime = this.getProcessingTime().get(index)
+        this.setRemainingTime(remaintime)
     }
 
     /**

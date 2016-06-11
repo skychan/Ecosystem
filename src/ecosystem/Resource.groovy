@@ -165,22 +165,35 @@ public class Resource  {
     /**
      *
      * This is the step behavior.
-     * @method step
+     * @method Occupy
      *
      */
-    public def step() {
-
-        // Define the return value variable.
-        def returnValue
+    public void Occupy(int amount) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        int i =1
-        // Return the results.
-        return returnValue
+        int temp = this.getAvailable()
+        temp -= amount
+        this.setAvailable(temp)
+    }
 
+    /**
+     *
+     * This is the step behavior.
+     * @method Release
+     *
+     */
+    public void Release(int amount) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        int temp = this.getAvailable()
+        temp -= amount
+        this.setAvailable(temp)
     }
 
     /**

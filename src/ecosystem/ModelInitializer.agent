@@ -26,15 +26,15 @@
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="237" y="65" comment="This is an agent property." visibility="0" compiledname="demanderCount" type="int" defaultvalue="0">
+    <agentproperty x="237" y="65" comment="This is an agent property." visibility="0" compiledname="demanderCount" type="int" defaultvalue="1">
       <label x="242" y="50" text="Demander Count"/>
     </agentproperty>
-    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="0">
+    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="1">
       <label x="242" y="135" text="Provider Count"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="100" y="506"/>
+    <endstep x="105" y="511"/>
   </endsteps>
   <connections>
     <transitions>

@@ -90,13 +90,35 @@ public class PureDemander  {
     /**
      *
      * This is the step behavior.
-     * @method GenerateDemand
+     * @method CreateOrder
      *
      */
-    public void GenerateDemand(int taskAmount) {
+    public ArrayList<Task> CreateOrder(String[] taskTypes) {
+
+        // Define the return value variable.
+        def returnValue
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        Order o = new Order()
+
+        // This is a loop.
+        for (task in taskTypes) {
+
+            // This is a task.
+            Task t = new Task()
+            t.setType(task)
+            t.SetValues()
+            o.Add(t)
+
+        }
+
+        // This is a task.
+        returnValue = o
+        // Return the results.
+        return returnValue
 
     }
 

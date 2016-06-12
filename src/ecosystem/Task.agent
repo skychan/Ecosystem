@@ -7,8 +7,8 @@
     <behaviorstep x="327" y="76" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Select" parameters="String index" exceptions="">
       <label x="327" y="61" text="Selection"/>
     </behaviorstep>
-    <behaviorstep x="35" y="441" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Setting" parameters="" exceptions="">
-      <label x="35" y="426" text="Set Values"/>
+    <behaviorstep x="502" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="SetValues" parameters="" exceptions="">
+      <label x="502" y="72" text="Set Values"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -18,21 +18,25 @@
     <taskstep x="327" y="182" comment="This is a task." command1="this.setSelectedResource(index)" command2="int remaintime = this.getProcessingTime().get(index)" command3="this.setRemainingTime(remaintime)" command4="" command5="">
       <label x="327" y="167" text="Selection"/>
     </taskstep>
-    <taskstep x="34" y="531" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
-      <label x="34" y="516" text="Do Task"/>
+    <taskstep x="501" y="177" comment="This is a task." command1="String path = &quot;Matching/&quot;+this.getType()" command2="List&lt;String&gt; data = Util.MatchResource(path)" command3="" command4="" command5="">
+      <label x="501" y="162" text="Read Data"/>
+    </taskstep>
+    <taskstep x="482" y="386" comment="This is a task." command1="String item[] = line.split(&quot;,&quot;)" command2="String resourceType = item[0]" command3="this.alternations.add(resourceType)" command4="this.processingTime.put(resourceType,Integer.parseInt(item[1]))" command5="this.needResourceCapacity.put(resourceType,Integer.parseInt(item[2]))">
+      <label x="482" y="371" text="Split line"/>
     </taskstep>
   </tasksteps>
-  <decisionsteps/>
+  <decisionsteps>
+    <decisionstep x="490" y="287" comment="This is a loop." criteria="String line in data" branchType="while">
+      <label x="490" y="272" text="Read by line"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
   <agentproperties>
     <agentproperty x="35" y="31" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
       <label x="40" y="16" text="Type"/>
     </agentproperty>
-    <agentproperty x="34" y="183" comment="This is an agent property." visibility="0" compiledname="needServiceType" type="Map&lt;String,String&gt;" defaultvalue="new HashMap&lt;String,String&gt;()">
-      <label x="39" y="168" text="NeedServiceType"/>
-    </agentproperty>
-    <agentproperty x="133" y="107" comment="This is an agent property." visibility="0" compiledname="needServiceCapacity" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
-      <label x="138" y="92" text="NeedServiceCapacity"/>
+    <agentproperty x="133" y="107" comment="This is an agent property." visibility="0" compiledname="needResourceCapacity" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
+      <label x="138" y="92" text="NeedResourceCapacity"/>
     </agentproperty>
     <agentproperty x="34" y="107" comment="This is an agent property." visibility="0" compiledname="processingTime" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
       <label x="39" y="92" text="ProcessingTime"/>
@@ -48,8 +52,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="335" y="300"/>
-    <endstep x="208" y="406"/>
+    <endstep x="340" y="305"/>
+    <endstep x="213" y="411"/>
+    <endstep x="493" y="474"/>
   </endsteps>
   <connections>
     <transitions>
@@ -64,6 +69,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
@@ -73,7 +83,23 @@
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

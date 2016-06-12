@@ -20,10 +20,13 @@ package ecosystem
 import java.io.*
 import java.math.*
 import java.util.*
+
 import javax.measure.unit.*
+
 import org.jscience.mathematics.number.*
 import org.jscience.mathematics.vector.*
 import org.jscience.physics.amount.*
+
 import repast.simphony.adaptation.neural.*
 import repast.simphony.adaptation.regression.*
 import repast.simphony.context.*
@@ -76,7 +79,7 @@ public class ModelInitializer  {
     public void setDemanderCount(int newValue) {
         demanderCount = newValue
     }
-    public int demanderCount = 0
+    public int demanderCount = 1
 
     /**
      *
@@ -91,7 +94,7 @@ public class ModelInitializer  {
     public void setProviderCount(int newValue) {
         providerCount = newValue
     }
-    public int providerCount = 0
+    public int providerCount = 1
 
     /**
      *
@@ -139,6 +142,7 @@ public class ModelInitializer  {
         for (i in 1..demanderCount) {
 
             // This is a task.
+            System.out.println("create demander")
 
         }
 
@@ -147,7 +151,7 @@ public class ModelInitializer  {
         for (i in 1..providerCount) {
 
             // This is a task.
-
+            System.out.println("create provider")
         }
 
         // Return the results.

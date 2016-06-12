@@ -1,20 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureDemander" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="98" y="84" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="GenerateDemand" parameters="int taskAmount" exceptions="">
-      <label x="98" y="69" text="Generate Demand"/>
+    <behaviorstep x="98" y="84" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="ArrayList&lt;Task&gt;" compiledname="CreateOrder" parameters="String[] taskTypes" exceptions="">
+      <label x="98" y="69" text="Create Order"/>
     </behaviorstep>
     <behaviorstep x="277" y="81" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="PublishOrder" parameters="" exceptions="">
       <label x="277" y="66" text="Publish Order"/>
     </behaviorstep>
   </behaviorsteps>
-  <tasksteps/>
-  <decisionsteps/>
+  <tasksteps>
+    <taskstep x="98" y="348" comment="This is a task." command1="Task t = new Task()" command2="t.setType(task)" command3="t.SetValues()" command4="o.Add(t)" command5="">
+      <label x="98" y="333" text="Add task"/>
+    </taskstep>
+    <taskstep x="94" y="160" comment="This is a task." command1="Order o = new Order()" command2="" command3="" command4="" command5="">
+      <label x="94" y="145" text="Create Order"/>
+    </taskstep>
+    <taskstep x="222" y="260" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
+      <label x="222" y="245" text="Do Task"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="101" y="239" comment="This is a loop." criteria="task in taskTypes" branchType="while">
+      <label x="101" y="224" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
   <agentproperties/>
-  <endsteps/>
+  <endsteps>
+    <endstep x="100" y="455"/>
+  </endsteps>
   <connections>
-    <transitions/>
-    <booleantransitions/>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

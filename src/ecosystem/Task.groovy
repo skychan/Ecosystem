@@ -81,32 +81,17 @@ public class Task  {
     /**
      *
      * This is an agent property.
-     * @field needServiceType
+     * @field needResourceCapacity
      *
      */
-    @Parameter (displayName = "NeedServiceType", usageName = "needServiceType")
-    public Map<String,String> getNeedServiceType() {
-        return needServiceType
+    @Parameter (displayName = "NeedResourceCapacity", usageName = "needResourceCapacity")
+    public Map<String,Integer> getNeedResourceCapacity() {
+        return needResourceCapacity
     }
-    public void setNeedServiceType(Map<String,String> newValue) {
-        needServiceType = newValue
+    public void setNeedResourceCapacity(Map<String,Integer> newValue) {
+        needResourceCapacity = newValue
     }
-    public Map<String,String> needServiceType = new HashMap<String,String>()
-
-    /**
-     *
-     * This is an agent property.
-     * @field needServiceCapacity
-     *
-     */
-    @Parameter (displayName = "NeedServiceCapacity", usageName = "needServiceCapacity")
-    public Map<String,Integer> getNeedServiceCapacity() {
-        return needServiceCapacity
-    }
-    public void setNeedServiceCapacity(Map<String,Integer> newValue) {
-        needServiceCapacity = newValue
-    }
-    public Map<String,Integer> needServiceCapacity = new HashMap<String,Integer>()
+    public Map<String,Integer> needResourceCapacity = new HashMap<String,Integer>()
 
     /**
      *
@@ -229,13 +214,29 @@ public class Task  {
     /**
      *
      * This is the step behavior.
-     * @method Setting
+     * @method SetValues
      *
      */
-    public void Setting() {
+    public void SetValues() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        String path = "Matching/"+this.getType()
+        List<String> data = Util.MatchResource(path)
+
+        // This is a loop.
+        for (String line in data) {
+
+            // This is a task.
+            String item[] = line.split(",")
+            String resourceType = item[0]
+            this.alternations.add(resourceType)
+            this.processingTime.put(resourceType,Integer.parseInt(item[1]))
+            this.needResourceCapacity.put(resourceType,Integer.parseInt(item[2]))
+
+        }
 
     }
 

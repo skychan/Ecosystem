@@ -195,10 +195,10 @@ public class Task  {
     /**
      *
      * This is the step behavior.
-     * @method processing
+     * @method Processing
      *
      */
-    public void processing() {
+    public void Processing() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -212,10 +212,10 @@ public class Task  {
     /**
      *
      * This is the step behavior.
-     * @method selection
+     * @method Select
      *
      */
-    public void selection(String index) {
+    public void Select(String index) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -224,6 +224,19 @@ public class Task  {
         this.setSelectedResource(index)
         int remaintime = this.getProcessingTime().get(index)
         this.setRemainingTime(remaintime)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Setting
+     *
+     */
+    public void Setting() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
     }
 
     /**

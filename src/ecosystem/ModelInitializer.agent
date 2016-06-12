@@ -1,25 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is a model initializer." agentclassname="ModelInitializer" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="99" y="104" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the user model builder" visibility="0" returntype="def" compiledname="initializeModel" parameters="" exceptions="">
-      <label x="90" y="88" text="Initialize Model"/>
+    <behaviorstep x="70" y="85" scheduleannotationstart="" scheduleannotationpick="ScheduledMethod.ALL" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the user model builder" visibility="0" returntype="def" compiledname="initializeModel" parameters="" exceptions="">
+      <label x="61" y="69" text="Initialize Model"/>
     </behaviorstep>
   </behaviorsteps>
-  <tasksteps/>
-  <decisionsteps/>
+  <tasksteps>
+    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgents(&quot;Ecosystem&quot;, &quot;Ecosystem.CloudPlatform&quot;,1)" command2="CloudPlatform platform = (CloudPlatform)agent" command3="" command4="" command5="">
+      <label x="71" y="178" text="Create Platform"/>
+    </taskstep>
+    <taskstep x="238" y="284" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="238" y="269" text="Create Demander"/>
+    </taskstep>
+    <taskstep x="258" y="392" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="258" y="377" text="Create Provider"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="84" y="280" comment="This is a loop." criteria="i in 1..demanderCount" branchType="while">
+      <label x="84" y="265" text="Count Demander"/>
+    </decisionstep>
+    <decisionstep x="94" y="393" comment="This is a loop." criteria="i in 1..providerCount" branchType="while">
+      <label x="94" y="378" text="Count Provider"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
-  <agentproperties/>
+  <agentproperties>
+    <agentproperty x="237" y="65" comment="This is an agent property." visibility="0" compiledname="demanderCount" type="int" defaultvalue="0">
+      <label x="242" y="50" text="Demander Count"/>
+    </agentproperty>
+    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="0">
+      <label x="242" y="135" text="Provider Count"/>
+    </agentproperty>
+  </agentproperties>
   <endsteps>
-    <endstep x="108" y="242"/>
+    <endstep x="100" y="506"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="1" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

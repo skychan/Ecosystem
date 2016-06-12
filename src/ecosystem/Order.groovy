@@ -65,6 +65,21 @@ public class Order  {
 
     /**
      *
+     * This is an agent property.
+     * @field taskList
+     *
+     */
+    @Parameter (displayName = "TaskList", usageName = "taskList")
+    public List<Task> getTaskList() {
+        return taskList
+    }
+    public void setTaskList(List<Task> newValue) {
+        taskList = newValue
+    }
+    public List<Task> taskList = new ArrayList<Task>()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -86,6 +101,21 @@ public class Order  {
      *
      */
     protected String agentID = "Order " + (agentIDCounter++)
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Add
+     *
+     */
+    public void Add(Task t) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.taskList.add(t)
+    }
 
     /**
      *

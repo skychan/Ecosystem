@@ -65,6 +65,36 @@ public class ModelInitializer  {
 
     /**
      *
+     * This is an agent property.
+     * @field demanderCount
+     *
+     */
+    @Parameter (displayName = "Demander Count", usageName = "demanderCount")
+    public int getDemanderCount() {
+        return demanderCount
+    }
+    public void setDemanderCount(int newValue) {
+        demanderCount = newValue
+    }
+    public int demanderCount = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field providerCount
+     *
+     */
+    @Parameter (displayName = "Provider Count", usageName = "providerCount")
+    public int getProviderCount() {
+        return providerCount
+    }
+    public void setProviderCount(int newValue) {
+        providerCount = newValue
+    }
+    public int providerCount = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -100,6 +130,25 @@ public class ModelInitializer  {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        Object agent = CreateAgents("Ecosystem", "Ecosystem.CloudPlatform",1)
+        CloudPlatform platform = (CloudPlatform)agent
+
+        // This is a loop.
+        for (i in 1..demanderCount) {
+
+            // This is a task.
+
+        }
+
+
+        // This is a loop.
+        for (i in 1..providerCount) {
+
+            // This is a task.
+
+        }
 
         // Return the results.
         return returnValue

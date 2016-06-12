@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
-  <tasksteps/>
+  <behaviorsteps>
+    <behaviorstep x="22" y="105" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Add" parameters="Task t" exceptions="">
+      <label x="22" y="90" text="Add Task"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="21" y="199" comment="This is a task." command1="this.taskList.add(t)" command2="" command3="" command4="" command5="">
+      <label x="21" y="184" text="adding"/>
+    </taskstep>
+  </tasksteps>
   <decisionsteps/>
   <joinsteps/>
-  <agentproperties/>
-  <endsteps/>
+  <agentproperties>
+    <agentproperty x="16" y="21" comment="This is an agent property." visibility="0" compiledname="taskList" type="List&lt;Task&gt;" defaultvalue="new ArrayList&lt;Task&gt;()">
+      <label x="21" y="6" text="TaskList"/>
+    </agentproperty>
+  </agentproperties>
+  <endsteps>
+    <endstep x="25" y="312"/>
+  </endsteps>
   <connections>
-    <transitions/>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
     <booleantransitions/>
   </connections>
 </agent>

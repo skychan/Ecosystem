@@ -93,16 +93,10 @@ public class PureDemander  {
      * @method GenerateDemand
      *
      */
-    public def GenerateDemand() {
-
-        // Define the return value variable.
-        def returnValue
+    public void GenerateDemand(int taskAmount) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
-
-        // Return the results.
-        return returnValue
 
     }
 

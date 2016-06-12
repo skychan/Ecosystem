@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Task" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="197" y="191" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="processing" parameters="" exceptions="">
+    <behaviorstep x="197" y="191" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Processing" parameters="" exceptions="">
       <label x="197" y="176" text="Processing"/>
     </behaviorstep>
-    <behaviorstep x="327" y="76" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="selection" parameters="String index" exceptions="">
+    <behaviorstep x="327" y="76" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Select" parameters="String index" exceptions="">
       <label x="327" y="61" text="Selection"/>
+    </behaviorstep>
+    <behaviorstep x="35" y="441" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Setting" parameters="" exceptions="">
+      <label x="35" y="426" text="Set Values"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -14,6 +17,9 @@
     </taskstep>
     <taskstep x="327" y="182" comment="This is a task." command1="this.setSelectedResource(index)" command2="int remaintime = this.getProcessingTime().get(index)" command3="this.setRemainingTime(remaintime)" command4="" command5="">
       <label x="327" y="167" text="Selection"/>
+    </taskstep>
+    <taskstep x="34" y="531" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="34" y="516" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -42,8 +48,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="330" y="295"/>
-    <endstep x="203" y="401"/>
+    <endstep x="335" y="300"/>
+    <endstep x="208" y="406"/>
   </endsteps>
   <connections>
     <transitions>
@@ -53,13 +59,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="task" index="1" anchor="0"/>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

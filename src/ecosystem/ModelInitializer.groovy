@@ -20,13 +20,10 @@ package ecosystem
 import java.io.*
 import java.math.*
 import java.util.*
-
 import javax.measure.unit.*
-
 import org.jscience.mathematics.number.*
 import org.jscience.mathematics.vector.*
 import org.jscience.physics.amount.*
-
 import repast.simphony.adaptation.neural.*
 import repast.simphony.adaptation.regression.*
 import repast.simphony.context.*
@@ -98,6 +95,36 @@ public class ModelInitializer  {
 
     /**
      *
+     * This is an agent property.
+     * @field demanderList
+     *
+     */
+    @Parameter (displayName = "Demander List", usageName = "demanderList")
+    public ArrayList getDemanderList() {
+        return demanderList
+    }
+    public void setDemanderList(ArrayList newValue) {
+        demanderList = newValue
+    }
+    public ArrayList demanderList = new ArrayList()
+
+    /**
+     *
+     * This is an agent property.
+     * @field providerList
+     *
+     */
+    @Parameter (displayName = "Provider List", usageName = "providerList")
+    public ArrayList getProviderList() {
+        return providerList
+    }
+    public void setProviderList(ArrayList newValue) {
+        providerList = newValue
+    }
+    public ArrayList providerList = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -135,14 +162,16 @@ public class ModelInitializer  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        Object agent = CreateAgents("Ecosystem", "Ecosystem.CloudPlatform",1)
-        CloudPlatform platform = (CloudPlatform)agent
+        Object agent = CreateAgent("Ecosystem", "ecosystem.CloudPlatform")
+        CloudPlatform platform = (CloudPlatform) agent
 
         // This is a loop.
         for (i in 1..demanderCount) {
 
             // This is a task.
-            System.out.println("create demander")
+            Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
+            PureDemander pureDemander = (PureDemander) dagent
+            this.demanderList.add(pureDemander)
 
         }
 
@@ -151,7 +180,10 @@ public class ModelInitializer  {
         for (i in 1..providerCount) {
 
             // This is a task.
-            System.out.println("create provider")
+            Object pagent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+            PureProvider pureProvider = (PureProvider) pagent
+            this.providerList.add(pureProvider)
+
         }
 
         // Return the results.

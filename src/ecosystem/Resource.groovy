@@ -198,6 +198,21 @@ public class Resource  {
 
     /**
      *
+     * This is the step behavior.
+     * @method Bid
+     *
+     */
+    public void Bid(int cost) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.setUnitCost(cost)
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

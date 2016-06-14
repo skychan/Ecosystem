@@ -65,6 +65,36 @@ public class PureProvider  {
 
     /**
      *
+     * This is an agent property.
+     * @field serviceList
+     *
+     */
+    @Parameter (displayName = "Service List", usageName = "serviceList")
+    public ArrayList getServiceList() {
+        return serviceList
+    }
+    public void setServiceList(ArrayList newValue) {
+        serviceList = newValue
+    }
+    public ArrayList serviceList = new ArrayList()
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceList
+     *
+     */
+    @Parameter (displayName = "Resource List", usageName = "resourceList")
+    public ArrayList getResourceList() {
+        return resourceList
+    }
+    public void setResourceList(ArrayList newValue) {
+        resourceList = newValue
+    }
+    public ArrayList resourceList = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -90,19 +120,34 @@ public class PureProvider  {
     /**
      *
      * This is the step behavior.
-     * @method step
+     * @method Init
      *
      */
-    public def step() {
-
-        // Define the return value variable.
-        def returnValue
+    public void Init() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Return the results.
-        return returnValue
+
+        // This is a loop.
+        for (i in 1..resourceCount) {
+
+            // This is a task.
+            Resource r = new Resource()
+            this.resourceList.add(r)
+
+        }
+
+
+        // This is a loop.
+        for (r in this.getResourceList()) {
+
+            // This is a task.
+            Service s = new Service()
+            s.AddResource(r)
+            this.serviceList.add(s)
+
+        }
 
     }
 

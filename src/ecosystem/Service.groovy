@@ -65,6 +65,36 @@ public class Service  {
 
     /**
      *
+     * This is an agent property.
+     * @field discount
+     *
+     */
+    @Parameter (displayName = "Discount", usageName = "discount")
+    public double getDiscount() {
+        return discount
+    }
+    public void setDiscount(double newValue) {
+        discount = newValue
+    }
+    public double discount = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceList
+     *
+     */
+    @Parameter (displayName = "Resource List", usageName = "resourceList")
+    public ArrayList getResourceList() {
+        return resourceList
+    }
+    public void setResourceList(ArrayList newValue) {
+        resourceList = newValue
+    }
+    public ArrayList resourceList = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -86,6 +116,36 @@ public class Service  {
      *
      */
     protected String agentID = "Service " + (agentIDCounter++)
+
+    /**
+     *
+     * This is the step behavior.
+     * @method RemoveResource
+     *
+     */
+    public void RemoveResource(Resource r) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.resourceList.remove(r)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method AddResource
+     *
+     */
+    public void AddResource(Resource r) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.resourceList.add(r)
+    }
 
     /**
      *

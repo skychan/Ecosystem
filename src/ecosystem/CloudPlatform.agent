@@ -1,13 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="CloudPlatform" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
-  <tasksteps/>
-  <decisionsteps/>
+  <behaviorsteps>
+    <behaviorstep x="64" y="164" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="AddUser" parameters="Object o" exceptions="">
+      <label x="64" y="149" text="Add User"/>
+    </behaviorstep>
+    <behaviorstep x="173" y="165" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
+      <label x="173" y="150" text="Eliminate User"/>
+    </behaviorstep>
+    <behaviorstep x="294" y="65" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
+      <label x="294" y="50" text="Create Provider"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="63" y="240" comment="This is a task." command1="this.UserList.add(o)" command2="" command3="" command4="" command5="">
+      <label x="63" y="225" text="add user"/>
+    </taskstep>
+    <taskstep x="170" y="245" comment="This is a task." command1="this.UserList.remove(o)" command2="" command3="" command4="" command5="">
+      <label x="170" y="230" text="eliminate user"/>
+    </taskstep>
+    <taskstep x="418" y="233" comment="Create Provider at a random distribution" command1="PureProvider provider = new PureProvider()" command2="this.AddUser(provider)" command3="" command4="" command5="">
+      <label x="418" y="218" text="Create Provider"/>
+    </taskstep>
+    <taskstep x="294" y="152" comment="This is a task." command1="RandomHelper.createPoisson(5)" command2="int providerCount = RandomHelper.getPoisson().nextInt()" command3="" command4="" command5="">
+      <label x="294" y="137" text="Randomize"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="298" y="239" comment="This is a loop." criteria="int i in 0..providerCount" branchType="while">
+      <label x="298" y="224" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
-  <agentproperties/>
-  <endsteps/>
+  <agentproperties>
+    <agentproperty x="50" y="47" comment="This is an agent property." visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="55" y="32" text="User List"/>
+    </agentproperty>
+  </agentproperties>
+  <endsteps>
+    <endstep x="68" y="319"/>
+    <endstep x="178" y="325"/>
+    <endstep x="304" y="369"/>
+  </endsteps>
   <connections>
-    <transitions/>
-    <booleantransitions/>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

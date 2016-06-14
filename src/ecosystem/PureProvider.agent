@@ -1,17 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureProvider" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="200" y="102" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
-      <label x="200" y="87" text="Step"/>
+    <behaviorstep x="65" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Init" parameters="" exceptions="">
+      <label x="65" y="52" text="Initilization"/>
     </behaviorstep>
   </behaviorsteps>
-  <tasksteps/>
-  <decisionsteps/>
+  <tasksteps>
+    <taskstep x="196" y="261" comment="This is a task." command1="Service s = new Service()" command2="s.AddResource(r)" command3="" command4="" command5="this.serviceList.add(s)">
+      <label x="196" y="246" text="Create Services"/>
+    </taskstep>
+    <taskstep x="206" y="165" comment="This is a task." command1="Resource r = new Resource()" command2="" command3="" command4="" command5="this.resourceList.add(r)">
+      <label x="206" y="150" text="Create resource"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="70" y="157" comment="This is a loop." criteria="i in 1..resourceCount" branchType="while">
+      <label x="70" y="142" text="resource loop"/>
+    </decisionstep>
+    <decisionstep x="61" y="258" comment="This is a loop." criteria="r in this.getResourceList()" branchType="while">
+      <label x="61" y="243" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
-  <agentproperties/>
-  <endsteps/>
+  <agentproperties>
+    <agentproperty x="204" y="75" comment="This is an agent property." visibility="0" compiledname="serviceList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="209" y="60" text="Service List"/>
+    </agentproperty>
+    <agentproperty x="305" y="72" comment="This is an agent property." visibility="0" compiledname="resourceList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="310" y="57" text="Resource List"/>
+    </agentproperty>
+  </agentproperties>
+  <endsteps>
+    <endstep x="80" y="378"/>
+  </endsteps>
   <connections>
-    <transitions/>
-    <booleantransitions/>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="1" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="0" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

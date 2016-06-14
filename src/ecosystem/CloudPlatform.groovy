@@ -65,6 +65,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * This is an agent property.
+     * @field userList
+     *
+     */
+    @Parameter (displayName = "User List", usageName = "userList")
+    public ArrayList getUserList() {
+        return userList
+    }
+    public void setUserList(ArrayList newValue) {
+        userList = newValue
+    }
+    public ArrayList userList = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -86,6 +101,67 @@ public class CloudPlatform  {
      *
      */
     protected String agentID = "CloudPlatform " + (agentIDCounter++)
+
+    /**
+     *
+     * This is the step behavior.
+     * @method AddUser
+     *
+     */
+    public void AddUser(Object o) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.userList.add(o)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method EliminateUser
+     *
+     */
+    public void EliminateUser(Object o) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.userList.remove(o)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method CreateProvider
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void CreateProvider() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        RandomHelper.createPoisson(5)
+        int providerCount = RandomHelper.getPoisson().nextInt()
+
+        // This is a loop.
+        for (int i in 0..providerCount) {
+
+            // Create Provider at a random distribution
+            PureProvider provider = new PureProvider()
+            this.AddUser(provider)
+
+        }
+
+    }
 
     /**
      *

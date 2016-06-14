@@ -7,6 +7,9 @@
     <behaviorstep x="282" y="70" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="int amount" exceptions="">
       <label x="282" y="55" text="Release"/>
     </behaviorstep>
+    <behaviorstep x="406" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Bid" parameters="int cost" exceptions="">
+      <label x="406" y="72" text="Adjust Cost"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="165" y="294" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
@@ -14,6 +17,9 @@
     </taskstep>
     <taskstep x="283" y="180" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
       <label x="283" y="165" text="Releasing"/>
+    </taskstep>
+    <taskstep x="404" y="171" comment="This is a task." command1="this.setUnitCost(cost)" command2="" command3="" command4="" command5="">
+      <label x="404" y="156" text="Adjust bid"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -36,8 +42,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="170" y="394"/>
-    <endstep x="290" y="309"/>
+    <endstep x="175" y="399"/>
+    <endstep x="295" y="314"/>
+    <endstep x="418" y="292"/>
   </endsteps>
   <connections>
     <transitions>
@@ -47,18 +54,28 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

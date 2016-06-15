@@ -91,7 +91,7 @@ public class ModelInitializer  {
     public void setProviderCount(int newValue) {
         providerCount = newValue
     }
-    public int providerCount = 1
+    public int providerCount = 20
 
     /**
      *
@@ -164,6 +164,28 @@ public class ModelInitializer  {
         // This is a task.
         Object agent = CreateAgent("Ecosystem", "ecosystem.CloudPlatform")
         CloudPlatform platform = (CloudPlatform) agent
+
+        // This is a loop.
+        for (i in 1..<demanderCount) {
+
+            // This is a task.
+            Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
+            PureDemander pureDemander = (PureDemander) dagent
+            platform.userList.add(pureDemander)
+
+        }
+
+
+        // This is a loop.
+        for (i in 1..<providerCount) {
+
+            // This is a task.
+            Object pagent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+            PureProvider pureProvider = (PureProvider) pagent
+            platform.userList.add(pureProvider)
+
+        }
+
         // Return the results.
         return returnValue
 

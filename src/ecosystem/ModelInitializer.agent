@@ -9,18 +9,18 @@
     <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
-    <taskstep x="239" y="278" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="this.demanderList.add(pureDemander)" command4="platform.AddUser(pureDemander)" command5="">
+    <taskstep x="239" y="278" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="platform.userList.add(pureDemander)" command4="" command5="">
       <label x="239" y="263" text="Create Demander"/>
     </taskstep>
-    <taskstep x="258" y="392" comment="This is a task." command1="Object pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pureProvider = (PureProvider) pagent" command3="this.providerList.add(pureProvider)" command4="platform.AddUser(pureProvider)" command5="">
+    <taskstep x="258" y="392" comment="This is a task." command1="Object pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pureProvider = (PureProvider) pagent" command3="platform.userList.add(pureProvider)" command4="" command5="">
       <label x="258" y="377" text="Create Provider"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="84" y="280" comment="This is a loop." criteria="i in 1..demanderCount" branchType="while">
+    <decisionstep x="84" y="280" comment="This is a loop." criteria="i in 1..&lt;demanderCount" branchType="while">
       <label x="84" y="265" text="Count Demander"/>
     </decisionstep>
-    <decisionstep x="94" y="393" comment="This is a loop." criteria="i in 1..providerCount" branchType="while">
+    <decisionstep x="94" y="393" comment="This is a loop." criteria="i in 1..&lt;providerCount" branchType="while">
       <label x="94" y="378" text="Count Provider"/>
     </decisionstep>
   </decisionsteps>
@@ -29,7 +29,7 @@
     <agentproperty x="237" y="65" comment="This is an agent property." visibility="0" compiledname="demanderCount" type="int" defaultvalue="1">
       <label x="242" y="50" text="Demander Count"/>
     </agentproperty>
-    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="1">
+    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="20">
       <label x="242" y="135" text="Provider Count"/>
     </agentproperty>
     <agentproperty x="401" y="59" comment="This is an agent property." visibility="0" compiledname="demanderList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -41,7 +41,6 @@
   </agentproperties>
   <endsteps>
     <endstep x="110" y="516"/>
-    <endstep x="37" y="300"/>
   </endsteps>
   <connections>
     <transitions>
@@ -52,7 +51,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

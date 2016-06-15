@@ -80,6 +80,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * This is an agent property.
+     * @field mean1
+     *
+     */
+    @Parameter (displayName = "Mean1", usageName = "mean1")
+    public double getMean1() {
+        return mean1
+    }
+    public void setMean1(double newValue) {
+        mean1 = newValue
+    }
+    public double mean1 = 0.16
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -135,6 +150,38 @@ public class CloudPlatform  {
     /**
      *
      * This is the step behavior.
+     * @method DeleteProvider
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void DeleteProvider() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        Parameters params = RunEnvironment.getInstance().getParameters()
+        double mean2 = params.getValue("Mean2")
+        RandomHelper.createPoisson(mean2)
+        int providerCount = RandomHelper.getPoisson().nextInt()
+
+        // This is a loop.
+        for (int i in 0..<providerCount) {
+
+            // Create Provider at a random distribution
+            RemoveAgentFromModel(this.userList.remove(this.userList.size()-1))
+
+        }
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
      * @method CreateProvider
      *
      */
@@ -149,15 +196,18 @@ public class CloudPlatform  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        RandomHelper.createPoisson(5)
+        Parameters params = RunEnvironment.getInstance().getParameters()
+        double mean = params.getValue("Mean")
+        RandomHelper.createPoisson(mean)
         int providerCount = RandomHelper.getPoisson().nextInt()
 
         // This is a loop.
-        for (int i in 0..providerCount) {
+        for (int i in 0..<providerCount) {
 
             // Create Provider at a random distribution
-            PureProvider provider = new PureProvider()
-            this.AddUser(provider)
+            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+            PureProvider pagent = (PureProvider) agent
+            this.AddUser(pagent)
 
         }
 

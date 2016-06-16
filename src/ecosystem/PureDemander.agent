@@ -4,8 +4,8 @@
     <behaviorstep x="98" y="84" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="ArrayList&lt;Task&gt;" compiledname="CreateOrder" parameters="String[] taskTypes" exceptions="">
       <label x="98" y="69" text="Create Order"/>
     </behaviorstep>
-    <behaviorstep x="277" y="81" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="PublishOrder" parameters="" exceptions="">
-      <label x="277" y="66" text="Publish Order"/>
+    <behaviorstep x="562" y="129" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
+      <label x="562" y="114" text="Step"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -18,16 +18,30 @@
     <taskstep x="222" y="260" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
       <label x="222" y="245" text="Do Task"/>
     </taskstep>
+    <taskstep x="581" y="348" comment="This is a task." command1="this.setNeed(true)" command2="System.out.println(&quot;change need&quot;)" command3="" command4="" command5="">
+      <label x="581" y="333" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="101" y="239" comment="This is a loop." criteria="task in taskTypes" branchType="while">
       <label x="101" y="224" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="562" y="238" comment="This is an agent decision." criteria="RandomHelper.nextIntFromTo(0, 2)" branchType="if">
+      <label x="562" y="223" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps/>
-  <agentproperties/>
+  <agentproperties>
+    <agentproperty x="335" y="72" comment="indicator to show if the demander have need" visibility="0" compiledname="need" type="boolean" defaultvalue="false">
+      <label x="340" y="57" text="Need"/>
+    </agentproperty>
+    <agentproperty x="361" y="210" comment="This is a test adder" visibility="0" compiledname="unit" type="int" defaultvalue="5">
+      <label x="366" y="195" text="addition"/>
+    </agentproperty>
+  </agentproperties>
   <endsteps>
-    <endstep x="100" y="455"/>
+    <endstep x="110" y="465"/>
+    <endstep x="588" y="447"/>
   </endsteps>
   <connections>
     <transitions>
@@ -46,6 +60,16 @@
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -56,6 +80,11 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="3"/>
         <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

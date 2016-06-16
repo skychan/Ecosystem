@@ -58,14 +58,14 @@ import static repast.simphony.essentials.RepastEssentials.*
 
 /**
  *
- * This is an agent.
+ * Platform of cloud mfg
  *
  */
 public class CloudPlatform  {
 
     /**
      *
-     * This is an agent property.
+     * User list to record the user exist in the platform
      * @field userList
      *
      */
@@ -95,6 +95,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * This is an agent test
+     * @field needCount
+     *
+     */
+    @Parameter (displayName = "Need Count", usageName = "needCount")
+    public int getNeedCount() {
+        return needCount
+    }
+    public void setNeedCount(int newValue) {
+        needCount = newValue
+    }
+    public int needCount = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -119,7 +134,7 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is the step behavior.
+     * Add user including pure and complex users
      * @method AddUser
      *
      */
@@ -134,7 +149,7 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is the step behavior.
+     * Eliminate user include pure and complex users
      * @method EliminateUser
      *
      */
@@ -181,7 +196,42 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is the step behavior.
+     * Create demander procedure
+     * @method CreateDemander
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void CreateDemander() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // generate random value for the count
+        Parameters params = RunEnvironment.getInstance().getParameters()
+        double mean = params.getValue("Mean")
+        RandomHelper.createPoisson(mean)
+        int demanderCount = RandomHelper.getPoisson().nextInt()
+
+        // This is a loop.
+        for (int i in 0..<demanderCount) {
+
+            // Create demander at a random distribution
+            Object agent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
+            PureDemander dagent = (PureDemander) agent
+            dagent.changeNeed()
+            this.AddUser(dagent)
+
+        }
+
+    }
+
+    /**
+     *
+     * Create provider procedure
      * @method CreateProvider
      *
      */
@@ -211,6 +261,29 @@ public class CloudPlatform  {
 
         }
 
+    }
+
+    /**
+     *
+     * Watch needs then to analysis them to search resource providers.
+     * @method Search
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public void Search(PureDemander tagent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.needCount += tagent.getUnit()
+        System.out.println("watched")
+        System.out.println(tagent.getNeed().toString())
     }
 
     /**

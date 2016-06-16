@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="CloudPlatform" agentparentclassname="" agentinterfaces="" agentimports="">
+<agent version="1" agentcomment="Platform of cloud mfg" agentclassname="CloudPlatform" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="64" y="164" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="AddUser" parameters="Object o" exceptions="">
+    <behaviorstep x="64" y="164" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add user including pure and complex users" visibility="0" returntype="void" compiledname="AddUser" parameters="Object o" exceptions="">
       <label x="64" y="149" text="Add User"/>
     </behaviorstep>
-    <behaviorstep x="173" y="165" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
+    <behaviorstep x="173" y="165" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Eliminate user include pure and complex users" visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
       <label x="173" y="150" text="Eliminate User"/>
     </behaviorstep>
     <behaviorstep x="544" y="74" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="DeleteProvider" parameters="" exceptions="">
       <label x="544" y="59" text="Test Delete Provider"/>
     </behaviorstep>
-    <behaviorstep x="309" y="80" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="$watchee.getVoltage() &gt; 120" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
-      <label x="309" y="65" text="Create Provider"/>
+    <behaviorstep x="791" y="81" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="$watchee.getVoltage() &gt; 120" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create demander procedure" visibility="0" returntype="void" compiledname="CreateDemander" parameters="" exceptions="">
+      <label x="791" y="66" text="Create Demander"/>
+    </behaviorstep>
+    <behaviorstep x="324" y="95" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="$watchee.getVoltage() &gt; 120" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
+      <label x="324" y="80" text="Create Provider"/>
+    </behaviorstep>
+    <behaviorstep x="738" y="486" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch needs then to analysis them to search resource providers." visibility="0" returntype="void" compiledname="Search" parameters="PureDemander tagent" exceptions="">
+      <label x="738" y="471" text="Search the provider."/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -27,35 +33,52 @@
     <taskstep x="544" y="161" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean2 = params.getValue(&quot;Mean2&quot;)" command3="" command4="RandomHelper.createPoisson(mean2)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
       <label x="544" y="146" text="Randomize"/>
     </taskstep>
-    <taskstep x="309" y="167" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
-      <label x="309" y="152" text="Randomize"/>
+    <taskstep x="791" y="168" comment="generate random value for the count" command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int demanderCount = RandomHelper.getPoisson().nextInt()">
+      <label x="791" y="153" text="Randomize"/>
     </taskstep>
-    <taskstep x="433" y="248" comment="Create Provider at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pagent = (PureProvider) agent" command3="this.AddUser(pagent)" command4="" command5="">
-      <label x="433" y="233" text="Create Provider"/>
+    <taskstep x="915" y="249" comment="Create demander at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander dagent = (PureDemander) agent" command3="dagent.changeNeed()" command4="this.AddUser(dagent)" command5="">
+      <label x="915" y="234" text="Create Demander"/>
+    </taskstep>
+    <taskstep x="448" y="263" comment="Create Provider at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pagent = (PureProvider) agent" command3="this.AddUser(pagent)" command4="" command5="">
+      <label x="448" y="248" text="Create Provider"/>
+    </taskstep>
+    <taskstep x="324" y="182" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
+      <label x="324" y="167" text="Randomize"/>
+    </taskstep>
+    <taskstep x="738" y="571" comment="This is a task." command1="this.needCount += tagent.getUnit()" command2="System.out.println(&quot;watched&quot;)" command3="System.out.println(tagent.getNeed().toString())" command4="" command5="">
+      <label x="738" y="556" text="test"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="548" y="248" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
       <label x="548" y="233" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="313" y="254" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
-      <label x="313" y="239" text="Evaluate Criteria"/>
+    <decisionstep x="795" y="255" comment="This is a loop." criteria="int i in 0..&lt;demanderCount" branchType="while">
+      <label x="795" y="240" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="328" y="269" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
+      <label x="328" y="254" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="50" y="47" comment="This is an agent property." visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
+    <agentproperty x="50" y="47" comment="User list to record the user exist in the platform" visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="55" y="32" text="User List"/>
     </agentproperty>
     <agentproperty x="169" y="61" comment="This is an agent property." visibility="0" compiledname="mean1" type="double" defaultvalue="0.16">
       <label x="174" y="46" text="Mean1"/>
     </agentproperty>
+    <agentproperty x="555" y="513" comment="This is an agent test" visibility="0" compiledname="needCount" type="int" defaultvalue="0">
+      <label x="560" y="498" text="Need Count"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="68" y="319"/>
-    <endstep x="178" y="325"/>
-    <endstep x="564" y="388"/>
-    <endstep x="324" y="389"/>
+    <endstep x="73" y="324"/>
+    <endstep x="183" y="330"/>
+    <endstep x="569" y="393"/>
+    <endstep x="816" y="400"/>
+    <endstep x="349" y="414"/>
+    <endstep x="744" y="653"/>
   </endsteps>
   <connections>
     <transitions>
@@ -65,23 +88,38 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="1" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="5" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -95,8 +133,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
+        <transitionsource type="task" index="7" anchor="2"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="8" anchor="2"/>
+        <transitiontarget type="end" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -119,6 +162,16 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="3"/>
+        <transitiontarget type="task" index="6" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

@@ -65,6 +65,36 @@ public class PureDemander  {
 
     /**
      *
+     * indicator to show if the demander have need
+     * @field need
+     *
+     */
+    @Parameter (displayName = "Need", usageName = "need")
+    public boolean getNeed() {
+        return need
+    }
+    public void setNeed(boolean newValue) {
+        need = newValue
+    }
+    public boolean need = false
+
+    /**
+     *
+     * This is a test adder
+     * @field unit
+     *
+     */
+    @Parameter (displayName = "addition", usageName = "unit")
+    public int getUnit() {
+        return unit
+    }
+    public void setUnit(int newValue) {
+        unit = newValue
+    }
+    public int unit = 5
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -125,20 +155,26 @@ public class PureDemander  {
     /**
      *
      * This is the step behavior.
-     * @method PublishOrder
+     * @method changeNeed
      *
      */
-    public def PublishOrder() {
-
-        // Define the return value variable.
-        def returnValue
+    public void changeNeed() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Return the results.
-        return returnValue
 
+        // This is an agent decision.
+        if (RandomHelper.nextIntFromTo(0, 2)) {
+
+            // This is a task.
+            this.setNeed(true)
+            System.out.println("change need")
+
+        } else  {
+
+
+        }
     }
 
     /**

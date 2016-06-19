@@ -16,7 +16,7 @@
     <behaviorstep x="324" y="95" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="$watchee.getVoltage() &gt; 120" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="324" y="80" text="Create Provider"/>
     </behaviorstep>
-    <behaviorstep x="738" y="486" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch needs then to analysis them to search resource providers." visibility="0" returntype="void" compiledname="Search" parameters="PureDemander tagent" exceptions="">
+    <behaviorstep x="738" y="486" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch needs then to analysis them to search resource providers." visibility="0" returntype="void" compiledname="Search" parameters="PureDemander dagent" exceptions="">
       <label x="738" y="471" text="Search the provider."/>
     </behaviorstep>
   </behaviorsteps>
@@ -45,8 +45,14 @@
     <taskstep x="324" y="182" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
       <label x="324" y="167" text="Randomize"/>
     </taskstep>
-    <taskstep x="738" y="571" comment="This is a task." command1="this.needCount += tagent.getUnit()" command2="System.out.println(&quot;watched&quot;)" command3="System.out.println(tagent.getNeed().toString())" command4="" command5="">
-      <label x="738" y="556" text="test"/>
+    <taskstep x="738" y="571" comment="record and add need mark and search the provider" command1="this.needCount += dagent.getUnit()" command2="this.searched.clear()" command3="" command4="" command5="">
+      <label x="738" y="556" text="Record and search"/>
+    </taskstep>
+    <taskstep x="839" y="649" comment="Add searched resource" command1="this.searched.addAll(t.getAlternations())" command2="" command3="" command4="" command5="">
+      <label x="839" y="634" text="Matching"/>
+    </taskstep>
+    <taskstep x="738" y="745" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="738" y="730" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -58,6 +64,9 @@
     </decisionstep>
     <decisionstep x="328" y="269" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
       <label x="328" y="254" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="740" y="647" comment="This is a loop." criteria="Task t in dagent.getNewOrder()" branchType="while">
+      <label x="740" y="632" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -71,14 +80,17 @@
     <agentproperty x="555" y="513" comment="This is an agent test" visibility="0" compiledname="needCount" type="int" defaultvalue="0">
       <label x="560" y="498" text="Need Count"/>
     </agentproperty>
+    <agentproperty x="889" y="500" comment="Searche provider result list" visibility="0" compiledname="searched" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="894" y="485" text="Searched provider"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="73" y="324"/>
-    <endstep x="183" y="330"/>
-    <endstep x="569" y="393"/>
-    <endstep x="816" y="400"/>
-    <endstep x="349" y="414"/>
-    <endstep x="744" y="653"/>
+    <endstep x="78" y="329"/>
+    <endstep x="188" y="335"/>
+    <endstep x="574" y="398"/>
+    <endstep x="821" y="405"/>
+    <endstep x="354" y="419"/>
+    <endstep x="751" y="827"/>
   </endsteps>
   <connections>
     <transitions>
@@ -139,6 +151,11 @@
       </transition>
       <transition>
         <transitionsource type="task" index="8" anchor="2"/>
+        <transitiontarget type="decision" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -172,6 +189,16 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="2" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="3" anchor="3"/>
+        <transitiontarget type="task" index="9" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="3" anchor="2"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

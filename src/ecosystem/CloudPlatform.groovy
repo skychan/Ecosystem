@@ -110,6 +110,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * Searche provider result list
+     * @field searched
+     *
+     */
+    @Parameter (displayName = "Searched provider", usageName = "searched")
+    public ArrayList getSearched() {
+        return searched
+    }
+    public void setSearched(ArrayList newValue) {
+        searched = newValue
+    }
+    public ArrayList searched = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -275,15 +290,24 @@ public class CloudPlatform  {
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
-    public void Search(PureDemander tagent) {
+    public void Search(PureDemander dagent) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // record and add need mark and search the provider
+        this.needCount += dagent.getUnit()
+        this.searched.clear()
+
+        // This is a loop.
+        for (Task t in dagent.getNewOrder()) {
+
+            // Add searched resource
+            this.searched.addAll(t.getAlternations())
+
+        }
+
         // This is a task.
-        this.needCount += tagent.getUnit()
-        System.out.println("watched")
-        System.out.println(tagent.getNeed().toString())
     }
 
     /**

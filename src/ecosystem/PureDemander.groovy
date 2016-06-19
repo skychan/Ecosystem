@@ -95,6 +95,36 @@ public class PureDemander  {
 
     /**
      *
+     * Order List
+     * @field orderList
+     *
+     */
+    @Parameter (displayName = "Order List", usageName = "orderList")
+    public ArrayList getOrderList() {
+        return orderList
+    }
+    public void setOrderList(ArrayList newValue) {
+        orderList = newValue
+    }
+    public ArrayList orderList = new ArrayList()
+
+    /**
+     *
+     * New order
+     * @field newOrder
+     *
+     */
+    @Parameter (displayName = "New order", usageName = "newOrder")
+    public ArrayList getNewOrder() {
+        return newOrder
+    }
+    public void setNewOrder(ArrayList newValue) {
+        newOrder = newValue
+    }
+    public ArrayList newOrder = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -154,7 +184,7 @@ public class PureDemander  {
 
     /**
      *
-     * This is the step behavior.
+     * Generate Need
      * @method changeNeed
      *
      */
@@ -164,15 +194,25 @@ public class PureDemander  {
         def time = GetTickCountInTimeUnits()
 
 
-        // This is an agent decision.
-        if (RandomHelper.nextIntFromTo(0, 2)) {
+        // Check if it already have needs
+        if (this.getNeed()) {
 
-            // This is a task.
-            this.setNeed(true)
-            System.out.println("change need")
 
         } else  {
 
+
+            // to need or not
+            if (RandomHelper.nextIntFromTo(0, 1)) {
+
+                // have need is to generate order
+                this.setNeed(true)
+                this.newOrder.clear()
+                this.setNewOrder(this.CreateOrder())
+
+            } else  {
+
+
+            }
 
         }
     }

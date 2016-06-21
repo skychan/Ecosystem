@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agent version="1" agentcomment="This is an agent." agentclassname="PureDemander" agentparentclassname="" agentinterfaces="" agentimports="">
+  <behaviorsteps>
+    <behaviorstep x="98" y="84" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="ArrayList&lt;Task&gt;" compiledname="CreateOrder" parameters="String[] taskTypes" exceptions="">
+      <label x="98" y="69" text="Create Order"/>
+    </behaviorstep>
+    <behaviorstep x="543" y="83" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="colocated" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
+      <label x="543" y="68" text="Generate Need"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="98" y="348" comment="This is a task." command1="Task t = new Task()" command2="t.setType(task)" command3="t.SetValues()" command4="o.Add(t)" command5="">
+      <label x="98" y="333" text="Add task"/>
+    </taskstep>
+    <taskstep x="94" y="160" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="Order o = (Order) agent" command3="" command4="" command5="">
+      <label x="94" y="145" text="Create Order"/>
+    </taskstep>
+    <taskstep x="222" y="260" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
+      <label x="222" y="245" text="Do Task"/>
+    </taskstep>
+    <taskstep x="548" y="339" comment="have need is to generate order" command1="this.setNeed(true)" command2="this.newOrder.clear()" command3="this.setNewOrder(this.CreateOrder())" command4="" command5="">
+      <label x="548" y="324" text="Generate Order"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="101" y="239" comment="This is a loop." criteria="task in taskTypes" branchType="while">
+      <label x="101" y="224" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="549" y="245" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
+      <label x="549" y="230" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="548" y="160" comment="Check if it already have needs" criteria="this.getNeed()" branchType="if">
+      <label x="548" y="145" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
+  <joinsteps/>
+  <agentproperties>
+    <agentproperty x="335" y="72" comment="indicator to show if the demander have need" visibility="0" compiledname="need" type="boolean" defaultvalue="false">
+      <label x="340" y="57" text="Need"/>
+    </agentproperty>
+    <agentproperty x="361" y="210" comment="This is a test adder" visibility="0" compiledname="unit" type="int" defaultvalue="5">
+      <label x="366" y="195" text="addition"/>
+    </agentproperty>
+    <agentproperty x="259" y="116" comment="Order List" visibility="0" compiledname="orderList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="264" y="101" text="Order List"/>
+    </agentproperty>
+    <agentproperty x="327" y="353" comment="New order" visibility="0" compiledname="newOrder" type="Order" defaultvalue="null">
+      <label x="332" y="338" text="New order"/>
+    </agentproperty>
+  </agentproperties>
+  <endsteps>
+    <endstep x="112" y="466"/>
+    <endstep x="566" y="472"/>
+  </endsteps>
+  <connections>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
+  </connections>
+</agent>

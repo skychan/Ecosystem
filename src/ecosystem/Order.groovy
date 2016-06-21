@@ -95,6 +95,21 @@ public class Order  {
 
     /**
      *
+     * The order owner, if not only one
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public ArrayList getOwner() {
+        return owner
+    }
+    public void setOwner(ArrayList newValue) {
+        owner = newValue
+    }
+    public ArrayList owner = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -146,6 +161,21 @@ public class Order  {
 
         // Update the tasks' status
         this.status.replace(taskID,true)
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addOwner
+     *
+     */
+    public void addOwner(String ownerID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add owner to the list
+        this.owner.add(ownerID)
     }
 
     /**

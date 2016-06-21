@@ -342,8 +342,8 @@ public class CloudPlatform  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        this.orderHub.Add(watchedAgent)
+        // add order to the order hub
+        this.orderHub.Add(watchedAgent.getNewOrder())
     }
 
     /**

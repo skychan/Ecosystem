@@ -57,8 +57,8 @@
     <taskstep x="738" y="745" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="738" y="730" text="Do Task"/>
     </taskstep>
-    <taskstep x="183" y="713" comment="This is a task." command1="this.orderHub.Add(watchedAgent)" command2="" command3="" command4="" command5="">
-      <label x="183" y="698" text="Do Task"/>
+    <taskstep x="183" y="713" comment="add order to the order hub" command1="this.orderHub.Add(watchedAgent.getNewOrder())" command2="" command3="" command4="" command5="">
+      <label x="183" y="698" text="add order"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -94,13 +94,13 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="83" y="334"/>
-    <endstep x="193" y="340"/>
-    <endstep x="579" y="403"/>
-    <endstep x="826" y="410"/>
-    <endstep x="359" y="424"/>
-    <endstep x="756" y="832"/>
-    <endstep x="190" y="815"/>
+    <endstep x="88" y="339"/>
+    <endstep x="198" y="345"/>
+    <endstep x="584" y="408"/>
+    <endstep x="831" y="415"/>
+    <endstep x="364" y="429"/>
+    <endstep x="761" y="837"/>
+    <endstep x="195" y="820"/>
   </endsteps>
   <connections>
     <transitions>
@@ -132,6 +132,11 @@
       <transition>
         <transitionsource type="behavior" index="5" anchor="0"/>
         <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -167,11 +172,6 @@
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="5" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="6" anchor="0"/>
-        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

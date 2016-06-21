@@ -205,7 +205,19 @@ public class PureDemander  {
                 // have need is to generate order
                 this.setNeed(true)
                 this.newOrder.clear()
-                this.setNewOrder(this.CreateOrder())
+                int taskLen = RandomHelper.nextIntFromTo(1, 15)
+                String[] taskTypes
+
+                // This is a loop.
+                for (int i in 1..taskLen) {
+
+                    // This is a task.
+                    taskTypes.append("haha")
+
+                }
+
+                // This is a task.
+                this.setNewOrder(this.CreateOrder(taskTypes))
 
             } else  {
 

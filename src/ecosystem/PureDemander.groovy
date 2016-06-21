@@ -115,13 +115,13 @@ public class PureDemander  {
      *
      */
     @Parameter (displayName = "New order", usageName = "newOrder")
-    public ArrayList getNewOrder() {
+    public Order getNewOrder() {
         return newOrder
     }
-    public void setNewOrder(ArrayList newValue) {
+    public void setNewOrder(Order newValue) {
         newOrder = newValue
     }
-    public ArrayList newOrder = new ArrayList()
+    public Order newOrder = null
 
     /**
      *

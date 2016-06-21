@@ -44,13 +44,13 @@
     <agentproperty x="259" y="116" comment="Order List" visibility="0" compiledname="orderList" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="264" y="101" text="Order List"/>
     </agentproperty>
-    <agentproperty x="327" y="353" comment="New order" visibility="0" compiledname="newOrder" type="ArrayList" defaultvalue="new ArrayList()">
+    <agentproperty x="327" y="353" comment="New order" visibility="0" compiledname="newOrder" type="Order" defaultvalue="null">
       <label x="332" y="338" text="New order"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="107" y="461"/>
-    <endstep x="561" y="467"/>
+    <endstep x="112" y="466"/>
+    <endstep x="566" y="472"/>
   </endsteps>
   <connections>
     <transitions>
@@ -65,13 +65,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="1" anchor="2"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

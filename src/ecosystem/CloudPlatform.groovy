@@ -125,6 +125,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * The Order hub that contains the stage orders.
+     * @field orderHub
+     *
+     */
+    @Parameter (displayName = "Order Hub", usageName = "orderHub")
+    public OrderHub getOrderHub() {
+        return orderHub
+    }
+    public void setOrderHub(OrderHub newValue) {
+        orderHub = newValue
+    }
+    public OrderHub orderHub = (Order) CreateAgent("ecosystem","ecosystem.OrderHub")
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -308,6 +323,27 @@ public class CloudPlatform  {
         }
 
         // This is a task.
+    }
+
+    /**
+     *
+     * Watch demanders, if any of them have need, then add the order to the order hub
+     * @method InHub
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 1d
+    )
+    public void InHub(ecosystem.PureDemander watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.orderHub.Add(watchedAgent)
     }
 
     /**

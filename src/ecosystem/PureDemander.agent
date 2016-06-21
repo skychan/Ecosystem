@@ -12,7 +12,7 @@
     <taskstep x="98" y="348" comment="This is a task." command1="Task t = new Task()" command2="t.setType(task)" command3="t.SetValues()" command4="o.Add(t)" command5="">
       <label x="98" y="333" text="Add task"/>
     </taskstep>
-    <taskstep x="94" y="160" comment="This is a task." command1="Order o = new Order()" command2="" command3="" command4="" command5="">
+    <taskstep x="94" y="160" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="Order o = (Order) agent" command3="" command4="" command5="">
       <label x="94" y="145" text="Create Order"/>
     </taskstep>
     <taskstep x="222" y="260" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
@@ -49,8 +49,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="102" y="456"/>
-    <endstep x="556" y="462"/>
+    <endstep x="107" y="461"/>
+    <endstep x="561" y="467"/>
   </endsteps>
   <connections>
     <transitions>
@@ -96,7 +96,7 @@
         <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
+      <booleantransition value="true">
         <transitionsource type="decision" index="2" anchor="2"/>
         <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>

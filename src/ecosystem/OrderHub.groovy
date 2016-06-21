@@ -58,40 +58,25 @@ import static repast.simphony.essentials.RepastEssentials.*
 
 /**
  *
- * This is order agent.
+ * This is an agent.
  *
  */
-public class Order  {
+public class OrderHub  {
 
     /**
      *
-     * This is an agent property.
-     * @field taskList
+     * Order list is to record orders that have generated
+     * @field orderList
      *
      */
-    @Parameter (displayName = "TaskList", usageName = "taskList")
-    public List<Task> getTaskList() {
-        return taskList
+    @Parameter (displayName = "Order List", usageName = "orderList")
+    public ArrayList getOrderList() {
+        return orderList
     }
-    public void setTaskList(List<Task> newValue) {
-        taskList = newValue
+    public void setOrderList(ArrayList newValue) {
+        orderList = newValue
     }
-    public List<Task> taskList = new ArrayList<Task>()
-
-    /**
-     *
-     * Task Status
-     * @field status
-     *
-     */
-    @Parameter (displayName = "Order Status", usageName = "status")
-    public HashMap<String,Boolean> getStatus() {
-        return status
-    }
-    public void setStatus(HashMap<String,Boolean> newValue) {
-        status = newValue
-    }
-    public HashMap<String,Boolean> status = new HashMap<String,Boolean>()
+    public ArrayList orderList = new ArrayList()
 
     /**
      *
@@ -115,37 +100,51 @@ public class Order  {
      * @field agentID
      *
      */
-    protected String agentID = "Order " + (agentIDCounter++)
+    protected String agentID = "OrderHub " + (agentIDCounter++)
 
     /**
      *
-     * This is the step behavior.
-     * @method Add
+     * Initialization
+     * @method Init
      *
      */
-    public void Add(Task t) {
+    public void Init() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        this.taskList.add(t)
-        this.status.put(t.toString(),false)
+        // Initialization
+        this.orderList.clear()
     }
 
     /**
      *
-     * when one task finished, turn the status to true
-     * @method Change
+     * Add orders into the order hub
+     * @method Add
      *
      */
-    public void Change(String taskID) {
+    public void Add(Order o) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Update the tasks' status
-        this.status.replace(taskID,true)
+        // add order in the hub
+        this.orderList.add(o)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Remove
+     *
+     */
+    public void Remove(Object o) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // remove order from the hub
+        this.orderList.remove(o)
     }
 
     /**

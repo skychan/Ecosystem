@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
+    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="platform.orderHub.Init()" command4="" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
     <taskstep x="239" y="278" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="platform.userList.add(pureDemander)" command4="" command5="">
@@ -40,7 +40,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="110" y="516"/>
+    <endstep x="115" y="521"/>
   </endsteps>
   <connections>
     <transitions>

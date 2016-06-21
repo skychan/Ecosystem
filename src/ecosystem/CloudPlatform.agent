@@ -19,6 +19,9 @@
     <behaviorstep x="738" y="486" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch needs then to analysis them to search resource providers." visibility="0" returntype="void" compiledname="Search" parameters="PureDemander dagent" exceptions="">
       <label x="738" y="471" text="Search the provider."/>
     </behaviorstep>
+    <behaviorstep x="183" y="626" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch demanders, if any of them have need, then add the order to the order hub" visibility="0" returntype="void" compiledname="InHub" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
+      <label x="183" y="611" text="Flow in hub"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="63" y="240" comment="This is a task." command1="this.userList.add(o)" command2="" command3="" command4="" command5="">
@@ -54,6 +57,9 @@
     <taskstep x="738" y="745" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="738" y="730" text="Do Task"/>
     </taskstep>
+    <taskstep x="183" y="713" comment="This is a task." command1="this.orderHub.Add(watchedAgent)" command2="" command3="" command4="" command5="">
+      <label x="183" y="698" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="548" y="248" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
@@ -83,14 +89,18 @@
     <agentproperty x="889" y="500" comment="Searche provider result list" visibility="0" compiledname="searched" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="894" y="485" text="Searched provider"/>
     </agentproperty>
+    <agentproperty x="56" y="619" comment="The Order hub that contains the stage orders." visibility="0" compiledname="orderHub" type="OrderHub" defaultvalue="(Order) CreateAgent(&quot;ecosystem&quot;,&quot;ecosystem.OrderHub&quot;)">
+      <label x="61" y="604" text="Order Hub"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="78" y="329"/>
-    <endstep x="188" y="335"/>
-    <endstep x="574" y="398"/>
-    <endstep x="821" y="405"/>
-    <endstep x="354" y="419"/>
-    <endstep x="751" y="827"/>
+    <endstep x="83" y="334"/>
+    <endstep x="193" y="340"/>
+    <endstep x="579" y="403"/>
+    <endstep x="826" y="410"/>
+    <endstep x="359" y="424"/>
+    <endstep x="756" y="832"/>
+    <endstep x="190" y="815"/>
   </endsteps>
   <connections>
     <transitions>
@@ -157,6 +167,16 @@
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="end" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

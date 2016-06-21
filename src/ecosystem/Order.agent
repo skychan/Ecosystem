@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
+<agent version="1" agentcomment="This is order agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
     <behaviorstep x="22" y="105" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Add" parameters="Task t" exceptions="">
       <label x="22" y="90" text="Add Task"/>
     </behaviorstep>
+    <behaviorstep x="161" y="105" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="when one task finished, turn the status to true" visibility="0" returntype="void" compiledname="Change" parameters="String taskID" exceptions="">
+      <label x="161" y="90" text="Update Status"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="21" y="199" comment="This is a task." command1="this.taskList.add(t)" command2="" command3="" command4="" command5="">
-      <label x="21" y="184" text="adding"/>
+    <taskstep x="28" y="195" comment="This is a task." command1="this.taskList.add(t)" command2="this.status.put(t.toString(),false)" command3="" command4="" command5="">
+      <label x="28" y="180" text="adding"/>
+    </taskstep>
+    <taskstep x="163" y="203" comment="Update the tasks&apos; status" command1="this.status.replace(taskID,true)" command2="" command3="" command4="" command5="">
+      <label x="163" y="188" text="updating"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -16,9 +22,13 @@
     <agentproperty x="16" y="21" comment="This is an agent property." visibility="0" compiledname="taskList" type="List&lt;Task&gt;" defaultvalue="new ArrayList&lt;Task&gt;()">
       <label x="21" y="6" text="TaskList"/>
     </agentproperty>
+    <agentproperty x="173" y="30" comment="Task Status" visibility="0" compiledname="status" type="HashMap&lt;String,Boolean&gt;" defaultvalue="new HashMap&lt;String,Boolean&gt;()">
+      <label x="178" y="15" text="Order Status"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="30" y="317"/>
+    <endstep x="35" y="322"/>
+    <endstep x="172" y="314"/>
   </endsteps>
   <connections>
     <transitions>
@@ -30,6 +40,16 @@
       <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

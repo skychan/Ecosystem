@@ -162,7 +162,8 @@ public class PureDemander  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        Order o = new Order()
+        Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
+        Order o = (Order) agent
 
         // This is a loop.
         for (task in taskTypes) {
@@ -198,9 +199,6 @@ public class PureDemander  {
         if (this.getNeed()) {
 
 
-        } else  {
-
-
             // to need or not
             if (RandomHelper.nextIntFromTo(0, 1)) {
 
@@ -213,6 +211,9 @@ public class PureDemander  {
 
 
             }
+
+        } else  {
+
 
         }
     }

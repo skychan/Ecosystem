@@ -6,19 +6,22 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="196" y="261" comment="This is a task." command1="Service s = new Service()" command2="s.AddResource(r)" command3="" command4="" command5="this.serviceList.add(s)">
-      <label x="196" y="246" text="Create Services"/>
+    <taskstep x="188" y="347" comment="" command1="Object sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service s = (Service) sagent" command3="r.addMaster(s.toString())" command4="s.AddResource(r)" command5="">
+      <label x="188" y="332" text="Create Services"/>
     </taskstep>
-    <taskstep x="206" y="165" comment="This is a task." command1="Resource r = new Resource()" command2="" command3="" command4="" command5="this.resourceList.add(r)">
-      <label x="206" y="150" text="Create resource"/>
+    <taskstep x="193" y="259" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource r = (Resource) ragent" command3="r.addOwner(this.toString())" command4="" command5="this.resourceList.add(r)">
+      <label x="193" y="244" text="Create resource"/>
+    </taskstep>
+    <taskstep x="190" y="431" comment="" command1="s.addOwner(this.toString())" command2="" command3="" command4="" command5="this.serviceList.add(s)">
+      <label x="190" y="416" text="fill service"/>
+    </taskstep>
+    <taskstep x="62" y="164" comment="Set the resourceCount" command1="int resourceCount = 5" command2="" command3="" command4="" command5="">
+      <label x="62" y="149" text="Set resourceCount"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="70" y="157" comment="This is a loop." criteria="i in 1..resourceCount" branchType="while">
-      <label x="70" y="142" text="resource loop"/>
-    </decisionstep>
-    <decisionstep x="61" y="258" comment="This is a loop." criteria="r in this.getResourceList()" branchType="while">
-      <label x="61" y="243" text="Evaluate Criteria"/>
+    <decisionstep x="61" y="258" comment="This is a loop." criteria="i in 1..resourceCount" branchType="while">
+      <label x="61" y="243" text="resource loop"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -31,12 +34,27 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="85" y="383"/>
+    <endstep x="70" y="418"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -49,16 +67,6 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="decision" index="1" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="1" anchor="3"/>
-        <transitiontarget type="task" index="0" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>

@@ -185,7 +185,7 @@ public class Task  {
 
     /**
      *
-     * Record the owners of the task
+     * Record the master of the task
      * @field master
      *
      */

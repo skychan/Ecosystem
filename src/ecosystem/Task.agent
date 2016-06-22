@@ -74,7 +74,7 @@
     <agentproperty x="26" y="460" comment="the mark of the task stage" visibility="0" compiledname="finish" type="boolean" defaultvalue="false">
       <label x="31" y="445" text="Finish"/>
     </agentproperty>
-    <agentproperty x="439" y="574" comment="Record the owners of the task" visibility="0" compiledname="master" type="ArrayList" defaultvalue="new ArrayList()">
+    <agentproperty x="439" y="574" comment="Record the master of the task" visibility="0" compiledname="master" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="444" y="559" text="Master"/>
     </agentproperty>
   </agentproperties>

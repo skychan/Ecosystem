@@ -20,10 +20,14 @@ package ecosystem
 import java.io.*
 import java.math.*
 import java.util.*
+
 import javax.measure.unit.*
+
 import org.jscience.mathematics.number.*
 import org.jscience.mathematics.vector.*
 import org.jscience.physics.amount.*
+
+import bsh.This;
 import repast.simphony.adaptation.neural.*
 import repast.simphony.adaptation.regression.*
 import repast.simphony.context.*
@@ -61,7 +65,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class ComplexUser extends PureProvider  {
+public class ComplexUser extends TestComplex  {
 
     /**
      *
@@ -78,6 +82,7 @@ public class ComplexUser extends PureProvider  {
      *
      */
     protected static long agentIDCounter = 1
+
 
     /**
      *

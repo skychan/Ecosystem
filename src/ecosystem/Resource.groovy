@@ -140,6 +140,36 @@ public class Resource  {
 
     /**
      *
+     * Record the master of the resource
+     * @field master
+     *
+     */
+    @Parameter (displayName = "Master", usageName = "master")
+    public ArrayList getMaster() {
+        return master
+    }
+    public void setMaster(ArrayList newValue) {
+        master = newValue
+    }
+    public ArrayList master = new ArrayList()
+
+    /**
+     *
+     * Record the owners of the resource
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owners", usageName = "owner")
+    public ArrayList getOwner() {
+        return owner
+    }
+    public void setOwner(ArrayList newValue) {
+        owner = newValue
+    }
+    public ArrayList owner = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -209,6 +239,36 @@ public class Resource  {
 
         // This is a task.
         this.setUnitCost(cost)
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addMaster
+     *
+     */
+    public void addMaster(String masterID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add master to the list
+        this.master.add(masterID)
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addOwner
+     *
+     */
+    public void addOwner(String ownerID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add owner to the list
+        this.owner.add(ownerID)
     }
 
     /**

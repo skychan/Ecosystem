@@ -45,7 +45,7 @@
     <taskstep x="915" y="249" comment="Create demander at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander dagent = (PureDemander) agent" command3="dagent.changeNeed()" command4="this.AddUser(dagent)" command5="">
       <label x="915" y="234" text="Create Demander"/>
     </taskstep>
-    <taskstep x="448" y="263" comment="Create Provider at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pagent = (PureProvider) agent" command3="this.AddUser(pagent)" command4="" command5="">
+    <taskstep x="448" y="263" comment="Create Provider at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pagent = (PureProvider) agent" command3="pagent.Init()" command4="" command5="this.AddUser(pagent)">
       <label x="448" y="248" text="Create Provider"/>
     </taskstep>
     <taskstep x="324" y="182" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
@@ -104,7 +104,7 @@
     <endstep x="198" y="345"/>
     <endstep x="584" y="408"/>
     <endstep x="831" y="415"/>
-    <endstep x="364" y="429"/>
+    <endstep x="334" y="427"/>
     <endstep x="761" y="837"/>
     <endstep x="175" y="824"/>
     <endstep x="297" y="831"/>

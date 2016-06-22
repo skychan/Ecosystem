@@ -10,6 +10,12 @@
     <behaviorstep x="406" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Bid" parameters="int cost" exceptions="">
       <label x="406" y="72" text="Adjust Cost"/>
     </behaviorstep>
+    <behaviorstep x="681" y="107" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addMaster" parameters="String masterID" exceptions="">
+      <label x="681" y="92" text="Add Master"/>
+    </behaviorstep>
+    <behaviorstep x="578" y="114" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
+      <label x="578" y="99" text="Add Owner"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="165" y="294" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
@@ -20,6 +26,12 @@
     </taskstep>
     <taskstep x="404" y="171" comment="This is a task." command1="this.setUnitCost(cost)" command2="" command3="" command4="" command5="">
       <label x="404" y="156" text="Adjust bid"/>
+    </taskstep>
+    <taskstep x="679" y="185" comment="add master to the list" command1="this.master.add(masterID)" command2="" command3="" command4="" command5="">
+      <label x="679" y="170" text="set master"/>
+    </taskstep>
+    <taskstep x="576" y="192" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
+      <label x="576" y="177" text="set owner"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -40,11 +52,19 @@
     <agentproperty x="170" y="121" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="this.getCapacity()">
       <label x="175" y="106" text="Available"/>
     </agentproperty>
+    <agentproperty x="677" y="38" comment="Record the master of the resource" visibility="0" compiledname="master" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="682" y="23" text="Master"/>
+    </agentproperty>
+    <agentproperty x="574" y="45" comment="Record the owners of the resource" visibility="0" compiledname="owner" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="579" y="30" text="Owners"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="175" y="399"/>
-    <endstep x="295" y="314"/>
-    <endstep x="418" y="292"/>
+    <endstep x="170" y="411"/>
+    <endstep x="300" y="319"/>
+    <endstep x="423" y="297"/>
+    <endstep x="600" y="312"/>
+    <endstep x="701" y="311"/>
   </endsteps>
   <connections>
     <transitions>
@@ -59,6 +79,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -69,13 +94,28 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="end" index="2" anchor="0"/>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

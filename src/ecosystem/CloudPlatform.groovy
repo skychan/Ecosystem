@@ -287,6 +287,7 @@ public class CloudPlatform  {
             // Create Provider at a random distribution
             Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
             PureProvider pagent = (PureProvider) agent
+            pagent.Init()
             this.AddUser(pagent)
 
         }

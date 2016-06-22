@@ -128,23 +128,22 @@ public class PureProvider  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // Set the resourceCount
+        int resourceCount = 5
 
         // This is a loop.
         for (i in 1..resourceCount) {
 
             // This is a task.
-            Resource r = new Resource()
+            Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
+            Resource r = (Resource) ragent
+            r.addOwner(this.toString())
             this.resourceList.add(r)
-
-        }
-
-
-        // This is a loop.
-        for (r in this.getResourceList()) {
-
-            // This is a task.
-            Service s = new Service()
+            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+            Service s = (Service) sagent
+            r.addMaster(s.toString())
             s.AddResource(r)
+            s.addOwner(this.toString())
             this.serviceList.add(s)
 
         }

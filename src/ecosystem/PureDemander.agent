@@ -9,14 +9,14 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="98" y="348" comment="This is a task." command1="Task t = new Task()" command2="t.setType(task)" command3="t.SetValues()" command4="o.Add(t)" command5="">
-      <label x="98" y="333" text="Add task"/>
+    <taskstep x="213" y="240" comment="Create Task and set the values" command1="Object tagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) tagent" command3="t.setType(task)" command4="t.SetValues()" command5="">
+      <label x="213" y="225" text="Add task"/>
     </taskstep>
-    <taskstep x="94" y="160" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="Order o = (Order) agent" command3="" command4="" command5="">
+    <taskstep x="94" y="160" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="Order o = (Order) agent" command3="o.addOwner(this.toString())" command4="" command5="">
       <label x="94" y="145" text="Create Order"/>
     </taskstep>
-    <taskstep x="222" y="260" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
-      <label x="222" y="245" text="Do Task"/>
+    <taskstep x="97" y="348" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
+      <label x="97" y="333" text="Do Task"/>
     </taskstep>
     <taskstep x="548" y="339" comment="have need is to generate order" command1="this.setNeed(true)" command2="this.newOrder.clear()" command3="int taskLen = RandomHelper.nextIntFromTo(1, 15)" command4="" command5="String[] taskTypes">
       <label x="548" y="324" text="Generate Order"/>
@@ -26,6 +26,9 @@
     </taskstep>
     <taskstep x="551" y="526" comment="This is a task." command1="this.setNewOrder(this.CreateOrder(taskTypes))" command2="" command3="" command4="" command5="">
       <label x="551" y="511" text="Do Task"/>
+    </taskstep>
+    <taskstep x="215" y="329" comment="" command1="t.addOwner(this.toString())" command2="t.addMaster(o.toString())" command3="" command4="" command5="o.Add(t)">
+      <label x="215" y="314" text="Set to the order"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -58,7 +61,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="117" y="471"/>
+    <endstep x="102" y="459"/>
     <endstep x="560" y="640"/>
   </endsteps>
   <connections>
@@ -71,6 +74,11 @@
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -96,13 +104,13 @@
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
-        <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="0" anchor="0"/>
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="0" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
-        <transitionsource type="decision" index="0" anchor="3"/>
-        <transitiontarget type="task" index="2" anchor="1"/>
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

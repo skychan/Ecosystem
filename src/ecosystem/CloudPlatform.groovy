@@ -334,7 +334,7 @@ public class CloudPlatform  {
     @Watch(
         watcheeClassName = 'ecosystem.PureDemander',
         watcheeFieldNames = 'need',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
     public void InHub(ecosystem.PureDemander watchedAgent) {
@@ -344,6 +344,28 @@ public class CloudPlatform  {
 
         // add order to the order hub
         this.orderHub.Add(watchedAgent.getNewOrder())
+    }
+
+    /**
+     *
+     * Watch providers, if any of them have finished a order, then we should pull it off from the hub
+     * @method Order
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.OrderHub',
+        watcheeFieldNames = 'status',
+        triggerCondition = '$watchee.getStatus().values().contains(false) == false',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public void Order(ecosystem.Order watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // remove order from the order hub
+        this.orderHub.Remove(watchedAgent)
     }
 
     /**

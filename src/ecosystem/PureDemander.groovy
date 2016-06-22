@@ -164,14 +164,18 @@ public class PureDemander  {
         // This is a task.
         Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
         Order o = (Order) agent
+        o.addOwner(this.toString())
 
         // This is a loop.
         for (task in taskTypes) {
 
-            // This is a task.
-            Task t = new Task()
+            // Create Task and set the values
+            Object tagent = CreateAgent("Ecosystem", "ecosystem.Task")
+            Task t = (Task) tagent
             t.setType(task)
             t.SetValues()
+            t.addOwner(this.toString())
+            t.addMaster(o.toString())
             o.Add(t)
 
         }

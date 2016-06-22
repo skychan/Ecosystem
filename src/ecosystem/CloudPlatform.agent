@@ -19,8 +19,11 @@
     <behaviorstep x="738" y="486" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch needs then to analysis them to search resource providers." visibility="0" returntype="void" compiledname="Search" parameters="PureDemander dagent" exceptions="">
       <label x="738" y="471" text="Search the provider."/>
     </behaviorstep>
-    <behaviorstep x="183" y="626" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch demanders, if any of them have need, then add the order to the order hub" visibility="0" returntype="void" compiledname="InHub" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
-      <label x="183" y="611" text="Flow in hub"/>
+    <behaviorstep x="169" y="625" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch demanders, if any of them have need, then add the order to the order hub" visibility="0" returntype="void" compiledname="InHub" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
+      <label x="169" y="610" text="Flow in hub"/>
+    </behaviorstep>
+    <behaviorstep x="288" y="628" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.OrderHub" watchannotationtargetfieldnames="status" watchannotationtriggercondition="$watchee.getStatus().values().contains(false) == false" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch providers, if any of them have finished a order, then we should pull it off from the hub" visibility="0" returntype="void" compiledname="Order" parameters="ecosystem.Order watchedAgent" exceptions="">
+      <label x="288" y="613" text="Flow out hub"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -57,8 +60,11 @@
     <taskstep x="738" y="745" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="738" y="730" text="Do Task"/>
     </taskstep>
-    <taskstep x="183" y="713" comment="add order to the order hub" command1="this.orderHub.Add(watchedAgent.getNewOrder())" command2="" command3="" command4="" command5="">
-      <label x="183" y="698" text="add order"/>
+    <taskstep x="169" y="712" comment="add order to the order hub" command1="this.orderHub.Add(watchedAgent.getNewOrder())" command2="" command3="" command4="" command5="">
+      <label x="169" y="697" text="add order"/>
+    </taskstep>
+    <taskstep x="288" y="715" comment="remove order from the order hub" command1="this.orderHub.Remove(watchedAgent)" command2="" command3="" command4="" command5="">
+      <label x="288" y="700" text="remove order"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -100,7 +106,8 @@
     <endstep x="831" y="415"/>
     <endstep x="364" y="429"/>
     <endstep x="761" y="837"/>
-    <endstep x="195" y="820"/>
+    <endstep x="175" y="824"/>
+    <endstep x="297" y="831"/>
   </endsteps>
   <connections>
     <transitions>
@@ -177,6 +184,16 @@
       <transition>
         <transitionsource type="task" index="11" anchor="2"/>
         <transitiontarget type="end" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="end" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="7" anchor="0"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

@@ -65,33 +65,18 @@ public class Order  {
 
     /**
      *
-     * This is an agent property.
-     * @field taskList
-     *
-     */
-    @Parameter (displayName = "TaskList", usageName = "taskList")
-    public List<Task> getTaskList() {
-        return taskList
-    }
-    public void setTaskList(List<Task> newValue) {
-        taskList = newValue
-    }
-    public List<Task> taskList = new ArrayList<Task>()
-
-    /**
-     *
      * Task Status
      * @field status
      *
      */
-    @Parameter (displayName = "Order Status", usageName = "status")
-    public HashMap<String,Boolean> getStatus() {
+    @Parameter (displayName = "Tasks' Status", usageName = "status")
+    public HashMap<Task,Boolean> getStatus() {
         return status
     }
-    public void setStatus(HashMap<String,Boolean> newValue) {
+    public void setStatus(HashMap<Task,Boolean> newValue) {
         status = newValue
     }
-    public HashMap<String,Boolean> status = new HashMap<String,Boolean>()
+    public HashMap<Task,Boolean> status = new HashMap<Task,Boolean>()
 
     /**
      *
@@ -144,8 +129,7 @@ public class Order  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.taskList.add(t)
-        this.status.put(t.toString(),false)
+        this.status.put(t,false)
     }
 
     /**
@@ -154,13 +138,20 @@ public class Order  {
      * @method Change
      *
      */
-    public void Change(String taskID) {
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'finish',
+        triggerCondition = '$watchee.getMaster().contains($watcher.toString())',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 0d
+    )
+    public void Change(Task t) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // Update the tasks' status
-        this.status.replace(taskID,true)
+        this.status.replace(t,true)
     }
 
     /**

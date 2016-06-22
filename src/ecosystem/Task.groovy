@@ -155,6 +155,51 @@ public class Task  {
 
     /**
      *
+     * Record the owners of the task
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owners", usageName = "owner")
+    public ArrayList getOwner() {
+        return owner
+    }
+    public void setOwner(ArrayList newValue) {
+        owner = newValue
+    }
+    public ArrayList owner = new ArrayList()
+
+    /**
+     *
+     * the mark of the task stage
+     * @field finish
+     *
+     */
+    @Parameter (displayName = "Finish", usageName = "finish")
+    public boolean getFinish() {
+        return finish
+    }
+    public void setFinish(boolean newValue) {
+        finish = newValue
+    }
+    public boolean finish = false
+
+    /**
+     *
+     * Record the owners of the task
+     * @field master
+     *
+     */
+    @Parameter (displayName = "Master", usageName = "master")
+    public ArrayList getMaster() {
+        return master
+    }
+    public void setMaster(ArrayList newValue) {
+        master = newValue
+    }
+    public ArrayList master = new ArrayList()
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -179,7 +224,7 @@ public class Task  {
 
     /**
      *
-     * This is the step behavior.
+     * Processing the task every time
      * @method Processing
      *
      */
@@ -192,6 +237,17 @@ public class Task  {
         int remaintime = this.getRemainingTime()
         remaintime--
         this.setRemainingTime(remaintime)
+
+        // This is an agent decision.
+        if (this.getRemainingTime()) {
+
+
+        } else  {
+
+            // send the task change status signal
+            this.setFinish(true)
+
+        }
     }
 
     /**
@@ -238,6 +294,36 @@ public class Task  {
 
         }
 
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addOwner
+     *
+     */
+    public void addOwner(String ownerID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add owner to the list
+        this.owner.add(ownerID)
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addMaster
+     *
+     */
+    public void addMaster(String masterID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add master to the list
+        this.master.add(masterID)
     }
 
     /**

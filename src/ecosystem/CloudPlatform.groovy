@@ -136,7 +136,7 @@ public class CloudPlatform  {
     public void setOrderHub(OrderHub newValue) {
         orderHub = newValue
     }
-    public OrderHub orderHub = (Order) CreateAgent("ecosystem","ecosystem.OrderHub")
+    public OrderHub orderHub = (OrderHub) CreateAgent("Ecosystem","ecosystem.OrderHub")
 
     /**
      *
@@ -354,7 +354,7 @@ public class CloudPlatform  {
      *
      */
     @Watch(
-        watcheeClassName = 'ecosystem.OrderHub',
+        watcheeClassName = 'ecosystem.Order',
         watcheeFieldNames = 'status',
         triggerCondition = '$watchee.getStatus().values().contains(false) == false',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,

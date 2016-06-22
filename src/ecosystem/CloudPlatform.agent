@@ -22,7 +22,7 @@
     <behaviorstep x="169" y="625" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch demanders, if any of them have need, then add the order to the order hub" visibility="0" returntype="void" compiledname="InHub" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="169" y="610" text="Flow in hub"/>
     </behaviorstep>
-    <behaviorstep x="288" y="628" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.OrderHub" watchannotationtargetfieldnames="status" watchannotationtriggercondition="$watchee.getStatus().values().contains(false) == false" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch providers, if any of them have finished a order, then we should pull it off from the hub" visibility="0" returntype="void" compiledname="Order" parameters="ecosystem.Order watchedAgent" exceptions="">
+    <behaviorstep x="288" y="628" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Order" watchannotationtargetfieldnames="status" watchannotationtriggercondition="$watchee.getStatus().values().contains(false) == false" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch providers, if any of them have finished a order, then we should pull it off from the hub" visibility="0" returntype="void" compiledname="Order" parameters="ecosystem.Order watchedAgent" exceptions="">
       <label x="288" y="613" text="Flow out hub"/>
     </behaviorstep>
   </behaviorsteps>
@@ -95,7 +95,7 @@
     <agentproperty x="889" y="500" comment="Searche provider result list" visibility="0" compiledname="searched" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="894" y="485" text="Searched provider"/>
     </agentproperty>
-    <agentproperty x="56" y="619" comment="The Order hub that contains the stage orders." visibility="0" compiledname="orderHub" type="OrderHub" defaultvalue="(Order) CreateAgent(&quot;ecosystem&quot;,&quot;ecosystem.OrderHub&quot;)">
+    <agentproperty x="56" y="619" comment="The Order hub that contains the stage orders." visibility="0" compiledname="orderHub" type="OrderHub" defaultvalue="(OrderHub) CreateAgent(&quot;Ecosystem&quot;,&quot;ecosystem.OrderHub&quot;)">
       <label x="61" y="604" text="Order Hub"/>
     </agentproperty>
   </agentproperties>

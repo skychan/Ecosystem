@@ -7,13 +7,13 @@
     <behaviorstep x="161" y="105" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="$watchee.getMaster().contains($watcher.toString())" watchannotationtriggerschedule="0" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="when one task finished, turn the status to true" visibility="0" returntype="void" compiledname="Change" parameters="Task t" exceptions="">
       <label x="161" y="90" text="Update Status"/>
     </behaviorstep>
-    <behaviorstep x="300" y="106" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
-      <label x="300" y="91" text="Add Owner"/>
+    <behaviorstep x="306" y="102" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
+      <label x="306" y="87" text="Add Owner"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="28" y="195" comment="This is a task." command1="this.status.put(t,false)" command2="" command3="" command4="" command5="">
-      <label x="28" y="180" text="adding"/>
+    <taskstep x="19" y="197" comment="This is a task." command1="this.status.put(t,false)" command2="" command3="" command4="" command5="">
+      <label x="19" y="182" text="adding"/>
     </taskstep>
     <taskstep x="163" y="203" comment="Update the tasks&apos; status" command1="this.status.replace(t,true)" command2="" command3="" command4="" command5="">
       <label x="163" y="188" text="updating"/>
@@ -31,11 +31,14 @@
     <agentproperty x="313" y="27" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="318" y="12" text="Owner"/>
     </agentproperty>
+    <agentproperty x="431" y="28" comment="The order amount" visibility="0" compiledname="amount" type="int" defaultvalue="0">
+      <label x="436" y="13" text="Amount"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="40" y="327"/>
-    <endstep x="168" y="329"/>
-    <endstep x="321" y="333"/>
+    <endstep x="30" y="323"/>
+    <endstep x="173" y="334"/>
+    <endstep x="314" y="338"/>
   </endsteps>
   <connections>
     <transitions>

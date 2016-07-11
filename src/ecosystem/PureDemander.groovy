@@ -65,36 +65,6 @@ public class PureDemander  {
 
     /**
      *
-     * indicator to show if the demander have need
-     * @field need
-     *
-     */
-    @Parameter (displayName = "Need", usageName = "need")
-    public boolean getNeed() {
-        return need
-    }
-    public void setNeed(boolean newValue) {
-        need = newValue
-    }
-    public boolean need = false
-
-    /**
-     *
-     * This is a test adder
-     * @field unit
-     *
-     */
-    @Parameter (displayName = "addition", usageName = "unit")
-    public int getUnit() {
-        return unit
-    }
-    public void setUnit(int newValue) {
-        unit = newValue
-    }
-    public int unit = 5
-
-    /**
-     *
      * Order List
      * @field orderList
      *
@@ -122,6 +92,21 @@ public class PureDemander  {
         newOrder = newValue
     }
     public Order newOrder = null
+
+    /**
+     *
+     * The index of need generated
+     * @field need
+     *
+     */
+    @Parameter (displayName = "Need", usageName = "need")
+    public boolean getNeed() {
+        return need
+    }
+    public void setNeed(boolean newValue) {
+        need = newValue
+    }
+    public boolean need = false
 
     /**
      *
@@ -193,40 +178,28 @@ public class PureDemander  {
      * @method changeNeed
      *
      */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
     public void changeNeed() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
 
-        // Check if it already have needs
-        if (this.getNeed()) {
+        // to need or not
+        if (RandomHelper.nextIntFromTo(0, 1)) {
 
-
-            // to need or not
-            if (RandomHelper.nextIntFromTo(0, 1)) {
-
-                // have need is to generate order
-                this.setNeed(true)
-                this.newOrder.clear()
-                int taskLen = RandomHelper.nextIntFromTo(1, 15)
-                String[] taskTypes
-
-                // This is a loop.
-                for (int i in 1..taskLen) {
-
-                    // This is a task.
-                    taskTypes.append("haha")
-
-                }
-
-                // This is a task.
-                this.setNewOrder(this.CreateOrder(taskTypes))
-
-            } else  {
-
-
-            }
+            // have need is to generate order
+            this.newOrder.clear()
+            Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
+            Order o = (Order) agent
+            o.addOwner(this.toString())
+            // Set the order parameters
+            o.setAmount(50)
+            this.setNewOrder(o)
 
         } else  {
 

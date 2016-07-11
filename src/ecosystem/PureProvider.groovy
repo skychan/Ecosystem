@@ -65,33 +65,18 @@ public class PureProvider  {
 
     /**
      *
-     * This is an agent property.
-     * @field serviceList
+     * Record the service
+     * @field services
      *
      */
-    @Parameter (displayName = "Service List", usageName = "serviceList")
-    public ArrayList getServiceList() {
-        return serviceList
+    @Parameter (displayName = "Service List", usageName = "services")
+    public ArrayList getServices() {
+        return services
     }
-    public void setServiceList(ArrayList newValue) {
-        serviceList = newValue
+    public void setServices(ArrayList newValue) {
+        services = newValue
     }
-    public ArrayList serviceList = new ArrayList()
-
-    /**
-     *
-     * This is an agent property.
-     * @field resourceList
-     *
-     */
-    @Parameter (displayName = "Resource List", usageName = "resourceList")
-    public ArrayList getResourceList() {
-        return resourceList
-    }
-    public void setResourceList(ArrayList newValue) {
-        resourceList = newValue
-    }
-    public ArrayList resourceList = new ArrayList()
+    public ArrayList services = new ArrayList()
 
     /**
      *
@@ -119,7 +104,7 @@ public class PureProvider  {
 
     /**
      *
-     * This is the step behavior.
+     * Initilization
      * @method Init
      *
      */
@@ -128,26 +113,14 @@ public class PureProvider  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Set the resourceCount
-        int resourceCount = 5
-
-        // This is a loop.
-        for (i in 1..resourceCount) {
-
-            // This is a task.
-            Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
-            Resource r = (Resource) ragent
-            r.addOwner(this.toString())
-            this.resourceList.add(r)
-            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
-            Service s = (Service) sagent
-            r.addMaster(s.toString())
-            s.AddResource(r)
-            s.addOwner(this.toString())
-            this.serviceList.add(s)
-
-        }
-
+        // Generate Service
+        Object agent = CreateAgent("Ecosystem", "ecosystem.Service")
+        Service sagent = (Service) agent
+        sagent.addOwner(this.toString())
+        // Set parameters
+        sagent.setCapacity(30)
+        sagent.setCost(2)
+        services.add(sagent)
     }
 
     /**

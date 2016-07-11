@@ -194,73 +194,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is the step behavior.
-     * @method DeleteProvider
-     *
-     */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
-    public void DeleteProvider() {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        Parameters params = RunEnvironment.getInstance().getParameters()
-        double mean2 = params.getValue("Mean2")
-        RandomHelper.createPoisson(mean2)
-        int providerCount = RandomHelper.getPoisson().nextInt()
-
-        // This is a loop.
-        for (int i in 0..<providerCount) {
-
-            // Create Provider at a random distribution
-            RemoveAgentFromModel(this.userList.remove(this.userList.size()-1))
-
-        }
-
-    }
-
-    /**
-     *
-     * Create demander procedure
-     * @method CreateDemander
-     *
-     */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
-    public void CreateDemander() {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // generate random value for the count
-        Parameters params = RunEnvironment.getInstance().getParameters()
-        double mean = params.getValue("Mean")
-        RandomHelper.createPoisson(mean)
-        int demanderCount = RandomHelper.getPoisson().nextInt()
-
-        // This is a loop.
-        for (int i in 0..<demanderCount) {
-
-            // Create demander at a random distribution
-            Object agent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
-            PureDemander dagent = (PureDemander) agent
-            dagent.changeNeed()
-            this.AddUser(dagent)
-
-        }
-
-    }
-
-    /**
-     *
      * Create provider procedure
      * @method CreateProvider
      *
@@ -300,13 +233,7 @@ public class CloudPlatform  {
      * @method Search
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'need',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public void Search(PureDemander dagent) {
+    public void Search(ecosystem.PureDemander dagent) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -318,7 +245,7 @@ public class CloudPlatform  {
         // This is a loop.
         for (Task t in dagent.getNewOrder()) {
 
-            // Add searched resource
+            // Search corresponding resource
             this.searched.addAll(t.getAlternations())
 
         }
@@ -350,7 +277,7 @@ public class CloudPlatform  {
     /**
      *
      * Watch providers, if any of them have finished a order, then we should pull it off from the hub
-     * @method Order
+     * @method OutHub
      *
      */
     @Watch(
@@ -360,7 +287,7 @@ public class CloudPlatform  {
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
-    public void Order(ecosystem.Order watchedAgent) {
+    public void OutHub(ecosystem.Order watchedAgent) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()

@@ -95,6 +95,21 @@ public class Service  {
 
     /**
      *
+     * The capacity of the service
+     * @field capacity
+     *
+     */
+    @Parameter (displayName = "Capacity", usageName = "capacity")
+    public int getCapacity() {
+        return capacity
+    }
+    public void setCapacity(int newValue) {
+        capacity = newValue
+    }
+    public int capacity = 0
+
+    /**
+     *
      * The service owner, if not only one
      * @field owner
      *
@@ -107,6 +122,21 @@ public class Service  {
         owner = newValue
     }
     public ArrayList owner = new ArrayList()
+
+    /**
+     *
+     * The service unit cost
+     * @field cost
+     *
+     */
+    @Parameter (displayName = "Unit Cost", usageName = "cost")
+    public int getCost() {
+        return cost
+    }
+    public void setCost(int newValue) {
+        cost = newValue
+    }
+    public int cost = 0
 
     /**
      *
@@ -175,6 +205,27 @@ public class Service  {
 
         // add owner to the list
         this.owner.add(ownerID)
+    }
+
+    /**
+     *
+     * Bid
+     * @method addOwner
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public void addOwner() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Change the unit cost for bid
+        this.setCost(this.cost++)
     }
 
     /**

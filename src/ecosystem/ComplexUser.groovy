@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class ComplexUser extends TestComplex  {
+public class ComplexUser  {
 
     /**
      *
@@ -111,3 +111,4 @@ public class ComplexUser extends TestComplex  {
 
 
 }
+

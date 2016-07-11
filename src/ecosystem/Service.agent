@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Service" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="246" y="178" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="RemoveResource" parameters="Resource r" exceptions="">
-      <label x="246" y="163" text="Remove Resource"/>
+    <behaviorstep x="203" y="175" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="RemoveResource" parameters="Resource r" exceptions="">
+      <label x="203" y="160" text="Remove Resource"/>
     </behaviorstep>
     <behaviorstep x="64" y="177" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="AddResource" parameters="Resource r" exceptions="">
       <label x="64" y="162" text="Add Resource"/>
     </behaviorstep>
-    <behaviorstep x="428" y="123" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
-      <label x="428" y="108" text="Add Owner"/>
+    <behaviorstep x="450" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
+      <label x="450" y="123" text="Add Owner"/>
+    </behaviorstep>
+    <behaviorstep x="541" y="137" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Bid" visibility="0" returntype="void" compiledname="addOwner" parameters="" exceptions="">
+      <label x="541" y="122" text="Bid"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="250" y="253" comment="This is a task." command1="this.resourceList.remove(r)" command2="" command3="" command4="" command5="">
-      <label x="250" y="238" text="Removing Resource"/>
+    <taskstep x="204" y="259" comment="This is a task." command1="this.resourceList.remove(r)" command2="" command3="" command4="" command5="">
+      <label x="204" y="244" text="Removing Resource"/>
     </taskstep>
     <taskstep x="64" y="266" comment="This is a task." command1="this.resourceList.add(r)" command2="" command3="" command4="" command5="">
       <label x="64" y="251" text="Adding Resource"/>
     </taskstep>
-    <taskstep x="435" y="230" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
-      <label x="435" y="215" text="set owner"/>
+    <taskstep x="450" y="245" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
+      <label x="450" y="230" text="set owner"/>
+    </taskstep>
+    <taskstep x="541" y="244" comment="Change the unit cost for bid" command1="this.setCost(this.cost++)" command2="" command3="" command4="" command5="">
+      <label x="541" y="229" text="change unit cost"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -31,14 +37,21 @@
     <agentproperty x="146" y="57" comment="This is an agent property." visibility="0" compiledname="resourceList" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="151" y="42" text="Resource List"/>
     </agentproperty>
-    <agentproperty x="441" y="44" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="446" y="29" text="Owner"/>
+    <agentproperty x="522" y="53" comment="The capacity of the service" visibility="0" compiledname="capacity" type="int" defaultvalue="0">
+      <label x="527" y="38" text="Capacity"/>
+    </agentproperty>
+    <agentproperty x="452" y="54" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="457" y="39" text="Owner"/>
+    </agentproperty>
+    <agentproperty x="595" y="50" comment="The service unit cost" visibility="0" compiledname="cost" type="int" defaultvalue="0">
+      <label x="600" y="35" text="Unit Cost"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="256" y="370"/>
-    <endstep x="69" y="367"/>
-    <endstep x="459" y="360"/>
+    <endstep x="208" y="368"/>
+    <endstep x="70" y="361"/>
+    <endstep x="453" y="371"/>
+    <endstep x="545" y="372"/>
   </endsteps>
   <connections>
     <transitions>
@@ -63,13 +76,23 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="2" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

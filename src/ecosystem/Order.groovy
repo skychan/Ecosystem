@@ -95,6 +95,21 @@ public class Order  {
 
     /**
      *
+     * The order amount
+     * @field amount
+     *
+     */
+    @Parameter (displayName = "Amount", usageName = "amount")
+    public int getAmount() {
+        return amount
+    }
+    public void setAmount(int newValue) {
+        amount = newValue
+    }
+    public int amount = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

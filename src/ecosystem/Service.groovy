@@ -140,6 +140,21 @@ public class Service  {
 
     /**
      *
+     * Service Quality
+     * @field quality
+     *
+     */
+    @Parameter (displayName = "Quality", usageName = "quality")
+    public double getQuality() {
+        return quality
+    }
+    public void setQuality(double newValue) {
+        quality = newValue
+    }
+    public double quality = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -205,27 +220,6 @@ public class Service  {
 
         // add owner to the list
         this.owner.add(ownerID)
-    }
-
-    /**
-     *
-     * Bid
-     * @method addOwner
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'need',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public void addOwner() {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Change the unit cost for bid
-        this.setCost(this.cost++)
     }
 
     /**

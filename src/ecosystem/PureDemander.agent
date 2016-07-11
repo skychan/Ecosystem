@@ -7,6 +7,9 @@
     <behaviorstep x="543" y="83" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
       <label x="543" y="68" text="Generate Need"/>
     </behaviorstep>
+    <behaviorstep x="744" y="84" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+      <label x="744" y="69" text="Chose"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="213" y="240" comment="Create Task and set the values" command1="Object tagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) tagent" command3="t.setType(task)" command4="t.SetValues()" command5="">
@@ -26,6 +29,9 @@
     </taskstep>
     <taskstep x="215" y="329" comment="" command1="t.addOwner(this.toString())" command2="t.addMaster(o.toString())" command3="" command4="" command5="o.Add(t)">
       <label x="215" y="314" text="Set to the order"/>
+    </taskstep>
+    <taskstep x="739" y="177" comment="Chose the provider" command1="" command2="" command3="" command4="" command5="">
+      <label x="739" y="162" text="Chose the provider"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -49,8 +55,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="103" y="438"/>
-    <endstep x="555" y="449"/>
+    <endstep x="108" y="443"/>
+    <endstep x="560" y="454"/>
+    <endstep x="743" y="292"/>
   </endsteps>
   <connections>
     <transitions>
@@ -87,6 +94,16 @@
       <transition>
         <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

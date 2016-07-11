@@ -16,12 +16,12 @@
   <decisionsteps/>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="522" y="72" comment="Record the service" visibility="0" compiledname="services" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="527" y="57" text="Service List"/>
+    <agentproperty x="297" y="52" comment="Record the service" visibility="0" compiledname="services" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="302" y="37" text="Service List"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="129" y="368"/>
+    <endstep x="134" y="373"/>
   </endsteps>
   <connections>
     <transitions>

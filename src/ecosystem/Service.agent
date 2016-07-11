@@ -10,9 +10,6 @@
     <behaviorstep x="450" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
       <label x="450" y="123" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="541" y="137" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Bid" visibility="0" returntype="void" compiledname="addOwner" parameters="" exceptions="">
-      <label x="541" y="122" text="Bid"/>
-    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="204" y="259" comment="This is a task." command1="this.resourceList.remove(r)" command2="" command3="" command4="" command5="">
@@ -23,9 +20,6 @@
     </taskstep>
     <taskstep x="450" y="245" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
       <label x="450" y="230" text="set owner"/>
-    </taskstep>
-    <taskstep x="541" y="244" comment="Change the unit cost for bid" command1="this.setCost(this.cost++)" command2="" command3="" command4="" command5="">
-      <label x="541" y="229" text="change unit cost"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -46,12 +40,14 @@
     <agentproperty x="595" y="50" comment="The service unit cost" visibility="0" compiledname="cost" type="int" defaultvalue="0">
       <label x="600" y="35" text="Unit Cost"/>
     </agentproperty>
+    <agentproperty x="697" y="47" comment="Service Quality" visibility="0" compiledname="quality" type="double" defaultvalue="0">
+      <label x="702" y="32" text="Quality"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="208" y="368"/>
-    <endstep x="70" y="361"/>
-    <endstep x="453" y="371"/>
-    <endstep x="545" y="372"/>
+    <endstep x="213" y="373"/>
+    <endstep x="75" y="366"/>
+    <endstep x="458" y="376"/>
   </endsteps>
   <connections>
     <transitions>
@@ -66,6 +62,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -76,23 +77,8 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="2" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

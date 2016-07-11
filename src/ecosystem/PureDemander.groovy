@@ -209,6 +209,26 @@ public class PureDemander  {
 
     /**
      *
+     * Chose the provider
+     * @method step
+     *
+     */
+    public def step() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Chose the provider
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

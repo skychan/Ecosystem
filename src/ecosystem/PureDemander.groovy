@@ -110,6 +110,21 @@ public class PureDemander  {
 
     /**
      *
+     * This is an agent property.
+     * @field property
+     *
+     */
+    @Parameter (displayName = "Property", usageName = "property")
+    public def getProperty() {
+        return property
+    }
+    public void setProperty(def newValue) {
+        property = newValue
+    }
+    public def property = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -210,10 +225,17 @@ public class PureDemander  {
     /**
      *
      * Chose the provider
-     * @method step
+     * @method ChoseProvider
      *
      */
-    public def step() {
+    @Watch(
+        watcheeClassName = 'ecosystem.CloudPlatform',
+        watcheeFieldNames = 'indicate',
+        triggerCondition = '$watcher.getNeed() && $watchee.getIndicate()',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def ChoseProvider(ecosystem.CloudPlatform watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -221,7 +243,7 @@ public class PureDemander  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Chose the provider
+        // Chose the provider with amount
         // Return the results.
         return returnValue
 

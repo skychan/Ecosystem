@@ -140,6 +140,36 @@ public class CloudPlatform  {
 
     /**
      *
+     * Record the candidates
+     * @field candidates
+     *
+     */
+    @Parameter (displayName = "Candidates", usageName = "candidates")
+    public ArrayList getCandidates() {
+        return candidates
+    }
+    public void setCandidates(ArrayList newValue) {
+        candidates = newValue
+    }
+    public ArrayList candidates = new ArrayList()
+
+    /**
+     *
+     * indicate if any of provider candidates
+     * @field indicate
+     *
+     */
+    @Parameter (displayName = "candidate indicate", usageName = "indicate")
+    public boolean getIndicate() {
+        return indicate
+    }
+    public void setIndicate(boolean newValue) {
+        indicate = newValue
+    }
+    public boolean indicate = false
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -294,6 +324,34 @@ public class CloudPlatform  {
 
         // remove order from the order hub
         this.orderHub.Remove(watchedAgent)
+    }
+
+    /**
+     *
+     * Add the competitor
+     * @method AddCompetitor
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeFieldNames = 'compete',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def AddCompetitor(ecosystem.PureProvider watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Add to the temp candidates list
+        this.candidates.add(watchedAgent)
+        this.setIndicate(true)
+        // Return the results.
+        return returnValue
+
     }
 
     /**

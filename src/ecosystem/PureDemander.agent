@@ -7,8 +7,8 @@
     <behaviorstep x="543" y="83" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
       <label x="543" y="68" text="Generate Need"/>
     </behaviorstep>
-    <behaviorstep x="744" y="84" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
-      <label x="744" y="69" text="Chose"/>
+    <behaviorstep x="97" y="540" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.CloudPlatform" watchannotationtargetfieldnames="indicate" watchannotationtriggercondition="$watcher.getNeed() &amp;&amp; $watchee.getIndicate()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="def" compiledname="ChoseProvider" parameters="ecosystem.CloudPlatform watchedAgent" exceptions="">
+      <label x="97" y="525" text="Chose"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -30,8 +30,8 @@
     <taskstep x="215" y="329" comment="" command1="t.addOwner(this.toString())" command2="t.addMaster(o.toString())" command3="" command4="" command5="o.Add(t)">
       <label x="215" y="314" text="Set to the order"/>
     </taskstep>
-    <taskstep x="739" y="177" comment="Chose the provider" command1="" command2="" command3="" command4="" command5="">
-      <label x="739" y="162" text="Chose the provider"/>
+    <taskstep x="97" y="613" comment="Chose the provider with amount" command1="" command2="" command3="" command4="" command5="">
+      <label x="97" y="598" text="Select"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -53,11 +53,14 @@
     <agentproperty x="409" y="243" comment="The index of need generated" visibility="0" compiledname="need" type="boolean" defaultvalue="false">
       <label x="414" y="228" text="Need"/>
     </agentproperty>
+    <agentproperty x="193" y="541" comment="This is an agent property." visibility="0" compiledname="property" type="def" defaultvalue="0">
+      <label x="198" y="526" text="Property"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="108" y="443"/>
-    <endstep x="560" y="454"/>
-    <endstep x="743" y="292"/>
+    <endstep x="100" y="440"/>
+    <endstep x="551" y="447"/>
+    <endstep x="102" y="702"/>
   </endsteps>
   <connections>
     <transitions>

@@ -140,18 +140,18 @@ public class Service  {
 
     /**
      *
-     * Service Quality
-     * @field quality
+     * The mark of competence
+     * @field compete
      *
      */
-    @Parameter (displayName = "Quality", usageName = "quality")
-    public double getQuality() {
-        return quality
+    @Parameter (displayName = "Compete", usageName = "compete")
+    public boolean getCompete() {
+        return compete
     }
-    public void setQuality(double newValue) {
-        quality = newValue
+    public void setCompete(boolean newValue) {
+        compete = newValue
     }
-    public double quality = 0
+    public boolean compete = false
 
     /**
      *
@@ -220,6 +220,63 @@ public class Service  {
 
         // add owner to the list
         this.owner.add(ownerID)
+    }
+
+    /**
+     *
+     * Bid
+     * @method addOwner
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public void addOwner(ecosystem.PureDemander watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Change the unit cost for bid
+        this.setCost(this.cost++)
+    }
+
+    /**
+     *
+     * Response to the need call
+     * @method Response
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def Response(ecosystem.PureDemander watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // Decide to take the task or not
+        if (true) {
+
+            // change the compete state
+            this.setCompete(true)
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
     }
 
     /**

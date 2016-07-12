@@ -65,21 +65,6 @@ public class Order  {
 
     /**
      *
-     * Task Status
-     * @field status
-     *
-     */
-    @Parameter (displayName = "Tasks' Status", usageName = "status")
-    public HashMap<Task,Boolean> getStatus() {
-        return status
-    }
-    public void setStatus(HashMap<Task,Boolean> newValue) {
-        status = newValue
-    }
-    public HashMap<Task,Boolean> status = new HashMap<Task,Boolean>()
-
-    /**
-     *
      * The order owner, if not only one
      * @field owner
      *
@@ -110,6 +95,51 @@ public class Order  {
 
     /**
      *
+     * Record the allocated service
+     * @field allocatedService
+     *
+     */
+    @Parameter (displayName = "Service", usageName = "allocatedService")
+    public ecosystem.Service getAllocatedService() {
+        return allocatedService
+    }
+    public void setAllocatedService(ecosystem.Service newValue) {
+        allocatedService = newValue
+    }
+    public ecosystem.Service allocatedService = new ecosystem.Service()
+
+    /**
+     *
+     * Record the candidates
+     * @field candidates
+     *
+     */
+    @Parameter (displayName = "Candidates", usageName = "candidates")
+    public ArrayList getCandidates() {
+        return candidates
+    }
+    public void setCandidates(ArrayList newValue) {
+        candidates = newValue
+    }
+    public ArrayList candidates = new ArrayList()
+
+    /**
+     *
+     * indicate if any of provider candidates
+     * @field indicate
+     *
+     */
+    @Parameter (displayName = "candidate indicate", usageName = "indicate")
+    public boolean getIndicate() {
+        return indicate
+    }
+    public void setIndicate(boolean newValue) {
+        indicate = newValue
+    }
+    public boolean indicate = false
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -134,43 +164,6 @@ public class Order  {
 
     /**
      *
-     * This is the step behavior.
-     * @method Add
-     *
-     */
-    public void Add(Task t) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.status.put(t,false)
-    }
-
-    /**
-     *
-     * when one task finished, turn the status to true
-     * @method Change
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'finish',
-        triggerCondition = '$watchee.getMaster().contains($watcher.toString())',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 0d
-    )
-    public void Change(Task t) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Update the tasks' status
-        this.status.replace(t,true)
-    }
-
-    /**
-     *
      * Set the owner is add to the owner list
      * @method addOwner
      *
@@ -182,6 +175,76 @@ public class Order  {
 
         // add owner to the list
         this.owner.add(ownerID)
+    }
+
+    /**
+     *
+     * Chose the provider
+     * @method Select
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Order',
+        watcheeFieldNames = 'indicate',
+        triggerCondition = '$watcher.toString() == $watchee.toString()',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def Select(ecosystem.Order watchedAgent) {
+
+        // This is a task.
+        this.setAllocatedService(this.candidates.remove(0))
+        this.allocatedService.setChose(true)
+        this.allocatedService.Process()
+
+        // This is a loop.
+        for (Service s in this.candidates) {
+
+            // This is a task.
+            s.setCompete(false)
+
+        }
+
+        // This is a task.
+        this.candidates.clear()
+    }
+
+    /**
+     *
+     * Add the competitor
+     * @method AddCompetitor
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'compete',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def AddCompetitor(ecosystem.Service watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Add to the temp candidates list
+        this.candidates.add(watchedAgent)
+
+        // This is an agent decision.
+        if (this.getIndicate()) {
+
+
+        } else  {
+
+            // Change the indicate
+            this.setIndicate(true)
+
+        }
+        // Return the results.
+        return returnValue
+
     }
 
     /**

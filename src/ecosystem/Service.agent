@@ -10,11 +10,11 @@
     <behaviorstep x="450" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
       <label x="450" y="123" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="541" y="137" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Bid" visibility="0" returntype="void" compiledname="addOwner" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
-      <label x="541" y="122" text="Bid"/>
-    </behaviorstep>
     <behaviorstep x="79" y="473" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="79" y="458" text="Response"/>
+    </behaviorstep>
+    <behaviorstep x="637" y="175" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
+      <label x="637" y="160" text="Process"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -27,11 +27,11 @@
     <taskstep x="450" y="245" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
       <label x="450" y="230" text="set owner"/>
     </taskstep>
-    <taskstep x="541" y="244" comment="Change the unit cost for bid" command1="this.setCost(this.cost++)" command2="" command3="" command4="" command5="">
-      <label x="541" y="229" text="change unit cost"/>
-    </taskstep>
     <taskstep x="78" y="637" comment="change the compete state" command1="this.setCompete(true)" command2="" command3="" command4="" command5="">
       <label x="78" y="622" text="Change the comoete state"/>
+    </taskstep>
+    <taskstep x="643" y="263" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="643" y="248" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -59,13 +59,16 @@
     <agentproperty x="212" y="472" comment="The mark of competence" visibility="0" compiledname="compete" type="boolean" defaultvalue="false">
       <label x="217" y="457" text="Compete"/>
     </agentproperty>
+    <agentproperty x="300" y="55" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
+      <label x="305" y="40" text="Chose"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="218" y="378"/>
-    <endstep x="73" y="372"/>
-    <endstep x="463" y="381"/>
-    <endstep x="555" y="382"/>
-    <endstep x="87" y="748"/>
+    <endstep x="210" y="377"/>
+    <endstep x="71" y="376"/>
+    <endstep x="459" y="347"/>
+    <endstep x="83" y="742"/>
+    <endstep x="648" y="348"/>
   </endsteps>
   <connections>
     <transitions>
@@ -86,11 +89,6 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -115,6 +113,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
@@ -123,7 +126,7 @@
     <booleantransitions>
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

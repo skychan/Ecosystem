@@ -155,6 +155,21 @@ public class Service  {
 
     /**
      *
+     * Record be chose or not
+     * @field chose
+     *
+     */
+    @Parameter (displayName = "Chose", usageName = "chose")
+    public boolean getChose() {
+        return chose
+    }
+    public void setChose(boolean newValue) {
+        chose = newValue
+    }
+    public boolean chose = false
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -224,27 +239,6 @@ public class Service  {
 
     /**
      *
-     * Bid
-     * @method addOwner
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'need',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public void addOwner(ecosystem.PureDemander watchedAgent) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Change the unit cost for bid
-        this.setCost(this.cost++)
-    }
-
-    /**
-     *
      * Response to the need call
      * @method Response
      *
@@ -274,6 +268,26 @@ public class Service  {
 
 
         }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Begin to process
+     * @method Process
+     *
+     */
+    public def Process() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
         // Return the results.
         return returnValue
 

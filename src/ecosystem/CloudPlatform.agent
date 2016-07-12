@@ -19,7 +19,7 @@
     <behaviorstep x="288" y="628" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Order" watchannotationtargetfieldnames="status" watchannotationtriggercondition="$watchee.getStatus().values().contains(false) == false" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Watch providers, if any of them have finished a order, then we should pull it off from the hub" visibility="0" returntype="void" compiledname="OutHub" parameters="ecosystem.Order watchedAgent" exceptions="">
       <label x="288" y="613" text="Flow out hub"/>
     </behaviorstep>
-    <behaviorstep x="703" y="51" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureProvider" watchannotationtargetfieldnames="compete" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.PureProvider watchedAgent" exceptions="">
+    <behaviorstep x="703" y="51" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="compete" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="703" y="36" text="Add competitor"/>
     </behaviorstep>
   </behaviorsteps>
@@ -80,21 +80,21 @@
     <agentproperty x="56" y="619" comment="The Order hub that contains the stage orders." visibility="0" compiledname="orderHub" type="OrderHub" defaultvalue="(OrderHub) CreateAgent(&quot;Ecosystem&quot;,&quot;ecosystem.OrderHub&quot;)">
       <label x="61" y="604" text="Order Hub"/>
     </agentproperty>
-    <agentproperty x="597" y="54" comment="Record the candidates" visibility="0" compiledname="candidates" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="602" y="39" text="Candidates"/>
+    <agentproperty x="575" y="53" comment="Record the candidates" visibility="0" compiledname="candidates" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="580" y="38" text="Candidates"/>
     </agentproperty>
-    <agentproperty x="597" y="148" comment="indicate if any of provider candidates" visibility="0" compiledname="indicate" type="boolean" defaultvalue="false">
-      <label x="602" y="133" text="candidate indicate"/>
+    <agentproperty x="575" y="147" comment="indicate if any of provider candidates" visibility="0" compiledname="indicate" type="boolean" defaultvalue="false">
+      <label x="580" y="132" text="candidate indicate"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="68" y="362"/>
-    <endstep x="175" y="364"/>
-    <endstep x="327" y="368"/>
-    <endstep x="742" y="854"/>
-    <endstep x="174" y="847"/>
-    <endstep x="293" y="852"/>
-    <endstep x="708" y="237"/>
+    <endstep x="73" y="367"/>
+    <endstep x="180" y="369"/>
+    <endstep x="332" y="373"/>
+    <endstep x="747" y="859"/>
+    <endstep x="179" y="852"/>
+    <endstep x="298" y="857"/>
+    <endstep x="704" y="232"/>
   </endsteps>
   <connections>
     <transitions>
@@ -126,6 +126,11 @@
       <transition>
         <transitionsource type="behavior" index="5" anchor="0"/>
         <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -161,11 +166,6 @@
       <transition>
         <transitionsource type="task" index="8" anchor="2"/>
         <transitiontarget type="end" index="5" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="6" anchor="0"/>
-        <transitiontarget type="task" index="9" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

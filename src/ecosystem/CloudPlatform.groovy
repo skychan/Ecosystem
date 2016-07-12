@@ -333,12 +333,12 @@ public class CloudPlatform  {
      *
      */
     @Watch(
-        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeClassName = 'ecosystem.Service',
         watcheeFieldNames = 'compete',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
-    public def AddCompetitor(ecosystem.PureProvider watchedAgent) {
+    public def AddCompetitor(ecosystem.Service watchedAgent) {
 
         // Define the return value variable.
         def returnValue

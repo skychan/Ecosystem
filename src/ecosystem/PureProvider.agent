@@ -4,9 +4,6 @@
     <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Initilization" visibility="0" returntype="void" compiledname="Init" parameters="" exceptions="">
       <label x="120" y="52" text="Initilization"/>
     </behaviorstep>
-    <behaviorstep x="409" y="62" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
-      <label x="409" y="47" text="Response"/>
-    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="119" y="145" comment="Generate Service" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service sagent = (Service) agent" command3="sagent.addOwner(this.toString())" command4="" command5="">
@@ -15,27 +12,16 @@
     <taskstep x="116" y="228" comment="Set parameters" command1="sagent.setCapacity(30)" command2="sagent.setCost(2)" command3="services.add(sagent)" command4="" command5="">
       <label x="116" y="213" text="Set parameters"/>
     </taskstep>
-    <taskstep x="408" y="226" comment="change the compete state" command1="this.setCompete(true)" command2="" command3="" command4="" command5="">
-      <label x="408" y="211" text="Change the comoete state"/>
-    </taskstep>
   </tasksteps>
-  <decisionsteps>
-    <decisionstep x="407" y="134" comment="Decide to take the task or not" criteria="true" branchType="if">
-      <label x="407" y="119" text="Take it or not"/>
-    </decisionstep>
-  </decisionsteps>
+  <decisionsteps/>
   <joinsteps/>
   <agentproperties>
     <agentproperty x="263" y="57" comment="Record the service" visibility="0" compiledname="services" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="268" y="42" text="Service List"/>
     </agentproperty>
-    <agentproperty x="542" y="61" comment="The mark of competence" visibility="0" compiledname="compete" type="boolean" defaultvalue="false">
-      <label x="547" y="46" text="Compete"/>
-    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="120" y="315"/>
-    <endstep x="411" y="319"/>
+    <endstep x="125" y="320"/>
   </endsteps>
   <connections>
     <transitions>
@@ -54,23 +40,7 @@
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
-      <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
     </transitions>
-    <booleantransitions>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-    </booleantransitions>
+    <booleantransitions/>
   </connections>
 </agent>

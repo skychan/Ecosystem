@@ -6,10 +6,10 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="278" y="218" comment="have need is to generate order" command1="this.newOrder.clear()" command2="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command3="Order o = (Order) agent" command4="o.addOwner(this.toString())" command5="">
+    <taskstep x="278" y="218" comment="have need is to generate order" command1="System.out.println(&quot;I have a need&quot;)" command2="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command3="Order o = (Order) agent" command4="o.addOwner(this.toString())" command5="">
       <label x="278" y="203" text="Generate Order"/>
     </taskstep>
-    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setAmount(50)" command2="" command3="" command4="" command5="this.setNewOrder(o)">
+    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setAmount(50)" command2="" command3="" command4="this.setNeed(true)" command5="this.setNewOrder(o)">
       <label x="279" y="294" text="Set parameters"/>
     </taskstep>
   </tasksteps>
@@ -23,7 +23,7 @@
     <agentproperty x="82" y="80" comment="Order List" visibility="0" compiledname="orderList" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="87" y="65" text="Order List"/>
     </agentproperty>
-    <agentproperty x="159" y="79" comment="New order" visibility="0" compiledname="newOrder" type="ecosystem.Order" defaultvalue="new ecosystem.Order()">
+    <agentproperty x="159" y="79" comment="New order" visibility="0" compiledname="newOrder" type="def" defaultvalue="null">
       <label x="164" y="64" text="New order"/>
     </agentproperty>
     <agentproperty x="140" y="202" comment="The index of need generated" visibility="0" compiledname="need" type="boolean" defaultvalue="false">
@@ -31,7 +31,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="284" y="420"/>
+    <endstep x="289" y="425"/>
   </endsteps>
   <connections>
     <transitions>

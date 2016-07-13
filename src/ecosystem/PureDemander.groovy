@@ -85,13 +85,13 @@ public class PureDemander  {
      *
      */
     @Parameter (displayName = "New order", usageName = "newOrder")
-    public ecosystem.Order getNewOrder() {
+    public def getNewOrder() {
         return newOrder
     }
-    public void setNewOrder(ecosystem.Order newValue) {
+    public void setNewOrder(def newValue) {
         newOrder = newValue
     }
-    public ecosystem.Order newOrder = new ecosystem.Order()
+    public def newOrder = null
 
     /**
      *
@@ -153,12 +153,13 @@ public class PureDemander  {
         if (RandomHelper.nextIntFromTo(0, 1)) {
 
             // have need is to generate order
-            this.newOrder.clear()
+            System.out.println("I have a need")
             Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
             Order o = (Order) agent
             o.addOwner(this.toString())
             // Set the order parameters
             o.setAmount(50)
+            this.setNeed(true)
             this.setNewOrder(o)
 
         } else  {

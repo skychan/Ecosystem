@@ -145,13 +145,13 @@ public class Service  {
      *
      */
     @Parameter (displayName = "Order Mark", usageName = "order")
-    public ecosystem.Order getOrder() {
+    public def getOrder() {
         return order
     }
-    public void setOrder(ecosystem.Order newValue) {
+    public void setOrder(def newValue) {
         order = newValue
     }
-    public ecosystem.Order order = new ecosystem.Order()
+    public def order = null
 
     /**
      *
@@ -249,6 +249,7 @@ public class Service  {
 
             // change the compete state
             this.setCompete(true)
+            System.out.println("response")
 
         } else  {
 
@@ -269,7 +270,7 @@ public class Service  {
         watcheeClassName = 'ecosystem.Service',
         watcheeFieldNames = 'remain',
         triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.getRemain() > 0',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 1d
     )
     public def Process(ecosystem.Service watchedAgent) {
@@ -282,6 +283,7 @@ public class Service  {
 
         // Cut down remain
         this.setRemain(this.getRemain()-this.getCapacity())
+        System.out.println("start to process")
 
         // To judge if the remain still there
         if (this.getRemain()<=0) {

@@ -7,7 +7,7 @@
     <behaviorstep x="50" y="156" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="$watchee.getNeed()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="50" y="141" text="Response"/>
     </behaviorstep>
-    <behaviorstep x="438" y="400" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="remain" watchannotationtriggercondition="$watcher.toString() == $watchee.toString() &amp;&amp; $watchee.getRemain() &gt; 0" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="ecosystem.Service watchedAgent" exceptions="">
+    <behaviorstep x="438" y="400" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="remain" watchannotationtriggercondition="$watcher.toString() == $watchee.toString() &amp;&amp; $watchee.getRemain() &gt; 0" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="438" y="385" text="Process"/>
     </behaviorstep>
   </behaviorsteps>
@@ -15,10 +15,10 @@
     <taskstep x="449" y="225" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
       <label x="449" y="210" text="set owner"/>
     </taskstep>
-    <taskstep x="49" y="320" comment="change the compete state" command1="this.setCompete(true)" command2="" command3="" command4="" command5="">
+    <taskstep x="49" y="320" comment="change the compete state" command1="this.setCompete(true)" command2="System.out.println(&quot;response&quot;)" command3="" command4="" command5="">
       <label x="49" y="305" text="Change the comoete state"/>
     </taskstep>
-    <taskstep x="438" y="480" comment="Cut down remain" command1="this.setRemain(this.getRemain()-this.getCapacity())" command2="" command3="" command4="" command5="">
+    <taskstep x="438" y="480" comment="Cut down remain" command1="this.setRemain(this.getRemain()-this.getCapacity())" command2="System.out.println(&quot;start to process&quot;)" command3="" command4="" command5="">
       <label x="438" y="465" text="Process by one step"/>
     </taskstep>
     <taskstep x="351" y="562" comment="The finish step" command1="this.setRemain(0)" command2="this.setFinish(this.getFinish()+1)" command3="" command4="" command5="">
@@ -50,7 +50,7 @@
     <agentproperty x="300" y="55" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
       <label x="305" y="40" text="Chose"/>
     </agentproperty>
-    <agentproperty x="289" y="398" comment="The Order(Task) mark" visibility="0" compiledname="order" type="ecosystem.Order" defaultvalue="new ecosystem.Order()">
+    <agentproperty x="289" y="398" comment="The Order(Task) mark" visibility="0" compiledname="order" type="def" defaultvalue="null">
       <label x="294" y="383" text="Order Mark"/>
     </agentproperty>
     <agentproperty x="291" y="484" comment="The remain task mark" visibility="0" compiledname="remain" type="int" defaultvalue="0">
@@ -61,9 +61,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="454" y="311"/>
-    <endstep x="54" y="416"/>
-    <endstep x="445" y="659"/>
+    <endstep x="459" y="316"/>
+    <endstep x="59" y="421"/>
+    <endstep x="450" y="664"/>
   </endsteps>
   <connections>
     <transitions>

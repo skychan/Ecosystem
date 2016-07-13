@@ -100,13 +100,13 @@ public class Order  {
      *
      */
     @Parameter (displayName = "Service", usageName = "allocatedService")
-    public ecosystem.Service getAllocatedService() {
+    public def getAllocatedService() {
         return allocatedService
     }
-    public void setAllocatedService(ecosystem.Service newValue) {
+    public void setAllocatedService(def newValue) {
         allocatedService = newValue
     }
-    public ecosystem.Service allocatedService = new ecosystem.Service()
+    public def allocatedService = null
 
     /**
      *
@@ -209,7 +209,8 @@ public class Order  {
         // This is a task.
         this.candidates.clear()
         this.setIndicate(false)
-        this.getAllocatedService.setCompete(false)
+        this.allocatedService.setCompete(false)
+        System.out.println("Chosed provider")
     }
 
     /**
@@ -235,6 +236,7 @@ public class Order  {
 
         // Add to the temp candidates list
         this.candidates.add(watchedAgent)
+        System.out.println("add competitor")
 
         // This is an agent decision.
         if (this.getIndicate()) {

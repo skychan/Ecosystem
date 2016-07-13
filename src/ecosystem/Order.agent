@@ -18,7 +18,7 @@
     <taskstep x="325" y="132" comment="This is a task." command1="this.setAllocatedService(this.candidates.remove(0))" command2="this.allocatedService.setChose(true)" command3="this.getAllocatedService().setOrder(this)" command4="this.getAllocatedService().setRemain(this.getAmount())" command5="">
       <label x="325" y="117" text="Do Task"/>
     </taskstep>
-    <taskstep x="633" y="146" comment="Add to the temp candidates list" command1="this.candidates.add(watchedAgent)" command2="" command3="" command4="" command5="">
+    <taskstep x="633" y="146" comment="Add to the temp candidates list" command1="this.candidates.add(watchedAgent)" command2="System.out.println(&quot;add competitor&quot;)" command3="" command4="" command5="">
       <label x="633" y="131" text="add competitor"/>
     </taskstep>
     <taskstep x="538" y="215" comment="Change the indicate" command1="this.setIndicate(true)" command2="" command3="" command4="" command5="">
@@ -27,7 +27,7 @@
     <taskstep x="431" y="211" comment="This is a task." command1="s.setCompete(false)" command2="" command3="" command4="" command5="">
       <label x="431" y="196" text="Do Task"/>
     </taskstep>
-    <taskstep x="322" y="305" comment="This is a task." command1="this.candidates.clear()" command2="this.setIndicate(false)" command3="this.getAllocatedService.setCompete(false)" command4="" command5="">
+    <taskstep x="322" y="305" comment="This is a task." command1="this.candidates.clear()" command2="this.setIndicate(false)" command3="this.allocatedService.setCompete(false)" command4="System.out.println(&quot;Chosed provider&quot;)" command5="">
       <label x="322" y="290" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -47,7 +47,7 @@
     <agentproperty x="128" y="35" comment="The order amount" visibility="0" compiledname="amount" type="int" defaultvalue="0">
       <label x="133" y="20" text="Amount"/>
     </agentproperty>
-    <agentproperty x="250" y="124" comment="Record the allocated service" visibility="0" compiledname="allocatedService" type="ecosystem.Service" defaultvalue="new ecosystem.Service()">
+    <agentproperty x="250" y="124" comment="Record the allocated service" visibility="0" compiledname="allocatedService" type="def" defaultvalue="null">
       <label x="255" y="109" text="Service"/>
     </agentproperty>
     <agentproperty x="528" y="47" comment="Record the candidates" visibility="0" compiledname="candidates" type="ArrayList" defaultvalue="new ArrayList()">
@@ -58,9 +58,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="45" y="289"/>
-    <endstep x="332" y="398"/>
-    <endstep x="640" y="303"/>
+    <endstep x="50" y="294"/>
+    <endstep x="337" y="403"/>
+    <endstep x="645" y="308"/>
   </endsteps>
   <connections>
     <transitions>

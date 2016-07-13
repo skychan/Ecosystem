@@ -166,7 +166,7 @@ public class ModelInitializer  {
         CloudPlatform platform = (CloudPlatform) agent
 
         // This is a loop.
-        for (i in 1..<demanderCount) {
+        for (i in 0..<demanderCount) {
 
             // This is a task.
             Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
@@ -177,11 +177,12 @@ public class ModelInitializer  {
 
 
         // This is a loop.
-        for (i in 1..<providerCount) {
+        for (i in 0..<providerCount) {
 
             // This is a task.
             Object pagent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
             PureProvider pureProvider = (PureProvider) pagent
+            pureProvider.Init()
             platform.userList.add(pureProvider)
 
         }

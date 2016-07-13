@@ -4,10 +4,10 @@
     <behaviorstep x="35" y="109" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
       <label x="35" y="94" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="329" y="44" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Order" watchannotationtargetfieldnames="indicate" watchannotationtriggercondition="$watcher.toString() == $watchee.toString()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="" compiledname="Select" parameters="ecosystem.Order watchedAgent" exceptions="">
+    <behaviorstep x="329" y="44" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Order" watchannotationtargetfieldnames="indicate" watchannotationtriggercondition="$watcher.toString() == $watchee.toString() &amp;&amp; $watchee.getIndicate()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="" compiledname="Select" parameters="ecosystem.Order watchedAgent" exceptions="">
       <label x="329" y="29" text="Chose provider"/>
     </behaviorstep>
-    <behaviorstep x="635" y="57" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="compete" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.Service watchedAgent" exceptions="">
+    <behaviorstep x="635" y="57" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="compete" watchannotationtriggercondition="$watchee.getCompete()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="635" y="42" text="Add competitor"/>
     </behaviorstep>
   </behaviorsteps>
@@ -15,8 +15,8 @@
     <taskstep x="36" y="186" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
       <label x="36" y="171" text="set owner"/>
     </taskstep>
-    <taskstep x="330" y="130" comment="This is a task." command1="this.setAllocatedService(this.candidates.remove(0))" command2="this.allocatedService.setChose(true)" command3="this.allocatedService.Process()" command4="" command5="">
-      <label x="330" y="115" text="Do Task"/>
+    <taskstep x="325" y="132" comment="This is a task." command1="this.setAllocatedService(this.candidates.remove(0))" command2="this.allocatedService.setChose(true)" command3="this.getAllocatedService().setOrder(this)" command4="this.getAllocatedService().setRemain(this.getAmount())" command5="">
+      <label x="325" y="117" text="Do Task"/>
     </taskstep>
     <taskstep x="633" y="146" comment="Add to the temp candidates list" command1="this.candidates.add(watchedAgent)" command2="" command3="" command4="" command5="">
       <label x="633" y="131" text="add competitor"/>
@@ -24,10 +24,10 @@
     <taskstep x="538" y="215" comment="Change the indicate" command1="this.setIndicate(true)" command2="" command3="" command4="" command5="">
       <label x="538" y="200" text="change indicate"/>
     </taskstep>
-    <taskstep x="431" y="215" comment="This is a task." command1="s.setCompete(false)" command2="" command3="" command4="" command5="">
-      <label x="431" y="200" text="Do Task"/>
+    <taskstep x="431" y="211" comment="This is a task." command1="s.setCompete(false)" command2="" command3="" command4="" command5="">
+      <label x="431" y="196" text="Do Task"/>
     </taskstep>
-    <taskstep x="322" y="305" comment="This is a task." command1="this.candidates.clear()" command2="" command3="" command4="" command5="">
+    <taskstep x="322" y="305" comment="This is a task." command1="this.candidates.clear()" command2="this.setIndicate(false)" command3="this.getAllocatedService.setCompete(false)" command4="" command5="">
       <label x="322" y="290" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -58,9 +58,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="40" y="284"/>
-    <endstep x="327" y="393"/>
-    <endstep x="635" y="298"/>
+    <endstep x="45" y="289"/>
+    <endstep x="332" y="398"/>
+    <endstep x="640" y="303"/>
   </endsteps>
   <connections>
     <transitions>
@@ -70,23 +70,23 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="1" anchor="2"/>
-        <transitiontarget type="decision" index="1" anchor="0"/>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -101,14 +101,14 @@
       </transition>
     </transitions>
     <booleantransitions>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="0" anchor="1"/>
-        <transitiontarget type="task" index="3" anchor="3"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="1"/>
+        <transitiontarget type="task" index="3" anchor="3"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

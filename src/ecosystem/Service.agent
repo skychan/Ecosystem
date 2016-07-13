@@ -10,11 +10,11 @@
     <behaviorstep x="450" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
       <label x="450" y="123" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="79" y="473" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
+    <behaviorstep x="79" y="473" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="$watchee.getNeed()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="79" y="458" text="Response"/>
     </behaviorstep>
-    <behaviorstep x="637" y="175" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
-      <label x="637" y="160" text="Process"/>
+    <behaviorstep x="585" y="470" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="remain" watchannotationtriggercondition="$watcher.toString() == $watchee.toString() &amp;&amp; $watchee.getRemain() &gt; 0" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="ecosystem.Service watchedAgent" exceptions="">
+      <label x="585" y="455" text="Process"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -30,13 +30,19 @@
     <taskstep x="78" y="637" comment="change the compete state" command1="this.setCompete(true)" command2="" command3="" command4="" command5="">
       <label x="78" y="622" text="Change the comoete state"/>
     </taskstep>
-    <taskstep x="643" y="263" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
-      <label x="643" y="248" text="Do Task"/>
+    <taskstep x="585" y="550" comment="Cut down remain" command1="this.setRemain(this.getRemain()-this.getCapacity())" command2="" command3="" command4="" command5="">
+      <label x="585" y="535" text="Process by one step"/>
+    </taskstep>
+    <taskstep x="498" y="632" comment="The finish step" command1="this.setRemain(0)" command2="" command3="" command4="" command5="">
+      <label x="498" y="617" text="Afterward"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="77" y="545" comment="Decide to take the task or not" criteria="true" branchType="if">
       <label x="77" y="530" text="Take it or not"/>
+    </decisionstep>
+    <decisionstep x="586" y="631" comment="To judge if the remain still there" criteria="this.getRemain()&lt;=0" branchType="if">
+      <label x="586" y="616" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -62,13 +68,19 @@
     <agentproperty x="300" y="55" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
       <label x="305" y="40" text="Chose"/>
     </agentproperty>
+    <agentproperty x="436" y="468" comment="The Order(Task) mark" visibility="0" compiledname="order" type="ecosystem.Order" defaultvalue="new ecosystem.Order()">
+      <label x="441" y="453" text="Order Mark"/>
+    </agentproperty>
+    <agentproperty x="438" y="554" comment="The remain task mark" visibility="0" compiledname="remain" type="int" defaultvalue="0">
+      <label x="443" y="539" text="Remain"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="210" y="377"/>
-    <endstep x="71" y="376"/>
-    <endstep x="459" y="347"/>
-    <endstep x="83" y="742"/>
-    <endstep x="648" y="348"/>
+    <endstep x="215" y="377"/>
+    <endstep x="71" y="368"/>
+    <endstep x="462" y="348"/>
+    <endstep x="88" y="729"/>
+    <endstep x="590" y="726"/>
   </endsteps>
   <connections>
     <transitions>
@@ -93,6 +105,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -113,13 +130,8 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="4" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -127,6 +139,16 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="2"/>
         <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="1"/>
+        <transitiontarget type="task" index="5" anchor="3"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

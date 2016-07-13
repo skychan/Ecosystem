@@ -186,7 +186,7 @@ public class Order  {
     @Watch(
         watcheeClassName = 'ecosystem.Order',
         watcheeFieldNames = 'indicate',
-        triggerCondition = '$watcher.toString() == $watchee.toString()',
+        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.getIndicate()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
@@ -195,7 +195,8 @@ public class Order  {
         // This is a task.
         this.setAllocatedService(this.candidates.remove(0))
         this.allocatedService.setChose(true)
-        this.allocatedService.Process()
+        this.getAllocatedService().setOrder(this)
+        this.getAllocatedService().setRemain(this.getAmount())
 
         // This is a loop.
         for (Service s in this.candidates) {
@@ -207,6 +208,8 @@ public class Order  {
 
         // This is a task.
         this.candidates.clear()
+        this.setIndicate(false)
+        this.getAllocatedService.setCompete(false)
     }
 
     /**
@@ -218,6 +221,7 @@ public class Order  {
     @Watch(
         watcheeClassName = 'ecosystem.Service',
         watcheeFieldNames = 'compete',
+        triggerCondition = '$watchee.getCompete()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )

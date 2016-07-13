@@ -262,6 +262,7 @@ public class CloudPlatform  {
     @Watch(
         watcheeClassName = 'ecosystem.PureDemander',
         watcheeFieldNames = 'need',
+        triggerCondition = '$watchee.getNeed()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )

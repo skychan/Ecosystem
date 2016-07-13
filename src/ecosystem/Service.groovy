@@ -170,6 +170,36 @@ public class Service  {
 
     /**
      *
+     * The Order(Task) mark
+     * @field order
+     *
+     */
+    @Parameter (displayName = "Order Mark", usageName = "order")
+    public ecosystem.Order getOrder() {
+        return order
+    }
+    public void setOrder(ecosystem.Order newValue) {
+        order = newValue
+    }
+    public ecosystem.Order order = new ecosystem.Order()
+
+    /**
+     *
+     * The remain task mark
+     * @field remain
+     *
+     */
+    @Parameter (displayName = "Remain", usageName = "remain")
+    public int getRemain() {
+        return remain
+    }
+    public void setRemain(int newValue) {
+        remain = newValue
+    }
+    public int remain = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -246,6 +276,7 @@ public class Service  {
     @Watch(
         watcheeClassName = 'ecosystem.PureDemander',
         watcheeFieldNames = 'need',
+        triggerCondition = '$watchee.getNeed()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
@@ -279,7 +310,14 @@ public class Service  {
      * @method Process
      *
      */
-    public def Process() {
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'remain',
+        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.getRemain() > 0',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def Process(ecosystem.Service watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -287,7 +325,19 @@ public class Service  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
+        // Cut down remain
+        this.setRemain(this.getRemain()-this.getCapacity())
+
+        // To judge if the remain still there
+        if (this.getRemain()<=0) {
+
+
+        } else  {
+
+            // The finish step
+            this.setRemain(0)
+
+        }
         // Return the results.
         return returnValue
 

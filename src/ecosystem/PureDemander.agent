@@ -1,109 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureDemander" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="93" y="78" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="ArrayList&lt;Task&gt;" compiledname="CreateOrder" parameters="String[] taskTypes" exceptions="">
-      <label x="93" y="63" text="Create Order"/>
-    </behaviorstep>
-    <behaviorstep x="543" y="83" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
-      <label x="543" y="68" text="Generate Need"/>
+    <behaviorstep x="274" y="42" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
+      <label x="274" y="27" text="Generate Need"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="213" y="240" comment="Create Task and set the values" command1="Object tagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) tagent" command3="t.setType(task)" command4="t.SetValues()" command5="">
-      <label x="213" y="225" text="Add task"/>
+    <taskstep x="278" y="218" comment="have need is to generate order" command1="this.newOrder.clear()" command2="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command3="Order o = (Order) agent" command4="o.addOwner(this.toString())" command5="">
+      <label x="278" y="203" text="Generate Order"/>
     </taskstep>
-    <taskstep x="94" y="160" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="Order o = (Order) agent" command3="o.addOwner(this.toString())" command4="" command5="">
-      <label x="94" y="145" text="Create Order"/>
-    </taskstep>
-    <taskstep x="97" y="348" comment="This is a task." command1="returnValue = o" command2="" command3="" command4="" command5="">
-      <label x="97" y="333" text="Do Task"/>
-    </taskstep>
-    <taskstep x="547" y="259" comment="have need is to generate order" command1="this.newOrder.clear()" command2="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command3="Order o = (Order) agent" command4="o.addOwner(this.toString())" command5="">
-      <label x="547" y="244" text="Generate Order"/>
-    </taskstep>
-    <taskstep x="548" y="350" comment="Set the order parameters" command1="o.setAmount(50)" command2="" command3="" command4="" command5="this.setNewOrder(o)">
-      <label x="548" y="335" text="Set parameters"/>
-    </taskstep>
-    <taskstep x="215" y="329" comment="" command1="t.addOwner(this.toString())" command2="t.addMaster(o.toString())" command3="" command4="" command5="o.Add(t)">
-      <label x="215" y="314" text="Set to the order"/>
+    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setAmount(50)" command2="" command3="" command4="" command5="this.setNewOrder(o)">
+      <label x="279" y="294" text="Set parameters"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="94" y="239" comment="This is a loop." criteria="task in taskTypes" branchType="while">
-      <label x="94" y="224" text="Evaluate Criteria"/>
-    </decisionstep>
-    <decisionstep x="544" y="168" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
-      <label x="544" y="153" text="Evaluate Criteria"/>
+    <decisionstep x="275" y="127" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
+      <label x="275" y="112" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="351" y="121" comment="Order List" visibility="0" compiledname="orderList" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="356" y="106" text="Order List"/>
+    <agentproperty x="82" y="80" comment="Order List" visibility="0" compiledname="orderList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="87" y="65" text="Order List"/>
     </agentproperty>
-    <agentproperty x="428" y="120" comment="New order" visibility="0" compiledname="newOrder" type="Order" defaultvalue="null">
-      <label x="433" y="105" text="New order"/>
+    <agentproperty x="159" y="79" comment="New order" visibility="0" compiledname="newOrder" type="ecosystem.Order" defaultvalue="new ecosystem.Order()">
+      <label x="164" y="64" text="New order"/>
     </agentproperty>
-    <agentproperty x="409" y="243" comment="The index of need generated" visibility="0" compiledname="need" type="boolean" defaultvalue="false">
-      <label x="414" y="228" text="Need"/>
+    <agentproperty x="140" y="202" comment="The index of need generated" visibility="0" compiledname="need" type="boolean" defaultvalue="false">
+      <label x="145" y="187" text="Need"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="105" y="445"/>
-    <endstep x="556" y="452"/>
+    <endstep x="284" y="420"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
-        <transitiontarget type="task" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="decision" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="task" index="5" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="4" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
-        <transitionsource type="decision" index="0" anchor="3"/>
-        <transitiontarget type="task" index="0" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="1" anchor="2"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

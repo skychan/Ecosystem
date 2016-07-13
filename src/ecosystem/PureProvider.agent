@@ -9,8 +9,8 @@
     <taskstep x="119" y="145" comment="Generate Service" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service sagent = (Service) agent" command3="sagent.addOwner(this.toString())" command4="" command5="">
       <label x="119" y="130" text="generate service"/>
     </taskstep>
-    <taskstep x="116" y="228" comment="Set parameters" command1="sagent.setCapacity(30)" command2="sagent.setCost(2)" command3="services.add(sagent)" command4="" command5="">
-      <label x="116" y="213" text="Set parameters"/>
+    <taskstep x="121" y="226" comment="Set parameters" command1="sagent.setCapacity(30)" command2="sagent.setCost(2)" command3="services.add(sagent)" command4="" command5="">
+      <label x="121" y="211" text="Set parameters"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -21,7 +21,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="125" y="320"/>
+    <endstep x="128" y="314"/>
   </endsteps>
   <connections>
     <transitions>

@@ -85,13 +85,13 @@ public class PureDemander  {
      *
      */
     @Parameter (displayName = "New order", usageName = "newOrder")
-    public Order getNewOrder() {
+    public ecosystem.Order getNewOrder() {
         return newOrder
     }
-    public void setNewOrder(Order newValue) {
+    public void setNewOrder(ecosystem.Order newValue) {
         newOrder = newValue
     }
-    public Order newOrder = null
+    public ecosystem.Order newOrder = new ecosystem.Order()
 
     /**
      *
@@ -131,46 +131,6 @@ public class PureDemander  {
      *
      */
     protected String agentID = "PureDemander " + (agentIDCounter++)
-
-    /**
-     *
-     * This is the step behavior.
-     * @method CreateOrder
-     *
-     */
-    public ArrayList<Task> CreateOrder(String[] taskTypes) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
-        Order o = (Order) agent
-        o.addOwner(this.toString())
-
-        // This is a loop.
-        for (task in taskTypes) {
-
-            // Create Task and set the values
-            Object tagent = CreateAgent("Ecosystem", "ecosystem.Task")
-            Task t = (Task) tagent
-            t.setType(task)
-            t.SetValues()
-            t.addOwner(this.toString())
-            t.addMaster(o.toString())
-            o.Add(t)
-
-        }
-
-        // This is a task.
-        returnValue = o
-        // Return the results.
-        return returnValue
-
-    }
 
     /**
      *

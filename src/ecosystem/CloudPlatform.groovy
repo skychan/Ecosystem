@@ -95,36 +95,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is an agent test
-     * @field needCount
-     *
-     */
-    @Parameter (displayName = "Need Count", usageName = "needCount")
-    public int getNeedCount() {
-        return needCount
-    }
-    public void setNeedCount(int newValue) {
-        needCount = newValue
-    }
-    public int needCount = 0
-
-    /**
-     *
-     * Searche provider result list
-     * @field searched
-     *
-     */
-    @Parameter (displayName = "Searched provider", usageName = "searched")
-    public ArrayList getSearched() {
-        return searched
-    }
-    public void setSearched(ArrayList newValue) {
-        searched = newValue
-    }
-    public ArrayList searched = new ArrayList()
-
-    /**
-     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -210,32 +180,6 @@ public class CloudPlatform  {
 
         }
 
-    }
-
-    /**
-     *
-     * Watch needs then to analysis them to search resource providers.
-     * @method Search
-     *
-     */
-    public void Search(ecosystem.PureDemander dagent) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // record and add need mark and search the provider
-        this.needCount += dagent.getUnit()
-        this.searched.clear()
-
-        // This is a loop.
-        for (Task t in dagent.getNewOrder()) {
-
-            // Search corresponding resource
-            this.searched.addAll(t.getAlternations())
-
-        }
-
-        // This is a task.
     }
 
     /**

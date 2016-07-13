@@ -164,7 +164,6 @@ public class ModelInitializer  {
         // This is a task.
         Object agent = CreateAgent("Ecosystem", "ecosystem.CloudPlatform")
         CloudPlatform platform = (CloudPlatform) agent
-        platform.orderHub.Init()
 
         // This is a loop.
         for (i in 1..<demanderCount) {

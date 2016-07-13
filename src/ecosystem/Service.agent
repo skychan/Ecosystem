@@ -24,8 +24,8 @@
     <taskstep x="64" y="266" comment="This is a task." command1="this.resourceList.add(r)" command2="" command3="" command4="" command5="">
       <label x="64" y="251" text="Adding Resource"/>
     </taskstep>
-    <taskstep x="450" y="245" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
-      <label x="450" y="230" text="set owner"/>
+    <taskstep x="449" y="225" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
+      <label x="449" y="210" text="set owner"/>
     </taskstep>
     <taskstep x="78" y="637" comment="change the compete state" command1="this.setCompete(true)" command2="" command3="" command4="" command5="">
       <label x="78" y="622" text="Change the comoete state"/>
@@ -76,10 +76,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="215" y="377"/>
-    <endstep x="71" y="368"/>
-    <endstep x="462" y="348"/>
-    <endstep x="88" y="729"/>
+    <endstep x="208" y="364"/>
+    <endstep x="71" y="358"/>
+    <endstep x="456" y="315"/>
+    <endstep x="85" y="734"/>
     <endstep x="590" y="726"/>
   </endsteps>
   <connections>

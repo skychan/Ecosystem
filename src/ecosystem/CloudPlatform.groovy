@@ -125,21 +125,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * The Order hub that contains the stage orders.
-     * @field orderHub
-     *
-     */
-    @Parameter (displayName = "Order Hub", usageName = "orderHub")
-    public OrderHub getOrderHub() {
-        return orderHub
-    }
-    public void setOrderHub(OrderHub newValue) {
-        orderHub = newValue
-    }
-    public OrderHub orderHub = (OrderHub) CreateAgent("Ecosystem","ecosystem.OrderHub")
-
-    /**
-     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -251,50 +236,6 @@ public class CloudPlatform  {
         }
 
         // This is a task.
-    }
-
-    /**
-     *
-     * Watch demanders, if any of them have need, then add the order to the order hub
-     * @method InHub
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'need',
-        triggerCondition = '$watchee.getNeed()',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public void InHub(ecosystem.PureDemander watchedAgent) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add order to the order hub
-        this.orderHub.Add(watchedAgent.getNewOrder())
-    }
-
-    /**
-     *
-     * Watch providers, if any of them have finished a order, then we should pull it off from the hub
-     * @method OutHub
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Order',
-        watcheeFieldNames = 'status',
-        triggerCondition = '$watchee.getStatus().values().contains(false) == false',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public void OutHub(ecosystem.Order watchedAgent) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // remove order from the order hub
-        this.orderHub.Remove(watchedAgent)
     }
 
     /**

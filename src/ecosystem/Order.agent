@@ -15,7 +15,7 @@
     <taskstep x="36" y="186" comment="add owner to the list" command1="this.getOwnerList().add(od)" command2="" command3="" command4="" command5="">
       <label x="36" y="171" text="add owner to list"/>
     </taskstep>
-    <taskstep x="325" y="132" comment="This is a task." command1="this.setAllocatedService(this.getCandidates().remove(0))" command2="" command3="this.getAllocatedService().setOrder(this)" command4="this.getAllocatedService().getJobList().add(this)" command5="System.out.println(this.getAllocatedService().getJobList())">
+    <taskstep x="325" y="132" comment="This is a task." command1="this.setAllocatedService(this.getCandidates().remove(0))" command2="" command3="" command4="this.getAllocatedService().getJobList().add(this)" command5="System.out.println(this.getAllocatedService().getJobList())">
       <label x="325" y="117" text="Do Task"/>
     </taskstep>
     <taskstep x="633" y="146" comment="Add to the temp candidates list" command1="this.candidates &lt;&lt; watchedAgent" command2="System.out.println(&quot;add competitor&quot;)" command3="System.out.println(watchedAgent.getCompete())" command4="println candidates" command5="">

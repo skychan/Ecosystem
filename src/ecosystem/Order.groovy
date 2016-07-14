@@ -195,7 +195,6 @@ public class Order  {
 
         // This is a task.
         this.setAllocatedService(this.getCandidates().remove(0))
-        this.getAllocatedService().setOrder(this)
         this.getAllocatedService().getJobList().add(this)
         System.out.println(this.getAllocatedService().getJobList())
 

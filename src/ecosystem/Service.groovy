@@ -282,6 +282,11 @@ public class Service  {
      * @method Process
      *
      */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
     public def Process() {
 
         // Define the return value variable.
@@ -307,7 +312,7 @@ public class Service  {
                 // allocate the job
                 this.setOrder(this.getJobList()[0])
                 this.setProcessing(true)
-                System.out.println("start to process "+this.getOrder().toString())
+                System.out.println("start to process new "+this.getOrder().toString())
                 this.step()
 
             } else  {
@@ -343,23 +348,9 @@ public class Service  {
 
             // The finish step
             this.setFinish(this.getFinish()+1)
-            System.out.println(this.getOrder().toString()+"Finished")
+            System.out.println(this.getOrder().toString()+" Finished")
             this.getJobList().remove(this.getOrder())
-
-            // Check if remain jobs
-            if (this.getJobList().size()==0) {
-
-                // Change process status
-                this.setProcessing(false)
-
-            } else  {
-
-                // Allocate new job
-                this.setOrder(this.getJobList()[0])
-                System.out.println("start to process in list "+this.getOrder().toString())
-                System.out.println(this.getJobList())
-
-            }
+            this.setProcessing(false)
 
         } else  {
 

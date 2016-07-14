@@ -7,7 +7,7 @@
     <behaviorstep x="50" y="156" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="$watchee.getNeed()" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="50" y="141" text="Response"/>
     </behaviorstep>
-    <behaviorstep x="438" y="400" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
+    <behaviorstep x="438" y="400" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
       <label x="438" y="385" text="Process"/>
     </behaviorstep>
     <behaviorstep x="293" y="683" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
@@ -24,10 +24,10 @@
     <taskstep x="291" y="770" comment="Cut down remain" command1="" command2="this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())" command3="" command4="" command5="">
       <label x="291" y="755" text="Process 1 step"/>
     </taskstep>
-    <taskstep x="291" y="948" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot;Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="" command5="">
+    <taskstep x="291" y="948" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="">
       <label x="291" y="933" text="Afterward"/>
     </taskstep>
-    <taskstep x="557" y="575" comment="allocate the job" command1="this.setOrder(this.getJobList()[0])" command2="this.setProcessing(true)" command3="System.out.println(&quot;start to process &quot;+this.getOrder().toString())" command4="this.step()" command5="">
+    <taskstep x="557" y="575" comment="allocate the job" command1="this.setOrder(this.getJobList()[0])" command2="this.setProcessing(true)" command3="System.out.println(&quot;start to process new &quot;+this.getOrder().toString())" command4="this.step()" command5="">
       <label x="557" y="560" text="Allocate job"/>
     </taskstep>
     <taskstep x="435" y="574" comment="Continue" command1="System.out.println(&quot;continue to process &quot;+this.getOrder().toString())" command2="this.step()" command3="" command4="" command5="">
@@ -95,6 +95,7 @@
     <endstep x="54" y="413"/>
     <endstep x="302" y="1254"/>
     <endstep x="505" y="735"/>
+    <endstep x="467" y="971"/>
   </endsteps>
   <connections>
     <transitions>
@@ -130,7 +131,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="decision" index="4" anchor="0"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

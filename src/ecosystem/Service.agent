@@ -61,9 +61,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="459" y="316"/>
-    <endstep x="59" y="421"/>
-    <endstep x="450" y="664"/>
+    <endstep x="464" y="321"/>
+    <endstep x="59" y="427"/>
+    <endstep x="455" y="669"/>
   </endsteps>
   <connections>
     <transitions>

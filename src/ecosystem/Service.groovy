@@ -110,18 +110,18 @@ public class Service  {
 
     /**
      *
-     * The mark of competence
-     * @field compete
+     * The list to record compete order
+     * @field competeList
      *
      */
-    @Parameter (displayName = "Compete", usageName = "compete")
-    public boolean getCompete() {
-        return compete
+    @Parameter (displayName = "Compete List", usageName = "competeList")
+    public def getCompeteList() {
+        return competeList
     }
-    public void setCompete(boolean newValue) {
-        compete = newValue
+    public void setCompeteList(def newValue) {
+        competeList = newValue
     }
-    public boolean compete = false
+    public def competeList = []
 
     /**
      *
@@ -145,28 +145,13 @@ public class Service  {
      *
      */
     @Parameter (displayName = "Order Mark", usageName = "order")
-    public def getOrder() {
+    public Order getOrder() {
         return order
     }
-    public void setOrder(def newValue) {
+    public void setOrder(Order newValue) {
         order = newValue
     }
-    public def order = null
-
-    /**
-     *
-     * The remain task mark
-     * @field remain
-     *
-     */
-    @Parameter (displayName = "Remain", usageName = "remain")
-    public int getRemain() {
-        return remain
-    }
-    public void setRemain(int newValue) {
-        remain = newValue
-    }
-    public int remain = 0
+    public Order order = null
 
     /**
      *
@@ -182,6 +167,36 @@ public class Service  {
         finish = newValue
     }
     public int finish = 0
+
+    /**
+     *
+     * Job list
+     * @field jobList
+     *
+     */
+    @Parameter (displayName = "Job List", usageName = "jobList")
+    public ArrayList getJobList() {
+        return jobList
+    }
+    public void setJobList(ArrayList newValue) {
+        jobList = newValue
+    }
+    public ArrayList jobList = new ArrayList()
+
+    /**
+     *
+     * Mark the status of processing or not
+     * @field processing
+     *
+     */
+    @Parameter (displayName = "Processing ?", usageName = "processing")
+    public boolean getProcessing() {
+        return processing
+    }
+    public void setProcessing(boolean newValue) {
+        processing = newValue
+    }
+    public boolean processing = false
 
     /**
      *
@@ -231,9 +246,8 @@ public class Service  {
     @Watch(
         watcheeClassName = 'ecosystem.PureDemander',
         watcheeFieldNames = 'need',
-        triggerCondition = '$watchee.getNeed()',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.5d
     )
     public def Response(ecosystem.PureDemander watchedAgent) {
 
@@ -248,8 +262,9 @@ public class Service  {
         if (true) {
 
             // change the compete state
-            this.setCompete(true)
+            this.getCompeteList() << watchedAgent.getNewOrder()
             System.out.println("response")
+            println competeList
 
         } else  {
 
@@ -266,14 +281,57 @@ public class Service  {
      * @method Process
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'remain',
-        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.getRemain() > 0',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 1d
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
     )
-    public def Process(ecosystem.Service watchedAgent) {
+    public def Process() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // In processing or not
+        if (this.getProcessing()) {
+
+            // Continue
+            System.out.println("continue to process "+this.getOrder().toString())
+            this.step()
+
+        } else  {
+
+
+            // Have job or not
+            if (this.getJobList().size() > 0) {
+
+                // allocate the job
+                this.setOrder(this.getJobList()[0])
+                this.setProcessing(true)
+                System.out.println("start to process "+this.getOrder().toString())
+                this.step()
+
+            } else  {
+
+
+            }
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method step
+     *
+     */
+    public def step() {
 
         // Define the return value variable.
         def returnValue
@@ -282,18 +340,33 @@ public class Service  {
         def time = GetTickCountInTimeUnits()
 
         // Cut down remain
-        this.setRemain(this.getRemain()-this.getCapacity())
-        System.out.println("start to process")
+        this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())
 
-        // To judge if the remain still there
-        if (this.getRemain()<=0) {
+        // Is the job finished?
+        if (this.getOrder().getAmount()<=0) {
 
+            // The finish step
+            this.setFinish(this.getFinish()+1)
+            System.out.println(this.getOrder().toString()+"Finished")
+            this.getJobList().remove(this.getOrder())
+
+            // Check if remain jobs
+            if (this.getJobList().size()==0) {
+
+                // Change process status
+                this.setProcessing(false)
+
+            } else  {
+
+                // Allocate new job
+                this.setOrder(this.getJobList()[0])
+                System.out.println("start to process in list "+this.getOrder().toString())
+                System.out.println(this.getJobList())
+
+            }
 
         } else  {
 
-            // The finish step
-            this.setRemain(0)
-            this.setFinish(this.getFinish()+1)
 
         }
         // Return the results.

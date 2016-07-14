@@ -91,7 +91,7 @@ public class ModelInitializer  {
     public void setProviderCount(int newValue) {
         providerCount = newValue
     }
-    public int providerCount = 20
+    public int providerCount = 1
 
     /**
      *

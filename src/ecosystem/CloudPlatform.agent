@@ -40,9 +40,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="69" y="353"/>
-    <endstep x="173" y="351"/>
-    <endstep x="328" y="346"/>
+    <endstep x="74" y="358"/>
+    <endstep x="178" y="356"/>
+    <endstep x="333" y="351"/>
+    <endstep x="431" y="170"/>
   </endsteps>
   <connections>
     <transitions>
@@ -73,7 +74,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

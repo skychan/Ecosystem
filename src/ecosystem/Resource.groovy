@@ -152,7 +152,7 @@ public class Resource  {
         master = newValue
     }
     public ArrayList master = new ArrayList()
-
+    
     /**
      *
      * Record the owners of the resource

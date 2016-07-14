@@ -66,17 +66,17 @@ public class Order  {
     /**
      *
      * The order owner, if not only one
-     * @field owner
+     * @field ownerList
      *
      */
-    @Parameter (displayName = "Owner", usageName = "owner")
-    public ArrayList getOwner() {
-        return owner
+    @Parameter (displayName = "Owner List", usageName = "ownerList")
+    public ArrayList getOwnerList() {
+        return ownerList
     }
-    public void setOwner(ArrayList newValue) {
-        owner = newValue
+    public void setOwnerList(ArrayList newValue) {
+        ownerList = newValue
     }
-    public ArrayList owner = new ArrayList()
+    public ArrayList ownerList = new ArrayList()
 
     /**
      *
@@ -100,13 +100,13 @@ public class Order  {
      *
      */
     @Parameter (displayName = "Service", usageName = "allocatedService")
-    public def getAllocatedService() {
+    public Service getAllocatedService() {
         return allocatedService
     }
-    public void setAllocatedService(def newValue) {
+    public void setAllocatedService(Service newValue) {
         allocatedService = newValue
     }
-    public def allocatedService = null
+    public Service allocatedService = null
 
     /**
      *
@@ -140,6 +140,21 @@ public class Order  {
 
     /**
      *
+     * Record the current owner
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Current owner", usageName = "owner")
+    public def getOwner() {
+        return owner
+    }
+    public void setOwner(def newValue) {
+        owner = newValue
+    }
+    public def owner = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -168,13 +183,13 @@ public class Order  {
      * @method addOwner
      *
      */
-    public void addOwner(String ownerID) {
+    public void addOwner(Object od) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // add owner to the list
-        this.owner.add(ownerID)
+        this.getOwnerList().add(od)
     }
 
     /**
@@ -183,20 +198,14 @@ public class Order  {
      * @method Select
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Order',
-        watcheeFieldNames = 'indicate',
-        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.getIndicate()',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public def Select(ecosystem.Order watchedAgent) {
+    public def Select() {
 
         // This is a task.
         this.setAllocatedService(this.candidates.remove(0))
         this.allocatedService.setChose(true)
         this.getAllocatedService().setOrder(this)
-        this.getAllocatedService().setRemain(this.getAmount())
+        this.getAllocatedService().getJobList().add(this)
+        System.out.println(this.getAllocatedService().getJobList())
 
         // This is a loop.
         for (Service s in this.candidates) {
@@ -211,6 +220,7 @@ public class Order  {
         this.setIndicate(false)
         this.allocatedService.setCompete(false)
         System.out.println("Chosed provider")
+        this.getOwner().setNeed(false)
     }
 
     /**
@@ -221,10 +231,10 @@ public class Order  {
      */
     @Watch(
         watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'compete',
-        triggerCondition = '$watchee.getCompete()',
+        watcheeFieldNames = 'competeList',
+        triggerCondition = '$watchee.getCompeteList()[-1].toString() == $watcher.toString()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
+        scheduleTriggerDelta = 0d
     )
     public def AddCompetitor(ecosystem.Service watchedAgent) {
 
@@ -237,6 +247,7 @@ public class Order  {
         // Add to the temp candidates list
         this.candidates.add(watchedAgent)
         System.out.println("add competitor")
+        System.out.println(watchedAgent.getCompeteList())
 
         // This is an agent decision.
         if (this.getIndicate()) {

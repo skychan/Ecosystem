@@ -168,18 +168,6 @@ public class CloudPlatform  {
         double mean = params.getValue("Mean")
         RandomHelper.createPoisson(mean)
         int providerCount = RandomHelper.getPoisson().nextInt()
-
-        // This is a loop.
-        for (int i in 0..<providerCount) {
-
-            // Create Provider at a random distribution
-            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
-            PureProvider pagent = (PureProvider) agent
-            pagent.Init()
-            this.AddUser(pagent)
-
-        }
-
     }
 
     /**

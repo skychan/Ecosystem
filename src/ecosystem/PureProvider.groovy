@@ -118,7 +118,7 @@ public class PureProvider  {
         Service sagent = (Service) agent
         sagent.addOwner(this.toString())
         // Set parameters
-        sagent.setCapacity(30)
+        sagent.setCapacity(15)
         sagent.setCost(2)
         services.add(sagent)
     }

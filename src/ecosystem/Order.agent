@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is order agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="35" y="109" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
+    <behaviorstep x="35" y="109" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="Object od" exceptions="">
       <label x="35" y="94" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="329" y="44" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Order" watchannotationtargetfieldnames="indicate" watchannotationtriggercondition="$watcher.toString() == $watchee.toString() &amp;&amp; $watchee.getIndicate()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="" compiledname="Select" parameters="ecosystem.Order watchedAgent" exceptions="">
-      <label x="329" y="29" text="Chose provider"/>
+    <behaviorstep x="323" y="45" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Chose the provider" visibility="0" returntype="" compiledname="Select" parameters="" exceptions="">
+      <label x="323" y="30" text="Chose provider"/>
     </behaviorstep>
-    <behaviorstep x="635" y="57" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="compete" watchannotationtriggercondition="$watchee.getCompete()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.Service watchedAgent" exceptions="">
+    <behaviorstep x="635" y="57" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="competeList" watchannotationtriggercondition="$watchee.getCompeteList()[-1].toString() == $watcher.toString()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="635" y="42" text="Add competitor"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="36" y="186" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
-      <label x="36" y="171" text="set owner"/>
+    <taskstep x="36" y="186" comment="add owner to the list" command1="this.getOwnerList().add(od)" command2="" command3="" command4="" command5="">
+      <label x="36" y="171" text="add owner to list"/>
     </taskstep>
-    <taskstep x="325" y="132" comment="This is a task." command1="this.setAllocatedService(this.candidates.remove(0))" command2="this.allocatedService.setChose(true)" command3="this.getAllocatedService().setOrder(this)" command4="this.getAllocatedService().setRemain(this.getAmount())" command5="">
+    <taskstep x="325" y="132" comment="This is a task." command1="this.setAllocatedService(this.candidates.remove(0))" command2="this.allocatedService.setChose(true)" command3="this.getAllocatedService().setOrder(this)" command4="this.getAllocatedService().getJobList().add(this)" command5="System.out.println(this.getAllocatedService().getJobList())">
       <label x="325" y="117" text="Do Task"/>
     </taskstep>
-    <taskstep x="633" y="146" comment="Add to the temp candidates list" command1="this.candidates.add(watchedAgent)" command2="System.out.println(&quot;add competitor&quot;)" command3="" command4="" command5="">
+    <taskstep x="633" y="146" comment="Add to the temp candidates list" command1="this.candidates.add(watchedAgent)" command2="System.out.println(&quot;add competitor&quot;)" command3="System.out.println(watchedAgent.getCompeteList())" command4="" command5="">
       <label x="633" y="131" text="add competitor"/>
     </taskstep>
     <taskstep x="538" y="215" comment="Change the indicate" command1="this.setIndicate(true)" command2="" command3="" command4="" command5="">
       <label x="538" y="200" text="change indicate"/>
     </taskstep>
-    <taskstep x="431" y="211" comment="This is a task." command1="s.setCompete(false)" command2="" command3="" command4="" command5="">
-      <label x="431" y="196" text="Do Task"/>
+    <taskstep x="433" y="214" comment="This is a task." command1="s.setCompete(false)" command2="" command3="" command4="" command5="">
+      <label x="433" y="199" text="Do Task"/>
     </taskstep>
-    <taskstep x="322" y="305" comment="This is a task." command1="this.candidates.clear()" command2="this.setIndicate(false)" command3="this.allocatedService.setCompete(false)" command4="System.out.println(&quot;Chosed provider&quot;)" command5="">
-      <label x="322" y="290" text="Do Task"/>
+    <taskstep x="322" y="314" comment="This is a task." command1="this.candidates.clear()" command2="this.setIndicate(false)" command3="this.allocatedService.setCompete(false)" command4="System.out.println(&quot;Chosed provider&quot;)" command5="this.getOwner().setNeed(false)">
+      <label x="322" y="299" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -41,13 +41,13 @@
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="47" y="19" text="Owner"/>
+    <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="ownerList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="47" y="19" text="Owner List"/>
     </agentproperty>
     <agentproperty x="128" y="35" comment="The order amount" visibility="0" compiledname="amount" type="int" defaultvalue="0">
       <label x="133" y="20" text="Amount"/>
     </agentproperty>
-    <agentproperty x="250" y="124" comment="Record the allocated service" visibility="0" compiledname="allocatedService" type="def" defaultvalue="null">
+    <agentproperty x="250" y="124" comment="Record the allocated service" visibility="0" compiledname="allocatedService" type="Service" defaultvalue="null">
       <label x="255" y="109" text="Service"/>
     </agentproperty>
     <agentproperty x="528" y="47" comment="Record the candidates" visibility="0" compiledname="candidates" type="ArrayList" defaultvalue="new ArrayList()">
@@ -56,11 +56,14 @@
     <agentproperty x="525" y="125" comment="indicate if any of provider candidates" visibility="0" compiledname="indicate" type="boolean" defaultvalue="false">
       <label x="530" y="110" text="candidate indicate"/>
     </agentproperty>
+    <agentproperty x="131" y="126" comment="Record the current owner" visibility="0" compiledname="owner" type="def" defaultvalue="null">
+      <label x="136" y="111" text="Current owner"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="50" y="294"/>
-    <endstep x="337" y="403"/>
-    <endstep x="645" y="308"/>
+    <endstep x="41" y="296"/>
+    <endstep x="329" y="404"/>
+    <endstep x="640" y="323"/>
   </endsteps>
   <connections>
     <transitions>

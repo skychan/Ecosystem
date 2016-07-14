@@ -29,7 +29,7 @@
     <agentproperty x="237" y="65" comment="This is an agent property." visibility="0" compiledname="demanderCount" type="int" defaultvalue="1">
       <label x="242" y="50" text="Demander Count"/>
     </agentproperty>
-    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="20">
+    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="1">
       <label x="242" y="135" text="Provider Count"/>
     </agentproperty>
     <agentproperty x="401" y="59" comment="This is an agent property." visibility="0" compiledname="demanderList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -40,7 +40,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="81" y="471"/>
+    <endstep x="86" y="476"/>
   </endsteps>
   <connections>
     <transitions>

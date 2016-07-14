@@ -110,18 +110,18 @@ public class Service  {
 
     /**
      *
-     * The list to record compete order
-     * @field competeList
+     * The var to record compete order
+     * @field compete
      *
      */
-    @Parameter (displayName = "Compete List", usageName = "competeList")
-    public def getCompeteList() {
-        return competeList
+    @Parameter (displayName = "Compete", usageName = "compete")
+    public def getCompete() {
+        return compete
     }
-    public void setCompeteList(def newValue) {
-        competeList = newValue
+    public void setCompete(def newValue) {
+        compete = newValue
     }
-    public def competeList = []
+    public def compete = []
 
     /**
      *
@@ -246,8 +246,9 @@ public class Service  {
     @Watch(
         watcheeClassName = 'ecosystem.PureDemander',
         watcheeFieldNames = 'need',
+        triggerCondition = '$watchee.getNeed()',
         whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.5d
+        scheduleTriggerDelta = 0.1d
     )
     public def Response(ecosystem.PureDemander watchedAgent) {
 
@@ -262,9 +263,9 @@ public class Service  {
         if (true) {
 
             // change the compete state
-            this.getCompeteList() << watchedAgent.getNewOrder()
             System.out.println("response")
-            println competeList
+            this.setCompete(watchedAgent.getNewOrder())
+            println this.toString() + "is competing for "+ compete
 
         } else  {
 
@@ -281,11 +282,6 @@ public class Service  {
      * @method Process
      *
      */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
     public def Process() {
 
         // Define the return value variable.

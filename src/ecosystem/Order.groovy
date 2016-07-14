@@ -115,28 +115,13 @@ public class Order  {
      *
      */
     @Parameter (displayName = "Candidates", usageName = "candidates")
-    public ArrayList getCandidates() {
+    public def getCandidates() {
         return candidates
     }
-    public void setCandidates(ArrayList newValue) {
+    public void setCandidates(def newValue) {
         candidates = newValue
     }
-    public ArrayList candidates = new ArrayList()
-
-    /**
-     *
-     * indicate if any of provider candidates
-     * @field indicate
-     *
-     */
-    @Parameter (displayName = "candidate indicate", usageName = "indicate")
-    public boolean getIndicate() {
-        return indicate
-    }
-    public void setIndicate(boolean newValue) {
-        indicate = newValue
-    }
-    public boolean indicate = false
+    public def candidates = []
 
     /**
      *
@@ -198,11 +183,18 @@ public class Order  {
      * @method Select
      *
      */
-    public def Select() {
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'compete',
+        triggerCondition = '$watchee.getCompete().toString() == $watcher.toString()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d,
+        scheduleTriggerPriority = -1.7976931348623157E308d
+    )
+    public def Select(ecosystem.Service watchedAgent) {
 
         // This is a task.
-        this.setAllocatedService(this.candidates.remove(0))
-        this.allocatedService.setChose(true)
+        this.setAllocatedService(this.getCandidates().remove(0))
         this.getAllocatedService().setOrder(this)
         this.getAllocatedService().getJobList().add(this)
         System.out.println(this.getAllocatedService().getJobList())
@@ -217,7 +209,6 @@ public class Order  {
 
         // This is a task.
         this.candidates.clear()
-        this.setIndicate(false)
         this.allocatedService.setCompete(false)
         System.out.println("Chosed provider")
         this.getOwner().setNeed(false)
@@ -231,10 +222,11 @@ public class Order  {
      */
     @Watch(
         watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'competeList',
-        triggerCondition = '$watchee.getCompeteList()[-1].toString() == $watcher.toString()',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 0d
+        watcheeFieldNames = 'compete',
+        triggerCondition = '$watchee.getCompete().toString() == $watcher.toString()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d,
+        scheduleTriggerPriority = 1.7976931348623157E308d
     )
     public def AddCompetitor(ecosystem.Service watchedAgent) {
 
@@ -245,20 +237,10 @@ public class Order  {
         def time = GetTickCountInTimeUnits()
 
         // Add to the temp candidates list
-        this.candidates.add(watchedAgent)
+        this.candidates << watchedAgent
         System.out.println("add competitor")
-        System.out.println(watchedAgent.getCompeteList())
-
-        // This is an agent decision.
-        if (this.getIndicate()) {
-
-
-        } else  {
-
-            // Change the indicate
-            this.setIndicate(true)
-
-        }
+        System.out.println(watchedAgent.getCompete())
+        println candidates
         // Return the results.
         return returnValue
 

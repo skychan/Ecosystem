@@ -4,10 +4,10 @@
     <behaviorstep x="450" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
       <label x="450" y="123" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="50" y="156" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.5" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
+    <behaviorstep x="50" y="156" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="need" watchannotationtriggercondition="$watchee.getNeed()" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="50" y="141" text="Response"/>
     </behaviorstep>
-    <behaviorstep x="438" y="400" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
+    <behaviorstep x="438" y="400" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
       <label x="438" y="385" text="Process"/>
     </behaviorstep>
     <behaviorstep x="293" y="683" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
@@ -18,7 +18,7 @@
     <taskstep x="449" y="225" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
       <label x="449" y="210" text="set owner"/>
     </taskstep>
-    <taskstep x="49" y="320" comment="change the compete state" command1="this.getCompeteList() &lt;&lt; watchedAgent.getNewOrder()" command2="System.out.println(&quot;response&quot;)" command3="println competeList" command4="" command5="">
+    <taskstep x="49" y="320" comment="change the compete state" command1="System.out.println(&quot;response&quot;)" command2="" command3="this.setCompete(watchedAgent.getNewOrder())" command4="" command5="println this.toString() + &quot;is competing for &quot;+ compete">
       <label x="49" y="305" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="291" y="770" comment="Cut down remain" command1="" command2="this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())" command3="" command4="" command5="">
@@ -71,8 +71,8 @@
     <agentproperty x="290" y="167" comment="The service unit cost" visibility="0" compiledname="cost" type="int" defaultvalue="0">
       <label x="295" y="152" text="Unit Cost"/>
     </agentproperty>
-    <agentproperty x="50" y="59" comment="The list to record compete order" visibility="0" compiledname="competeList" type="def" defaultvalue="[]">
-      <label x="55" y="44" text="Compete List"/>
+    <agentproperty x="50" y="59" comment="The var to record compete order" visibility="0" compiledname="compete" type="def" defaultvalue="[]">
+      <label x="55" y="44" text="Compete"/>
     </agentproperty>
     <agentproperty x="300" y="55" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
       <label x="305" y="40" text="Chose"/>

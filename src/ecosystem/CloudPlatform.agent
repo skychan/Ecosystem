@@ -40,10 +40,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="74" y="358"/>
-    <endstep x="178" y="356"/>
-    <endstep x="333" y="351"/>
-    <endstep x="431" y="170"/>
+    <endstep x="66" y="363"/>
+    <endstep x="175" y="355"/>
+    <endstep x="338" y="356"/>
+    <endstep x="436" y="175"/>
   </endsteps>
   <connections>
     <transitions>

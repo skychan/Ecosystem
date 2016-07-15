@@ -351,6 +351,7 @@ public class Service  {
             System.out.println(this.getOrder().toString()+" Finished")
             this.getJobList().remove(this.getOrder())
             this.setProcessing(false)
+            RemoveAgentFromModel(this.getOrder())
 
         } else  {
 

@@ -52,9 +52,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="41" y="296"/>
-    <endstep x="329" y="404"/>
-    <endstep x="640" y="323"/>
+    <endstep x="46" y="301"/>
+    <endstep x="323" y="405"/>
+    <endstep x="645" y="328"/>
   </endsteps>
   <connections>
     <transitions>

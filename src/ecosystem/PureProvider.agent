@@ -4,6 +4,9 @@
     <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Initilization" visibility="0" returntype="void" compiledname="Init" parameters="" exceptions="">
       <label x="120" y="52" text="Initilization"/>
     </behaviorstep>
+    <behaviorstep x="423" y="247" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+      <label x="423" y="232" text="Step"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="119" y="145" comment="Generate Service" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service sagent = (Service) agent" command3="sagent.addOwner(this.toString())" command4="" command5="">
@@ -19,9 +22,12 @@
     <agentproperty x="263" y="57" comment="Record the service" visibility="0" compiledname="services" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="268" y="42" text="Service List"/>
     </agentproperty>
+    <agentproperty x="413" y="59" comment="This is an agent property." visibility="0" compiledname="property" type="def" defaultvalue="0">
+      <label x="418" y="44" text="Property"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="133" y="319"/>
+    <endstep x="126" y="329"/>
   </endsteps>
   <connections>
     <transitions>

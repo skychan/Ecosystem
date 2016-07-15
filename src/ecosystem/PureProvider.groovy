@@ -80,6 +80,21 @@ public class PureProvider  {
 
     /**
      *
+     * This is an agent property.
+     * @field property
+     *
+     */
+    @Parameter (displayName = "Property", usageName = "property")
+    public def getProperty() {
+        return property
+    }
+    public void setProperty(def newValue) {
+        property = newValue
+    }
+    public def property = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -121,6 +136,25 @@ public class PureProvider  {
         sagent.setCapacity(15)
         sagent.setCost(2)
         services.add(sagent)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method step
+     *
+     */
+    public def step() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Return the results.
+        return returnValue
+
     }
 
     /**

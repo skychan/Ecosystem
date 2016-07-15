@@ -24,7 +24,7 @@
     <taskstep x="291" y="770" comment="Cut down remain" command1="" command2="this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())" command3="" command4="" command5="">
       <label x="291" y="755" text="Process 1 step"/>
     </taskstep>
-    <taskstep x="291" y="948" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="">
+    <taskstep x="291" y="948" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="RemoveAgentFromModel(this.getOrder())">
       <label x="291" y="933" text="Afterward"/>
     </taskstep>
     <taskstep x="557" y="575" comment="allocate the job" command1="this.setOrder(this.getJobList()[0])" command2="this.setProcessing(true)" command3="System.out.println(&quot;start to process new &quot;+this.getOrder().toString())" command4="this.step()" command5="">
@@ -32,12 +32,6 @@
     </taskstep>
     <taskstep x="435" y="574" comment="Continue" command1="System.out.println(&quot;continue to process &quot;+this.getOrder().toString())" command2="this.step()" command3="" command4="" command5="">
       <label x="435" y="559" text="Continue"/>
-    </taskstep>
-    <taskstep x="374" y="1092" comment="Allocate new job" command1="this.setOrder(this.getJobList()[0])" command2="System.out.println(&quot;start to process in list &quot;+this.getOrder().toString())" command3="System.out.println(this.getJobList())" command4="" command5="">
-      <label x="374" y="1077" text="new job"/>
-    </taskstep>
-    <taskstep x="210" y="1103" comment="Change process status" command1="this.setProcessing(false)" command2="" command3="" command4="" command5="">
-      <label x="210" y="1088" text="processing down"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -53,13 +47,9 @@
     <decisionstep x="291" y="848" comment="Is the job finished?" criteria="this.getOrder().getAmount()&lt;=0" branchType="if">
       <label x="291" y="833" text="Finished?"/>
     </decisionstep>
-    <decisionstep x="289" y="1025" comment="Check if remain jobs" criteria="this.getJobList().size()==0" branchType="if">
-      <label x="289" y="1010" text="Any jobs?"/>
-    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="500" y="649"/>
-    <joinstep x="298" y="1179"/>
+    <joinstep x="510" y="659"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="222" y="169" comment="The capacity of the service" visibility="0" compiledname="capacity" type="int" defaultvalue="0">
@@ -91,11 +81,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="449" y="322"/>
+    <endstep x="459" y="332"/>
     <endstep x="54" y="413"/>
-    <endstep x="302" y="1254"/>
-    <endstep x="505" y="735"/>
-    <endstep x="467" y="971"/>
+    <endstep x="515" y="745"/>
+    <endstep x="302" y="1041"/>
   </endsteps>
   <connections>
     <transitions>
@@ -115,6 +104,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -131,7 +125,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -145,27 +139,7 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="6" anchor="2"/>
-        <transitiontarget type="join" index="1" anchor="3"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="7" anchor="2"/>
-        <transitiontarget type="join" index="1" anchor="1"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="join" index="1" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -176,14 +150,14 @@
         <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="1" anchor="3"/>
-        <transitiontarget type="decision" index="2" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="decision" index="2" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -194,16 +168,6 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="3" anchor="2"/>
         <transitiontarget type="task" index="3" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="4" anchor="3"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="4" anchor="1"/>
-        <transitiontarget type="task" index="7" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

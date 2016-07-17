@@ -95,6 +95,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * The amount of finished jobs
+     * @field finishCount
+     *
+     */
+    @Parameter (displayName = "Finished amount", usageName = "finishCount")
+    public int getFinishCount() {
+        return finishCount
+    }
+    public void setFinishCount(int newValue) {
+        finishCount = newValue
+    }
+    public int finishCount = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -168,6 +183,33 @@ public class CloudPlatform  {
         double mean = params.getValue("Mean")
         RandomHelper.createPoisson(mean)
         int providerCount = RandomHelper.getPoisson().nextInt()
+    }
+
+    /**
+     *
+     * Count finished jobs
+     * @method count
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'finish',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def count(ecosystem.Service watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.setFinishCount(this.getFinishCount()+1)
+        // Return the results.
+        return returnValue
+
     }
 
     /**

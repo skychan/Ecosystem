@@ -144,6 +144,11 @@ public class PureProvider  {
      * @method step
      *
      */
+    @ScheduledMethod(
+        start = 40d,
+        interval = 40d,
+        shuffle = true
+    )
     public def step() {
 
         // Define the return value variable.
@@ -152,6 +157,8 @@ public class PureProvider  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // This is a task.
+        RemoveAgentFromModel(this.getServices()[0])
         // Return the results.
         return returnValue
 

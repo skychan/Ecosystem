@@ -10,6 +10,9 @@
     <behaviorstep x="319" y="65" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="319" y="50" text="Create Provider"/>
     </behaviorstep>
+    <behaviorstep x="575" y="98" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Count finished jobs" visibility="0" returntype="def" compiledname="count" parameters="ecosystem.Service watchedAgent" exceptions="">
+      <label x="575" y="83" text="Count"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="63" y="240" comment="This is a task." command1="this.userList.add(o)" command2="" command3="" command4="" command5="">
@@ -23,6 +26,9 @@
     </taskstep>
     <taskstep x="319" y="152" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
       <label x="319" y="137" text="Randomize"/>
+    </taskstep>
+    <taskstep x="572" y="172" comment="This is a task." command1="this.setFinishCount(this.getFinishCount()+1)" command2="" command3="" command4="" command5="">
+      <label x="572" y="157" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -38,12 +44,16 @@
     <agentproperty x="169" y="49" comment="This is an agent property." visibility="0" compiledname="mean1" type="double" defaultvalue="0.16">
       <label x="174" y="34" text="Mean1"/>
     </agentproperty>
+    <agentproperty x="668" y="50" comment="The amount of finished jobs" visibility="0" compiledname="finishCount" type="int" defaultvalue="0">
+      <label x="673" y="35" text="Finished amount"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="66" y="363"/>
-    <endstep x="175" y="355"/>
-    <endstep x="338" y="356"/>
-    <endstep x="436" y="175"/>
+    <endstep x="71" y="368"/>
+    <endstep x="180" y="360"/>
+    <endstep x="343" y="361"/>
+    <endstep x="441" y="180"/>
+    <endstep x="575" y="268"/>
   </endsteps>
   <connections>
     <transitions>
@@ -75,6 +85,16 @@
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

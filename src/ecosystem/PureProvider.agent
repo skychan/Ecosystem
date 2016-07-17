@@ -4,7 +4,7 @@
     <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Initilization" visibility="0" returntype="void" compiledname="Init" parameters="" exceptions="">
       <label x="120" y="52" text="Initilization"/>
     </behaviorstep>
-    <behaviorstep x="423" y="247" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+    <behaviorstep x="423" y="247" scheduleannotationstart="40" scheduleannotationpick="" scheduleannotationinterval="40" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
       <label x="423" y="232" text="Step"/>
     </behaviorstep>
   </behaviorsteps>
@@ -14,6 +14,9 @@
     </taskstep>
     <taskstep x="121" y="226" comment="Set parameters" command1="sagent.setCapacity(15)" command2="sagent.setCost(2)" command3="services.add(sagent)" command4="" command5="">
       <label x="121" y="211" text="Set parameters"/>
+    </taskstep>
+    <taskstep x="421" y="316" comment="This is a task." command1="RemoveAgentFromModel(this.getServices()[0])" command2="" command3="" command4="" command5="">
+      <label x="421" y="301" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -27,13 +30,19 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="126" y="329"/>
+    <endstep x="127" y="311"/>
+    <endstep x="429" y="423"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
         <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -44,6 +53,11 @@
       <transition>
         <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

@@ -24,7 +24,7 @@
     <taskstep x="291" y="770" comment="Cut down remain" command1="" command2="this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())" command3="" command4="" command5="">
       <label x="291" y="755" text="Process 1 step"/>
     </taskstep>
-    <taskstep x="291" y="948" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="RemoveAgentFromModel(this.getOrder())">
+    <taskstep x="291" y="948" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="//RemoveAgentFromModel(this.getOrder())">
       <label x="291" y="933" text="Afterward"/>
     </taskstep>
     <taskstep x="557" y="575" comment="allocate the job" command1="this.setOrder(this.getJobList()[0])" command2="this.setProcessing(true)" command3="System.out.println(&quot;start to process new &quot;+this.getOrder().toString())" command4="this.step()" command5="">
@@ -49,7 +49,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="510" y="659"/>
+    <joinstep x="515" y="664"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="222" y="169" comment="The capacity of the service" visibility="0" compiledname="capacity" type="int" defaultvalue="0">
@@ -81,10 +81,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="459" y="332"/>
-    <endstep x="54" y="413"/>
-    <endstep x="515" y="745"/>
-    <endstep x="302" y="1041"/>
+    <endstep x="454" y="333"/>
+    <endstep x="59" y="418"/>
+    <endstep x="520" y="750"/>
+    <endstep x="297" y="1039"/>
   </endsteps>
   <connections>
     <transitions>

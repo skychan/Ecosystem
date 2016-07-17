@@ -4,13 +4,19 @@
     <behaviorstep x="274" y="42" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="changeNeed" parameters=" " exceptions="">
       <label x="274" y="27" text="Generate Need"/>
     </behaviorstep>
+    <behaviorstep x="486" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="$watcher.orderList.contains($watchee.order)" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Remove order from list when finished" visibility="0" returntype="def" compiledname="RemoveOrder" parameters="ecosystem.Service watchedAgent" exceptions="">
+      <label x="486" y="72" text="Remove Order"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="278" y="218" comment="have need is to generate order" command1="System.out.println(&quot;I have a need&quot;)" command2="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command3="Order o = (Order) agent" command4="o.addOwner(this)" command5="o.setOwner(this)">
+    <taskstep x="278" y="218" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="" command3="Order o = (Order) agent" command4="o.addOwner(this)" command5="o.setOwner(this)">
       <label x="278" y="203" text="Generate Order"/>
     </taskstep>
-    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setAmount(50)" command2="System.out.println(&quot;named &quot;+o.toString())" command3="this.getOrderList().add(o)" command4="this.setNewOrder(o)" command5="this.setNeed(true)">
+    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setAmount(50)" command2="println this.toString() + &quot; need &quot;+ o.toString()" command3="this.getOrderList().add(o)" command4="this.setNewOrder(o)" command5="this.setNeed(true)">
       <label x="279" y="294" text="Set parameters"/>
+    </taskstep>
+    <taskstep x="486" y="199" comment="This is a task." command1="this.orderList.remove(watchedAgent.order)" command2="RemoveAgentFromModel(watchedAgent.order)" command3="" command4="" command5="">
+      <label x="486" y="184" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -31,7 +37,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="286" y="474"/>
+    <endstep x="284" y="409"/>
+    <endstep x="491" y="301"/>
   </endsteps>
   <connections>
     <transitions>
@@ -48,6 +55,16 @@
       <transition>
         <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

@@ -246,7 +246,6 @@ public class Service  {
     @Watch(
         watcheeClassName = 'ecosystem.PureDemander',
         watcheeFieldNames = 'need',
-        triggerCondition = '$watchee.getNeed()',
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 0.1d
     )
@@ -263,9 +262,8 @@ public class Service  {
         if (true) {
 
             // change the compete state
-            System.out.println("response")
             this.setCompete(watchedAgent.getNewOrder())
-            println this.toString() + "is competing for "+ compete
+            println this.toString() + " is competing for "+ compete
 
         } else  {
 
@@ -351,7 +349,6 @@ public class Service  {
             System.out.println(this.getOrder().toString()+" Finished")
             this.getJobList().remove(this.getOrder())
             this.setProcessing(false)
-            //RemoveAgentFromModel(this.getOrder())
 
         } else  {
 

@@ -13,6 +13,9 @@
     <behaviorstep x="575" y="98" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Count finished jobs" visibility="0" returntype="def" compiledname="count" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="575" y="83" text="Count"/>
     </behaviorstep>
+    <behaviorstep x="543" y="408" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="newOrder" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="orderCount" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
+      <label x="543" y="393" text="Step"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="63" y="240" comment="This is a task." command1="this.userList.add(o)" command2="" command3="" command4="" command5="">
@@ -30,6 +33,9 @@
     <taskstep x="572" y="172" comment="This is a task." command1="this.setFinishCount(this.getFinishCount()+1)" command2="" command3="" command4="" command5="">
       <label x="572" y="157" text="Do Task"/>
     </taskstep>
+    <taskstep x="544" y="521" comment="This is a task." command1="this.setOrderCount(this.getOrderCount()+1)" command2="" command3="" command4="" command5="">
+      <label x="544" y="506" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="323" y="239" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
@@ -45,15 +51,18 @@
       <label x="174" y="34" text="Mean1"/>
     </agentproperty>
     <agentproperty x="668" y="50" comment="The amount of finished jobs" visibility="0" compiledname="finishCount" type="int" defaultvalue="0">
-      <label x="673" y="35" text="Finished amount"/>
+      <label x="673" y="35" text="Finished order count"/>
+    </agentproperty>
+    <agentproperty x="667" y="387" comment="Count the order appeared in the history" visibility="0" compiledname="orderCount" type="int" defaultvalue="0">
+      <label x="672" y="372" text="Order count"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="71" y="368"/>
-    <endstep x="180" y="360"/>
-    <endstep x="343" y="361"/>
-    <endstep x="441" y="180"/>
-    <endstep x="575" y="268"/>
+    <endstep x="67" y="376"/>
+    <endstep x="179" y="371"/>
+    <endstep x="332" y="362"/>
+    <endstep x="580" y="273"/>
+    <endstep x="550" y="623"/>
   </endsteps>
   <connections>
     <transitions>
@@ -73,6 +82,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -84,16 +98,21 @@
       </transition>
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="5" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>

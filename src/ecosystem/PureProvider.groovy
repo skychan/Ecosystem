@@ -140,32 +140,6 @@ public class PureProvider  {
 
     /**
      *
-     * This is the step behavior.
-     * @method step
-     *
-     */
-    @ScheduledMethod(
-        start = 40d,
-        interval = 40d,
-        shuffle = true
-    )
-    public def step() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        RemoveAgentFromModel(this.getServices()[0])
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

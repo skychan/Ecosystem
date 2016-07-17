@@ -99,7 +99,7 @@ public class CloudPlatform  {
      * @field finishCount
      *
      */
-    @Parameter (displayName = "Finished amount", usageName = "finishCount")
+    @Parameter (displayName = "Finished order count", usageName = "finishCount")
     public int getFinishCount() {
         return finishCount
     }
@@ -107,6 +107,21 @@ public class CloudPlatform  {
         finishCount = newValue
     }
     public int finishCount = 0
+
+    /**
+     *
+     * Count the order appeared in the history
+     * @field orderCount
+     *
+     */
+    @Parameter (displayName = "Order count", usageName = "orderCount")
+    public int getOrderCount() {
+        return orderCount
+    }
+    public void setOrderCount(int newValue) {
+        orderCount = newValue
+    }
+    public int orderCount = 0
 
     /**
      *
@@ -183,6 +198,18 @@ public class CloudPlatform  {
         double mean = params.getValue("Mean")
         RandomHelper.createPoisson(mean)
         int providerCount = RandomHelper.getPoisson().nextInt()
+
+        // This is a loop.
+        for (int i in 0..<providerCount) {
+
+            // Create Provider at a random distribution
+            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+            PureProvider pagent = (PureProvider) agent
+            pagent.Init()
+            this.AddUser(pagent)
+
+        }
+
     }
 
     /**
@@ -207,6 +234,33 @@ public class CloudPlatform  {
 
         // This is a task.
         this.setFinishCount(this.getFinishCount()+1)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method orderCount
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'newOrder',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def orderCount(ecosystem.PureDemander watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.setOrderCount(this.getOrderCount()+1)
         // Return the results.
         return returnValue
 

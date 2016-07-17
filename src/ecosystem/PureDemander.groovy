@@ -153,14 +153,13 @@ public class PureDemander  {
         if (RandomHelper.nextIntFromTo(0, 1)) {
 
             // have need is to generate order
-            System.out.println("I have a need")
             Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
             Order o = (Order) agent
             o.addOwner(this)
             o.setOwner(this)
             // Set the order parameters
             o.setAmount(50)
-            System.out.println("named "+o.toString())
+            println this.toString() + " need "+ o.toString()
             this.getOrderList().add(o)
             this.setNewOrder(o)
             this.setNeed(true)
@@ -169,6 +168,35 @@ public class PureDemander  {
 
 
         }
+    }
+
+    /**
+     *
+     * Remove order from list when finished
+     * @method RemoveOrder
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'finish',
+        triggerCondition = '$watcher.orderList.contains($watchee.order)',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def RemoveOrder(ecosystem.Service watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.orderList.remove(watchedAgent.order)
+        RemoveAgentFromModel(watchedAgent.order)
+        // Return the results.
+        return returnValue
+
     }
 
     /**

@@ -24,6 +24,24 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>Finished Order c</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Finished Order c</id>
+        <className>ecosystem.CloudPlatform</className>
+        <methodName>getFinishCount</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Order Count</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Order Count</id>
+        <className>ecosystem.CloudPlatform</className>
+        <methodName>getOrderCount</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map">
     <entry>

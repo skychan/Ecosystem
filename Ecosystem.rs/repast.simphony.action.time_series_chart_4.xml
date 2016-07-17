@@ -33,6 +33,30 @@
       </SeriesData>
     </entry>
     <entry>
+      <string>Finished Order c</string>
+      <SeriesData>
+        <label>Finished Order c</label>
+        <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>Order Count</string>
+      <SeriesData>
+        <label>Order Count</label>
+        <color>
+          <red>255</red>
+          <green>200</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
       <string>Service</string>
       <SeriesData>
         <label>Service</label>

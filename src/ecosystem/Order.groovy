@@ -184,33 +184,24 @@ public class Order  {
      *
      */
     @Watch(
-        watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'compete',
-        triggerCondition = '$watchee.getCompete().toString() == $watcher.toString()',
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        triggerCondition = '$watchee.getNewOrder().equals($watcher)',
         whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.1d,
+        scheduleTriggerDelta = 0.3d,
         scheduleTriggerPriority = -1.7976931348623157E308d
     )
-    public def Select(ecosystem.Service watchedAgent) {
+    public def Select(ecosystem.PureDemander watchedAgent) {
 
         // This is a task.
-        this.setAllocatedService(this.getCandidates().remove(0))
+        println "candidates are "+this.getCandidates()
+        Choose()
+        println "after sort we have " +this.getCandidates()
+        this.setAllocatedService(this.getCandidates()[0])
         this.getAllocatedService().getJobList().add(this)
-        System.out.println(this.getAllocatedService().getJobList())
-
-        // This is a loop.
-        for (Service s in this.candidates) {
-
-            // This is a task.
-            s.setCompete(false)
-
-        }
-
         // This is a task.
         this.candidates.clear()
-        this.allocatedService.setCompete(false)
-        System.out.println("Chosed provider")
-        this.getOwner().setNeed(false)
+        System.out.println("Provider Chosen: "+this.allocatedService)
     }
 
     /**
@@ -222,7 +213,7 @@ public class Order  {
     @Watch(
         watcheeClassName = 'ecosystem.Service',
         watcheeFieldNames = 'compete',
-        triggerCondition = '$watchee.getCompete().toString() == $watcher.toString()',
+        triggerCondition = '$watchee.getCompete().equals($watcher)',
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 0.1d,
         scheduleTriggerPriority = 1.7976931348623157E308d
@@ -237,9 +228,28 @@ public class Order  {
 
         // Add to the temp candidates list
         this.candidates << watchedAgent
-        System.out.println("add competitor")
-        System.out.println(watchedAgent.getCompete())
-        println candidates
+        println "just add "+ watchedAgent
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Chosing
+     * @method Choose
+     *
+     */
+    public def Choose() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}
         // Return the results.
         return returnValue
 

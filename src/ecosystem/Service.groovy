@@ -200,6 +200,51 @@ public class Service  {
 
     /**
      *
+     * Quality
+     * @field quality
+     *
+     */
+    @Parameter (displayName = "Quality", usageName = "quality")
+    public def getQuality() {
+        return quality
+    }
+    public void setQuality(def newValue) {
+        quality = newValue
+    }
+    public def quality = 0
+
+    /**
+     *
+     * Review history
+     * @field reviews
+     *
+     */
+    @Parameter (displayName = "Review History", usageName = "reviews")
+    public def getReviews() {
+        return reviews
+    }
+    public void setReviews(def newValue) {
+        reviews = newValue
+    }
+    public def reviews = []
+
+    /**
+     *
+     * Mark the Rank value
+     * @field rank
+     *
+     */
+    @Parameter (displayName = "Rank", usageName = "rank")
+    public def getRank() {
+        return rank
+    }
+    public void setRank(def newValue) {
+        rank = newValue
+    }
+    public def rank = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -375,6 +420,27 @@ public class Service  {
 
         // This is a task.
         returnValue = true
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Add review to history
+     * @method AddReview
+     *
+     */
+    public def AddReview() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        println "add demander's review to the history"
         // Return the results.
         return returnValue
 

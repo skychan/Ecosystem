@@ -16,6 +16,9 @@
     <behaviorstep x="57" y="540" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Decision making for taking the order or not" visibility="0" returntype="def" compiledname="Response" parameters="" exceptions="">
       <label x="57" y="525" text="Response decision"/>
     </behaviorstep>
+    <behaviorstep x="748" y="383" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add review to history" visibility="0" returntype="def" compiledname="AddReview" parameters="" exceptions="">
+      <label x="748" y="368" text="Add review"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="449" y="225" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
@@ -39,6 +42,9 @@
     <taskstep x="55" y="632" comment="This is a task." command1="returnValue = true" command2="" command3="" command4="" command5="">
       <label x="55" y="617" text="Do Task"/>
     </taskstep>
+    <taskstep x="749" y="478" comment="This is a task." command1="println &quot;add demander&apos;s review to the history&quot;" command2="" command3="" command4="" command5="">
+      <label x="749" y="463" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="48" y="228" comment="Decide to take the task or not" criteria="Response()" branchType="if">
@@ -55,7 +61,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="525" y="674"/>
+    <joinstep x="530" y="679"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="222" y="169" comment="The capacity of the service" visibility="0" compiledname="capacity" type="int" defaultvalue="0">
@@ -85,13 +91,23 @@
     <agentproperty x="200" y="482" comment="Mark the status of processing or not" visibility="0" compiledname="processing" type="boolean" defaultvalue="false">
       <label x="205" y="467" text="Processing ?"/>
     </agentproperty>
+    <agentproperty x="792" y="273" comment="Quality" visibility="0" compiledname="quality" type="def" defaultvalue="0">
+      <label x="797" y="258" text="Quality"/>
+    </agentproperty>
+    <agentproperty x="877" y="274" comment="Review history" visibility="0" compiledname="reviews" type="def" defaultvalue="[]">
+      <label x="882" y="259" text="Review History"/>
+    </agentproperty>
+    <agentproperty x="692" y="272" comment="Mark the Rank value" visibility="0" compiledname="rank" type="def" defaultvalue="0">
+      <label x="697" y="257" text="Rank"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="464" y="343"/>
-    <endstep x="59" y="425"/>
-    <endstep x="530" y="760"/>
-    <endstep x="301" y="1056"/>
-    <endstep x="58" y="748"/>
+    <endstep x="469" y="348"/>
+    <endstep x="64" y="430"/>
+    <endstep x="535" y="765"/>
+    <endstep x="306" y="1061"/>
+    <endstep x="63" y="753"/>
+    <endstep x="756" y="580"/>
   </endsteps>
   <connections>
     <transitions>
@@ -113,6 +129,11 @@
       <transition>
         <transitionsource type="behavior" index="3" anchor="0"/>
         <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -146,18 +167,23 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
+        <transitionsource type="behavior" index="5" anchor="0"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="6" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
+        <transitionsource type="task" index="7" anchor="2"/>
+        <transitiontarget type="end" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

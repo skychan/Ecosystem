@@ -257,6 +257,33 @@ public class Order  {
 
     /**
      *
+     * Review the transaction
+     * @method Review
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'finish',
+        triggerCondition = '$watchee.getOrder().equals($watcher)',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public def Review(ecosystem.Service watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Review and Commit
+        println "review and commit"
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

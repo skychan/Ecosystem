@@ -13,6 +13,9 @@
     <behaviorstep x="293" y="683" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
       <label x="293" y="668" text="One step"/>
     </behaviorstep>
+    <behaviorstep x="57" y="540" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Decision making for taking the order or not" visibility="0" returntype="def" compiledname="Response" parameters="" exceptions="">
+      <label x="57" y="525" text="Response decision"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="449" y="225" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
@@ -33,9 +36,12 @@
     <taskstep x="435" y="574" comment="Continue" command1="System.out.println(&quot;continue to process &quot;+this.getOrder().toString())" command2="this.step()" command3="" command4="" command5="">
       <label x="435" y="559" text="Continue"/>
     </taskstep>
+    <taskstep x="55" y="632" comment="This is a task." command1="returnValue = true" command2="" command3="" command4="" command5="">
+      <label x="55" y="617" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="48" y="228" comment="Decide to take the task or not" criteria="true" branchType="if">
+    <decisionstep x="48" y="228" comment="Decide to take the task or not" criteria="Response()" branchType="if">
       <label x="48" y="213" text="Take it or not"/>
     </decisionstep>
     <decisionstep x="436" y="473" comment="In processing or not" criteria="this.getProcessing()" branchType="if">
@@ -49,7 +55,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="520" y="669"/>
+    <joinstep x="525" y="674"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="222" y="169" comment="The capacity of the service" visibility="0" compiledname="capacity" type="int" defaultvalue="0">
@@ -81,10 +87,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="459" y="338"/>
-    <endstep x="54" y="420"/>
-    <endstep x="525" y="755"/>
-    <endstep x="296" y="1051"/>
+    <endstep x="464" y="343"/>
+    <endstep x="59" y="425"/>
+    <endstep x="530" y="760"/>
+    <endstep x="301" y="1056"/>
+    <endstep x="58" y="748"/>
   </endsteps>
   <connections>
     <transitions>
@@ -141,6 +148,16 @@
       <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

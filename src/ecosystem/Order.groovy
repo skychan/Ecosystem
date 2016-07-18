@@ -179,7 +179,7 @@ public class Order  {
 
     /**
      *
-     * Chose the provider
+     * Select provider
      * @method Select
      *
      */
@@ -193,13 +193,13 @@ public class Order  {
     )
     public def Select(ecosystem.PureDemander watchedAgent) {
 
-        // This is a task.
+        // Select proper supplier with evaluation
         println "candidates are "+this.getCandidates()
-        Choose()
+        Evaluation()
         println "after sort we have " +this.getCandidates()
         this.setAllocatedService(this.getCandidates()[0])
         this.getAllocatedService().getJobList().add(this)
-        // This is a task.
+        // Reset the candidates after selection
         this.candidates.clear()
         System.out.println("Provider Chosen: "+this.allocatedService)
     }
@@ -236,11 +236,11 @@ public class Order  {
 
     /**
      *
-     * Chosing
-     * @method Choose
+     * Supplier Evaluation
+     * @method Evaluation
      *
      */
-    public def Choose() {
+    public def Evaluation() {
 
         // Define the return value variable.
         def returnValue

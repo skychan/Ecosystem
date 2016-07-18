@@ -259,7 +259,7 @@ public class Service  {
 
 
         // Decide to take the task or not
-        if (true) {
+        if (Response()) {
 
             // change the compete state
             this.setCompete(watchedAgent.getNewOrder())
@@ -354,6 +354,27 @@ public class Service  {
 
 
         }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Decision making for taking the order or not
+     * @method Response
+     *
+     */
+    public def Response() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        returnValue = true
         // Return the results.
         return returnValue
 

@@ -427,11 +427,31 @@ public class Service  {
 
     /**
      *
+     * Change the service rank with depends on the review
+     * @method AdjustRank
+     *
+     */
+    public def AdjustRank() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
      * Add review to history
      * @method AddReview
      *
      */
-    public def AddReview() {
+    public def AddReview(rvalue) {
 
         // Define the return value variable.
         def returnValue
@@ -441,6 +461,7 @@ public class Service  {
 
         // This is a task.
         println "add demander's review to the history"
+        this.reviews << rvalue
         // Return the results.
         return returnValue
 

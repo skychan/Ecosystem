@@ -10,8 +10,8 @@
     <behaviorstep x="635" y="57" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="compete" watchannotationtriggercondition="$watchee.getCompete().equals($watcher)" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Add the competitor" visibility="0" returntype="def" compiledname="AddCompetitor" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="635" y="42" text="Add competitor"/>
     </behaviorstep>
-    <behaviorstep x="320" y="464" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Supplier Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="" exceptions="">
-      <label x="320" y="449" text="Supplier Evaluation"/>
+    <behaviorstep x="240" y="236" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Supplier Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="" exceptions="">
+      <label x="240" y="221" text="Supplier Evaluation"/>
     </behaviorstep>
     <behaviorstep x="552" y="462" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="$watchee.getOrder().equals($watcher)" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Review the transaction" visibility="0" returntype="def" compiledname="Review" parameters="ecosystem.Service watchedAgent" exceptions="">
       <label x="552" y="447" text="Review"/>
@@ -30,10 +30,10 @@
     <taskstep x="326" y="217" comment="Reset the candidates after selection" command1="this.candidates.clear()" command2="" command3="" command4="System.out.println(&quot;Provider Chosen: &quot;+this.allocatedService)" command5="">
       <label x="326" y="202" text="Reset"/>
     </taskstep>
-    <taskstep x="321" y="549" comment="This is a task." command1="this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}" command2="" command3="" command4="" command5="">
-      <label x="321" y="534" text="Do Task"/>
+    <taskstep x="241" y="321" comment="This is a task." command1="this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}" command2="" command3="" command4="" command5="">
+      <label x="241" y="306" text="Do Task"/>
     </taskstep>
-    <taskstep x="551" y="563" comment="Review and Commit" command1="println &quot;review and commit&quot;" command2="" command3="" command4="" command5="">
+    <taskstep x="551" y="563" comment="Review and Commit" command1="println &quot;review and commit&quot;" command2="def rvalue = 0" command3="watchedAgent.AddReview(rvalue)" command4="" command5="">
       <label x="551" y="548" text="Review and commit"/>
     </taskstep>
   </tasksteps>
@@ -57,11 +57,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="46" y="291"/>
-    <endstep x="335" y="327"/>
-    <endstep x="642" y="269"/>
-    <endstep x="330" y="642"/>
-    <endstep x="553" y="666"/>
+    <endstep x="41" y="304"/>
+    <endstep x="331" y="327"/>
+    <endstep x="647" y="274"/>
+    <endstep x="249" y="438"/>
+    <endstep x="558" y="671"/>
   </endsteps>
   <connections>
     <transitions>
@@ -83,6 +83,11 @@
       <transition>
         <transitionsource type="behavior" index="3" anchor="0"/>
         <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -108,11 +113,6 @@
       <transition>
         <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

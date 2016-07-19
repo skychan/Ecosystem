@@ -277,6 +277,8 @@ public class Order  {
 
         // Review and Commit
         println "review and commit"
+        def rvalue = 0
+        watchedAgent.AddReview(rvalue)
         // Return the results.
         return returnValue
 

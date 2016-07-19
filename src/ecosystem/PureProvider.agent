@@ -22,9 +22,12 @@
     <agentproperty x="413" y="59" comment="This is an agent property." visibility="0" compiledname="property" type="def" defaultvalue="0">
       <label x="418" y="44" text="Property"/>
     </agentproperty>
+    <agentproperty x="586" y="68" comment="The provider Rank value" visibility="0" compiledname="rankVal" type="double" defaultvalue="0">
+      <label x="591" y="53" text="Rank"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="132" y="329"/>
+    <endstep x="137" y="334"/>
   </endsteps>
   <connections>
     <transitions>

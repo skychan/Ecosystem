@@ -95,6 +95,21 @@ public class PureProvider  {
 
     /**
      *
+     * The provider Rank value
+     * @field rankVal
+     *
+     */
+    @Parameter (displayName = "Rank", usageName = "rankVal")
+    public double getRankVal() {
+        return rankVal
+    }
+    public void setRankVal(double newValue) {
+        rankVal = newValue
+    }
+    public double rankVal = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

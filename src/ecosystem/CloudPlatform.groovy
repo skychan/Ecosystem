@@ -179,8 +179,8 @@ public class CloudPlatform  {
 
     /**
      *
-     * Create provider procedure
-     * @method CreateProvider
+     * Create demander procedure
+     * @method CreateDemander
      *
      */
     @ScheduledMethod(
@@ -188,7 +188,7 @@ public class CloudPlatform  {
         interval = 1d,
         shuffle = true
     )
-    public void CreateProvider() {
+    public void CreateDemander() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -203,10 +203,10 @@ public class CloudPlatform  {
         for (int i in 0..<providerCount) {
 
             // Create Provider at a random distribution
-            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
-            PureProvider pagent = (PureProvider) agent
-            pagent.Init()
-            this.AddUser(pagent)
+            Object agent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
+            PureDemander dagent = (PureDemander) agent
+            dagent.Init()
+            this.AddUser(dagent)
 
         }
 
@@ -261,6 +261,61 @@ public class CloudPlatform  {
 
         // This is a task.
         this.setOrderCount(this.getOrderCount()+1)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Create provider procedure
+     * @method CreateProvider
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void CreateProvider() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        Parameters params = RunEnvironment.getInstance().getParameters()
+        double mean = params.getValue("Mean")
+        RandomHelper.createPoisson(mean)
+        int providerCount = RandomHelper.getPoisson().nextInt()
+
+        // This is a loop.
+        for (int i in 0..<providerCount) {
+
+            // Create Provider at a random distribution
+            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+            PureProvider pagent = (PureProvider) agent
+            pagent.Init()
+            this.AddUser(pagent)
+
+        }
+
+    }
+
+    /**
+     *
+     * Read data from file
+     * @method ReadData
+     *
+     */
+    public def ReadData() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
         // Return the results.
         return returnValue
 

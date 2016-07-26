@@ -111,21 +111,6 @@ public class Task  {
     /**
      *
      * This is an agent property.
-     * @field alternations
-     *
-     */
-    @Parameter (displayName = "Alternations", usageName = "alternations")
-    public List<String> getAlternations() {
-        return alternations
-    }
-    public void setAlternations(List<String> newValue) {
-        alternations = newValue
-    }
-    public List<String> alternations = new ArrayList<String>()
-
-    /**
-     *
-     * This is an agent property.
      * @field selectedResource
      *
      */
@@ -270,35 +255,37 @@ public class Task  {
     /**
      *
      * This is the step behavior.
-     * @method SetValues
+     * @method setParameters
      *
      */
-    public void SetValues(dataList) {
+    public void setParameters(tdata) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Set ProcessingTime
-        this.setProcessingTime(dataList[0])
-        int n = dataList.size()
 
         // This is a loop.
-        for (int i in 1..< n) {
+        for (data in tdata.value) {
 
 
             // This is an agent decision.
-            if (dataList[i]) {
+            if (data.key == "p") {
 
                 // This is a task.
-                this.needResourceCapacity << [(i):dataList[i]]
+                this.setProcessingTime(data.value)
 
             } else  {
 
+                // This is a task.
+                this.needResourceCapacity << data
 
             }
 
         }
 
+        // This is a task.
+        println this.processingTime
+        println this.needResourceCapacity
     }
 
     /**
@@ -329,6 +316,83 @@ public class Task  {
 
         // add master to the list
         this.master.add(masterID)
+    }
+
+    /**
+     *
+     * Select provider
+     * @method Select
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureDemander',
+        watcheeFieldNames = 'need',
+        triggerCondition = '$watchee.getNewOrder().equals($watcher)',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.3d,
+        scheduleTriggerPriority = -1.7976931348623157E308d
+    )
+    public def Select(ecosystem.PureDemander watchedAgent) {
+
+        // Select proper supplier with evaluation
+        println "candidates are "+this.getCandidates()
+        Evaluation()
+        println "after sort we have " +this.getCandidates()
+        this.setAllocatedService(this.getCandidates()[0])
+        this.getAllocatedService().getJobList().add(this)
+        // Reset the candidates after selection
+        this.candidates.clear()
+        System.out.println("Provider Chosen: "+this.allocatedService)
+    }
+
+    /**
+     *
+     * Supplier Evaluation
+     * @method Evaluation
+     *
+     */
+    public def Evaluation() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Review the transaction
+     * @method Review
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Service',
+        watcheeFieldNames = 'finish',
+        triggerCondition = '$watchee.getOrder().equals($watcher)',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public def Review(ecosystem.Service watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Review and Commit
+        println "review and commit"
+        def rvalue = 0
+        watchedAgent.AddReview(rvalue)
+        // Return the results.
+        return returnValue
+
     }
 
     /**

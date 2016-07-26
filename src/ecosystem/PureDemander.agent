@@ -15,7 +15,7 @@
     <taskstep x="278" y="218" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="" command3="Order o = (Order) agent" command4="o.addOwner(this)" command5="o.setOwner(this)">
       <label x="278" y="203" text="Generate Order"/>
     </taskstep>
-    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setAmount(50)" command2="println this.toString() + &quot; need &quot;+ o.toString()" command3="this.getOrderList().add(o)" command4="this.setNewOrder(o)" command5="this.setNeed(true)">
+    <taskstep x="279" y="309" comment="Set the order parameters" command1="o.setParameters(taskMap)" command2="println this.toString() + &quot; need &quot;+ o.toString()" command3="this.getOrderList().add(o)" command4="this.setNewOrder(o)" command5="this.setNeed(true)">
       <label x="279" y="294" text="Set parameters"/>
     </taskstep>
     <taskstep x="486" y="199" comment="This is a task." command1="this.orderList.remove(watchedAgent.order)" command2="RemoveAgentFromModel(watchedAgent.order)" command3="" command4="" command5="">
@@ -79,9 +79,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="289" y="424"/>
-    <endstep x="501" y="311"/>
-    <endstep x="314" y="950"/>
+    <endstep x="285" y="435"/>
+    <endstep x="495" y="316"/>
+    <endstep x="319" y="955"/>
   </endsteps>
   <connections>
     <transitions>
@@ -93,6 +93,11 @@
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -133,11 +138,6 @@
       <transition>
         <transitionsource type="task" index="7" anchor="3"/>
         <transitiontarget type="decision" index="3" anchor="1"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

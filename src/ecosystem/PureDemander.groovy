@@ -188,7 +188,7 @@ public class PureDemander  {
             o.addOwner(this)
             o.setOwner(this)
             // Set the order parameters
-            o.setAmount(50)
+            o.setParameters(taskMap)
             println this.toString() + " need "+ o.toString()
             this.getOrderList().add(o)
             this.setNewOrder(o)

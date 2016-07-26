@@ -80,51 +80,6 @@ public class Order  {
 
     /**
      *
-     * The order amount
-     * @field amount
-     *
-     */
-    @Parameter (displayName = "Amount", usageName = "amount")
-    public int getAmount() {
-        return amount
-    }
-    public void setAmount(int newValue) {
-        amount = newValue
-    }
-    public int amount = 0
-
-    /**
-     *
-     * Record the allocated service
-     * @field allocatedService
-     *
-     */
-    @Parameter (displayName = "Service", usageName = "allocatedService")
-    public Service getAllocatedService() {
-        return allocatedService
-    }
-    public void setAllocatedService(Service newValue) {
-        allocatedService = newValue
-    }
-    public Service allocatedService = null
-
-    /**
-     *
-     * Record the candidates
-     * @field candidates
-     *
-     */
-    @Parameter (displayName = "Candidates", usageName = "candidates")
-    public def getCandidates() {
-        return candidates
-    }
-    public void setCandidates(def newValue) {
-        candidates = newValue
-    }
-    public def candidates = []
-
-    /**
-     *
      * Record the current owner
      * @field owner
      *
@@ -179,63 +134,6 @@ public class Order  {
 
     /**
      *
-     * Select provider
-     * @method Select
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'need',
-        triggerCondition = '$watchee.getNewOrder().equals($watcher)',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.3d,
-        scheduleTriggerPriority = -1.7976931348623157E308d
-    )
-    public def Select(ecosystem.PureDemander watchedAgent) {
-
-        // Select proper supplier with evaluation
-        println "candidates are "+this.getCandidates()
-        Evaluation()
-        println "after sort we have " +this.getCandidates()
-        this.setAllocatedService(this.getCandidates()[0])
-        this.getAllocatedService().getJobList().add(this)
-        // Reset the candidates after selection
-        this.candidates.clear()
-        System.out.println("Provider Chosen: "+this.allocatedService)
-    }
-
-    /**
-     *
-     * Add the competitor
-     * @method AddCompetitor
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'compete',
-        triggerCondition = '$watchee.getCompete().equals($watcher)',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.1d,
-        scheduleTriggerPriority = 1.7976931348623157E308d
-    )
-    public def AddCompetitor(ecosystem.Service watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Add to the temp candidates list
-        this.candidates << watchedAgent
-        println "just add "+ watchedAgent
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * Supplier Evaluation
      * @method Evaluation
      *
@@ -279,6 +177,46 @@ public class Order  {
         println "review and commit"
         def rvalue = 0
         watchedAgent.AddReview(rvalue)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Set the tasks belongs to this order
+     * @method setParameters
+     *
+     */
+    public def setParameters(taskMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (tdata in taskMap) {
+
+
+            // This is an agent decision.
+            if (tdata.value.p > 0) {
+
+                // This is a task.
+                Object agent = CreateAgent("Ecosystem", "ecosystem.Task")
+                Task t = (Task) agent
+                t.setParameters(tdata)
+
+            } else  {
+
+
+            }
+
+        }
+
+        // This is a task.
         // Return the results.
         return returnValue
 

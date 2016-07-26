@@ -66,21 +66,6 @@ public class ModelInitializer  {
     /**
      *
      * This is an agent property.
-     * @field demanderCount
-     *
-     */
-    @Parameter (displayName = "Demander Count", usageName = "demanderCount")
-    public int getDemanderCount() {
-        return demanderCount
-    }
-    public void setDemanderCount(int newValue) {
-        demanderCount = newValue
-    }
-    public int demanderCount = 1
-
-    /**
-     *
-     * This is an agent property.
      * @field providerCount
      *
      */
@@ -91,7 +76,7 @@ public class ModelInitializer  {
     public void setProviderCount(int newValue) {
         providerCount = newValue
     }
-    public int providerCount = 1
+    public int providerCount = 30
 
     /**
      *
@@ -164,14 +149,14 @@ public class ModelInitializer  {
         // This is a task.
         Object agent = CreateAgent("Ecosystem", "ecosystem.CloudPlatform")
         CloudPlatform platform = (CloudPlatform) agent
-        platform.ReadData()
 
         // This is a loop.
-        for (i in 0..<demanderCount) {
+        for (i in 250..<251) {
 
             // This is a task.
             Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
             PureDemander pureDemander = (PureDemander) dagent
+            pureDemander.ReadData((i).toString())
             platform.userList.add(pureDemander)
 
         }

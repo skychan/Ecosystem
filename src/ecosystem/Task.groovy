@@ -70,13 +70,13 @@ public class Task  {
      *
      */
     @Parameter (displayName = "Type", usageName = "type")
-    public String getType() {
+    public def getType() {
         return type
     }
-    public void setType(String newValue) {
+    public void setType(def newValue) {
         type = newValue
     }
-    public String type = ""
+    public def type = -1
 
     /**
      *
@@ -85,13 +85,13 @@ public class Task  {
      *
      */
     @Parameter (displayName = "NeedResourceCapacity", usageName = "needResourceCapacity")
-    public Map<String,Integer> getNeedResourceCapacity() {
+    public def getNeedResourceCapacity() {
         return needResourceCapacity
     }
-    public void setNeedResourceCapacity(Map<String,Integer> newValue) {
+    public void setNeedResourceCapacity(def newValue) {
         needResourceCapacity = newValue
     }
-    public Map<String,Integer> needResourceCapacity = new HashMap<String,Integer>()
+    public def needResourceCapacity = [:]
 
     /**
      *
@@ -100,13 +100,13 @@ public class Task  {
      *
      */
     @Parameter (displayName = "ProcessingTime", usageName = "processingTime")
-    public Map<String,Integer> getProcessingTime() {
+    public int getProcessingTime() {
         return processingTime
     }
-    public void setProcessingTime(Map<String,Integer> newValue) {
+    public void setProcessingTime(int newValue) {
         processingTime = newValue
     }
-    public Map<String,Integer> processingTime = new HashMap<String,Integer>()
+    public int processingTime = 0
 
     /**
      *
@@ -241,11 +241,11 @@ public class Task  {
         // This is an agent decision.
         if (this.getRemainingTime()) {
 
+            // send the task change status signal
+            this.setFinish(true)
 
         } else  {
 
-            // send the task change status signal
-            this.setFinish(true)
 
         }
     }
@@ -273,24 +273,29 @@ public class Task  {
      * @method SetValues
      *
      */
-    public void SetValues() {
+    public void SetValues(dataList) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        String path = "Matching/"+this.getType()
-        List<String> data = Util.MatchResource(path)
+        // Set ProcessingTime
+        this.setProcessingTime(dataList[0])
+        int n = dataList.size()
 
         // This is a loop.
-        for (String line in data) {
+        for (int i in 1..< n) {
 
-            // This is a task.
-            String item[] = line.split(",")
-            String resourceType = item[0]
-            this.alternations.add(resourceType)
-            this.processingTime.put(resourceType,Integer.parseInt(item[1]))
-            this.needResourceCapacity.put(resourceType,Integer.parseInt(item[2]))
+
+            // This is an agent decision.
+            if (dataList[i]) {
+
+                // This is a task.
+                this.needResourceCapacity << [(i):dataList[i]]
+
+            } else  {
+
+
+            }
 
         }
 

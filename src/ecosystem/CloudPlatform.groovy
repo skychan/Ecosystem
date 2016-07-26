@@ -179,41 +179,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * Create demander procedure
-     * @method CreateDemander
-     *
-     */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
-    public void CreateDemander() {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        Parameters params = RunEnvironment.getInstance().getParameters()
-        double mean = params.getValue("Mean")
-        RandomHelper.createPoisson(mean)
-        int providerCount = RandomHelper.getPoisson().nextInt()
-
-        // This is a loop.
-        for (int i in 0..<providerCount) {
-
-            // Create Provider at a random distribution
-            Object agent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
-            PureDemander dagent = (PureDemander) agent
-            dagent.Init()
-            this.AddUser(dagent)
-
-        }
-
-    }
-
-    /**
-     *
      * Count finished jobs
      * @method count
      *
@@ -298,26 +263,6 @@ public class CloudPlatform  {
             this.AddUser(pagent)
 
         }
-
-    }
-
-    /**
-     *
-     * Read data from file
-     * @method ReadData
-     *
-     */
-    public def ReadData() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        // Return the results.
-        return returnValue
 
     }
 

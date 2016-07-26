@@ -7,7 +7,7 @@
     <behaviorstep x="327" y="76" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Select" parameters="String index" exceptions="">
       <label x="327" y="61" text="Selection"/>
     </behaviorstep>
-    <behaviorstep x="502" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="SetValues" parameters="" exceptions="">
+    <behaviorstep x="502" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="SetValues" parameters="dataList" exceptions="">
       <label x="502" y="72" text="Set Values"/>
     </behaviorstep>
     <behaviorstep x="340" y="650" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
@@ -24,11 +24,8 @@
     <taskstep x="327" y="182" comment="This is a task." command1="this.setSelectedResource(index)" command2="int remaintime = this.getProcessingTime().get(index)" command3="this.setRemainingTime(remaintime)" command4="" command5="">
       <label x="327" y="167" text="Selection"/>
     </taskstep>
-    <taskstep x="501" y="177" comment="This is a task." command1="String path = &quot;Matching/&quot;+this.getType()" command2="List&lt;String&gt; data = Util.MatchResource(path)" command3="" command4="" command5="">
-      <label x="501" y="162" text="Read Data"/>
-    </taskstep>
-    <taskstep x="615" y="279" comment="This is a task." command1="String item[] = line.split(&quot;,&quot;)" command2="String resourceType = item[0]" command3="this.alternations.add(resourceType)" command4="this.processingTime.put(resourceType,Integer.parseInt(item[1]))" command5="this.needResourceCapacity.put(resourceType,Integer.parseInt(item[2]))">
-      <label x="615" y="264" text="Split line"/>
+    <taskstep x="501" y="177" comment="Set ProcessingTime" command1="this.setProcessingTime(dataList[0])" command2="int n = dataList.size()" command3="" command4="" command5="">
+      <label x="501" y="162" text="Set P"/>
     </taskstep>
     <taskstep x="338" y="728" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
       <label x="338" y="713" text="set owner"/>
@@ -39,24 +36,30 @@
     <taskstep x="441" y="721" comment="add master to the list" command1="this.master.add(masterID)" command2="" command3="" command4="" command5="">
       <label x="441" y="706" text="set master"/>
     </taskstep>
+    <taskstep x="604" y="365" comment="This is a task." command1="this.needResourceCapacity &lt;&lt; [(i):dataList[i]]" command2="" command3="" command4="" command5="">
+      <label x="604" y="350" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="499" y="288" comment="This is a loop." criteria="String line in data" branchType="while">
-      <label x="499" y="273" text="Read by line"/>
+    <decisionstep x="499" y="288" comment="This is a loop." criteria="int i in 1..&lt; n" branchType="while">
+      <label x="499" y="273" text="loop"/>
     </decisionstep>
     <decisionstep x="198" y="365" comment="This is an agent decision." criteria="this.getRemainingTime()" branchType="if">
       <label x="198" y="350" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="608" y="281" comment="This is an agent decision." criteria="dataList[i]" branchType="if">
+      <label x="608" y="266" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="35" y="31" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
+    <agentproperty x="35" y="31" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="-1">
       <label x="40" y="16" text="Type"/>
     </agentproperty>
-    <agentproperty x="133" y="107" comment="This is an agent property." visibility="0" compiledname="needResourceCapacity" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
+    <agentproperty x="133" y="107" comment="This is an agent property." visibility="0" compiledname="needResourceCapacity" type="def" defaultvalue="[:]">
       <label x="138" y="92" text="NeedResourceCapacity"/>
     </agentproperty>
-    <agentproperty x="34" y="107" comment="This is an agent property." visibility="0" compiledname="processingTime" type="Map&lt;String,Integer&gt;" defaultvalue="new HashMap&lt;String,Integer&gt;()">
+    <agentproperty x="34" y="107" comment="This is an agent property." visibility="0" compiledname="processingTime" type="int" defaultvalue="0">
       <label x="39" y="92" text="ProcessingTime"/>
     </agentproperty>
     <agentproperty x="133" y="29" comment="This is an agent property." visibility="0" compiledname="alternations" type="List&lt;String&gt;" defaultvalue="new ArrayList&lt;String&gt;()">
@@ -79,11 +82,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="332" y="340"/>
-    <endstep x="204" y="550"/>
-    <endstep x="507" y="385"/>
-    <endstep x="347" y="833"/>
-    <endstep x="448" y="832"/>
+    <endstep x="337" y="345"/>
+    <endstep x="209" y="555"/>
+    <endstep x="512" y="390"/>
+    <endstep x="352" y="838"/>
+    <endstep x="453" y="837"/>
   </endsteps>
   <connections>
     <transitions>
@@ -103,6 +106,16 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
@@ -118,45 +131,40 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="4" anchor="2"/>
+        <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="5" anchor="2"/>
+        <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="6" anchor="2"/>
+        <transitionsource type="task" index="5" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
     <booleantransitions>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="0" anchor="3"/>
-        <transitiontarget type="task" index="3" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="decision" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
-        <transitiontarget type="task" index="5" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

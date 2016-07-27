@@ -9,24 +9,36 @@
     <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
-    <taskstep x="205" y="281" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="pureDemander.ReadData((i).toString())" command4="platform.userList.add(pureDemander)" command5="">
+    <taskstep x="205" y="281" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="pureDemander.ReadData((i).toString())" command4="platform.addUser(pureDemander)" command5="">
       <label x="205" y="266" text="Create Demander"/>
     </taskstep>
-    <taskstep x="211" y="371" comment="This is a task." command1="Object pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pureProvider = (PureProvider) pagent" command3="pureProvider.Init()" command4="platform.userList.add(pureProvider)" command5="">
-      <label x="211" y="356" text="Create Provider"/>
+    <taskstep x="205" y="505" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(i)" command4="" command5="">
+      <label x="205" y="490" text="Create Resource"/>
+    </taskstep>
+    <taskstep x="70" y="387" comment="This is a task." command1="ArrayList test = 1..providerCount" command2="RandomHelper.setSeed(2)" command3="SimUtilities.shuffle(test,RandomHelper.getUniform())" command4="" command5="">
+      <label x="70" y="372" text="Do Task"/>
+    </taskstep>
+    <taskstep x="324" y="506" comment="This is a task." command1="Object sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service ser = (Service) sagent" command3="res.addMaster(ser)" command4="" command5="">
+      <label x="324" y="491" text="Create Service"/>
+    </taskstep>
+    <taskstep x="419" y="505" comment="This is a task." command1="Object pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pureProvider = (PureProvider) pagent" command3="ser.addOwner(pureProvider)" command4="res.addOwner(pureProvider)" command5="platform.addUser(pureProvider)">
+      <label x="419" y="490" text="Create Provider"/>
+    </taskstep>
+    <taskstep x="540" y="506" comment="This is a task." command1="ser.addResource(res)" command2="pureProvider.addResource(res)" command3="pureProvider.addService(ser)" command4="" command5="">
+      <label x="540" y="491" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 250..&lt;251" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
     </decisionstep>
-    <decisionstep x="70" y="374" comment="This is a loop." criteria="i in 0..&lt;providerCount" branchType="while">
-      <label x="70" y="359" text="Count Provider"/>
+    <decisionstep x="71" y="506" comment="This is a loop." criteria="i in test" branchType="while">
+      <label x="71" y="491" text="Count Provider"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="30">
+    <agentproperty x="237" y="150" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="50">
       <label x="242" y="135" text="Provider Count"/>
     </agentproperty>
     <agentproperty x="401" y="59" comment="This is an agent property." visibility="0" compiledname="demanderList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -37,7 +49,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="77" y="499"/>
+    <endstep x="77" y="602"/>
   </endsteps>
   <connections>
     <transitions>
@@ -51,6 +63,26 @@
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="3"/>
+        <transitiontarget type="task" index="4" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="4" anchor="3"/>
+        <transitiontarget type="task" index="5" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="5" anchor="3"/>
+        <transitiontarget type="task" index="6" anchor="1"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -60,7 +92,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="decision" index="1" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

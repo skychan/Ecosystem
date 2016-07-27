@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is order agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="35" y="109" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="Object od" exceptions="">
+    <behaviorstep x="35" y="109" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="ownerID" exceptions="">
       <label x="35" y="94" text="Add Owner"/>
     </behaviorstep>
     <behaviorstep x="281" y="54" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Supplier Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="" exceptions="">
@@ -15,7 +15,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="36" y="186" comment="add owner to the list" command1="this.getOwnerList().add(od)" command2="" command3="" command4="" command5="">
+    <taskstep x="36" y="186" comment="add owner to the list" command1="this.ownerList &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
       <label x="36" y="171" text="add owner to list"/>
     </taskstep>
     <taskstep x="282" y="139" comment="This is a task." command1="this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}" command2="" command3="" command4="" command5="">
@@ -41,18 +41,18 @@
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="ownerList" type="ArrayList" defaultvalue="new ArrayList()">
+    <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="ownerList" type="def" defaultvalue="[]">
       <label x="47" y="19" text="Owner List"/>
     </agentproperty>
-    <agentproperty x="131" y="126" comment="Record the current owner" visibility="0" compiledname="owner" type="def" defaultvalue="null">
-      <label x="136" y="111" text="Current owner"/>
+    <agentproperty x="162" y="50" comment="Record the current owner" visibility="0" compiledname="owner" type="def" defaultvalue="null">
+      <label x="167" y="35" text="Current owner"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="44" y="308"/>
-    <endstep x="289" y="270"/>
-    <endstep x="513" y="284"/>
-    <endstep x="137" y="690"/>
+    <endstep x="49" y="313"/>
+    <endstep x="294" y="275"/>
+    <endstep x="518" y="289"/>
+    <endstep x="142" y="695"/>
   </endsteps>
   <connections>
     <transitions>
@@ -72,6 +72,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -84,11 +89,6 @@
       <transition>
         <transitionsource type="task" index="2" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

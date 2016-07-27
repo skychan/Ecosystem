@@ -145,13 +145,13 @@ public class Task  {
      *
      */
     @Parameter (displayName = "Owners", usageName = "owner")
-    public ArrayList getOwner() {
+    public def getOwner() {
         return owner
     }
-    public void setOwner(ArrayList newValue) {
+    public void setOwner(def newValue) {
         owner = newValue
     }
-    public ArrayList owner = new ArrayList()
+    public def owner = []
 
     /**
      *
@@ -175,13 +175,43 @@ public class Task  {
      *
      */
     @Parameter (displayName = "Master", usageName = "master")
-    public ArrayList getMaster() {
+    public def getMaster() {
         return master
     }
-    public void setMaster(ArrayList newValue) {
+    public void setMaster(def newValue) {
         master = newValue
     }
-    public ArrayList master = new ArrayList()
+    public def master = []
+
+    /**
+     *
+     * Denote calling for the new resources
+     * @field call
+     *
+     */
+    @Parameter (displayName = "Call", usageName = "call")
+    public def getCall() {
+        return call
+    }
+    public void setCall(def newValue) {
+        call = newValue
+    }
+    public def call = 0
+
+    /**
+     *
+     * Record the candidates
+     * @field candidates
+     *
+     */
+    @Parameter (displayName = "Candidates", usageName = "candidates")
+    public def getCandidates() {
+        return candidates
+    }
+    public void setCandidates(def newValue) {
+        candidates = newValue
+    }
+    public def candidates = [:]
 
     /**
      *
@@ -284,8 +314,7 @@ public class Task  {
         }
 
         // This is a task.
-        println this.processingTime
-        println this.needResourceCapacity
+        this.setCall(this.getNeedResourceCapacity())
     }
 
     /**
@@ -294,13 +323,13 @@ public class Task  {
      * @method addOwner
      *
      */
-    public void addOwner(String ownerID) {
+    public void addOwner(ownerID) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // add owner to the list
-        this.owner.add(ownerID)
+        this.owner << ownerID
     }
 
     /**
@@ -309,13 +338,13 @@ public class Task  {
      * @method addMaster
      *
      */
-    public void addMaster(String masterID) {
+    public void addMaster(masterID) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // add master to the list
-        this.master.add(masterID)
+        this.master << masterID
     }
 
     /**
@@ -325,14 +354,14 @@ public class Task  {
      *
      */
     @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'need',
-        triggerCondition = '$watchee.getNewOrder().equals($watcher)',
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'compete',
+        triggerCondition = '$watcher.toString() == $watchee.compete.toString()',
         whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.3d,
+        scheduleTriggerDelta = 0.2d,
         scheduleTriggerPriority = -1.7976931348623157E308d
     )
-    public def Select(ecosystem.PureDemander watchedAgent) {
+    public def Select(ecosystem.Resource watchedAgent) {
 
         // Select proper supplier with evaluation
         println "candidates are "+this.getCandidates()
@@ -390,6 +419,45 @@ public class Task  {
         println "review and commit"
         def rvalue = 0
         watchedAgent.AddReview(rvalue)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addCandidates
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'compete',
+        triggerCondition = '$watcher.toString() == $watchee.compete.toString()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d
+    )
+    public def addCandidates(ecosystem.Resource watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.candidates[watchedAgent.getType()]) {
+
+            // This is a task.
+            this.candidates[watchedAgent.getType()]<<watchedAgent
+
+        } else  {
+
+            // This is a task.
+            this.candidates[watchedAgent.getType()] = watchedAgent
+
+        }
         // Return the results.
         return returnValue
 

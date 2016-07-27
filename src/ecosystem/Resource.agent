@@ -1,70 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Resource" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="165" y="195" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Occupy" parameters="int amount" exceptions="">
-      <label x="165" y="180" text="Occupy"/>
+    <behaviorstep x="1105" y="618" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Occupy" parameters="int amount" exceptions="">
+      <label x="1105" y="603" text="Occupy"/>
     </behaviorstep>
-    <behaviorstep x="282" y="70" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="int amount" exceptions="">
-      <label x="282" y="55" text="Release"/>
+    <behaviorstep x="982" y="100" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="int amount" exceptions="">
+      <label x="982" y="85" text="Release"/>
     </behaviorstep>
-    <behaviorstep x="406" y="87" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Bid" parameters="int cost" exceptions="">
-      <label x="406" y="72" text="Adjust Cost"/>
+    <behaviorstep x="1106" y="117" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Bid" parameters="int cost" exceptions="">
+      <label x="1106" y="102" text="Adjust Cost"/>
     </behaviorstep>
-    <behaviorstep x="681" y="107" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addMaster" parameters="String masterID" exceptions="">
-      <label x="681" y="92" text="Add Master"/>
+    <behaviorstep x="573" y="140" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addMaster" parameters="masterID" exceptions="">
+      <label x="573" y="125" text="Add Master"/>
     </behaviorstep>
-    <behaviorstep x="578" y="114" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="String ownerID" exceptions="">
-      <label x="578" y="99" text="Add Owner"/>
+    <behaviorstep x="467" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="ownerID" exceptions="">
+      <label x="467" y="123" text="Add Owner"/>
+    </behaviorstep>
+    <behaviorstep x="65" y="171" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="call" watchannotationtriggercondition="$watcher.type in $watchee.call.keySets()" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.Task watchedAgent" exceptions="">
+      <label x="65" y="156" text="Response"/>
+    </behaviorstep>
+    <behaviorstep x="453" y="415" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
+      <label x="453" y="400" text="Process"/>
+    </behaviorstep>
+    <behaviorstep x="308" y="698" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+      <label x="308" y="683" text="One step"/>
+    </behaviorstep>
+    <behaviorstep x="869" y="406" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Change the service rank with depends on the review" visibility="0" returntype="def" compiledname="AdjustRank" parameters="" exceptions="">
+      <label x="869" y="391" text="Adjust the service rank"/>
+    </behaviorstep>
+    <behaviorstep x="754" y="403" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add review to history" visibility="0" returntype="def" compiledname="AddReview" parameters="rvalue" exceptions="">
+      <label x="754" y="388" text="Add review"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="165" y="294" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
-      <label x="165" y="279" text="Occupying"/>
+    <taskstep x="1105" y="717" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
+      <label x="1105" y="702" text="Occupying"/>
     </taskstep>
-    <taskstep x="283" y="180" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
-      <label x="283" y="165" text="Releasing"/>
+    <taskstep x="983" y="210" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
+      <label x="983" y="195" text="Releasing"/>
     </taskstep>
-    <taskstep x="404" y="171" comment="This is a task." command1="this.setUnitCost(cost)" command2="" command3="" command4="" command5="">
-      <label x="404" y="156" text="Adjust bid"/>
+    <taskstep x="1104" y="201" comment="This is a task." command1="this.setUnitCost(cost)" command2="" command3="" command4="" command5="">
+      <label x="1104" y="186" text="Adjust bid"/>
     </taskstep>
-    <taskstep x="679" y="185" comment="add master to the list" command1="this.master.add(masterID)" command2="" command3="" command4="" command5="">
-      <label x="679" y="170" text="set master"/>
+    <taskstep x="571" y="218" comment="add master to the list" command1="this.master &lt;&lt; masterID" command2="" command3="" command4="" command5="">
+      <label x="571" y="203" text="set master"/>
     </taskstep>
-    <taskstep x="576" y="192" comment="add owner to the list" command1="this.owner.add(ownerID)" command2="" command3="" command4="" command5="">
-      <label x="576" y="177" text="set owner"/>
+    <taskstep x="464" y="222" comment="add owner to the list" command1="this.owner &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
+      <label x="464" y="207" text="set owner"/>
+    </taskstep>
+    <taskstep x="64" y="335" comment="change the compete state" command1="" command2="" command3="this.setCompete(watchedAgent)" command4="" command5="println this.toString() + &quot; is competing for &quot;+ compete">
+      <label x="64" y="320" text="Change the comoete state"/>
+    </taskstep>
+    <taskstep x="306" y="785" comment="Cut down remain" command1="" command2="this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())" command3="" command4="" command5="">
+      <label x="306" y="770" text="Process 1 step"/>
+    </taskstep>
+    <taskstep x="306" y="963" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="">
+      <label x="306" y="948" text="Afterward"/>
+    </taskstep>
+    <taskstep x="572" y="590" comment="allocate the job" command1="this.setOrder(this.getJobList()[0])" command2="this.setProcessing(true)" command3="System.out.println(&quot;start to process new &quot;+this.getOrder().toString())" command4="this.step()" command5="">
+      <label x="572" y="575" text="Allocate job"/>
+    </taskstep>
+    <taskstep x="450" y="589" comment="Continue" command1="System.out.println(&quot;continue to process &quot;+this.getOrder().toString())" command2="this.step()" command3="" command4="" command5="">
+      <label x="450" y="574" text="Continue"/>
+    </taskstep>
+    <taskstep x="870" y="501" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="870" y="486" text="Do Task"/>
+    </taskstep>
+    <taskstep x="755" y="498" comment="This is a task." command1="println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
+      <label x="755" y="483" text="Do Task"/>
     </taskstep>
   </tasksteps>
-  <decisionsteps/>
-  <joinsteps/>
+  <decisionsteps>
+    <decisionstep x="63" y="243" comment="Decide to take the task or not" criteria="true" branchType="if">
+      <label x="63" y="228" text="Take it or not"/>
+    </decisionstep>
+    <decisionstep x="451" y="488" comment="In processing or not" criteria="this.getProcessing()" branchType="if">
+      <label x="451" y="473" text="processing?"/>
+    </decisionstep>
+    <decisionstep x="571" y="485" comment="Have job or not" criteria="this.getJobList().size() &gt; 0" branchType="if">
+      <label x="571" y="470" text="Still have job?"/>
+    </decisionstep>
+    <decisionstep x="306" y="863" comment="Is the job finished?" criteria="this.getOrder().getAmount()&lt;=0" branchType="if">
+      <label x="306" y="848" text="Finished?"/>
+    </decisionstep>
+  </decisionsteps>
+  <joinsteps>
+    <joinstep x="560" y="709"/>
+  </joinsteps>
   <agentproperties>
-    <agentproperty x="59" y="34" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
-      <label x="64" y="19" text="Type"/>
+    <agentproperty x="69" y="67" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
+      <label x="74" y="52" text="Type"/>
     </agentproperty>
-    <agentproperty x="171" y="38" comment="This is an agent property." visibility="0" compiledname="capacity" type="int" defaultvalue="0">
-      <label x="176" y="23" text="Capacity"/>
+    <agentproperty x="1001" y="626" comment="This is an agent property." visibility="0" compiledname="unitCost" type="int" defaultvalue="0">
+      <label x="1006" y="611" text="Unit Cost"/>
     </agentproperty>
-    <agentproperty x="60" y="124" comment="This is an agent property." visibility="0" compiledname="quality" type="double" defaultvalue="0">
-      <label x="65" y="109" text="Quality"/>
+    <agentproperty x="1110" y="544" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="this.getCapacity()">
+      <label x="1115" y="529" text="Available"/>
     </agentproperty>
-    <agentproperty x="61" y="203" comment="This is an agent property." visibility="0" compiledname="unitCost" type="int" defaultvalue="0">
-      <label x="66" y="188" text="Unit Cost"/>
+    <agentproperty x="569" y="71" comment="Record the master of the resource" visibility="0" compiledname="master" type="def" defaultvalue="[]">
+      <label x="574" y="56" text="Master"/>
     </agentproperty>
-    <agentproperty x="170" y="121" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="this.getCapacity()">
-      <label x="175" y="106" text="Available"/>
+    <agentproperty x="237" y="184" comment="The capacity of the service" visibility="0" compiledname="capacity" type="int" defaultvalue="0">
+      <label x="242" y="169" text="Capacity"/>
     </agentproperty>
-    <agentproperty x="677" y="38" comment="Record the master of the resource" visibility="0" compiledname="master" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="682" y="23" text="Master"/>
+    <agentproperty x="467" y="69" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="def" defaultvalue="[]">
+      <label x="472" y="54" text="Owner"/>
     </agentproperty>
-    <agentproperty x="574" y="45" comment="Record the owners of the resource" visibility="0" compiledname="owner" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="579" y="30" text="Owners"/>
+    <agentproperty x="305" y="182" comment="The service unit cost" visibility="0" compiledname="cost" type="int" defaultvalue="0">
+      <label x="310" y="167" text="Unit Cost"/>
+    </agentproperty>
+    <agentproperty x="151" y="69" comment="The var to record compete order" visibility="0" compiledname="compete" type="def" defaultvalue="[]">
+      <label x="156" y="54" text="Compete"/>
+    </agentproperty>
+    <agentproperty x="315" y="70" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
+      <label x="320" y="55" text="Chose"/>
+    </agentproperty>
+    <agentproperty x="304" y="413" comment="The Order(Task) mark" visibility="0" compiledname="order" type="Order" defaultvalue="null">
+      <label x="309" y="398" text="Order Mark"/>
+    </agentproperty>
+    <agentproperty x="1049" y="405" comment="Count the finished jobs" visibility="0" compiledname="finish" type="int" defaultvalue="0">
+      <label x="1054" y="390" text="Finished"/>
+    </agentproperty>
+    <agentproperty x="214" y="408" comment="Job list" visibility="0" compiledname="jobList" type="ArrayList" defaultvalue="new ArrayList()">
+      <label x="219" y="393" text="Job List"/>
+    </agentproperty>
+    <agentproperty x="215" y="497" comment="Mark the status of processing or not" visibility="0" compiledname="processing" type="boolean" defaultvalue="false">
+      <label x="220" y="482" text="Processing ?"/>
+    </agentproperty>
+    <agentproperty x="807" y="288" comment="Quality" visibility="0" compiledname="quality" type="def" defaultvalue="0">
+      <label x="812" y="273" text="Quality"/>
+    </agentproperty>
+    <agentproperty x="892" y="289" comment="Review history" visibility="0" compiledname="reviews" type="def" defaultvalue="[]">
+      <label x="897" y="274" text="Review History"/>
+    </agentproperty>
+    <agentproperty x="707" y="287" comment="Mark the Rank value" visibility="0" compiledname="rank" type="def" defaultvalue="0">
+      <label x="712" y="272" text="Rank"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="170" y="411"/>
-    <endstep x="300" y="319"/>
-    <endstep x="423" y="297"/>
-    <endstep x="600" y="312"/>
-    <endstep x="701" y="311"/>
+    <endstep x="1125" y="849"/>
+    <endstep x="993" y="326"/>
+    <endstep x="1113" y="321"/>
+    <endstep x="579" y="329"/>
+    <endstep x="467" y="327"/>
+    <endstep x="67" y="439"/>
+    <endstep x="560" y="821"/>
+    <endstep x="323" y="1089"/>
+    <endstep x="890" y="613"/>
+    <endstep x="770" y="623"/>
   </endsteps>
   <connections>
     <transitions>
@@ -84,6 +167,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -100,16 +188,6 @@
       </transition>
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -118,7 +196,103 @@
         <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="5" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="7" anchor="0"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="8" anchor="0"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="9" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="5" anchor="2"/>
+        <transitiontarget type="end" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="decision" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="7" anchor="2"/>
+        <transitiontarget type="end" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="8" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="9" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="10" anchor="2"/>
+        <transitiontarget type="end" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="end" index="9" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="decision" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="3" anchor="2"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

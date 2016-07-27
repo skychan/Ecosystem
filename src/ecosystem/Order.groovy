@@ -70,13 +70,13 @@ public class Order  {
      *
      */
     @Parameter (displayName = "Owner List", usageName = "ownerList")
-    public ArrayList getOwnerList() {
+    public def getOwnerList() {
         return ownerList
     }
-    public void setOwnerList(ArrayList newValue) {
+    public void setOwnerList(def newValue) {
         ownerList = newValue
     }
-    public ArrayList ownerList = new ArrayList()
+    public def ownerList = []
 
     /**
      *
@@ -123,13 +123,13 @@ public class Order  {
      * @method addOwner
      *
      */
-    public void addOwner(Object od) {
+    public void addOwner(ownerID) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // add owner to the list
-        this.getOwnerList().add(od)
+        this.ownerList << ownerID
     }
 
     /**

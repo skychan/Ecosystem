@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="Platform of cloud mfg" agentclassname="CloudPlatform" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="64" y="164" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add user including pure and complex users" visibility="0" returntype="void" compiledname="AddUser" parameters="Object o" exceptions="">
+    <behaviorstep x="64" y="164" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add user including pure and complex users" visibility="0" returntype="void" compiledname="addUser" parameters="userID" exceptions="">
       <label x="64" y="149" text="Add User"/>
     </behaviorstep>
     <behaviorstep x="170" y="166" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Eliminate user include pure and complex users" visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
@@ -13,12 +13,12 @@
     <behaviorstep x="543" y="408" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="newOrder" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="orderCount" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
       <label x="543" y="393" text="Step"/>
     </behaviorstep>
-    <behaviorstep x="334" y="80" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
+    <behaviorstep x="334" y="80" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="334" y="65" text="Create Provider"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="63" y="240" comment="This is a task." command1="this.userList.add(o)" command2="" command3="" command4="" command5="">
+    <taskstep x="63" y="240" comment="This is a task." command1="this.userList &lt;&lt; userID" command2="" command3="" command4="" command5="">
       <label x="63" y="225" text="add user"/>
     </taskstep>
     <taskstep x="170" y="245" comment="This is a task." command1="this.userList.remove(o)" command2="" command3="" command4="" command5="">
@@ -58,11 +58,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="69" y="359"/>
-    <endstep x="176" y="357"/>
-    <endstep x="600" y="293"/>
-    <endstep x="570" y="643"/>
-    <endstep x="372" y="402"/>
+    <endstep x="72" y="366"/>
+    <endstep x="181" y="362"/>
+    <endstep x="605" y="298"/>
+    <endstep x="575" y="648"/>
+    <endstep x="377" y="407"/>
   </endsteps>
   <connections>
     <transitions>

@@ -76,7 +76,7 @@ public class ModelInitializer  {
     public void setProviderCount(int newValue) {
         providerCount = newValue
     }
-    public int providerCount = 30
+    public int providerCount = 50
 
     /**
      *
@@ -157,19 +157,36 @@ public class ModelInitializer  {
             Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
             PureDemander pureDemander = (PureDemander) dagent
             pureDemander.ReadData((i).toString())
-            platform.userList.add(pureDemander)
+            platform.addUser(pureDemander)
 
         }
 
+        // This is a task.
+        ArrayList test = 1..providerCount
+        RandomHelper.setSeed(2)
+        SimUtilities.shuffle(test,RandomHelper.getUniform())
 
         // This is a loop.
-        for (i in 0..<providerCount) {
+        for (i in test) {
 
+            // This is a task.
+            Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
+            Resource res = (Resource) ragent
+            res.setType(i)
+            // This is a task.
+            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+            Service ser = (Service) sagent
+            res.addMaster(ser)
             // This is a task.
             Object pagent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
             PureProvider pureProvider = (PureProvider) pagent
-            pureProvider.Init()
-            platform.userList.add(pureProvider)
+            ser.addOwner(pureProvider)
+            res.addOwner(pureProvider)
+            platform.addUser(pureProvider)
+            // This is a task.
+            ser.addResource(res)
+            pureProvider.addResource(res)
+            pureProvider.addService(ser)
 
         }
 

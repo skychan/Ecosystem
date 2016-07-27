@@ -150,16 +150,16 @@ public class CloudPlatform  {
     /**
      *
      * Add user including pure and complex users
-     * @method AddUser
+     * @method addUser
      *
      */
-    public void AddUser(Object o) {
+    public void addUser(userID) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.userList.add(o)
+        this.userList << userID
     }
 
     /**
@@ -237,11 +237,6 @@ public class CloudPlatform  {
      * @method CreateProvider
      *
      */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
     public void CreateProvider() {
 
         // Note the simulation time.

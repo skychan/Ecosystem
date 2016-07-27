@@ -110,6 +110,36 @@ public class PureProvider  {
 
     /**
      *
+     * This is an agent property.
+     * @field serviceList
+     *
+     */
+    @Parameter (displayName = "Service List", usageName = "serviceList")
+    public def getServiceList() {
+        return serviceList
+    }
+    public void setServiceList(def newValue) {
+        serviceList = newValue
+    }
+    public def serviceList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceList
+     *
+     */
+    @Parameter (displayName = "Resource List", usageName = "resourceList")
+    public def getResourceList() {
+        return resourceList
+    }
+    public void setResourceList(def newValue) {
+        resourceList = newValue
+    }
+    public def resourceList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -138,7 +168,7 @@ public class PureProvider  {
      * @method Init
      *
      */
-    public void Init() {
+    public void Init(resourceTypeList) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -151,6 +181,48 @@ public class PureProvider  {
         sagent.setCapacity(15)
         sagent.setCost(2)
         services.add(sagent)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addService
+     *
+     */
+    public def addService(ser) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.serviceList << ser
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addResource
+     *
+     */
+    public def addResource(res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.resourceList << res
+        // Return the results.
+        return returnValue
+
     }
 
     /**

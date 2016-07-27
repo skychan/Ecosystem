@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureProvider" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Initilization" visibility="0" returntype="void" compiledname="Init" parameters="" exceptions="">
+    <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Initilization" visibility="0" returntype="void" compiledname="Init" parameters="resourceTypeList" exceptions="">
       <label x="120" y="52" text="Initilization"/>
+    </behaviorstep>
+    <behaviorstep x="624" y="159" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="addService" parameters="ser" exceptions="">
+      <label x="624" y="144" text="Add Service"/>
+    </behaviorstep>
+    <behaviorstep x="525" y="154" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="addResource" parameters="res" exceptions="">
+      <label x="525" y="139" text="Add Resource"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -11,6 +17,12 @@
     </taskstep>
     <taskstep x="121" y="226" comment="Set parameters" command1="sagent.setCapacity(15)" command2="sagent.setCost(2)" command3="services.add(sagent)" command4="" command5="">
       <label x="121" y="211" text="Set parameters"/>
+    </taskstep>
+    <taskstep x="625" y="242" comment="This is a task." command1="this.serviceList &lt;&lt; ser" command2="" command3="" command4="" command5="">
+      <label x="625" y="227" text="Do Task"/>
+    </taskstep>
+    <taskstep x="526" y="237" comment="This is a task." command1="this.resourceList &lt;&lt; res" command2="" command3="" command4="" command5="">
+      <label x="526" y="222" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -22,12 +34,20 @@
     <agentproperty x="413" y="59" comment="This is an agent property." visibility="0" compiledname="property" type="def" defaultvalue="0">
       <label x="418" y="44" text="Property"/>
     </agentproperty>
-    <agentproperty x="586" y="68" comment="The provider Rank value" visibility="0" compiledname="rankVal" type="double" defaultvalue="0">
-      <label x="591" y="53" text="Rank"/>
+    <agentproperty x="252" y="173" comment="The provider Rank value" visibility="0" compiledname="rankVal" type="double" defaultvalue="0">
+      <label x="257" y="158" text="Rank"/>
+    </agentproperty>
+    <agentproperty x="631" y="76" comment="This is an agent property." visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
+      <label x="636" y="61" text="Service List"/>
+    </agentproperty>
+    <agentproperty x="532" y="71" comment="This is an agent property." visibility="0" compiledname="resourceList" type="def" defaultvalue="[]">
+      <label x="537" y="56" text="Resource List"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="127" y="339"/>
+    <endstep x="132" y="344"/>
+    <endstep x="647" y="361"/>
+    <endstep x="543" y="351"/>
   </endsteps>
   <connections>
     <transitions>
@@ -44,6 +64,26 @@
       <transition>
         <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

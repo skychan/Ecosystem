@@ -65,33 +65,18 @@ public class Service  {
 
     /**
      *
-     * The capacity of the service
-     * @field capacity
-     *
-     */
-    @Parameter (displayName = "Capacity", usageName = "capacity")
-    public int getCapacity() {
-        return capacity
-    }
-    public void setCapacity(int newValue) {
-        capacity = newValue
-    }
-    public int capacity = 0
-
-    /**
-     *
      * The service owner, if not only one
      * @field owner
      *
      */
     @Parameter (displayName = "Owner", usageName = "owner")
-    public ArrayList getOwner() {
+    public def getOwner() {
         return owner
     }
-    public void setOwner(ArrayList newValue) {
+    public void setOwner(def newValue) {
         owner = newValue
     }
-    public ArrayList owner = new ArrayList()
+    public def owner = []
 
     /**
      *
@@ -245,6 +230,21 @@ public class Service  {
 
     /**
      *
+     * This is an agent property.
+     * @field resourceList
+     *
+     */
+    @Parameter (displayName = "Resource List", usageName = "resourceList")
+    public def getResourceList() {
+        return resourceList
+    }
+    public void setResourceList(def newValue) {
+        resourceList = newValue
+    }
+    public def resourceList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -273,13 +273,13 @@ public class Service  {
      * @method addOwner
      *
      */
-    public void addOwner(String ownerID) {
+    public void addOwner(ownerID) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // add owner to the list
-        this.owner.add(ownerID)
+        this.owner << ownerID
     }
 
     /**
@@ -462,6 +462,27 @@ public class Service  {
         // This is a task.
         println "add demander's review to the history"
         this.reviews << rvalue
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addResource
+     *
+     */
+    public def addResource(res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.resourceList << res
         // Return the results.
         return returnValue
 

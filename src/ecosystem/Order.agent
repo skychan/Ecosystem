@@ -7,9 +7,6 @@
     <behaviorstep x="281" y="54" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Supplier Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="" exceptions="">
       <label x="281" y="39" text="Supplier Evaluation"/>
     </behaviorstep>
-    <behaviorstep x="497" y="65" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="$watchee.getOrder().equals($watcher)" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Review the transaction" visibility="0" returntype="def" compiledname="Review" parameters="ecosystem.Service watchedAgent" exceptions="">
-      <label x="497" y="50" text="Review"/>
-    </behaviorstep>
     <behaviorstep x="128" y="427" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the tasks belongs to this order" visibility="0" returntype="def" compiledname="setParameters" parameters="taskMap" exceptions="">
       <label x="128" y="412" text="Set tasks"/>
     </behaviorstep>
@@ -20,9 +17,6 @@
     </taskstep>
     <taskstep x="282" y="139" comment="This is a task." command1="this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}" command2="" command3="" command4="" command5="">
       <label x="282" y="124" text="Do Task"/>
-    </taskstep>
-    <taskstep x="496" y="166" comment="Review and Commit" command1="println &quot;review and commit&quot;" command2="def rvalue = 0" command3="watchedAgent.AddReview(rvalue)" command4="" command5="">
-      <label x="496" y="151" text="Review and commit"/>
     </taskstep>
     <taskstep x="134" y="611" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="134" y="596" text="Do Task"/>
@@ -49,10 +43,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="49" y="313"/>
-    <endstep x="294" y="275"/>
-    <endstep x="518" y="289"/>
-    <endstep x="142" y="695"/>
+    <endstep x="54" y="318"/>
+    <endstep x="299" y="280"/>
+    <endstep x="147" y="700"/>
   </endsteps>
   <connections>
     <transitions>
@@ -68,11 +61,6 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -91,11 +79,6 @@
         <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
-      <transition>
-        <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -105,12 +88,12 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

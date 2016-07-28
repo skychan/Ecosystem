@@ -110,18 +110,18 @@ public class PureDemander  {
 
     /**
      *
-     * Record the task configure
-     * @field property
+     * Task data read from file
+     * @field taskMap
      *
      */
-    @Parameter (displayName = "Property", usageName = "property")
-    public def getProperty() {
-        return property
+    @Parameter (displayName = "Task Map", usageName = "taskMap")
+    public def getTaskMap() {
+        return taskMap
     }
-    public void setProperty(def newValue) {
-        property = newValue
+    public void setTaskMap(def newValue) {
+        taskMap = newValue
     }
-    public def property = 0
+    public def taskMap = [:]
 
     /**
      *
@@ -169,11 +169,12 @@ public class PureDemander  {
 
             // have need is to generate order
             Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
+            println this.taskMap
             Order o = (Order) agent
             o.addOwner(this)
             o.setOwner(this)
             // Set the order parameters
-            o.setParameters(taskMap)
+            o.setParameters(this.taskMap)
             println this.toString() + " need "+ o.toString()
             this.getOrderList().add(o)
             this.setNewOrder(o)
@@ -187,18 +188,11 @@ public class PureDemander  {
 
     /**
      *
-     * Remove order from list when finished
-     * @method RemoveOrder
+     * Read data from file
+     * @method ReadData
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'finish',
-        triggerCondition = '$watcher.orderList.contains($watchee.order)',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public def RemoveOrder(ecosystem.Service watchedAgent) {
+    public def ReadData(String orderID) {
 
         // Define the return value variable.
         def returnValue
@@ -207,8 +201,54 @@ public class PureDemander  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.orderList.remove(watchedAgent.order)
-        RemoveAgentFromModel(watchedAgent.order)
+        Scanner sc = new Scanner(new File("cases/Order"+orderID+".rcp"))
+        int nTasks = sc.nextInt()
+        int nServices = sc.nextInt()
+        sc.nextLine()
+        sc.nextLine()
+
+        // This is a loop.
+        for (int i in 1..nTasks) {
+
+            // This is a task.
+            def templist = [:]
+            templist << [p:sc.nextInt()]
+
+            // This is a loop.
+            for (int j in 1..nServices) {
+
+                // This is a task.
+                int amount = sc.nextInt()
+
+                // This is an agent decision.
+                if (amount > 0) {
+
+                    // This is a task.
+                    templist << [(j):amount]
+
+                } else  {
+
+
+                }
+
+            }
+
+            // This is a task.
+            this.taskMap << [(i): templist]
+            int nSuccessor = sc.nextInt()
+
+            // This is a loop.
+            for (int s in 0..<nSuccessor) {
+
+                // This is a task.
+                sc.nextInt()
+
+            }
+
+
+        }
+
+        // This is a task.
         // Return the results.
         return returnValue
 

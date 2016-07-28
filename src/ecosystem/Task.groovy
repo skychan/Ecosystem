@@ -196,7 +196,7 @@ public class Task  {
     public void setCall(def newValue) {
         call = newValue
     }
-    public def call = 0
+    public def call = [:]
 
     /**
      *
@@ -389,35 +389,6 @@ public class Task  {
 
     /**
      *
-     * Review the transaction
-     * @method Review
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'finish',
-        triggerCondition = '$watchee.getOrder().equals($watcher)',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
-    )
-    public def Review(ecosystem.Service watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Review and Commit
-        println "review and commit"
-        def rvalue = 0
-        watchedAgent.AddReview(rvalue)
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method addCandidates
      *
@@ -505,6 +476,27 @@ public class Task  {
 
 
         }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Check if a resource in the request
+     * @method Exist
+     *
+     */
+    public boolean Exist(tester) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        returnValue = (tester in this.call.keySet())
         // Return the results.
         return returnValue
 

@@ -7,12 +7,6 @@
     <behaviorstep x="170" y="166" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Eliminate user include pure and complex users" visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
       <label x="170" y="151" text="Eliminate User"/>
     </behaviorstep>
-    <behaviorstep x="575" y="98" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Service" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Count finished jobs" visibility="0" returntype="def" compiledname="count" parameters="ecosystem.Service watchedAgent" exceptions="">
-      <label x="575" y="83" text="Count"/>
-    </behaviorstep>
-    <behaviorstep x="543" y="408" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureDemander" watchannotationtargetfieldnames="newOrder" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="orderCount" parameters="ecosystem.PureDemander watchedAgent" exceptions="">
-      <label x="543" y="393" text="Step"/>
-    </behaviorstep>
     <behaviorstep x="334" y="80" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="334" y="65" text="Create Provider"/>
     </behaviorstep>
@@ -23,12 +17,6 @@
     </taskstep>
     <taskstep x="170" y="245" comment="This is a task." command1="this.userList.remove(o)" command2="" command3="" command4="" command5="">
       <label x="170" y="230" text="eliminate user"/>
-    </taskstep>
-    <taskstep x="572" y="172" comment="This is a task." command1="this.setFinishCount(this.getFinishCount()+1)" command2="" command3="" command4="" command5="">
-      <label x="572" y="157" text="Do Task"/>
-    </taskstep>
-    <taskstep x="544" y="521" comment="This is a task." command1="this.setOrderCount(this.getOrderCount()+1)" command2="" command3="" command4="" command5="">
-      <label x="544" y="506" text="Do Task"/>
     </taskstep>
     <taskstep x="334" y="167" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
       <label x="334" y="152" text="Randomize"/>
@@ -50,19 +38,11 @@
     <agentproperty x="169" y="49" comment="This is an agent property." visibility="0" compiledname="mean1" type="double" defaultvalue="0.16">
       <label x="174" y="34" text="Mean1"/>
     </agentproperty>
-    <agentproperty x="668" y="50" comment="The amount of finished jobs" visibility="0" compiledname="finishCount" type="int" defaultvalue="0">
-      <label x="673" y="35" text="Finished order count"/>
-    </agentproperty>
-    <agentproperty x="667" y="387" comment="Count the order appeared in the history" visibility="0" compiledname="orderCount" type="int" defaultvalue="0">
-      <label x="672" y="372" text="Order count"/>
-    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="72" y="366"/>
-    <endstep x="181" y="362"/>
-    <endstep x="605" y="298"/>
-    <endstep x="575" y="648"/>
-    <endstep x="377" y="407"/>
+    <endstep x="77" y="371"/>
+    <endstep x="186" y="367"/>
+    <endstep x="382" y="412"/>
   </endsteps>
   <connections>
     <transitions>
@@ -82,16 +62,6 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -103,16 +73,6 @@
       </transition>
       <transition>
         <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="end" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -120,12 +80,12 @@
     <booleantransitions>
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="3"/>
-        <transitiontarget type="task" index="5" anchor="1"/>
+        <transitiontarget type="task" index="3" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

@@ -16,7 +16,7 @@
     <behaviorstep x="467" y="138" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="ownerID" exceptions="">
       <label x="467" y="123" text="Add Owner"/>
     </behaviorstep>
-    <behaviorstep x="65" y="171" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="call" watchannotationtriggercondition="$watcher.type in $watchee.call.keySets()" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.Task watchedAgent" exceptions="">
+    <behaviorstep x="65" y="171" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="call" watchannotationtriggercondition="$watchee.Exist($watcher.getType())" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.Task watchedAgent" exceptions="">
       <label x="65" y="156" text="Response"/>
     </behaviorstep>
     <behaviorstep x="453" y="415" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
@@ -77,7 +77,7 @@
     <decisionstep x="63" y="243" comment="Decide to take the task or not" criteria="true" branchType="if">
       <label x="63" y="228" text="Take it or not"/>
     </decisionstep>
-    <decisionstep x="451" y="488" comment="Have ready tasks or not" criteria="this.getReadyTasks().size()&gt;0" branchType="if">
+    <decisionstep x="451" y="488" comment="Have ready tasks or not" criteria="this.getReadyTask().size()&gt;0" branchType="if">
       <label x="451" y="473" text="Have ready tasks"/>
     </decisionstep>
     <decisionstep x="38" y="691" comment="This is an agent decision." criteria="this.getAvailablity() &lt; needCapacity" branchType="if">
@@ -151,17 +151,17 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="1109" y="810"/>
-    <endstep x="993" y="326"/>
-    <endstep x="1113" y="321"/>
-    <endstep x="579" y="329"/>
-    <endstep x="467" y="327"/>
-    <endstep x="67" y="439"/>
-    <endstep x="312" y="1044"/>
-    <endstep x="890" y="613"/>
-    <endstep x="770" y="623"/>
-    <endstep x="44" y="871"/>
-    <endstep x="458" y="754"/>
+    <endstep x="1119" y="820"/>
+    <endstep x="1003" y="336"/>
+    <endstep x="1123" y="331"/>
+    <endstep x="589" y="339"/>
+    <endstep x="477" y="337"/>
+    <endstep x="77" y="449"/>
+    <endstep x="900" y="623"/>
+    <endstep x="780" y="633"/>
+    <endstep x="54" y="881"/>
+    <endstep x="468" y="764"/>
+    <endstep x="183" y="228"/>
   </endsteps>
   <connections>
     <transitions>
@@ -186,6 +186,36 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="5" anchor="0"/>
+        <transitiontarget type="end" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="7" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="8" anchor="0"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="9" anchor="0"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -206,31 +236,6 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="5" anchor="0"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="6" anchor="0"/>
-        <transitiontarget type="decision" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="7" anchor="0"/>
-        <transitiontarget type="task" index="8" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="8" anchor="0"/>
-        <transitiontarget type="task" index="9" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
@@ -247,22 +252,17 @@
       </transition>
       <transition>
         <transitionsource type="task" index="8" anchor="2"/>
-        <transitiontarget type="end" index="7" anchor="0"/>
+        <transitiontarget type="end" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="9" anchor="2"/>
-        <transitiontarget type="end" index="8" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="9" anchor="0"/>
-        <transitiontarget type="decision" index="2" anchor="0"/>
+        <transitiontarget type="end" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="11" anchor="2"/>
-        <transitiontarget type="end" index="9" anchor="0"/>
+        <transitiontarget type="end" index="8" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -299,7 +299,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="3" anchor="2"/>
-        <transitiontarget type="end" index="10" anchor="0"/>
+        <transitiontarget type="end" index="9" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

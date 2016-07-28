@@ -95,36 +95,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * The amount of finished jobs
-     * @field finishCount
-     *
-     */
-    @Parameter (displayName = "Finished order count", usageName = "finishCount")
-    public int getFinishCount() {
-        return finishCount
-    }
-    public void setFinishCount(int newValue) {
-        finishCount = newValue
-    }
-    public int finishCount = 0
-
-    /**
-     *
-     * Count the order appeared in the history
-     * @field orderCount
-     *
-     */
-    @Parameter (displayName = "Order count", usageName = "orderCount")
-    public int getOrderCount() {
-        return orderCount
-    }
-    public void setOrderCount(int newValue) {
-        orderCount = newValue
-    }
-    public int orderCount = 0
-
-    /**
-     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -175,60 +145,6 @@ public class CloudPlatform  {
 
         // This is a task.
         this.userList.remove(o)
-    }
-
-    /**
-     *
-     * Count finished jobs
-     * @method count
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Service',
-        watcheeFieldNames = 'finish',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public def count(ecosystem.Service watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.setFinishCount(this.getFinishCount()+1)
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method orderCount
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureDemander',
-        watcheeFieldNames = 'newOrder',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public def orderCount(ecosystem.PureDemander watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.setOrderCount(this.getOrderCount()+1)
-        // Return the results.
-        return returnValue
-
     }
 
     /**

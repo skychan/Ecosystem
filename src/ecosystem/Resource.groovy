@@ -460,7 +460,7 @@ public class Resource  {
     @Watch(
         watcheeClassName = 'ecosystem.Task',
         watcheeFieldNames = 'call',
-        triggerCondition = '$watcher.type in $watchee.call.keySets()',
+        triggerCondition = '$watchee.Exist($watcher.getType())',
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 0.1d
     )
@@ -472,18 +472,6 @@ public class Resource  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-
-        // Decide to take the task or not
-        if (true) {
-
-            // change the compete state
-            this.setCompete(watchedAgent)
-            println this.toString() + " is competing for "+ compete
-
-        } else  {
-
-
-        }
         // Return the results.
         return returnValue
 
@@ -510,7 +498,7 @@ public class Resource  {
 
 
         // Have ready tasks or not
-        if (this.getReadyTasks().size()>0) {
+        if (this.getReadyTask().size()>0) {
 
             // Continue
             System.out.println("continue to process "+this.getOrder().toString())

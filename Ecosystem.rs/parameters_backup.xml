@@ -30,6 +30,12 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
+				<parameter name="FileName" displayName="Case Name" type="java.lang.String" 
+						defaultValue="Case1" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
+									
+		/>
 				<parameter name="gridborder rule" displayName="grid border rule" type="java.lang.String" 
 						defaultValue="periodic" 
 						isReadOnly="false" 

@@ -235,13 +235,13 @@ public class Resource  {
      *
      */
     @Parameter (displayName = "Job List", usageName = "jobList")
-    public ArrayList getJobList() {
+    public def getJobList() {
         return jobList
     }
-    public void setJobList(ArrayList newValue) {
+    public void setJobList(def newValue) {
         jobList = newValue
     }
-    public ArrayList jobList = new ArrayList()
+    public def jobList = []
 
     /**
      *
@@ -302,6 +302,51 @@ public class Resource  {
         rank = newValue
     }
     public def rank = 0
+
+    /**
+     *
+     * Record the available capacity
+     * @field availablity
+     *
+     */
+    @Parameter (displayName = "Availablity", usageName = "availablity")
+    public int getAvailablity() {
+        return availablity
+    }
+    public void setAvailablity(int newValue) {
+        availablity = newValue
+    }
+    public int availablity = this.getCapacity()
+
+    /**
+     *
+     * The ready mark
+     * @field ready
+     *
+     */
+    @Parameter (displayName = "Ready", usageName = "ready")
+    public def getReady() {
+        return ready
+    }
+    public void setReady(def newValue) {
+        ready = newValue
+    }
+    public def ready = false
+
+    /**
+     *
+     * The ready task mark
+     * @field readyTask
+     *
+     */
+    @Parameter (displayName = "Ready Task", usageName = "readyTask")
+    public def getReadyTask() {
+        return readyTask
+    }
+    public void setReadyTask(def newValue) {
+        readyTask = newValue
+    }
+    public def readyTask = []
 
     /**
      *
@@ -464,61 +509,34 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
 
-        // In processing or not
-        if (this.getProcessing()) {
+        // Have ready tasks or not
+        if (this.getReadyTasks().size()>0) {
 
             // Continue
             System.out.println("continue to process "+this.getOrder().toString())
-            this.step()
 
-        } else  {
+            // This is a loop.
+            for (theTask in this.readyTask) {
+
+                // This is a task.
+                theTask.setProcessingTime(theTask.getProcessingTime()-1)
+
+                // Check if the job is finished
+                if (theTask.getProcessingTime()<=0) {
+
+                    // The finish step
+                    this.setFinish(this.getFinish()+1)
+                    System.out.println(theTask.toString()+" Finished")
+                    this.getJobList().remove(theTask)
+                    this.readyTask.remove(theTask)
+
+                } else  {
 
 
-            // Have job or not
-            if (this.getJobList().size() > 0) {
-
-                // allocate the job
-                this.setOrder(this.getJobList()[0])
-                this.setProcessing(true)
-                System.out.println("start to process new "+this.getOrder().toString())
-                this.step()
-
-            } else  {
-
+                }
 
             }
 
-        }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method step
-     *
-     */
-    public def step() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // Cut down remain
-        this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())
-
-        // Is the job finished?
-        if (this.getOrder().getAmount()<=0) {
-
-            // The finish step
-            this.setFinish(this.getFinish()+1)
-            System.out.println(this.getOrder().toString()+" Finished")
-            this.getJobList().remove(this.getOrder())
-            this.setProcessing(false)
 
         } else  {
 
@@ -566,6 +584,38 @@ public class Resource  {
         // This is a task.
         println "add demander's review to the history"
         this.reviews << rvalue
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * After select, just wait for other resource to get ready
+     * @method Prepare
+     *
+     */
+    public def Prepare(needCapacity) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getAvailablity() < needCapacity) {
+
+            // This is a task.
+            this.setReady(false)
+
+        } else  {
+
+            // This is a task.
+            this.setReady(true)
+
+        }
         // Return the results.
         return returnValue
 

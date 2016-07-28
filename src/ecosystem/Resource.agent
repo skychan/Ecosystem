@@ -22,14 +22,14 @@
     <behaviorstep x="453" y="415" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Begin to process" visibility="0" returntype="def" compiledname="Process" parameters="" exceptions="">
       <label x="453" y="400" text="Process"/>
     </behaviorstep>
-    <behaviorstep x="308" y="698" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
-      <label x="308" y="683" text="One step"/>
-    </behaviorstep>
     <behaviorstep x="869" y="406" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Change the service rank with depends on the review" visibility="0" returntype="def" compiledname="AdjustRank" parameters="" exceptions="">
       <label x="869" y="391" text="Adjust the service rank"/>
     </behaviorstep>
     <behaviorstep x="754" y="403" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Add review to history" visibility="0" returntype="def" compiledname="AddReview" parameters="rvalue" exceptions="">
       <label x="754" y="388" text="Add review"/>
+    </behaviorstep>
+    <behaviorstep x="39" y="607" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="After select, just wait for other resource to get ready" visibility="0" returntype="def" compiledname="Prepare" parameters="needCapacity" exceptions="">
+      <label x="39" y="592" text="Prepare"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -51,17 +51,11 @@
     <taskstep x="64" y="335" comment="change the compete state" command1="" command2="" command3="this.setCompete(watchedAgent)" command4="" command5="println this.toString() + &quot; is competing for &quot;+ compete">
       <label x="64" y="320" text="Change the comoete state"/>
     </taskstep>
-    <taskstep x="306" y="785" comment="Cut down remain" command1="" command2="this.getOrder().setAmount(this.getOrder().getAmount()-this.getCapacity())" command3="" command4="" command5="">
-      <label x="306" y="770" text="Process 1 step"/>
+    <taskstep x="557" y="841" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(theTask.toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(theTask)" command4="this.readyTask.remove(theTask)" command5="">
+      <label x="557" y="826" text="Afterward"/>
     </taskstep>
-    <taskstep x="306" y="963" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(this.getOrder().toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(this.getOrder())" command4="this.setProcessing(false)" command5="">
-      <label x="306" y="948" text="Afterward"/>
-    </taskstep>
-    <taskstep x="572" y="590" comment="allocate the job" command1="this.setOrder(this.getJobList()[0])" command2="this.setProcessing(true)" command3="System.out.println(&quot;start to process new &quot;+this.getOrder().toString())" command4="this.step()" command5="">
-      <label x="572" y="575" text="Allocate job"/>
-    </taskstep>
-    <taskstep x="450" y="589" comment="Continue" command1="System.out.println(&quot;continue to process &quot;+this.getOrder().toString())" command2="this.step()" command3="" command4="" command5="">
-      <label x="450" y="574" text="Continue"/>
+    <taskstep x="452" y="578" comment="Continue" command1="System.out.println(&quot;continue to process &quot;+this.getOrder().toString())" command2="" command3="" command4="" command5="">
+      <label x="452" y="563" text="Continue"/>
     </taskstep>
     <taskstep x="870" y="501" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="870" y="486" text="Do Task"/>
@@ -69,24 +63,34 @@
     <taskstep x="755" y="498" comment="This is a task." command1="println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
       <label x="755" y="483" text="Do Task"/>
     </taskstep>
+    <taskstep x="133" y="690" comment="This is a task." command1="this.setReady(false)" command2="" command3="" command4="" command5="">
+      <label x="133" y="675" text="Do Task"/>
+    </taskstep>
+    <taskstep x="37" y="777" comment="This is a task." command1="this.setReady(true)" command2="" command3="" command4="" command5="">
+      <label x="37" y="762" text="Do Task"/>
+    </taskstep>
+    <taskstep x="557" y="661" comment="This is a task." command1="theTask.setProcessingTime(theTask.getProcessingTime()-1)" command2="" command3="" command4="" command5="">
+      <label x="557" y="646" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="63" y="243" comment="Decide to take the task or not" criteria="true" branchType="if">
       <label x="63" y="228" text="Take it or not"/>
     </decisionstep>
-    <decisionstep x="451" y="488" comment="In processing or not" criteria="this.getProcessing()" branchType="if">
-      <label x="451" y="473" text="processing?"/>
+    <decisionstep x="451" y="488" comment="Have ready tasks or not" criteria="this.getReadyTasks().size()&gt;0" branchType="if">
+      <label x="451" y="473" text="Have ready tasks"/>
     </decisionstep>
-    <decisionstep x="571" y="485" comment="Have job or not" criteria="this.getJobList().size() &gt; 0" branchType="if">
-      <label x="571" y="470" text="Still have job?"/>
+    <decisionstep x="38" y="691" comment="This is an agent decision." criteria="this.getAvailablity() &lt; needCapacity" branchType="if">
+      <label x="38" y="676" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="306" y="863" comment="Is the job finished?" criteria="this.getOrder().getAmount()&lt;=0" branchType="if">
-      <label x="306" y="848" text="Finished?"/>
+    <decisionstep x="453" y="660" comment="This is a loop." criteria="theTask in this.readyTask" branchType="while">
+      <label x="453" y="645" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="557" y="741" comment="Check if the job is finished" criteria="theTask.getProcessingTime()&lt;=0" branchType="if">
+      <label x="557" y="726" text="Check finish"/>
     </decisionstep>
   </decisionsteps>
-  <joinsteps>
-    <joinstep x="560" y="709"/>
-  </joinsteps>
+  <joinsteps/>
   <agentproperties>
     <agentproperty x="69" y="67" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
       <label x="74" y="52" text="Type"/>
@@ -121,11 +125,11 @@
     <agentproperty x="1049" y="405" comment="Count the finished jobs" visibility="0" compiledname="finish" type="int" defaultvalue="0">
       <label x="1054" y="390" text="Finished"/>
     </agentproperty>
-    <agentproperty x="214" y="408" comment="Job list" visibility="0" compiledname="jobList" type="ArrayList" defaultvalue="new ArrayList()">
-      <label x="219" y="393" text="Job List"/>
+    <agentproperty x="222" y="414" comment="Job list" visibility="0" compiledname="jobList" type="def" defaultvalue="[]">
+      <label x="227" y="399" text="Job List"/>
     </agentproperty>
-    <agentproperty x="215" y="497" comment="Mark the status of processing or not" visibility="0" compiledname="processing" type="boolean" defaultvalue="false">
-      <label x="220" y="482" text="Processing ?"/>
+    <agentproperty x="221" y="487" comment="Mark the status of processing or not" visibility="0" compiledname="processing" type="boolean" defaultvalue="false">
+      <label x="226" y="472" text="Processing ?"/>
     </agentproperty>
     <agentproperty x="807" y="288" comment="Quality" visibility="0" compiledname="quality" type="def" defaultvalue="0">
       <label x="812" y="273" text="Quality"/>
@@ -136,18 +140,28 @@
     <agentproperty x="707" y="287" comment="Mark the Rank value" visibility="0" compiledname="rank" type="def" defaultvalue="0">
       <label x="712" y="272" text="Rank"/>
     </agentproperty>
+    <agentproperty x="234" y="276" comment="Record the available capacity" visibility="0" compiledname="availablity" type="int" defaultvalue="this.getCapacity()">
+      <label x="239" y="261" text="Availablity"/>
+    </agentproperty>
+    <agentproperty x="132" y="602" comment="The ready mark" visibility="0" compiledname="ready" type="def" defaultvalue="false">
+      <label x="137" y="587" text="Ready"/>
+    </agentproperty>
+    <agentproperty x="306" y="490" comment="The ready task mark" visibility="0" compiledname="readyTask" type="def" defaultvalue="[]">
+      <label x="311" y="475" text="Ready Task"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="1125" y="849"/>
+    <endstep x="1109" y="810"/>
     <endstep x="993" y="326"/>
     <endstep x="1113" y="321"/>
     <endstep x="579" y="329"/>
     <endstep x="467" y="327"/>
     <endstep x="67" y="439"/>
-    <endstep x="560" y="821"/>
-    <endstep x="323" y="1089"/>
+    <endstep x="312" y="1044"/>
     <endstep x="890" y="613"/>
     <endstep x="770" y="623"/>
+    <endstep x="44" y="871"/>
+    <endstep x="458" y="754"/>
   </endsteps>
   <connections>
     <transitions>
@@ -208,17 +222,12 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="7" anchor="0"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="behavior" index="8" anchor="0"/>
-        <transitiontarget type="task" index="10" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="9" anchor="0"/>
-        <transitiontarget type="task" index="11" anchor="0"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -232,28 +241,23 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="6" anchor="2"/>
+        <transitionsource type="task" index="7" anchor="2"/>
         <transitiontarget type="decision" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="7" anchor="2"/>
+        <transitionsource type="task" index="8" anchor="2"/>
         <transitiontarget type="end" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="8" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="3"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="9" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="1"/>
+        <transitiontarget type="end" index="8" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="10" anchor="2"/>
-        <transitiontarget type="end" index="8" anchor="0"/>
+        <transitionsource type="behavior" index="9" anchor="0"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -262,8 +266,8 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="6" anchor="0"/>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -275,22 +279,32 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
-        <transitiontarget type="task" index="9" anchor="0"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="3"/>
+        <transitiontarget type="task" index="10" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
-        <transitionsource type="decision" index="1" anchor="3"/>
-        <transitiontarget type="decision" index="2" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
         <transitionsource type="decision" index="2" anchor="2"/>
-        <transitiontarget type="task" index="8" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
+        <transitionsource type="decision" index="3" anchor="3"/>
+        <transitiontarget type="task" index="12" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
         <transitionsource type="decision" index="3" anchor="2"/>
-        <transitiontarget type="task" index="7" anchor="0"/>
+        <transitiontarget type="end" index="10" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="4" anchor="2"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

@@ -111,17 +111,17 @@ public class Task  {
     /**
      *
      * This is an agent property.
-     * @field selectedResource
+     * @field allocatedResource
      *
      */
-    @Parameter (displayName = "Selected Resource", usageName = "selectedResource")
-    public String getSelectedResource() {
-        return selectedResource
+    @Parameter (displayName = "Allocated Resource", usageName = "allocatedResource")
+    public def getAllocatedResource() {
+        return allocatedResource
     }
-    public void setSelectedResource(String newValue) {
-        selectedResource = newValue
+    public void setAllocatedResource(def newValue) {
+        allocatedResource = newValue
     }
-    public String selectedResource = ""
+    public def allocatedResource = [:]
 
     /**
      *
@@ -215,6 +215,21 @@ public class Task  {
 
     /**
      *
+     * Record the prepare status for selected ones
+     * @field prepareStatus
+     *
+     */
+    @Parameter (displayName = "Prepare Status", usageName = "prepareStatus")
+    public def getPrepareStatus() {
+        return prepareStatus
+    }
+    public void setPrepareStatus(def newValue) {
+        prepareStatus = newValue
+    }
+    public def prepareStatus = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -236,51 +251,6 @@ public class Task  {
      *
      */
     protected String agentID = "Task " + (agentIDCounter++)
-
-    /**
-     *
-     * Processing the task every time
-     * @method Processing
-     *
-     */
-    public void Processing() {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        int remaintime = this.getRemainingTime()
-        remaintime--
-        this.setRemainingTime(remaintime)
-
-        // This is an agent decision.
-        if (this.getRemainingTime()) {
-
-            // send the task change status signal
-            this.setFinish(true)
-
-        } else  {
-
-
-        }
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Select
-     *
-     */
-    public void Select(String index) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.setSelectedResource(index)
-        int remaintime = this.getProcessingTime().get(index)
-        this.setRemainingTime(remaintime)
-    }
 
     /**
      *
@@ -364,14 +334,36 @@ public class Task  {
     public def Select(ecosystem.Resource watchedAgent) {
 
         // Select proper supplier with evaluation
-        println "candidates are "+this.getCandidates()
-        Evaluation()
-        println "after sort we have " +this.getCandidates()
-        this.setAllocatedService(this.getCandidates()[0])
-        this.getAllocatedService().getJobList().add(this)
-        // Reset the candidates after selection
+        println "start to select the ideal resources"
+
+        // This is a loop.
+        for (candidateResource in this.getCandidates()) {
+
+            // This is a task.
+            theType = candidateResource.key
+            theList = candidateResource.value
+            println "for resource type "+ theType + "candidates are "+ theList
+            Evaluation(theList)
+            println "after sort we have " + theList
+            // This is a task.
+            this.prepareStatus[theType] = false
+            this.allocatedService[theType] = theList[0]
+            theList[0].jobList << this
+            theList[0].Prepare(this.getNeedResourceCapacity()[theType])
+
+            // This is a loop.
+            for (res in candidateResource.value) {
+
+                // This is a task.
+                res.compete.clear()
+
+            }
+
+
+        }
+
+        // This is a task.
         this.candidates.clear()
-        System.out.println("Provider Chosen: "+this.allocatedService)
     }
 
     /**
@@ -380,7 +372,7 @@ public class Task  {
      * @method Evaluation
      *
      */
-    public def Evaluation() {
+    public def Evaluation(resourceList) {
 
         // Define the return value variable.
         def returnValue
@@ -389,7 +381,7 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}
+        resourceList.sort{[it.jobList.size(),it.jobList[0]]}
         // Return the results.
         return returnValue
 
@@ -456,6 +448,61 @@ public class Task  {
 
             // This is a task.
             this.candidates[watchedAgent.getType()] = watchedAgent
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Check if all the candidates are ready
+     * @method Check
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'ready',
+        triggerCondition = '$watchee.getReady()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 1d
+    )
+    public def Check(ecosystem.Resource watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.prepareStatus[theType] = true
+
+        // This is an agent decision.
+        if (false in this.getPrepareStatus()) {
+
+
+            // This is a loop.
+            for (theType in this.needResourceCapacity.keySet()) {
+
+                // This is a task.
+                this.allocatedResource[theType].Prepare(this.needResourceCapacity[theType])
+
+            }
+
+
+        } else  {
+
+
+            // This is a loop.
+            for (theRes in this.this.allocatedResource.values()) {
+
+                // This is a task.
+                theRes.readyTask << this
+
+            }
+
 
         }
         // Return the results.

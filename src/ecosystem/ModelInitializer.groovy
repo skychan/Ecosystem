@@ -164,7 +164,7 @@ public class ModelInitializer  {
         // This is a task.
         ArrayList test = 1..providerCount
         RandomHelper.setSeed(2)
-        SimUtilities.shuffle(test,RandomHelper.getUniform())
+        //SimUtilities.shuffle(test,RandomHelper.getUniform())
 
         // This is a loop.
         for (i in test) {
@@ -173,6 +173,7 @@ public class ModelInitializer  {
             Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
             Resource res = (Resource) ragent
             res.setType(i)
+            res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
             // This is a task.
             Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
             Service ser = (Service) sagent

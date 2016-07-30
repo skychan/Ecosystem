@@ -70,8 +70,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="287" y="440"/>
-    <endstep x="349" y="985"/>
+    <endstep x="292" y="445"/>
+    <endstep x="332" y="991"/>
   </endsteps>
   <connections>
     <transitions>

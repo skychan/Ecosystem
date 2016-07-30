@@ -36,7 +36,7 @@
     <taskstep x="1105" y="717" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
       <label x="1105" y="702" text="Occupying"/>
     </taskstep>
-    <taskstep x="983" y="210" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
+    <taskstep x="983" y="210" comment="This is a task." command1="" command2="temp -= amount" command3="this.setAvailable(temp)" command4="" command5="">
       <label x="983" y="195" text="Releasing"/>
     </taskstep>
     <taskstep x="1104" y="201" comment="This is a task." command1="this.setUnitCost(cost)" command2="" command3="" command4="" command5="">
@@ -48,7 +48,7 @@
     <taskstep x="464" y="222" comment="add owner to the list" command1="this.owner &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
       <label x="464" y="207" text="set owner"/>
     </taskstep>
-    <taskstep x="64" y="335" comment="change the compete state" command1="" command2="" command3="this.setCompete(watchedAgent)" command4="" command5="println this.toString() + &quot; is competing for &quot;+ compete">
+    <taskstep x="64" y="335" comment="change the compete state" command1="" command2="" command3="this.setCompete(watchedAgent)" command4="" command5="println this.toString() + &quot;type &quot; + this.getType() + &quot; is competing for &quot;+ compete.getType()">
       <label x="64" y="320" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="557" y="841" comment="The finish step" command1="this.setFinish(this.getFinish()+1)" command2="System.out.println(theTask.toString()+&quot; Finished&quot;)" command3="this.getJobList().remove(theTask)" command4="this.readyTask.remove(theTask)" command5="">
@@ -143,7 +143,7 @@
     <agentproperty x="234" y="276" comment="Record the available capacity" visibility="0" compiledname="availablity" type="int" defaultvalue="this.getCapacity()">
       <label x="239" y="261" text="Availablity"/>
     </agentproperty>
-    <agentproperty x="132" y="602" comment="The ready mark" visibility="0" compiledname="ready" type="def" defaultvalue="false">
+    <agentproperty x="132" y="602" comment="The ready mark" visibility="0" compiledname="ready" type="boolean" defaultvalue="false">
       <label x="137" y="587" text="Ready"/>
     </agentproperty>
     <agentproperty x="306" y="490" comment="The ready task mark" visibility="0" compiledname="readyTask" type="def" defaultvalue="[]">
@@ -151,17 +151,16 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="1119" y="820"/>
-    <endstep x="1003" y="336"/>
-    <endstep x="1123" y="331"/>
-    <endstep x="589" y="339"/>
-    <endstep x="477" y="337"/>
-    <endstep x="77" y="449"/>
-    <endstep x="900" y="623"/>
-    <endstep x="780" y="633"/>
-    <endstep x="54" y="881"/>
-    <endstep x="468" y="764"/>
-    <endstep x="183" y="228"/>
+    <endstep x="1124" y="825"/>
+    <endstep x="1008" y="341"/>
+    <endstep x="1128" y="336"/>
+    <endstep x="594" y="344"/>
+    <endstep x="482" y="342"/>
+    <endstep x="82" y="454"/>
+    <endstep x="905" y="628"/>
+    <endstep x="785" y="638"/>
+    <endstep x="59" y="886"/>
+    <endstep x="473" y="769"/>
   </endsteps>
   <connections>
     <transitions>
@@ -192,7 +191,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="5" anchor="0"/>
-        <transitiontarget type="end" index="10" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

@@ -325,13 +325,13 @@ public class Resource  {
      *
      */
     @Parameter (displayName = "Ready", usageName = "ready")
-    public def getReady() {
+    public boolean getReady() {
         return ready
     }
-    public void setReady(def newValue) {
+    public void setReady(boolean newValue) {
         ready = newValue
     }
-    public def ready = false
+    public boolean ready = false
 
     /**
      *
@@ -401,7 +401,6 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        int temp = this.getAvailable()
         temp -= amount
         this.setAvailable(temp)
     }
@@ -472,6 +471,18 @@ public class Resource  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+
+        // Decide to take the task or not
+        if (true) {
+
+            // change the compete state
+            this.setCompete(watchedAgent)
+            println this.toString() + "type " + this.getType() + " is competing for "+ compete.getType()
+
+        } else  {
+
+
+        }
         // Return the results.
         return returnValue
 

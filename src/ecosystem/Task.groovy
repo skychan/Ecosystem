@@ -285,6 +285,9 @@ public class Task  {
 
         // This is a task.
         this.setCall(this.getNeedResourceCapacity())
+        this.setType(tdata.key)
+        print "Task "+this.getType()
+        println call
     }
 
     /**
@@ -340,14 +343,14 @@ public class Task  {
         for (candidateResource in this.getCandidates()) {
 
             // This is a task.
-            theType = candidateResource.key
-            theList = candidateResource.value
-            println "for resource type "+ theType + "candidates are "+ theList
+            def theType = candidateResource.key
+            def theList = candidateResource.value
+            println "for task "+ theType + "candidates are "+ theList
             Evaluation(theList)
             println "after sort we have " + theList
             // This is a task.
             this.prepareStatus[theType] = false
-            this.allocatedService[theType] = theList[0]
+            this.allocatedResource[theType] = theList[0]
             theList[0].jobList << this
             theList[0].Prepare(this.getNeedResourceCapacity()[theType])
 
@@ -355,7 +358,7 @@ public class Task  {
             for (res in candidateResource.value) {
 
                 // This is a task.
-                res.compete.clear()
+                res.compete = []
 
             }
 
@@ -381,7 +384,7 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        resourceList.sort{[it.jobList.size(),it.jobList[0]]}
+        resourceList.sort{[-it.getAvailablity(),it.jobList.size()]}
         // Return the results.
         return returnValue
 
@@ -396,7 +399,7 @@ public class Task  {
     @Watch(
         watcheeClassName = 'ecosystem.Resource',
         watcheeFieldNames = 'compete',
-        triggerCondition = '$watcher.toString() == $watchee.compete.toString()',
+        triggerCondition = '$watcher.equals(watchee.compete)',
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 0.1d
     )
@@ -410,15 +413,17 @@ public class Task  {
 
 
         // This is an agent decision.
-        if (this.candidates[watchedAgent.getType()]) {
+        if (watchedAgent.getType() in this.candidates.keySet()) {
 
             // This is a task.
             this.candidates[watchedAgent.getType()]<<watchedAgent
+            println "add true"
 
         } else  {
 
             // This is a task.
-            this.candidates[watchedAgent.getType()] = watchedAgent
+            this.candidates[watchedAgent.getType()] = [watchedAgent]
+            println "add false"
 
         }
         // Return the results.
@@ -429,17 +434,17 @@ public class Task  {
     /**
      *
      * Check if all the candidates are ready
-     * @method Check
+     * @method CheckTrue
      *
      */
     @Watch(
         watcheeClassName = 'ecosystem.Resource',
         watcheeFieldNames = 'ready',
-        triggerCondition = '$watchee.getReady()',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
+        triggerCondition = '$watchee.compete.equals($watcher) && $watchee.getReady()',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
-    public def Check(ecosystem.Resource watchedAgent) {
+    public def CheckTrue(ecosystem.Resource watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -448,19 +453,11 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.prepareStatus[theType] = true
+        this.prepareStatus[watchedAgent.getType()] = true
+        println watchedAgent.toString() + "is ready"
 
         // This is an agent decision.
         if (false in this.getPrepareStatus()) {
-
-
-            // This is a loop.
-            for (theType in this.needResourceCapacity.keySet()) {
-
-                // This is a task.
-                this.allocatedResource[theType].Prepare(this.needResourceCapacity[theType])
-
-            }
 
 
         } else  {
@@ -471,6 +468,7 @@ public class Task  {
 
                 // This is a task.
                 theRes.readyTask << this
+                theRes.setAvailablity(theRes.getAvailablity()-this.needResourceCapacity[theRes.getType()])
 
             }
 
@@ -497,6 +495,35 @@ public class Task  {
 
         // This is a task.
         returnValue = (tester in this.call.keySet())
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Check if all the candidates are ready
+     * @method CheckFalse
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'ready',
+        triggerCondition = '$watchee.compete.equals($watcher) && !$watchee.getReady()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 1d
+    )
+    public def CheckFalse(ecosystem.Resource watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        watchedAgent.Prepare(this.getNeedResourceCapacity()[watchedAgent.getType()])
+        println watchedAgent.toString() + "is not ready"
         // Return the results.
         return returnValue
 

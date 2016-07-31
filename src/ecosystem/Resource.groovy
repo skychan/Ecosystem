@@ -106,7 +106,7 @@ public class Resource  {
     public void setAvailable(int newValue) {
         available = newValue
     }
-    public int available = this.getCapacity()
+    public int available = 0
 
     /**
      *
@@ -200,21 +200,6 @@ public class Resource  {
 
     /**
      *
-     * The Order(Task) mark
-     * @field order
-     *
-     */
-    @Parameter (displayName = "Order Mark", usageName = "order")
-    public Order getOrder() {
-        return order
-    }
-    public void setOrder(Order newValue) {
-        order = newValue
-    }
-    public Order order = null
-
-    /**
-     *
      * Count the finished jobs
      * @field finish
      *
@@ -305,36 +290,6 @@ public class Resource  {
 
     /**
      *
-     * Record the available capacity
-     * @field availablity
-     *
-     */
-    @Parameter (displayName = "Availablity", usageName = "availablity")
-    public int getAvailablity() {
-        return availablity
-    }
-    public void setAvailablity(int newValue) {
-        availablity = newValue
-    }
-    public int availablity = this.getCapacity()
-
-    /**
-     *
-     * The ready mark
-     * @field ready
-     *
-     */
-    @Parameter (displayName = "Ready", usageName = "ready")
-    public boolean getReady() {
-        return ready
-    }
-    public void setReady(boolean newValue) {
-        ready = newValue
-    }
-    public boolean ready = false
-
-    /**
-     *
      * The ready task mark
      * @field readyTask
      *
@@ -347,6 +302,21 @@ public class Resource  {
         readyTask = newValue
     }
     public def readyTask = []
+
+    /**
+     *
+     * This is the task buffer
+     * @field buffer
+     *
+     */
+    @Parameter (displayName = "Buffer", usageName = "buffer")
+    public def getBuffer() {
+        return buffer
+    }
+    public void setBuffer(def newValue) {
+        buffer = newValue
+    }
+    public def buffer = []
 
     /**
      *
@@ -476,8 +446,10 @@ public class Resource  {
         if (true) {
 
             // change the compete state
-            this.setCompete(watchedAgent)
-            println this.toString() + "type " + this.getType() + " is competing for "+ compete.getType()
+            this.compete << watchedAgent
+            watchedAgent.addCandidates(this)
+            println this.toString() + " is competing for "+ watchedAgent
+            println "and the compete list is " + this.compete
 
         } else  {
 
@@ -512,7 +484,7 @@ public class Resource  {
         if (this.getReadyTask().size()>0) {
 
             // Continue
-            System.out.println("continue to process "+this.getOrder().toString())
+            println "process " + this.getReadyTask()
 
             // This is a loop.
             for (theTask in this.readyTask) {
@@ -526,8 +498,9 @@ public class Resource  {
                     // The finish step
                     this.setFinish(this.getFinish()+1)
                     System.out.println(theTask.toString()+" Finished")
-                    this.getJobList().remove(theTask)
+                    this.setAvailablity(this.getAvailablity()+theTask.needResourceCapacity[this.getType()])
                     this.readyTask.remove(theTask)
+                    this.Next(this.jobList[0])
 
                 } else  {
 
@@ -590,11 +563,73 @@ public class Resource  {
 
     /**
      *
-     * After select, just wait for other resource to get ready
-     * @method Prepare
+     * Check if a task in the compete list
+     * @method Exist
      *
      */
-    public def Prepare(needCapacity) {
+    public boolean Exist(checkList, tester) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        returnValue = (tester in checkList)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Chosen process
+     * @method Chosen
+     *
+     */
+    public def Chosen(theOne) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.compete.remove(theOne)
+        println this.toString() + " have " +this.available
+
+        // This is an agent decision.
+        if (this.getAvailable() < theOne.needResourceCapacity[this.getType()]) {
+
+            // This is a task.
+            this.jobList << theOne
+            println "the cap "+this.getAvailable()+" the need "+  theOne.needResourceCapacity[this.getType()]
+            println "the joblist " + this.jobList
+
+        } else  {
+
+            // This is a task.
+            this.buffer << theOne
+            this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
+            theOne.prepareStatus[this.getType()] = true
+            println "the cap "+this.getAvailable()+" the need " + theOne.needResourceCapacity[this.getType()]
+            println "the buffer " + this.buffer
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Chose the next task
+     * @method Next
+     *
+     */
+    public def Next(theOne) {
 
         // Define the return value variable.
         def returnValue
@@ -604,15 +639,16 @@ public class Resource  {
 
 
         // This is an agent decision.
-        if (this.getAvailablity() < needCapacity) {
+        if (this.getAvailablity() < theOne.needResourceCapacity[this.getType()]) {
 
-            // This is a task.
-            this.setReady(false)
 
         } else  {
 
             // This is a task.
-            this.setReady(true)
+            this.buffer << theOne
+            this.setAvailablity(this.getAvailablity()-theOne.needResourceCapacity[this.getType()])
+            theOne.prepareStatus[this.getType()] = true
+            this.jobList.remove(theOne)
 
         }
         // Return the results.

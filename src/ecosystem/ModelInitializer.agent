@@ -12,7 +12,7 @@
     <taskstep x="205" y="281" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="pureDemander.ReadData((i).toString())" command4="platform.addUser(pureDemander)" command5="">
       <label x="205" y="266" text="Create Demander"/>
     </taskstep>
-    <taskstep x="205" y="505" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(i)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="">
+    <taskstep x="205" y="505" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(i)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
       <label x="205" y="490" text="Create Resource"/>
     </taskstep>
     <taskstep x="70" y="387" comment="This is a task." command1="ArrayList test = 1..providerCount" command2="RandomHelper.setSeed(2)" command3="//SimUtilities.shuffle(test,RandomHelper.getUniform())" command4="" command5="">
@@ -29,7 +29,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 250..&lt;251" branchType="while">
+    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 249..&lt;250" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
     </decisionstep>
     <decisionstep x="71" y="506" comment="This is a loop." criteria="i in test" branchType="while">
@@ -49,7 +49,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="82" y="607"/>
+    <endstep x="97" y="622"/>
   </endsteps>
   <connections>
     <transitions>

@@ -151,7 +151,7 @@ public class ModelInitializer  {
         CloudPlatform platform = (CloudPlatform) agent
 
         // This is a loop.
-        for (i in 250..<251) {
+        for (i in 249..<250) {
 
             // This is a task.
             Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
@@ -174,6 +174,7 @@ public class ModelInitializer  {
             Resource res = (Resource) ragent
             res.setType(i)
             res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
+            res.setAvailable(res.getCapacity())
             // This is a task.
             Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
             Service ser = (Service) sagent

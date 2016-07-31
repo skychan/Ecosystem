@@ -345,23 +345,6 @@ public class Resource  {
     /**
      *
      * This is the step behavior.
-     * @method Occupy
-     *
-     */
-    public void Occupy(int amount) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        int temp = this.getAvailable()
-        temp -= amount
-        this.setAvailable(temp)
-    }
-
-    /**
-     *
-     * This is the step behavior.
      * @method Release
      *
      */
@@ -371,7 +354,8 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        temp -= amount
+        int temp = this.getAvailable()
+        temp += amount
         this.setAvailable(temp)
     }
 
@@ -448,67 +432,6 @@ public class Resource  {
             // change the compete state
             this.compete << watchedAgent
             watchedAgent.addCandidates(this)
-            println this.toString() + " is competing for "+ watchedAgent
-            println "and the compete list is " + this.compete
-
-        } else  {
-
-
-        }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Begin to process
-     * @method Process
-     *
-     */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
-    public def Process() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // Have ready tasks or not
-        if (this.getReadyTask().size()>0) {
-
-            // Continue
-            println "process " + this.getReadyTask()
-
-            // This is a loop.
-            for (theTask in this.readyTask) {
-
-                // This is a task.
-                theTask.setProcessingTime(theTask.getProcessingTime()-1)
-
-                // Check if the job is finished
-                if (theTask.getProcessingTime()<=0) {
-
-                    // The finish step
-                    this.setFinish(this.getFinish()+1)
-                    System.out.println(theTask.toString()+" Finished")
-                    this.setAvailablity(this.getAvailablity()+theTask.needResourceCapacity[this.getType()])
-                    this.readyTask.remove(theTask)
-                    this.Next(this.jobList[0])
-
-                } else  {
-
-
-                }
-
-            }
-
 
         } else  {
 
@@ -598,15 +521,12 @@ public class Resource  {
 
         // This is a task.
         this.compete.remove(theOne)
-        println this.toString() + " have " +this.available
 
         // This is an agent decision.
         if (this.getAvailable() < theOne.needResourceCapacity[this.getType()]) {
 
             // This is a task.
             this.jobList << theOne
-            println "the cap "+this.getAvailable()+" the need "+  theOne.needResourceCapacity[this.getType()]
-            println "the joblist " + this.jobList
 
         } else  {
 
@@ -614,8 +534,6 @@ public class Resource  {
             this.buffer << theOne
             this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
             theOne.prepareStatus[this.getType()] = true
-            println "the cap "+this.getAvailable()+" the need " + theOne.needResourceCapacity[this.getType()]
-            println "the buffer " + this.buffer
 
         }
         // Return the results.
@@ -629,7 +547,7 @@ public class Resource  {
      * @method Next
      *
      */
-    public def Next(theOne) {
+    public def Next() {
 
         // Define the return value variable.
         def returnValue
@@ -639,16 +557,27 @@ public class Resource  {
 
 
         // This is an agent decision.
-        if (this.getAvailablity() < theOne.needResourceCapacity[this.getType()]) {
+        if (this.jobList.size() > 0) {
 
+            // This is a task.
+            Task theOne = this.jobList[0]
+
+            // This is an agent decision.
+            if (this.getAvailable() >= theOne.needResourceCapacity[this.getType()]) {
+
+                // This is a task.
+                this.buffer << theOne
+                this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
+                theOne.prepareStatus[this.getType()] = true
+                this.jobList.remove(theOne)
+
+            } else  {
+
+
+            }
 
         } else  {
 
-            // This is a task.
-            this.buffer << theOne
-            this.setAvailablity(this.getAvailablity()-theOne.needResourceCapacity[this.getType()])
-            theOne.prepareStatus[this.getType()] = true
-            this.jobList.remove(theOne)
 
         }
         // Return the results.

@@ -350,7 +350,6 @@ public class Task  {
     public def Select(ecosystem.Task watchedAgent) {
 
         // Select proper supplier with evaluation
-        println this.toString() +"have candidates: " + candidates
 
         // This is a loop.
         for (candidateResource in this.getCandidates()) {
@@ -473,9 +472,6 @@ public class Task  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        println this.toString() + this.prepareStatus
-        println !(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())
 
         // This is an agent decision.
         if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
@@ -486,16 +482,15 @@ public class Task  {
 
                 // This is a task.
                 theRes.readyTask << this
-                println theRes.toString() + " s buffer " + theRes.buffer
-                println theRes.toString() + " s ready " + theRes.readyTask
                 theRes.buffer.remove(this)
-                println theRes.toString() + " s joblist " +theRes.jobList
 
             }
 
             // This is a task.
             this.Reset()
-            println this.toString() + "is ready to process"
+            this.setRemainingTime(this.getProcessingTime())
+            println this.toString() + " is ready to process"
+            println this.remainingTime
 
         } else  {
 
@@ -523,6 +518,69 @@ public class Task  {
         // This is a task.
         this.setPrepareStatus([:])
         this.setInNeed(false)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Process the task
+     * @method process
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'remainingTime',
+        triggerCondition = '$watchee.equals($watcher)',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 1d
+    )
+    public def process(ecosystem.Task watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        println this.toString() + " watched " + watchedAgent.toString()
+        println this.toString() + " remain time is " + this.getRemainingTime()
+
+        // This is an agent decision.
+        if (this.getRemainingTime() > 0) {
+
+            // This is a task.
+            this.setRemainingTime(this.getRemainingTime()-1)
+            println this.toString() + " remain time is " + this.getRemainingTime()
+
+            // This is an agent decision.
+            if (this.getRemainingTime() == 0) {
+
+
+                // This is a loop.
+                for (theRes in this.getAllocatedResource().values()) {
+
+                    // The finish step
+                    theRes.readyTask.remove(this)
+                    theRes.Release(this.needResourceCapacity[theRes.getType()])
+                    theRes.Next()
+
+                }
+
+                // This is a task.
+                println this.toString() + " is finished"
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
         // Return the results.
         return returnValue
 

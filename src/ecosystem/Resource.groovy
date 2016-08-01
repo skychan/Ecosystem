@@ -357,6 +357,10 @@ public class Resource  {
         int temp = this.getAvailable()
         temp += amount
         this.setAvailable(temp)
+        println this.toString()
+        println this.toString() + " joblist " + this.jobList
+        println this.toString() + " buffer " + this.buffer
+        println this.toString() + " readytask " + this.readyTask
     }
 
     /**
@@ -412,8 +416,8 @@ public class Resource  {
      */
     @Watch(
         watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'call',
-        triggerCondition = '$watchee.Exist($watcher.getType())',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watchee.Exist($watcher.getType()) && $watchee.inNeed',
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 0.1d
     )
@@ -527,6 +531,9 @@ public class Resource  {
 
             // This is a task.
             this.jobList << theOne
+            println this.toString() + " jobList " + this.jobList
+            println this.toString() + " buffer " + this.buffer
+            println this.toString() + " readytask " + this.readyTask
 
         } else  {
 
@@ -534,6 +541,9 @@ public class Resource  {
             this.buffer << theOne
             this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
             theOne.prepareStatus[this.getType()] = true
+            println this.toString() + " jobList " + this.jobList
+            println this.toString() + " buffer " + this.buffer
+            println this.toString() + " readytask " + this.readyTask
 
         }
         // Return the results.
@@ -556,8 +566,8 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
 
-        // This is an agent decision.
-        if (this.jobList.size() > 0) {
+        // This is a loop.
+        while (this.jobList.size() > 0) {
 
             // This is a task.
             Task theOne = this.jobList[0]
@@ -573,13 +583,13 @@ public class Resource  {
 
             } else  {
 
+                // This is a task.
+                break
 
             }
 
-        } else  {
-
-
         }
+
         // Return the results.
         return returnValue
 

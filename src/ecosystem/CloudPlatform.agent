@@ -10,6 +10,9 @@
     <behaviorstep x="334" y="80" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="334" y="65" text="Create Provider"/>
     </behaviorstep>
+    <behaviorstep x="623" y="157" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="catch the finish task and add the count" visibility="0" returntype="def" compiledname="Accumulator" parameters="ecosystem.Task watchedAgent" exceptions="">
+      <label x="623" y="142" text="Accumulator"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="63" y="240" comment="This is a task." command1="this.userList &lt;&lt; userID" command2="" command3="" command4="" command5="">
@@ -18,16 +21,22 @@
     <taskstep x="170" y="245" comment="This is a task." command1="this.userList.remove(o)" command2="" command3="" command4="" command5="">
       <label x="170" y="230" text="eliminate user"/>
     </taskstep>
-    <taskstep x="334" y="167" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
-      <label x="334" y="152" text="Randomize"/>
-    </taskstep>
-    <taskstep x="457" y="253" comment="Create Provider at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pagent = (PureProvider) agent" command3="pagent.Init()" command4="" command5="this.AddUser(pagent)">
+    <taskstep x="457" y="253" comment="Create Provider at a random distribution" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pagent = (PureProvider) agent" command3="pagent.GenerateResource()" command4="" command5="this.AddUser(pagent)">
       <label x="457" y="238" text="Create Provider"/>
+    </taskstep>
+    <taskstep x="623" y="233" comment="This is a task." command1="this.finishCount ++" command2="" command3="" command4="" command5="">
+      <label x="623" y="218" text="Do Task"/>
+    </taskstep>
+    <taskstep x="472" y="386" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
+      <label x="472" y="371" text="Randomize"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="338" y="254" comment="This is a loop." criteria="int i in 0..&lt;providerCount" branchType="while">
       <label x="338" y="239" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="331" y="159" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
+      <label x="331" y="144" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -38,11 +47,18 @@
     <agentproperty x="169" y="49" comment="This is an agent property." visibility="0" compiledname="mean1" type="double" defaultvalue="0.16">
       <label x="174" y="34" text="Mean1"/>
     </agentproperty>
+    <agentproperty x="620" y="69" comment="Count the fininshed jobs" visibility="0" compiledname="finishCount" type="int" defaultvalue="0">
+      <label x="625" y="54" text="Finish Count"/>
+    </agentproperty>
+    <agentproperty x="466" y="82" comment="This is an agent property." visibility="0" compiledname="providerCount" type="int" defaultvalue="50">
+      <label x="471" y="67" text="Provider Count"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="77" y="371"/>
-    <endstep x="186" y="367"/>
-    <endstep x="382" y="412"/>
+    <endstep x="71" y="354"/>
+    <endstep x="181" y="359"/>
+    <endstep x="347" y="364"/>
+    <endstep x="629" y="318"/>
   </endsteps>
   <connections>
     <transitions>
@@ -58,7 +74,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -72,20 +88,30 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="3"/>
-        <transitiontarget type="task" index="3" anchor="1"/>
+        <transitiontarget type="task" index="2" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

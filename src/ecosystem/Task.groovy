@@ -185,21 +185,6 @@ public class Task  {
 
     /**
      *
-     * Denote calling for the new resources
-     * @field call
-     *
-     */
-    @Parameter (displayName = "Call", usageName = "call")
-    public def getCall() {
-        return call
-    }
-    public void setCall(def newValue) {
-        call = newValue
-    }
-    public def call = [:]
-
-    /**
-     *
      * Record the candidates
      * @field candidates
      *
@@ -242,6 +227,21 @@ public class Task  {
         inNeed = newValue
     }
     public boolean inNeed = false
+
+    /**
+     *
+     * Record whether the resource in the system is sufficient
+     * @field insufficient
+     *
+     */
+    @Parameter (displayName = "Resource Sufficiency", usageName = "insufficient")
+    public boolean getInsufficient() {
+        return insufficient
+    }
+    public void setInsufficient(boolean newValue) {
+        insufficient = newValue
+    }
+    public boolean insufficient = true
 
     /**
      *
@@ -293,13 +293,14 @@ public class Task  {
 
                 // This is a task.
                 this.needResourceCapacity << data
+                this.prepareStatus[data.key] = false
+                this.candidates[data.key] = []
 
             }
 
         }
 
         // This is a task.
-        this.setCall(this.getNeedResourceCapacity())
         this.setType(tdata.key)
         this.setInNeed(true)
     }
@@ -349,34 +350,44 @@ public class Task  {
     )
     public def Select(ecosystem.Task watchedAgent) {
 
-        // Select proper supplier with evaluation
 
-        // This is a loop.
-        for (candidateResource in this.getCandidates()) {
+        // This is an agent decision.
+        if ([] in this.candidates.values()) {
 
             // This is a task.
-            def theType = candidateResource.key
-            def theList = candidateResource.value
-            //println "for task "+ theType + "candidates are "+ theList
-            Evaluation(theList)
-            // This is a task.
-            this.prepareStatus[theType] = false
-            this.allocatedResource[theType] = theList[0]
-            theList[0].Chosen(this)
+            this.candidates.each{ k,v -> v=[]}
+            this.setInsufficient(true)
+
+        } else  {
+
 
             // This is a loop.
-            for (res in candidateResource.value) {
+            for (candidateResource in this.getCandidates()) {
 
                 // This is a task.
-                res.compete.remove(this)
+                def theType = candidateResource.key
+                def theList = candidateResource.value
+                //println "for task "+ theType + "candidates are "+ theList
+                Evaluation(theList)
+                // This is a task.
+                this.allocatedResource[theType] = theList[0]
+                theList[0].Chosen(this)
+
+                // This is a loop.
+                for (res in candidateResource.value) {
+
+                    // This is a task.
+                    res.compete.remove(this)
+
+                }
+
 
             }
 
+            // This is a task.
+            this.candidates.clear()
 
         }
-
-        // This is a task.
-        this.candidates.clear()
     }
 
     /**
@@ -414,19 +425,8 @@ public class Task  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-
-        // This is an agent decision.
-        if (competitor.getType() in this.candidates.keySet()) {
-
-            // This is a task.
-            this.candidates[competitor.getType()]<<competitor
-
-        } else  {
-
-            // This is a task.
-            this.candidates[competitor.getType()] = [competitor]
-
-        }
+        // This is a task.
+        this.candidates[competitor.getType()]<<competitor
         // Return the results.
         return returnValue
 
@@ -447,7 +447,7 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        returnValue = (tester in this.call.keySet())
+        returnValue = (tester in this.needResourceCapacity.keySet())
         // Return the results.
         return returnValue
 
@@ -489,8 +489,6 @@ public class Task  {
             // This is a task.
             this.Reset()
             this.setRemainingTime(this.getProcessingTime())
-            println this.toString() + " is ready to process"
-            println this.remainingTime
 
         } else  {
 
@@ -544,16 +542,12 @@ public class Task  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        println this.toString() + " watched " + watchedAgent.toString()
-        println this.toString() + " remain time is " + this.getRemainingTime()
 
         // This is an agent decision.
         if (this.getRemainingTime() > 0) {
 
             // This is a task.
             this.setRemainingTime(this.getRemainingTime()-1)
-            println this.toString() + " remain time is " + this.getRemainingTime()
 
             // This is an agent decision.
             if (this.getRemainingTime() == 0) {
@@ -571,11 +565,49 @@ public class Task  {
 
                 // This is a task.
                 println this.toString() + " is finished"
+                this.setFinish(true)
 
             } else  {
 
 
             }
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Repeat
+     * @method Need
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'insufficient',
+        triggerCondition = '$watchee.toString() == $watcher.toString() && $watchee.insufficient',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.8d
+    )
+    public def Need(ecosystem.Task watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if ([] in this.candidates.values()) {
+
+            // This is a task.
+            this.setInNeed(true)
 
         } else  {
 

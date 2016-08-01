@@ -151,44 +151,13 @@ public class ModelInitializer  {
         CloudPlatform platform = (CloudPlatform) agent
 
         // This is a loop.
-        for (i in 249..<250) {
+        for (i in 251..<252) {
 
             // This is a task.
             Object dagent = CreateAgent("Ecosystem", "ecosystem.PureDemander")
             PureDemander pureDemander = (PureDemander) dagent
             pureDemander.ReadData((i).toString())
             platform.addUser(pureDemander)
-
-        }
-
-        // This is a task.
-        ArrayList test = 1..providerCount
-        RandomHelper.setSeed(2)
-        //SimUtilities.shuffle(test,RandomHelper.getUniform())
-
-        // This is a loop.
-        for (i in test) {
-
-            // This is a task.
-            Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
-            Resource res = (Resource) ragent
-            res.setType(i)
-            res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
-            res.setAvailable(res.getCapacity())
-            // This is a task.
-            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
-            Service ser = (Service) sagent
-            res.addMaster(ser)
-            // This is a task.
-            Object pagent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
-            PureProvider pureProvider = (PureProvider) pagent
-            ser.addOwner(pureProvider)
-            res.addOwner(pureProvider)
-            platform.addUser(pureProvider)
-            // This is a task.
-            ser.addResource(res)
-            pureProvider.addResource(res)
-            pureProvider.addService(ser)
 
         }
 

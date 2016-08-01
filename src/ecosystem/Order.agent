@@ -29,7 +29,7 @@
     <decisionstep x="131" y="519" comment="This is a loop." criteria="tdata in taskMap" branchType="while">
       <label x="131" y="504" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="233" y="516" comment="This is an agent decision." criteria="tdata.value.p &gt; 0" branchType="if">
+    <decisionstep x="233" y="516" comment="This is an agent decision." criteria="tdata.value.size() &gt; 1" branchType="if">
       <label x="233" y="501" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
@@ -43,9 +43,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="54" y="318"/>
-    <endstep x="299" y="280"/>
-    <endstep x="147" y="700"/>
+    <endstep x="59" y="323"/>
+    <endstep x="304" y="285"/>
+    <endstep x="152" y="705"/>
   </endsteps>
   <connections>
     <transitions>

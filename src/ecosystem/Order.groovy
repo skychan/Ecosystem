@@ -173,7 +173,7 @@ public class Order  {
 
 
             // This is an agent decision.
-            if (tdata.value.p > 0) {
+            if (tdata.value.size() > 1) {
 
                 // This is a task.
                 Object agent = CreateAgent("Ecosystem", "ecosystem.Task")

@@ -95,6 +95,36 @@ public class CloudPlatform  {
 
     /**
      *
+     * Count the fininshed jobs
+     * @field finishCount
+     *
+     */
+    @Parameter (displayName = "Finish Count", usageName = "finishCount")
+    public int getFinishCount() {
+        return finishCount
+    }
+    public void setFinishCount(int newValue) {
+        finishCount = newValue
+    }
+    public int finishCount = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field providerCount
+     *
+     */
+    @Parameter (displayName = "Provider Count", usageName = "providerCount")
+    public int getProviderCount() {
+        return providerCount
+    }
+    public void setProviderCount(int newValue) {
+        providerCount = newValue
+    }
+    public int providerCount = 50
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -158,22 +188,53 @@ public class CloudPlatform  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        Parameters params = RunEnvironment.getInstance().getParameters()
-        double mean = params.getValue("Mean")
-        RandomHelper.createPoisson(mean)
-        int providerCount = RandomHelper.getPoisson().nextInt()
 
-        // This is a loop.
-        for (int i in 0..<providerCount) {
+        // to need or not
+        if (RandomHelper.nextIntFromTo(0, 1)) {
 
-            // Create Provider at a random distribution
-            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
-            PureProvider pagent = (PureProvider) agent
-            pagent.Init()
-            this.AddUser(pagent)
+
+            // This is a loop.
+            for (int i in 0..<providerCount) {
+
+                // Create Provider at a random distribution
+                Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+                PureProvider pagent = (PureProvider) agent
+                pagent.GenerateResource()
+                this.AddUser(pagent)
+
+            }
+
+
+        } else  {
+
 
         }
+    }
+
+    /**
+     *
+     * catch the finish task and add the count
+     * @method Accumulator
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'finish',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def Accumulator(ecosystem.Task watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.finishCount ++
+        // Return the results.
+        return returnValue
 
     }
 

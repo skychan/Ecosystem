@@ -164,23 +164,34 @@ public class PureProvider  {
 
     /**
      *
-     * Initilization
-     * @method Init
+     * Generate Resource
+     * @method GenerateResource
      *
      */
-    public void Init(resourceTypeList) {
+    public void GenerateResource() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Generate Service
-        Object agent = CreateAgent("Ecosystem", "ecosystem.Service")
-        Service sagent = (Service) agent
-        sagent.addOwner(this.toString())
-        // Set parameters
-        sagent.setCapacity(15)
-        sagent.setCost(2)
-        services.add(sagent)
+        // This is a task.
+        ArrayList test = 1..50
+        SimUtilities.shuffle(test,RandomHelper.getUniform())
+
+        // This is a loop.
+        for (i in 0..<RandomHelper.nextIntFromTo(1,10)) {
+
+            // This is a task.
+            Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
+            Resource res = (Resource) ragent
+            res.setType(test[i])
+            res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
+            res.setAvailable(res.getCapacity())
+            // This is a task.
+            res.addOwner(this)
+            this.addResource(res)
+
+        }
+
     }
 
     /**

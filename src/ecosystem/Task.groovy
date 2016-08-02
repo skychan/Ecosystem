@@ -230,18 +230,18 @@ public class Task  {
 
     /**
      *
-     * Record whether the resource in the system is sufficient
-     * @field insufficient
+     * To mark if the task is allocated or not
+     * @field allocated
      *
      */
-    @Parameter (displayName = "Resource Sufficiency", usageName = "insufficient")
-    public boolean getInsufficient() {
-        return insufficient
+    @Parameter (displayName = "Allocated", usageName = "allocated")
+    public boolean getAllocated() {
+        return allocated
     }
-    public void setInsufficient(boolean newValue) {
-        insufficient = newValue
+    public void setAllocated(boolean newValue) {
+        allocated = newValue
     }
-    public boolean insufficient = true
+    public boolean allocated = false
 
     /**
      *
@@ -301,8 +301,8 @@ public class Task  {
         }
 
         // This is a task.
+        println "task para setted"
         this.setType(tdata.key)
-        this.setInNeed(true)
     }
 
     /**
@@ -341,53 +341,34 @@ public class Task  {
      * @method Select
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watcher == $watchee && $watchee.inNeed',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.2d
-    )
-    public def Select(ecosystem.Task watchedAgent) {
+    public def Select() {
 
 
-        // This is an agent decision.
-        if ([] in this.candidates.values()) {
+        // This is a loop.
+        for (candidateResource in this.getCandidates()) {
 
             // This is a task.
-            this.candidates.each{ k,v -> v=[]}
-            this.setInsufficient(true)
-
-        } else  {
-
+            def theType = candidateResource.key
+            def theList = candidateResource.value
+            Evaluation(theList)
+            // This is a task.
+            this.allocatedResource[theType] = theList[0]
+            theList[0].Chosen(this)
 
             // This is a loop.
-            for (candidateResource in this.getCandidates()) {
+            for (res in candidateResource.value) {
 
                 // This is a task.
-                def theType = candidateResource.key
-                def theList = candidateResource.value
-                //println "for task "+ theType + "candidates are "+ theList
-                Evaluation(theList)
-                // This is a task.
-                this.allocatedResource[theType] = theList[0]
-                theList[0].Chosen(this)
-
-                // This is a loop.
-                for (res in candidateResource.value) {
-
-                    // This is a task.
-                    res.compete.remove(this)
-
-                }
-
+                res.compete.remove(this)
 
             }
 
-            // This is a task.
-            this.candidates.clear()
 
         }
+
+        // This is a task.
+        this.candidates.clear()
+        println "after the selection and clear"
     }
 
     /**
@@ -405,7 +386,7 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        resourceList.sort{[-it.getAvailablity(),it.jobList.size()]}
+        resourceList.sort{[-it.getAvailable(),it.jobList.size()]}
         // Return the results.
         return returnValue
 
@@ -455,16 +436,18 @@ public class Task  {
 
     /**
      *
-     * Check if all the candidates are ready
+     * Check the lackness of resources
      * @method CheckStatus
      *
      */
-    @ScheduledMethod(
-        start = 0.3d,
-        interval = 1d,
-        shuffle = true
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.inNeed',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.2d
     )
-    public def CheckStatus() {
+    public def CheckStatus(ecosystem.Task watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -474,24 +457,28 @@ public class Task  {
 
 
         // This is an agent decision.
-        if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
+        if ([] in this.candidates.values()) {
 
 
             // This is a loop.
-            for (theRes in this.allocatedResource.values()) {
+            for (candidateList in this.candidates.values()) {
 
                 // This is a task.
-                theRes.readyTask << this
-                theRes.buffer.remove(this)
+                candidateList.each{ it.compete.remove(this)}
 
             }
 
             // This is a task.
-            this.Reset()
-            this.setRemainingTime(this.getProcessingTime())
+            this.candidates.each{ it.value=[]}
+            println this.toString() + " lack of resource"
 
         } else  {
 
+            // This is a task.
+            println this.candidates
+            this.Select()
+            this.setAllocated(true)
+            println this.toString() + " selected resources"
 
         }
         // Return the results.
@@ -587,14 +574,12 @@ public class Task  {
      * @method Need
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'insufficient',
-        triggerCondition = '$watchee.toString() == $watcher.toString() && $watchee.insufficient',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.8d
+    @ScheduledMethod(
+        start = 0d,
+        interval = 1d,
+        shuffle = true
     )
-    public def Need(ecosystem.Task watchedAgent) {
+    public def Need() {
 
         // Define the return value variable.
         def returnValue
@@ -604,10 +589,57 @@ public class Task  {
 
 
         // This is an agent decision.
-        if ([] in this.candidates.values()) {
+        if (this.getAllocated() == false) {
 
             // This is a task.
             this.setInNeed(true)
+            println this.toString() + " lack response so publish need again"
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Check if all the candidates are ready
+     * @method CheckStatus
+     *
+     */
+    @ScheduledMethod(
+        start = 0.3d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def CheckStatus() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
+
+
+            // This is a loop.
+            for (theRes in this.allocatedResource.values()) {
+
+                // This is a task.
+                theRes.readyTask << this
+                theRes.buffer.remove(this)
+
+            }
+
+            // This is a task.
+            this.Reset()
+            this.setRemainingTime(this.getProcessingTime())
 
         } else  {
 

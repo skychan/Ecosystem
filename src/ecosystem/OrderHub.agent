@@ -12,7 +12,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="367" y="292" comment="Initialization" command1="this.orderList.clear()" command2="" command3="" command4="" command5="">
+    <taskstep x="367" y="292" comment="Initialization" command1="this.orderList = []" command2="" command3="" command4="" command5="">
       <label x="367" y="277" text="Clear the list"/>
     </taskstep>
     <taskstep x="102" y="280" comment="add order in the hub" command1="this.orderList.add(o)" command2="" command3="" command4="" command5="">
@@ -30,15 +30,25 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="376" y="402"/>
-    <endstep x="107" y="383"/>
-    <endstep x="220" y="389"/>
+    <endstep x="381" y="407"/>
+    <endstep x="112" y="388"/>
+    <endstep x="225" y="394"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
         <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -52,18 +62,8 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="task" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="2" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

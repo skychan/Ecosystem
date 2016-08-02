@@ -150,40 +150,26 @@ public class PureDemander  {
     /**
      *
      * Generate Need
-     * @method changeNeed
+     * @method GenerateOrder
      *
      */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
-    public void changeNeed() {
+    public void GenerateOrder() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-
-        // to need or not
-        if (RandomHelper.nextIntFromTo(0, 1)) {
-
-            // have need is to generate order
-            Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
-            println this.taskMap
-            Order o = (Order) agent
-            o.addOwner(this)
-            o.setOwner(this)
-            // Set the order parameters
-            o.setParameters(this.taskMap)
-            println this.toString() + " need "+ o.toString()
-            this.getOrderList().add(o)
-            this.setNewOrder(o)
-            this.setNeed(true)
-
-        } else  {
-
-
-        }
+        // have need is to generate order
+        Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
+        println this.taskMap
+        Order o = (Order) agent
+        o.addOwner(this)
+        o.setOwner(this)
+        // Set the order parameters
+        o.setParameters(this.taskMap)
+        println this.toString() + " need "+ o.toString()
+        this.getOrderList().add(o)
+        this.setNewOrder(o)
+        this.setNeed(true)
     }
 
     /**

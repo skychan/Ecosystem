@@ -21,7 +21,7 @@
     <taskstep x="134" y="611" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="134" y="596" text="Do Task"/>
     </taskstep>
-    <taskstep x="224" y="608" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setParameters(tdata)" command4="" command5="">
+    <taskstep x="224" y="608" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setParameters(tdata)" command4="t.addMaster(this)" command5="this.taskList &lt;&lt; t">
       <label x="224" y="593" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -41,11 +41,14 @@
     <agentproperty x="162" y="50" comment="Record the current owner" visibility="0" compiledname="owner" type="def" defaultvalue="null">
       <label x="167" y="35" text="Current owner"/>
     </agentproperty>
+    <agentproperty x="236" y="415" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[]">
+      <label x="241" y="400" text="Task List"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="59" y="323"/>
-    <endstep x="304" y="285"/>
-    <endstep x="152" y="705"/>
+    <endstep x="64" y="328"/>
+    <endstep x="309" y="290"/>
+    <endstep x="157" y="710"/>
   </endsteps>
   <connections>
     <transitions>

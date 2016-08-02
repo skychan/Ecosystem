@@ -114,7 +114,7 @@ public class OrderHub  {
         def time = GetTickCountInTimeUnits()
 
         // Initialization
-        this.orderList.clear()
+        this.orderList = []
     }
 
     /**

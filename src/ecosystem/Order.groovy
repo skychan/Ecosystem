@@ -95,6 +95,21 @@ public class Order  {
 
     /**
      *
+     * Record the task an order contains
+     * @field taskList
+     *
+     */
+    @Parameter (displayName = "Task List", usageName = "taskList")
+    public def getTaskList() {
+        return taskList
+    }
+    public void setTaskList(def newValue) {
+        taskList = newValue
+    }
+    public def taskList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -179,6 +194,8 @@ public class Order  {
                 Object agent = CreateAgent("Ecosystem", "ecosystem.Task")
                 Task t = (Task) agent
                 t.setParameters(tdata)
+                t.addMaster(this)
+                this.taskList << t
 
             } else  {
 

@@ -436,6 +436,7 @@ public class Resource  {
             // change the compete state
             this.compete << watchedAgent
             watchedAgent.addCandidates(this)
+            println this.toString() + " compete " + watchedAgent.toString()
 
         } else  {
 

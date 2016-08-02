@@ -18,18 +18,18 @@
     <taskstep x="526" y="237" comment="This is a task." command1="this.resourceList &lt;&lt; res" command2="" command3="" command4="" command5="">
       <label x="526" y="222" text="Do Task"/>
     </taskstep>
-    <taskstep x="118" y="134" comment="This is a task." command1="ArrayList test = 1..50" command2="" command3="SimUtilities.shuffle(test,RandomHelper.getUniform())" command4="" command5="">
+    <taskstep x="118" y="134" comment="This is a task." command1="ArrayList test = 1..10" command2="" command3="SimUtilities.shuffle(test,RandomHelper.getUniform())" command4="" command5="">
       <label x="118" y="119" text="Do Task"/>
     </taskstep>
     <taskstep x="246" y="216" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(test[i])" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
       <label x="246" y="201" text="Create Resource"/>
     </taskstep>
-    <taskstep x="244" y="305" comment="This is a task." command1="res.addOwner(this)" command2="this.addResource(res)" command3="" command4="" command5="">
+    <taskstep x="244" y="305" comment="This is a task." command1="res.addOwner(this)" command2="this.addResource(res)" command3="println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType()" command4="" command5="">
       <label x="244" y="290" text="Add the attr"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="122" y="217" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,10)" branchType="while">
+    <decisionstep x="122" y="217" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
       <label x="122" y="202" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
@@ -52,9 +52,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="135" y="329"/>
-    <endstep x="652" y="366"/>
-    <endstep x="548" y="356"/>
+    <endstep x="128" y="324"/>
+    <endstep x="657" y="371"/>
+    <endstep x="553" y="361"/>
   </endsteps>
   <connections>
     <transitions>

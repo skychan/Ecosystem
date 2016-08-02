@@ -45,7 +45,7 @@
     <taskstep x="464" y="222" comment="add owner to the list" command1="this.owner &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
       <label x="464" y="207" text="set owner"/>
     </taskstep>
-    <taskstep x="64" y="335" comment="change the compete state" command1="this.compete &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="" command4="" command5="">
+    <taskstep x="64" y="335" comment="change the compete state" command1="this.compete &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
       <label x="64" y="320" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="870" y="501" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
@@ -91,7 +91,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="307" y="667"/>
+    <joinstep x="312" y="672"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="69" y="67" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -147,16 +147,16 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="1115" y="824"/>
-    <endstep x="1115" y="326"/>
-    <endstep x="585" y="332"/>
-    <endstep x="474" y="334"/>
-    <endstep x="73" y="440"/>
-    <endstep x="882" y="610"/>
-    <endstep x="768" y="605"/>
-    <endstep x="164" y="387"/>
-    <endstep x="311" y="744"/>
-    <endstep x="56" y="820"/>
+    <endstep x="1120" y="829"/>
+    <endstep x="1120" y="331"/>
+    <endstep x="590" y="337"/>
+    <endstep x="479" y="339"/>
+    <endstep x="78" y="445"/>
+    <endstep x="887" y="615"/>
+    <endstep x="773" y="610"/>
+    <endstep x="169" y="392"/>
+    <endstep x="316" y="749"/>
+    <endstep x="61" y="825"/>
   </endsteps>
   <connections>
     <transitions>

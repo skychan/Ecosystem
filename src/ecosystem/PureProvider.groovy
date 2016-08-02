@@ -174,11 +174,11 @@ public class PureProvider  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        ArrayList test = 1..50
+        ArrayList test = 1..10
         SimUtilities.shuffle(test,RandomHelper.getUniform())
 
         // This is a loop.
-        for (i in 0..<RandomHelper.nextIntFromTo(1,10)) {
+        for (i in 0..<RandomHelper.nextIntFromTo(1,4)) {
 
             // This is a task.
             Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
@@ -189,6 +189,7 @@ public class PureProvider  {
             // This is a task.
             res.addOwner(this)
             this.addResource(res)
+            println "create resource " + res.toString() + " with type " + res.getType()
 
         }
 

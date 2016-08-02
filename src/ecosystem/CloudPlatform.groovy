@@ -110,21 +110,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is an agent property.
-     * @field providerCount
-     *
-     */
-    @Parameter (displayName = "Provider Count", usageName = "providerCount")
-    public int getProviderCount() {
-        return providerCount
-    }
-    public void setProviderCount(int newValue) {
-        providerCount = newValue
-    }
-    public int providerCount = 50
-
-    /**
-     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -183,6 +168,11 @@ public class CloudPlatform  {
      * @method CreateProvider
      *
      */
+    @ScheduledMethod(
+        start = 0d,
+        interval = 1d,
+        shuffle = true
+    )
     public void CreateProvider() {
 
         // Note the simulation time.
@@ -192,18 +182,11 @@ public class CloudPlatform  {
         // to need or not
         if (RandomHelper.nextIntFromTo(0, 1)) {
 
-
-            // This is a loop.
-            for (int i in 0..<providerCount) {
-
-                // Create Provider at a random distribution
-                Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
-                PureProvider pagent = (PureProvider) agent
-                pagent.GenerateResource()
-                this.AddUser(pagent)
-
-            }
-
+            // Create Provider at a random distribution
+            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
+            PureProvider pagent = (PureProvider) agent
+            pagent.GenerateResource()
+            this.addUser(pagent)
 
         } else  {
 

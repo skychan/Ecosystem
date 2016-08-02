@@ -9,7 +9,7 @@
     <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
-    <taskstep x="205" y="281" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="pureDemander.ReadData((i).toString())" command4="platform.addUser(pureDemander)" command5="">
+    <taskstep x="205" y="281" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureDemander&quot;)" command2="PureDemander pureDemander = (PureDemander) dagent" command3="pureDemander.ReadData((i).toString())" command4="platform.addUser(pureDemander)" command5="pureDemander.GenerateOrder()">
       <label x="205" y="266" text="Create Demander"/>
     </taskstep>
     <taskstep x="361" y="510" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(i)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
@@ -26,7 +26,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 251..&lt;252" branchType="while">
+    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 249..&lt;250" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
     </decisionstep>
     <decisionstep x="239" y="508" comment="This is a loop." criteria="i in test" branchType="while">
@@ -46,7 +46,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="81" y="633"/>
+    <endstep x="75" y="454"/>
   </endsteps>
   <connections>
     <transitions>

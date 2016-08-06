@@ -110,6 +110,36 @@ public class CloudPlatform  {
 
     /**
      *
+     * Mark the resource type count with quality [type:[quality:quantity]]
+     * @field typeQuality
+     *
+     */
+    @Parameter (displayName = "Resource type count", usageName = "typeQuality")
+    public def getTypeQuality() {
+        return typeQuality
+    }
+    public void setTypeQuality(def newValue) {
+        typeQuality = newValue
+    }
+    public def typeQuality = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field typeQueueLength
+     *
+     */
+    @Parameter (displayName = "Resource Queue", usageName = "typeQueueLength")
+    public def getTypeQueueLength() {
+        return typeQueueLength
+    }
+    public void setTypeQueueLength(def newValue) {
+        typeQueueLength = newValue
+    }
+    public def typeQueueLength = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -183,10 +213,20 @@ public class CloudPlatform  {
         if (RandomHelper.nextIntFromTo(0, 1)) {
 
             // Create Provider at a random distribution
-            Object agent = CreateAgent("Ecosystem", "ecosystem.PureProvider")
-            PureProvider pagent = (PureProvider) agent
-            pagent.GenerateResource()
-            this.addUser(pagent)
+            PureProvider pagent = new PureProvider()
+            pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
+
+            // This is an agent decision.
+            if (pagent.Enter(this)) {
+
+                // This is a task.
+                AddAgentToContext("Ecosystem", pagent)
+                this.addUser(pagent)
+
+            } else  {
+
+
+            }
 
         } else  {
 
@@ -216,6 +256,88 @@ public class CloudPlatform  {
 
         // This is a task.
         this.finishCount ++
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Indexing
+     *
+     */
+    public def Indexing(res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (res.getType() in this.typeQuality.keySet()) {
+
+
+            // This is an agent decision.
+            if (res.getQuality() in this.typeQuality[res.getType()].keySet()) {
+
+                // This is a task.
+                this.typeQuality[res.getType()][res.getQuality()] += 1
+
+            } else  {
+
+                // This is a task.
+                this.typeQuality[res.getType()][res.getQuality()] = 1
+
+            }
+
+        } else  {
+
+            // This is a task.
+            this.typeQuality[res.getType()] = [:]
+            this.typeQuality[res.getType()][res.getQuality()] = 1
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Queue
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'queue',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
+        scheduleTriggerDelta = 1d
+    )
+    public def Queue(ecosystem.Resource watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (watchedAgent.getQueue()) {
+
+            // This is a task.
+            this.typeQueueLength[watchedAgent.getType()] += 1
+
+        } else  {
+
+            // This is a task.
+            this.typeQueueLength[watchedAgent.getType()] -= 1
+
+        }
         // Return the results.
         return returnValue
 

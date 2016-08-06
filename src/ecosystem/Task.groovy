@@ -90,6 +90,7 @@ public class Task  {
     }
     public void setNeedResourceCapacity(def newValue) {
         needResourceCapacity = newValue
+        
     }
     public def needResourceCapacity = [:]
 
@@ -245,6 +246,21 @@ public class Task  {
 
     /**
      *
+     * This is an agent property.
+     * @field startTime
+     *
+     */
+    @Parameter (displayName = "Start time", usageName = "startTime")
+    public def getStartTime() {
+        return startTime
+    }
+    public void setStartTime(def newValue) {
+        startTime = newValue
+    }
+    public def startTime = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -302,7 +318,9 @@ public class Task  {
 
         // This is a task.
         println "task para setted"
+        this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
         this.setType(tdata.key)
+        println "start at " + this.getStartTime()
     }
 
     /**
@@ -547,12 +565,14 @@ public class Task  {
                     theRes.readyTask.remove(this)
                     theRes.Release(this.needResourceCapacity[theRes.getType()])
                     theRes.Next()
+                    theRes.Review()
 
                 }
 
                 // This is a task.
                 println this.toString() + " is finished"
                 this.setFinish(true)
+                println "spent " + (RunEnvironment.getInstance().getCurrentSchedule().getTickCount()-this.getStartTime())
 
             } else  {
 
@@ -645,6 +665,26 @@ public class Task  {
 
 
         }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Review and comment after the task is finished
+     * @method Review
+     *
+     */
+    public def Review() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
         // Return the results.
         return returnValue
 

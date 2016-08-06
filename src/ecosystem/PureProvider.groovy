@@ -80,33 +80,18 @@ public class PureProvider  {
 
     /**
      *
-     * This is an agent property.
-     * @field property
+     * The provider difficulty rank value
+     * @field rank
      *
      */
-    @Parameter (displayName = "Property", usageName = "property")
-    public def getProperty() {
-        return property
+    @Parameter (displayName = "Rank", usageName = "rank")
+    public double getRank() {
+        return rank
     }
-    public void setProperty(def newValue) {
-        property = newValue
+    public void setRank(double newValue) {
+        rank = newValue
     }
-    public def property = 0
-
-    /**
-     *
-     * The provider Rank value
-     * @field rankVal
-     *
-     */
-    @Parameter (displayName = "Rank", usageName = "rankVal")
-    public double getRankVal() {
-        return rankVal
-    }
-    public void setRankVal(double newValue) {
-        rankVal = newValue
-    }
-    public double rankVal = 0
+    public double rank = 1000
 
     /**
      *
@@ -140,6 +125,21 @@ public class PureProvider  {
 
     /**
      *
+     * This is an agent property.
+     * @field candidates
+     *
+     */
+    @Parameter (displayName = "Resource candidates", usageName = "candidates")
+    public def getCandidates() {
+        return candidates
+    }
+    public void setCandidates(def newValue) {
+        candidates = newValue
+    }
+    public def candidates = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -168,28 +168,29 @@ public class PureProvider  {
      * @method GenerateResource
      *
      */
-    public void GenerateResource() {
+    public void GenerateResource(typeQuality, typeQueueLength) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        ArrayList test = 1..10
-        SimUtilities.shuffle(test,RandomHelper.getUniform())
+        ArrayList types = 1..10
+        SimUtilities.shuffle(types,RandomHelper.getUniform())
 
         // This is a loop.
         for (i in 0..<RandomHelper.nextIntFromTo(1,4)) {
 
             // This is a task.
-            Object ragent = CreateAgent("Ecosystem", "ecosystem.Resource")
-            Resource res = (Resource) ragent
-            res.setType(test[i])
+            Resource res = new Resource()
+            res.setQuality(RandomHelper.nextDoubleFromTo(0,30))
+            res.setType(types[i])
             res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
             res.setAvailable(res.getCapacity())
             // This is a task.
             res.addOwner(this)
-            this.addResource(res)
+            this.candidates << res
             println "create resource " + res.toString() + " with type " + res.getType()
+            this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
 
         }
 
@@ -232,6 +233,191 @@ public class PureProvider  {
 
         // This is a task.
         this.resourceList << res
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Calculate the rank value depend on the resources' quality and scaricity
+     * @method ranking
+     *
+     */
+    public def ranking() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Judge the resource to exit
+     * @method ResourceJudege
+     *
+     */
+    public def ResourceJudege(typeQuality, typeQueueLength, type, res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (type in typeQuality.keySet()) {
+
+
+            // This is an agent decision.
+            if (typeQueueLength[type] < 5) {
+
+                // This is a task.
+                double mu = this.WM(typeQuality[type])
+                double sigma = this.WSTD(typeQuality[type])
+                RandomHelper.createNormal(mu,sigma)
+
+                // This is an agent decision.
+                if (RandomHelper.getNormal().nextDouble() > res.getQuality()) {
+
+                    // This is a task.
+                    this.candidates.remove(res)
+
+                } else  {
+
+
+                }
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Enter
+     *
+     */
+    public def Enter(platform) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.candidates.isEmpty()) {
+
+            // This is a task.
+            returnValue = false
+
+        } else  {
+
+
+            // This is a loop.
+            for (res in this.candidates) {
+
+                // This is a task.
+                AddAgentToContext("Ecosystem", res)
+                this.addResource(res)
+                platform.Indexing(res)
+                platform.typeQueueLength[res.getType()] = 0
+
+            }
+
+            // This is a task.
+            this.candidates = []
+            returnValue = true
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Calculate weighted average
+     * @method WM
+     *
+     */
+    public def WM(dataMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double tempsum = 0
+        int n = 0
+
+        // This is a loop.
+        for (data in dataMap) {
+
+            // This is a task.
+            tempsum += data.key*data.value
+            n += data.value
+
+        }
+
+        // This is a task.
+        returnValue = tempsum/n
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Calculate the standard variation
+     * @method WSTD
+     *
+     */
+    public def WSTD(dataMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double tempsum = 0
+        int n = 0
+        double mean = this.WM(dataMap)
+
+        // This is a loop.
+        for (data in dataMap) {
+
+            // This is a task.
+            tempsum += (data.key - mean)*(data.key - mean) *data.value
+            n += data.value
+
+        }
+
+        // This is a task.
+        returnValue = Math.sqrt(tempsum/n)
         // Return the results.
         return returnValue
 

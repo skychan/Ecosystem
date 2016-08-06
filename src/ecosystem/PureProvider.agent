@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="PureProvider" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Resource" visibility="0" returntype="void" compiledname="GenerateResource" parameters="" exceptions="">
+    <behaviorstep x="120" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Resource" visibility="0" returntype="void" compiledname="GenerateResource" parameters="typeQuality,typeQueueLength" exceptions="">
       <label x="120" y="52" text="Generate Resource"/>
     </behaviorstep>
     <behaviorstep x="624" y="159" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="addService" parameters="ser" exceptions="">
@@ -9,6 +9,21 @@
     </behaviorstep>
     <behaviorstep x="525" y="154" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="addResource" parameters="res" exceptions="">
       <label x="525" y="139" text="Add Resource"/>
+    </behaviorstep>
+    <behaviorstep x="774" y="424" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Calculate the rank value depend on the resources&apos; quality and scaricity" visibility="0" returntype="def" compiledname="ranking" parameters="" exceptions="">
+      <label x="774" y="409" text="Ranking"/>
+    </behaviorstep>
+    <behaviorstep x="266" y="436" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Judge the resource to exit" visibility="0" returntype="def" compiledname="ResourceJudege" parameters="typeQuality,typeQueueLength,type,res" exceptions="">
+      <label x="266" y="421" text="Resource Judge"/>
+    </behaviorstep>
+    <behaviorstep x="532" y="450" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="Enter" parameters="platform" exceptions="">
+      <label x="532" y="435" text="Enter the system"/>
+    </behaviorstep>
+    <behaviorstep x="31" y="457" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Calculate weighted average" visibility="0" returntype="def" compiledname="WM" parameters="dataMap" exceptions="">
+      <label x="31" y="442" text="Weighted mean"/>
+    </behaviorstep>
+    <behaviorstep x="41" y="861" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Calculate the standard variation" visibility="0" returntype="def" compiledname="WSTD" parameters="dataMap" exceptions="">
+      <label x="41" y="846" text="Weighted std"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -18,19 +33,73 @@
     <taskstep x="526" y="237" comment="This is a task." command1="this.resourceList &lt;&lt; res" command2="" command3="" command4="" command5="">
       <label x="526" y="222" text="Do Task"/>
     </taskstep>
-    <taskstep x="118" y="134" comment="This is a task." command1="ArrayList test = 1..10" command2="" command3="SimUtilities.shuffle(test,RandomHelper.getUniform())" command4="" command5="">
-      <label x="118" y="119" text="Do Task"/>
+    <taskstep x="120" y="147" comment="This is a task." command1="ArrayList types = 1..10" command2="" command3="SimUtilities.shuffle(types,RandomHelper.getUniform())" command4="" command5="">
+      <label x="120" y="132" text="Do Task"/>
     </taskstep>
-    <taskstep x="246" y="216" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(test[i])" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
-      <label x="246" y="201" text="Create Resource"/>
+    <taskstep x="242" y="233" comment="This is a task." command1="Resource res = new Resource()" command2="res.setQuality(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(types[i])" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
+      <label x="242" y="218" text="Create Resource"/>
     </taskstep>
-    <taskstep x="244" y="305" comment="This is a task." command1="res.addOwner(this)" command2="this.addResource(res)" command3="println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType()" command4="" command5="">
-      <label x="244" y="290" text="Add the attr"/>
+    <taskstep x="244" y="325" comment="This is a task." command1="res.addOwner(this)" command2="this.candidates &lt;&lt; res" command3="println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType()" command4="this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="">
+      <label x="244" y="310" text="Add the attr"/>
+    </taskstep>
+    <taskstep x="539" y="708" comment="This is a task." command1="AddAgentToContext(&quot;Ecosystem&quot;, res)" command2="this.addResource(res)" command3="platform.Indexing(res)" command4="platform.typeQueueLength[res.getType()] = 0" command5="">
+      <label x="539" y="693" text="Do Task"/>
+    </taskstep>
+    <taskstep x="634" y="617" comment="This is a task." command1="this.candidates = []" command2="returnValue = true" command3="" command4="" command5="">
+      <label x="634" y="602" text="Do Task"/>
+    </taskstep>
+    <taskstep x="265" y="682" comment="This is a task." command1="double mu = this.WM(typeQuality[type])" command2="double sigma = this.WSTD(typeQuality[type])" command3="RandomHelper.createNormal(mu,sigma)" command4="" command5="">
+      <label x="265" y="667" text="Calculate the quality related criterian"/>
+    </taskstep>
+    <taskstep x="30" y="536" comment="This is a task." command1="double tempsum = 0" command2="int n = 0" command3="" command4="" command5="">
+      <label x="30" y="521" text="Do Task"/>
+    </taskstep>
+    <taskstep x="132" y="619" comment="This is a task." command1="tempsum += data.key*data.value" command2="n += data.value" command3="" command4="" command5="">
+      <label x="132" y="604" text="Do Task"/>
+    </taskstep>
+    <taskstep x="34" y="702" comment="This is a task." command1="returnValue = tempsum/n" command2="" command3="" command4="" command5="">
+      <label x="34" y="687" text="Do Task"/>
+    </taskstep>
+    <taskstep x="142" y="1023" comment="This is a task." command1="tempsum += (data.key - mean)*(data.key - mean) *data.value" command2="n += data.value" command3="" command4="" command5="">
+      <label x="142" y="1008" text="Do Task"/>
+    </taskstep>
+    <taskstep x="44" y="1106" comment="This is a task." command1="returnValue = Math.sqrt(tempsum/n)" command2="" command3="" command4="" command5="">
+      <label x="44" y="1091" text="Do Task"/>
+    </taskstep>
+    <taskstep x="40" y="940" comment="This is a task." command1="double tempsum = 0" command2="int n = 0" command3="double mean = this.WM(dataMap)" command4="" command5="">
+      <label x="40" y="925" text="Do Task"/>
+    </taskstep>
+    <taskstep x="367" y="761" comment="This is a task." command1="this.candidates.remove(res)" command2="" command3="" command4="" command5="">
+      <label x="367" y="746" text="Unqualified res"/>
+    </taskstep>
+    <taskstep x="629" y="524" comment="This is a task." command1="returnValue = false" command2="" command3="" command4="" command5="">
+      <label x="629" y="509" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="122" y="217" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
-      <label x="122" y="202" text="Evaluate Criteria"/>
+    <decisionstep x="120" y="233" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
+      <label x="120" y="218" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="536" y="619" comment="This is a loop." criteria="res in this.candidates" branchType="while">
+      <label x="536" y="604" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="263" y="507" comment="This is an agent decision." criteria="type in typeQuality.keySet()" branchType="if">
+      <label x="263" y="492" text="have the type yet?"/>
+    </decisionstep>
+    <decisionstep x="263" y="595" comment="This is an agent decision." criteria="typeQueueLength[type] &lt; 5" branchType="if">
+      <label x="263" y="580" text="hot or not"/>
+    </decisionstep>
+    <decisionstep x="268" y="763" comment="This is an agent decision." criteria="RandomHelper.getNormal().nextDouble() &gt; res.getQuality()" branchType="if">
+      <label x="268" y="748" text="Quality related"/>
+    </decisionstep>
+    <decisionstep x="32" y="619" comment="This is a loop." criteria="data in dataMap" branchType="while">
+      <label x="32" y="604" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="42" y="1023" comment="This is a loop." criteria="data in dataMap" branchType="while">
+      <label x="42" y="1008" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="532" y="526" comment="This is an agent decision." criteria="this.candidates.isEmpty()" branchType="if">
+      <label x="532" y="511" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -38,10 +107,7 @@
     <agentproperty x="263" y="57" comment="Record the service" visibility="0" compiledname="services" type="ArrayList" defaultvalue="new ArrayList()">
       <label x="268" y="42" text="Service List"/>
     </agentproperty>
-    <agentproperty x="413" y="59" comment="This is an agent property." visibility="0" compiledname="property" type="def" defaultvalue="0">
-      <label x="418" y="44" text="Property"/>
-    </agentproperty>
-    <agentproperty x="341" y="58" comment="The provider Rank value" visibility="0" compiledname="rankVal" type="double" defaultvalue="0">
+    <agentproperty x="341" y="58" comment="The provider difficulty rank value" visibility="0" compiledname="rank" type="double" defaultvalue="1000">
       <label x="346" y="43" text="Rank"/>
     </agentproperty>
     <agentproperty x="631" y="76" comment="This is an agent property." visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -50,11 +116,18 @@
     <agentproperty x="532" y="71" comment="This is an agent property." visibility="0" compiledname="resourceList" type="def" defaultvalue="[]">
       <label x="537" y="56" text="Resource List"/>
     </agentproperty>
+    <agentproperty x="365" y="233" comment="This is an agent property." visibility="0" compiledname="candidates" type="def" defaultvalue="[]">
+      <label x="370" y="218" text="Resource candidates"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="128" y="324"/>
-    <endstep x="657" y="371"/>
-    <endstep x="553" y="361"/>
+    <endstep x="124" y="333"/>
+    <endstep x="645" y="367"/>
+    <endstep x="546" y="368"/>
+    <endstep x="642" y="718"/>
+    <endstep x="41" y="793"/>
+    <endstep x="56" y="1208"/>
+    <endstep x="273" y="851"/>
   </endsteps>
   <connections>
     <transitions>
@@ -71,6 +144,16 @@
       <transition>
         <transitionsource type="behavior" index="2" anchor="0"/>
         <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="5" anchor="0"/>
+        <transitiontarget type="decision" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -93,6 +176,46 @@
         <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="7" anchor="2"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="8" anchor="2"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="10" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="end" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="13" anchor="2"/>
+        <transitiontarget type="decision" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="7" anchor="0"/>
+        <transitiontarget type="task" index="13" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -103,6 +226,66 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="6" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="decision" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="3" anchor="2"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="4" anchor="3"/>
+        <transitiontarget type="task" index="14" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="4" anchor="2"/>
+        <transitiontarget type="end" index="6" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="3"/>
+        <transitiontarget type="task" index="9" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="5" anchor="2"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="6" anchor="3"/>
+        <transitiontarget type="task" index="11" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="6" anchor="2"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="7" anchor="3"/>
+        <transitiontarget type="task" index="15" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="7" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

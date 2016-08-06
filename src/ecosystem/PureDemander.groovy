@@ -125,6 +125,21 @@ public class PureDemander  {
 
     /**
      *
+     * Mark the difficulty level of the order type
+     * @field level
+     *
+     */
+    @Parameter (displayName = "Level", usageName = "level")
+    public def getLevel() {
+        return level
+    }
+    public void setLevel(def newValue) {
+        level = newValue
+    }
+    public def level = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

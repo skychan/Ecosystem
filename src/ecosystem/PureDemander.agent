@@ -38,8 +38,8 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="476" y="117" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
-      <label x="476" y="102" text="Evaluate Criteria"/>
+    <decisionstep x="368" y="101" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
+      <label x="368" y="86" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="438" y="866" comment="This is a loop." criteria="int j in 1..nServices" branchType="while">
       <label x="438" y="851" text="Evaluate Criteria"/>
@@ -68,10 +68,13 @@
     <agentproperty x="474" y="613" comment="Task data read from file" visibility="0" compiledname="taskMap" type="def" defaultvalue="[:]">
       <label x="479" y="598" text="Task Map"/>
     </agentproperty>
+    <agentproperty x="535" y="66" comment="Mark the difficulty level of the order type" visibility="0" compiledname="level" type="def" defaultvalue="[:]">
+      <label x="540" y="51" text="Level"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="297" y="450"/>
-    <endstep x="337" y="996"/>
+    <endstep x="286" y="407"/>
+    <endstep x="329" y="999"/>
   </endsteps>
   <connections>
     <transitions>

@@ -81,21 +81,6 @@ public class Resource  {
     /**
      *
      * This is an agent property.
-     * @field unitCost
-     *
-     */
-    @Parameter (displayName = "Unit Cost", usageName = "unitCost")
-    public int getUnitCost() {
-        return unitCost
-    }
-    public void setUnitCost(int newValue) {
-        unitCost = newValue
-    }
-    public int unitCost = 0
-
-    /**
-     *
-     * This is an agent property.
      * @field available
      *
      */
@@ -152,21 +137,6 @@ public class Resource  {
         owner = newValue
     }
     public def owner = []
-
-    /**
-     *
-     * The service unit cost
-     * @field cost
-     *
-     */
-    @Parameter (displayName = "Unit Cost", usageName = "cost")
-    public int getCost() {
-        return cost
-    }
-    public void setCost(int newValue) {
-        cost = newValue
-    }
-    public int cost = 0
 
     /**
      *
@@ -230,33 +200,18 @@ public class Resource  {
 
     /**
      *
-     * Mark the status of processing or not
-     * @field processing
-     *
-     */
-    @Parameter (displayName = "Processing ?", usageName = "processing")
-    public boolean getProcessing() {
-        return processing
-    }
-    public void setProcessing(boolean newValue) {
-        processing = newValue
-    }
-    public boolean processing = false
-
-    /**
-     *
      * Quality
      * @field quality
      *
      */
     @Parameter (displayName = "Quality", usageName = "quality")
-    public def getQuality() {
+    public double getQuality() {
         return quality
     }
-    public void setQuality(def newValue) {
+    public void setQuality(double newValue) {
         quality = newValue
     }
-    public def quality = 0
+    public double quality = 0
 
     /**
      *
@@ -280,13 +235,13 @@ public class Resource  {
      *
      */
     @Parameter (displayName = "Rank", usageName = "rank")
-    public def getRank() {
+    public double getRank() {
         return rank
     }
-    public void setRank(def newValue) {
+    public void setRank(double newValue) {
         rank = newValue
     }
-    public def rank = 0
+    public double rank = 0
 
     /**
      *
@@ -317,6 +272,36 @@ public class Resource  {
         buffer = newValue
     }
     public def buffer = []
+
+    /**
+     *
+     * Mark queue in joblist or not
+     * @field queue
+     *
+     */
+    @Parameter (displayName = "Queue Status", usageName = "queue")
+    public boolean getQueue() {
+        return queue
+    }
+    public void setQueue(boolean newValue) {
+        queue = newValue
+    }
+    public boolean queue = false
+
+    /**
+     *
+     * This is an agent property.
+     * @field queueLength
+     *
+     */
+    @Parameter (displayName = "Queue Length", usageName = "queueLength")
+    public int getQueueLength() {
+        return queueLength
+    }
+    public void setQueueLength(int newValue) {
+        queueLength = newValue
+    }
+    public int queueLength = 0
 
     /**
      *
@@ -361,21 +346,6 @@ public class Resource  {
         println this.toString() + " joblist " + this.jobList
         println this.toString() + " buffer " + this.buffer
         println this.toString() + " readytask " + this.readyTask
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Bid
-     *
-     */
-    public void Bid(int cost) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.setUnitCost(cost)
     }
 
     /**
@@ -534,7 +504,8 @@ public class Resource  {
             this.jobList << theOne
             println this.toString() + " jobList " + this.jobList
             println this.toString() + " buffer " + this.buffer
-            println this.toString() + " readytask " + this.readyTask
+            this.queueLength += 1
+            this.setQueue(true)
 
         } else  {
 
@@ -581,6 +552,9 @@ public class Resource  {
                 this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
                 theOne.prepareStatus[this.getType()] = true
                 this.jobList.remove(theOne)
+                this.setQueue(false)
+                // This is a task.
+                this.queueLength -= 1
 
             } else  {
 
@@ -591,6 +565,26 @@ public class Resource  {
 
         }
 
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Review and comment after the task is finished
+     * @method Review
+     *
+     */
+    public def Review() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
         // Return the results.
         return returnValue
 

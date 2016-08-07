@@ -340,7 +340,7 @@ public class PureProvider  {
                 AddAgentToContext("Ecosystem", res)
                 this.addResource(res)
                 platform.Indexing(res)
-                platform.typeQueueLength[res.getType()] = 0
+                platform.NewQueue(res)
 
             }
 

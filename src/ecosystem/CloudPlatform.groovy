@@ -284,20 +284,22 @@ public class CloudPlatform  {
             if (res.getQuality() in this.typeQuality[res.getType()].keySet()) {
 
                 // This is a task.
-                this.typeQuality[res.getType()][res.getQuality()] += 1
+                this.typeQuality[res.getType()][res.getQuality()] += res.getCapacity()
 
             } else  {
 
                 // This is a task.
-                this.typeQuality[res.getType()][res.getQuality()] = 1
+                this.typeQuality[res.getType()][res.getQuality()] = res.getCapacity()
 
             }
+            // This is a task.
+            println this.typeQuality
 
         } else  {
 
             // This is a task.
             this.typeQuality[res.getType()] = [:]
-            this.typeQuality[res.getType()][res.getQuality()] = 1
+            this.typeQuality[res.getType()][res.getQuality()] = res.getCapacity()
 
         }
         // Return the results.
@@ -336,6 +338,38 @@ public class CloudPlatform  {
 
             // This is a task.
             this.typeQueueLength[watchedAgent.getType()] -= 1
+
+        }
+        // This is a task.
+        println this.typeQueueLength
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method NewQueue
+     *
+     */
+    public def NewQueue(res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (res.getType() in this.typeQueueLength.keySet()) {
+
+
+        } else  {
+
+            // This is a task.
+            this.typeQueueLength[res.getType()] = 0
 
         }
         // Return the results.

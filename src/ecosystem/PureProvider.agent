@@ -42,7 +42,7 @@
     <taskstep x="244" y="325" comment="This is a task." command1="res.addOwner(this)" command2="this.candidates &lt;&lt; res" command3="println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType()" command4="this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="">
       <label x="244" y="310" text="Add the attr"/>
     </taskstep>
-    <taskstep x="539" y="708" comment="This is a task." command1="AddAgentToContext(&quot;Ecosystem&quot;, res)" command2="this.addResource(res)" command3="platform.Indexing(res)" command4="platform.typeQueueLength[res.getType()] = 0" command5="">
+    <taskstep x="539" y="708" comment="This is a task." command1="AddAgentToContext(&quot;Ecosystem&quot;, res)" command2="this.addResource(res)" command3="platform.Indexing(res)" command4="platform.NewQueue(res)" command5="">
       <label x="539" y="693" text="Do Task"/>
     </taskstep>
     <taskstep x="634" y="617" comment="This is a task." command1="this.candidates = []" command2="returnValue = true" command3="" command4="" command5="">
@@ -121,13 +121,13 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="124" y="333"/>
-    <endstep x="645" y="367"/>
-    <endstep x="546" y="368"/>
-    <endstep x="642" y="718"/>
-    <endstep x="41" y="793"/>
-    <endstep x="56" y="1208"/>
-    <endstep x="273" y="851"/>
+    <endstep x="129" y="338"/>
+    <endstep x="650" y="372"/>
+    <endstep x="551" y="373"/>
+    <endstep x="647" y="723"/>
+    <endstep x="46" y="798"/>
+    <endstep x="61" y="1213"/>
+    <endstep x="278" y="856"/>
   </endsteps>
   <connections>
     <transitions>
@@ -154,6 +154,16 @@
       <transition>
         <transitionsource type="behavior" index="5" anchor="0"/>
         <transitiontarget type="decision" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="7" anchor="0"/>
+        <transitiontarget type="task" index="13" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -187,11 +197,6 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="6" anchor="0"/>
-        <transitiontarget type="task" index="8" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="8" anchor="2"/>
         <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
@@ -209,11 +214,6 @@
       <transition>
         <transitionsource type="task" index="13" anchor="2"/>
         <transitiontarget type="decision" index="6" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="7" anchor="0"/>
-        <transitiontarget type="task" index="13" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

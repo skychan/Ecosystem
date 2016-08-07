@@ -33,7 +33,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="1035" y="199" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp += amount" command3="this.setAvailable(temp)" command4="println this.toString()" command5="println this.toString() + &quot; joblist &quot; + this.jobList\fprintln this.toString() + &quot; buffer &quot; + this.buffer\fprintln this.toString() + &quot; readytask &quot; + this.readyTask">
+    <taskstep x="1035" y="199" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp += amount" command3="this.setAvailable(temp)" command4="" command5="">
       <label x="1035" y="184" text="Release"/>
     </taskstep>
     <taskstep x="571" y="218" comment="add master to the list" command1="this.master &lt;&lt; masterID" command2="" command3="" command4="" command5="">
@@ -42,19 +42,19 @@
     <taskstep x="464" y="222" comment="add owner to the list" command1="this.owner &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
       <label x="464" y="207" text="set owner"/>
     </taskstep>
-    <taskstep x="64" y="335" comment="change the compete state" command1="this.compete &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
+    <taskstep x="64" y="335" comment="change the compete state" command1="this.compete &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="//println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
       <label x="64" y="320" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="870" y="501" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="870" y="486" text="Do Task"/>
     </taskstep>
-    <taskstep x="755" y="498" comment="This is a task." command1="println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
+    <taskstep x="755" y="498" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
       <label x="755" y="483" text="Do Task"/>
     </taskstep>
     <taskstep x="155" y="245" comment="This is a task." command1="returnValue = (tester in checkList)" command2="" command3="" command4="" command5="">
       <label x="155" y="230" text="Do Task"/>
     </taskstep>
-    <taskstep x="223" y="572" comment="This is a task." command1="this.jobList &lt;&lt; theOne" command2="println this.toString() + &quot; jobList &quot; + this.jobList" command3="println this.toString() + &quot; buffer &quot; + this.buffer" command4="this.queueLength += 1" command5="this.setQueue(true)">
+    <taskstep x="223" y="572" comment="This is a task." command1="this.jobList &lt;&lt; theOne" command2="println this.toString() + &quot; jobList &quot; + this.jobList" command3="println this.toString() + &quot; buffer &quot; + this.buffer\fprintln this.toString() + &quot; readytask &quot; + this.readyTask" command4="this.queueLength += 1" command5="this.setQueue(true)\fprintln this.toString() + &quot; with type &quot;+ this.getType()+ &quot; queue length=&quot; + this.getQueueLength()">
       <label x="223" y="557" text="Do Task"/>
     </taskstep>
     <taskstep x="369" y="572" comment="This is a task." command1="this.buffer &lt;&lt; theOne" command2="this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])" command3="theOne.prepareStatus[this.getType()] = true" command4="println this.toString() + &quot; jobList &quot; + this.jobList" command5="println this.toString() + &quot; buffer &quot; + this.buffer\fprintln this.toString() + &quot; readytask &quot; + this.readyTask">
@@ -63,20 +63,20 @@
     <taskstep x="296" y="464" comment="This is a task." command1="this.compete.remove(theOne)" command2="" command3="" command4="" command5="">
       <label x="296" y="449" text="Do Task"/>
     </taskstep>
-    <taskstep x="144" y="814" comment="This is a task." command1="this.buffer &lt;&lt; theOne" command2="this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])" command3="theOne.prepareStatus[this.getType()] = true" command4="this.jobList.remove(theOne)" command5="this.setQueue(false)">
-      <label x="144" y="799" text="Do Task"/>
-    </taskstep>
-    <taskstep x="138" y="645" comment="This is a task." command1="Task theOne = this.jobList[0]" command2="" command3="" command4="" command5="">
-      <label x="138" y="630" text="Do Task"/>
-    </taskstep>
-    <taskstep x="46" y="735" comment="This is a task." command1="break" command2="" command3="" command4="" command5="">
-      <label x="46" y="720" text="Do Task"/>
+    <taskstep x="131" y="748" comment="This is a task." command1="this.buffer &lt;&lt; theOne" command2="this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])" command3="theOne.prepareStatus[this.getType()] = true" command4="this.shiftTask &lt;&lt; theOne" command5="this.setQueue(false)">
+      <label x="131" y="733" text="Do Task"/>
     </taskstep>
     <taskstep x="565" y="752" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="565" y="737" text="Do Task"/>
     </taskstep>
-    <taskstep x="137" y="895" comment="This is a task." command1="this.queueLength -= 1" command2="" command3="" command4="" command5="">
-      <label x="137" y="880" text="Do Task"/>
+    <taskstep x="133" y="841" comment="This is a task." command1="this.queueLength -= 1" command2="println this.toString() + &quot; with type &quot;+ this.getType()+ &quot; queue length=&quot; + this.getQueueLength()" command3="" command4="" command5="">
+      <label x="133" y="826" text="Do Task"/>
+    </taskstep>
+    <taskstep x="46" y="797" comment="This is a task." command1="this.jobList.remove(theOne)" command2="" command3="" command4="" command5="">
+      <label x="46" y="782" text="Do Task"/>
+    </taskstep>
+    <taskstep x="-17" y="723" comment="This is a task." command1="this.shiftTask = []" command2="" command3="" command4="" command5="">
+      <label x="-17" y="708" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -86,15 +86,18 @@
     <decisionstep x="295" y="545" comment="This is an agent decision." criteria="this.getAvailable() &lt; theOne.needResourceCapacity[this.getType()]" branchType="if">
       <label x="295" y="530" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="137" y="730" comment="This is an agent decision." criteria="this.getAvailable() &gt;= theOne.needResourceCapacity[this.getType()]" branchType="if">
-      <label x="137" y="715" text="Evaluate Criteria"/>
+    <decisionstep x="138" y="645" comment="This is an agent decision." criteria="this.getAvailable() &gt;= theOne.needResourceCapacity[this.getType()]" branchType="if">
+      <label x="138" y="630" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="47" y="642" comment="This is a loop." criteria="this.jobList.size() &gt; 0" branchType="while">
+    <decisionstep x="47" y="642" comment="This is a loop." criteria="theOne in this.jobList" branchType="while">
       <label x="47" y="627" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="44" y="726" comment="This is a loop." criteria="theOne in this.shiftTask" branchType="while">
+      <label x="44" y="711" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="322" y="682"/>
+    <joinstep x="332" y="692"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="69" y="67" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -145,18 +148,21 @@
     <agentproperty x="393" y="831" comment="This is an agent property." visibility="0" compiledname="queueLength" type="int" defaultvalue="0">
       <label x="398" y="816" text="Queue Length"/>
     </agentproperty>
+    <agentproperty x="-9" y="558" comment="This is an agent property." visibility="0" compiledname="shiftTask" type="def" defaultvalue="[]">
+      <label x="-4" y="543" text="Shift Task"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="1065" y="326"/>
-    <endstep x="600" y="347"/>
-    <endstep x="489" y="349"/>
-    <endstep x="88" y="455"/>
-    <endstep x="897" y="625"/>
-    <endstep x="783" y="620"/>
-    <endstep x="179" y="402"/>
-    <endstep x="326" y="759"/>
-    <endstep x="71" y="835"/>
-    <endstep x="586" y="866"/>
+    <endstep x="1075" y="336"/>
+    <endstep x="610" y="357"/>
+    <endstep x="499" y="359"/>
+    <endstep x="76" y="439"/>
+    <endstep x="907" y="635"/>
+    <endstep x="793" y="630"/>
+    <endstep x="171" y="410"/>
+    <endstep x="336" y="769"/>
+    <endstep x="596" y="876"/>
+    <endstep x="-13" y="804"/>
   </endsteps>
   <connections>
     <transitions>
@@ -207,7 +213,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="9" anchor="0"/>
-        <transitiontarget type="task" index="13" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -262,22 +268,22 @@
       </transition>
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
-        <transitiontarget type="task" index="14" anchor="0"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="11" anchor="2"/>
-        <transitiontarget type="decision" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="13" anchor="2"/>
-        <transitiontarget type="end" index="9" anchor="0"/>
+        <transitiontarget type="end" index="8" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="14" anchor="2"/>
+        <transitiontarget type="end" index="9" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -302,19 +308,24 @@
         <transitiontarget type="task" index="10" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="2" anchor="1"/>
-        <transitiontarget type="task" index="12" anchor="3"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="3" anchor="3"/>
-        <transitiontarget type="task" index="11" anchor="1"/>
+        <transitiontarget type="decision" index="2" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="3" anchor="2"/>
-        <transitiontarget type="end" index="8" anchor="0"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="4" anchor="2"/>
+        <transitiontarget type="task" index="13" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="4" anchor="1"/>
+        <transitiontarget type="task" index="14" anchor="3"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

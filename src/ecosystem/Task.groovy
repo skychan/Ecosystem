@@ -90,7 +90,6 @@ public class Task  {
     }
     public void setNeedResourceCapacity(def newValue) {
         needResourceCapacity = newValue
-        
     }
     public def needResourceCapacity = [:]
 
@@ -317,10 +316,10 @@ public class Task  {
         }
 
         // This is a task.
-        println "task para setted"
+        //println "task para setted"
         this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
         this.setType(tdata.key)
-        println "start at " + this.getStartTime()
+        //println "start at " + this.getStartTime()
     }
 
     /**
@@ -386,7 +385,7 @@ public class Task  {
 
         // This is a task.
         this.candidates.clear()
-        println "after the selection and clear"
+        //println "after the selection and clear"
     }
 
     /**
@@ -455,7 +454,7 @@ public class Task  {
     /**
      *
      * Check the lackness of resources
-     * @method CheckStatus
+     * @method CheckLackness
      *
      */
     @Watch(
@@ -465,7 +464,7 @@ public class Task  {
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 0.2d
     )
-    public def CheckStatus(ecosystem.Task watchedAgent) {
+    public def CheckLackness(ecosystem.Task watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -488,15 +487,15 @@ public class Task  {
 
             // This is a task.
             this.candidates.each{ it.value=[]}
-            println this.toString() + " lack of resource"
+            //println this.toString() + " lack of resource"
 
         } else  {
 
             // This is a task.
-            println this.candidates
+            //println this.candidates
             this.Select()
             this.setAllocated(true)
-            println this.toString() + " selected resources"
+            // println this.toString() + " selected resources"
 
         }
         // Return the results.
@@ -572,7 +571,7 @@ public class Task  {
                 // This is a task.
                 println this.toString() + " is finished"
                 this.setFinish(true)
-                println "spent " + (RunEnvironment.getInstance().getCurrentSchedule().getTickCount()-this.getStartTime())
+                //println "spent " + (RunEnvironment.getInstance().getCurrentSchedule().getTickCount()-this.getStartTime())
 
             } else  {
 
@@ -613,12 +612,32 @@ public class Task  {
 
             // This is a task.
             this.setInNeed(true)
-            println this.toString() + " lack response so publish need again"
+            //println this.toString() + " lack response so publish need again"
 
         } else  {
 
 
         }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Review and comment after the task is finished
+     * @method Review
+     *
+     */
+    public def Review() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
         // Return the results.
         return returnValue
 
@@ -654,6 +673,7 @@ public class Task  {
                 // This is a task.
                 theRes.readyTask << this
                 theRes.buffer.remove(this)
+                // what's that
 
             }
 
@@ -665,26 +685,6 @@ public class Task  {
 
 
         }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Review and comment after the task is finished
-     * @method Review
-     *
-     */
-    public def Review() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
         // Return the results.
         return returnValue
 

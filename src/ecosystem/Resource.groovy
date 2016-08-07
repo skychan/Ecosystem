@@ -305,6 +305,21 @@ public class Resource  {
 
     /**
      *
+     * This is an agent property.
+     * @field shiftTask
+     *
+     */
+    @Parameter (displayName = "Shift Task", usageName = "shiftTask")
+    public def getShiftTask() {
+        return shiftTask
+    }
+    public void setShiftTask(def newValue) {
+        shiftTask = newValue
+    }
+    public def shiftTask = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -342,10 +357,6 @@ public class Resource  {
         int temp = this.getAvailable()
         temp += amount
         this.setAvailable(temp)
-        println this.toString()
-        println this.toString() + " joblist " + this.jobList
-        println this.toString() + " buffer " + this.buffer
-        println this.toString() + " readytask " + this.readyTask
     }
 
     /**
@@ -406,7 +417,7 @@ public class Resource  {
             // change the compete state
             this.compete << watchedAgent
             watchedAgent.addCandidates(this)
-            println this.toString() + " compete " + watchedAgent.toString()
+            //println this.toString() + " compete " + watchedAgent.toString()
 
         } else  {
 
@@ -452,7 +463,7 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        println "add demander's review to the history"
+        //println "add demander's review to the history"
         this.reviews << rvalue
         // Return the results.
         return returnValue
@@ -504,8 +515,10 @@ public class Resource  {
             this.jobList << theOne
             println this.toString() + " jobList " + this.jobList
             println this.toString() + " buffer " + this.buffer
+            println this.toString() + " readytask " + this.readyTask
             this.queueLength += 1
             this.setQueue(true)
+            println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
 
         } else  {
 
@@ -539,10 +552,8 @@ public class Resource  {
 
 
         // This is a loop.
-        while (this.jobList.size() > 0) {
+        for (theOne in this.jobList) {
 
-            // This is a task.
-            Task theOne = this.jobList[0]
 
             // This is an agent decision.
             if (this.getAvailable() >= theOne.needResourceCapacity[this.getType()]) {
@@ -551,20 +562,30 @@ public class Resource  {
                 this.buffer << theOne
                 this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
                 theOne.prepareStatus[this.getType()] = true
-                this.jobList.remove(theOne)
+                this.shiftTask << theOne
                 this.setQueue(false)
                 // This is a task.
                 this.queueLength -= 1
+                println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
 
             } else  {
 
-                // This is a task.
-                break
 
             }
 
         }
 
+
+        // This is a loop.
+        for (theOne in this.shiftTask) {
+
+            // This is a task.
+            this.jobList.remove(theOne)
+
+        }
+
+        // This is a task.
+        this.shiftTask = []
         // Return the results.
         return returnValue
 

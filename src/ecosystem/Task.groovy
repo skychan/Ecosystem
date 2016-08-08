@@ -76,7 +76,7 @@ public class Task  {
     public void setType(def newValue) {
         type = newValue
     }
-    public def type = -1
+    public def type = 0
 
     /**
      *
@@ -395,6 +395,51 @@ public class Task  {
 
     /**
      *
+     * Record the candidates
+     * @field serviceCandidates
+     *
+     */
+    @Parameter (displayName = "Service Candidates", usageName = "serviceCandidates")
+    public def getServiceCandidates() {
+        return serviceCandidates
+    }
+    public void setServiceCandidates(def newValue) {
+        serviceCandidates = newValue
+    }
+    public def serviceCandidates = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field allocatedService
+     *
+     */
+    @Parameter (displayName = "Allocated Service", usageName = "allocatedService")
+    public def getAllocatedService() {
+        return allocatedService
+    }
+    public void setAllocatedService(def newValue) {
+        allocatedService = newValue
+    }
+    public def allocatedService = 0
+
+    /**
+     *
+     * T -- service; F -- resources
+     * @field choice
+     *
+     */
+    @Parameter (displayName = "Choice", usageName = "choice")
+    public boolean getChoice() {
+        return choice
+    }
+    public void setChoice(boolean newValue) {
+        choice = newValue
+    }
+    public boolean choice = false
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -490,11 +535,13 @@ public class Task  {
     /**
      *
      * Select provider
-     * @method Select
+     * @method SortResource
      *
      */
-    public def Select() {
+    public def SortResource() {
 
+        // This is a task.
+        this.setChoice(false)
 
         // This is a loop.
         for (candidateResource in this.getCandidates()) {
@@ -539,7 +586,7 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        resourceList.sort{[-it.getAvailable(),it.jobList.size()]}
+        //resourceList.sort{[-it.getAvailable(),it.jobList.size()]}
         // Return the results.
         return returnValue
 
@@ -610,28 +657,40 @@ public class Task  {
 
 
         // This is an agent decision.
-        if ([] in this.candidates.values()) {
+        if (this.serviceCandidates == []) {
 
 
-            // This is a loop.
-            for (candidateList in this.candidates.values()) {
+            // This is an agent decision.
+            if ([] in this.candidates.values()) {
+
+
+                // This is a loop.
+                for (candidateList in this.candidates.values()) {
+
+                    // This is a task.
+                    candidateList.each{ it.compete.remove(this)}
+
+                }
 
                 // This is a task.
-                candidateList.each{ it.compete.remove(this)}
+                this.candidates.each{ it.value=[]}
+                //println this.toString() + " lack of resource"
+
+            } else  {
+
+                // This is a task.
+                //println this.candidates
+                this.Select()
+                this.setAllocated(true)
+                // println this.toString() + " selected resources"
 
             }
-
-            // This is a task.
-            this.candidates.each{ it.value=[]}
-            //println this.toString() + " lack of resource"
 
         } else  {
 
             // This is a task.
-            //println this.candidates
-            this.Select()
             this.setAllocated(true)
-            // println this.toString() + " selected resources"
+            this.Select()
 
         }
         // Return the results.
@@ -693,45 +752,76 @@ public class Task  {
             if (this.getRemainingTime() == 0) {
 
 
-                // This is a loop.
-                for (theRes in this.getAllocatedResource().values()) {
+                // This is an agent decision.
+                if (this.getChoice()) {
 
                     // The finish step
-                    theRes.readyTask.remove(this)
-                    theRes.Release(this.needResourceCapacity[theRes.getType()])
-                    theRes.Next()
+                    Service theSer = this.allocatedService
+                    theSer.readyTask.remove(this)
+                    theSer.Release(this.needResourceCapacity[theRes.getType()])
+                    theSer.Next()
                     // This is a task.
-                    RandomHelper.createNormal(theRes.getQuality(),1)
-                    double tempQuality = RandomHelper.getNormal().nextDouble()
+                    this.setProductQuality(theSer.getQuality())
+                    // This is a task.
+                    int t = this.getReayTime() - this.inBufferTime[theSer]
+                    int t2 = this.getFinishTime() - this.inBufferTime[theSer]
+                    int q = 0
+                    or(needq in this.needResourceCapacity.values()){
+                    	q += needq
+                    }
+                    q = q * t2
+                    this.reviews << Math.exp(t)*q*theRes.getRank()
+                    theSer.Review(this)
+                    // This is a task.
+                    println this.toString() + " is finished"
+                    this.setFinish(true)
+                    this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                    this.span = this.finishTime - this.getStartTime()
 
-                    // This is an agent decision.
-                    if (tempQuality < this.getProductQuality()) {
+                } else  {
 
+
+                    // This is a loop.
+                    for (theRes in this.getAllocatedResource().values()) {
+
+                        // The finish step
+                        theRes.readyTask.remove(this)
+                        theRes.Release(this.needResourceCapacity[theRes.getType()])
+                        theRes.Next()
                         // This is a task.
-                        this.setProductQuality(tempQuality)
+                        RandomHelper.createNormal(theRes.getQuality(),1)
+                        double tempQuality = RandomHelper.getNormal().nextDouble()
 
-                    } else  {
+                        // This is an agent decision.
+                        if (tempQuality < this.getProductQuality()) {
 
+                            // This is a task.
+                            this.setProductQuality(tempQuality)
+
+                        } else  {
+
+
+                        }
 
                     }
 
-                }
 
+                    // This is a loop.
+                    for (theRes in this.getAllocatedResource().values()) {
 
-                // This is a loop.
-                for (theRes in this.getAllocatedResource().values()) {
+                        // This is a task.
+                        theRes.Review(this)
+                        this.Review(theRes)
+
+                    }
 
                     // This is a task.
-                    theRes.Review(this)
-                    this.Review(theRes)
+                    println this.toString() + " is finished"
+                    this.setFinish(true)
+                    this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                    this.span = this.finishTime - this.getStartTime()
 
                 }
-
-                // This is a task.
-                println this.toString() + " is finished"
-                this.setFinish(true)
-                this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-                this.span = this.finishTime - this.getStartTime()
 
             } else  {
 
@@ -828,19 +918,12 @@ public class Task  {
 
 
         // This is an agent decision.
-        if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
+        if (this.getChoice()) {
 
-
-            // This is a loop.
-            for (theRes in this.allocatedResource.values()) {
-
-                // This is a task.
-                theRes.readyTask << this
-                theRes.buffer.remove(this)
-                // what's that
-
-            }
-
+            // This is a task.
+            Service theSer = this.allocatedService
+            theSer.readyTask << this
+            theSer.buffer.remove(this)
             // This is a task.
             this.Reset()
             this.setRemainingTime(this.getProcessingTime())
@@ -849,7 +932,217 @@ public class Task  {
         } else  {
 
 
+            // This is an agent decision.
+            if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
+
+
+                // This is a loop.
+                for (theRes in this.allocatedResource.values()) {
+
+                    // This is a task.
+                    theRes.readyTask << this
+                    theRes.buffer.remove(this)
+                    // what's that
+
+                }
+
+                // This is a task.
+                this.Reset()
+                this.setRemainingTime(this.getProcessingTime())
+                this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+
+            } else  {
+
+
+            }
+
         }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addServiceCandidates
+     *
+     */
+    public def addServiceCandidates(competitor) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.serviceCandidates << competitor
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Select
+     *
+     */
+    public def Select() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if ([] in this.candidates.values()) {
+
+            // This is a task.
+            this.ArrangeService()
+
+        } else  {
+
+
+            // This is an agent decision.
+            if (this.serviceCandidates == []) {
+
+                // This is a task.
+                this.SortResource()
+
+            } else  {
+
+                // This is a task.
+                def tempAllocation = [:]
+                int qlength = 0
+                int bquality = Math.exp(200)
+
+                // This is a loop.
+                for (candidateResource in this.getCandidates()) {
+
+                    // This is a task.
+                    def theType = candidateResource.key
+                    def theList = candidateResource.value
+                    Evaluation(theList)
+                    tempAllocation[theType] = theList[0]
+
+                    // This is an agent decision.
+                    if (theList[0].getFullLength() > qlength) {
+
+                        // This is a task.
+                        qlength = theList[0].getFullLength()
+
+                        // This is an agent decision.
+                        if (theList[0].getQuality < bquality) {
+
+                            // This is a task.
+                            bquality = theList[0].getQuality
+
+                        } else  {
+
+
+                        }
+
+                    } else  {
+
+
+                        // This is an agent decision.
+                        if (theList[0].getQuality < bquality) {
+
+                            // This is a task.
+                            bquality = theList[0].getQuality
+
+                        } else  {
+
+
+                        }
+
+                    }
+
+                }
+
+                // This is a task.
+                Evaluation(this.getServiceCandidates())
+
+                // This is an agent decision.
+                if (this.serviceCandidates[0].getFullLength() < qlength) {
+
+                    // This is a task.
+                    this.ArrangeService()
+
+                } else  {
+
+
+                    // This is an agent decision.
+                    if (this.serviceCandidates[0].getFullLength() == qlength) {
+
+                        // This is a task.
+                        this.ArrangeService()
+
+                    } else  {
+
+
+                        // This is an agent decision.
+                        if (this.serviceCandidates[0].getQuality() >= bquality) {
+
+                            // This is a task.
+                            this.ArrangeService()
+
+                        } else  {
+
+                            // This is a task.
+                            this.SortResource()
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method ArrangeService
+     *
+     */
+    public def ArrangeService() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        def theList = this.getServiceCandidates()
+        Evaluation(theList)
+        theList[0].Chosen(this)
+        this.allocatedService = theList[0]
+        this.setChoice(true)
+
+        // This is a loop.
+        for (ser in this.getServiceCandidates()) {
+
+            // This is a task.
+            ser.compete.remove(this)
+
+        }
+
+        // This is a task.
+        this.serviceCandidates.clear()
+        //println "after the selection and clear"
+        this.setChosenTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
         // Return the results.
         return returnValue
 

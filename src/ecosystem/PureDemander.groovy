@@ -193,7 +193,7 @@ public class PureDemander  {
         //println this.taskMap
         Order o = (Order) agent
         o.addOwner(this)
-        o.setOwner(this)
+        o.setType(this.toString())
         // Set the order parameters
         o.setParameters(this.taskMap)
         println this.toString() + " need "+ o.toString()

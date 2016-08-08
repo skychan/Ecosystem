@@ -31,6 +31,12 @@
     <behaviorstep x="562" y="671" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Review and comment after the task is finished" visibility="0" returntype="def" compiledname="Review" parameters="theTask" exceptions="">
       <label x="562" y="656" text="Review self"/>
     </behaviorstep>
+    <behaviorstep x="801" y="696" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="int" compiledname="getFullLength" parameters="" exceptions="">
+      <label x="801" y="681" text="Full queue length"/>
+    </behaviorstep>
+    <behaviorstep x="198" y="974" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureProvider" watchannotationtargetfieldnames="serviceCalling" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="ResponseServiceCall" parameters="ecosystem.PureProvider watchedAgent" exceptions="">
+      <label x="198" y="959" text="Response the service call"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="1035" y="199" comment="This is a task." command1="int temp = this.getAvailable()" command2="temp += amount" command3="this.setAvailable(temp)" command4="" command5="">
@@ -60,7 +66,7 @@
     <taskstep x="413" y="568" comment="This is a task." command1="this.buffer &lt;&lt; theOne" command2="this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])" command3="theOne.prepareStatus[this.getType()] = true" command4="double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()\fint delta =  t - theOne.getChosenTime()\ftheOne.responseTime[this] = delta\ftheOne.inBufferTime[this] = t" command5="println this.toString() + &quot; jobList &quot; + this.jobList\fprintln this.toString() + &quot; buffer &quot; + this.buffer\fprintln this.toString() + &quot; readytask &quot; + this.readyTask">
       <label x="413" y="553" text="Do Task"/>
     </taskstep>
-    <taskstep x="340" y="460" comment="This is a task." command1="this.compete.remove(theOne)" command2="" command3="" command4="" command5="">
+    <taskstep x="340" y="460" comment="This is a task." command1="this.compete.remove(theOne)" command2="this.owner[0].addTaskFrequency(theOne)" command3="" command4="" command5="">
       <label x="340" y="445" text="Do Task"/>
     </taskstep>
     <taskstep x="173" y="743" comment="This is a task." command1="this.buffer &lt;&lt; theOne" command2="this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])" command3="theOne.prepareStatus[this.getType()] = true" command4="this.shiftTask &lt;&lt; theOne" command5="this.setQueue(false)">
@@ -75,8 +81,14 @@
     <taskstep x="88" y="792" comment="This is a task." command1="this.jobList.remove(theOne)" command2="" command3="" command4="" command5="">
       <label x="88" y="777" text="Do Task"/>
     </taskstep>
-    <taskstep x="9" y="710" comment="This is a task." command1="this.shiftTask = []" command2="" command3="" command4="" command5="">
+    <taskstep x="9" y="710" comment="This is a task." command1="this.shiftTask = []" command2="this.owner[0].ServiceCall()" command3="" command4="" command5="">
       <label x="9" y="695" text="Do Task"/>
+    </taskstep>
+    <taskstep x="802" y="801" comment="This is a task." command1="returnValue = this.jobList.size() + this.buffer.size() + this.readyTask.size()" command2="" command3="" command4="" command5="">
+      <label x="802" y="786" text="Do Task"/>
+    </taskstep>
+    <taskstep x="197" y="1138" comment="change the compete state" command1="this.competeService &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="//println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
+      <label x="197" y="1123" text="Change the comoete state"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -95,9 +107,12 @@
     <decisionstep x="86" y="721" comment="This is a loop." criteria="theOne in this.shiftTask" branchType="while">
       <label x="86" y="706" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="196" y="1046" comment="Decide to take the task or not" criteria="true" branchType="if">
+      <label x="196" y="1031" text="Take it or not"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="353" y="671"/>
+    <joinstep x="358" y="676"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="69" y="67" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -151,18 +166,23 @@
     <agentproperty x="451" y="455" comment="This is an agent property." visibility="0" compiledname="chosenTime" type="double" defaultvalue="0">
       <label x="456" y="440" text="Chosen time"/>
     </agentproperty>
+    <agentproperty x="89" y="972" comment="The var to record compete order" visibility="0" compiledname="competeService" type="def" defaultvalue="[]">
+      <label x="94" y="957" text="Compete service"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="1041" y="329"/>
-    <endstep x="585" y="317"/>
-    <endstep x="474" y="319"/>
-    <endstep x="69" y="432"/>
-    <endstep x="880" y="603"/>
-    <endstep x="766" y="598"/>
-    <endstep x="160" y="429"/>
-    <endstep x="351" y="764"/>
-    <endstep x="573" y="835"/>
-    <endstep x="20" y="819"/>
+    <endstep x="1046" y="334"/>
+    <endstep x="581" y="323"/>
+    <endstep x="469" y="318"/>
+    <endstep x="74" y="437"/>
+    <endstep x="885" y="608"/>
+    <endstep x="771" y="603"/>
+    <endstep x="165" y="434"/>
+    <endstep x="356" y="769"/>
+    <endstep x="578" y="840"/>
+    <endstep x="25" y="824"/>
+    <endstep x="810" y="890"/>
+    <endstep x="206" y="1237"/>
   </endsteps>
   <connections>
     <transitions>
@@ -286,6 +306,26 @@
         <transitiontarget type="end" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="10" anchor="0"/>
+        <transitiontarget type="task" index="15" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="15" anchor="2"/>
+        <transitiontarget type="end" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="11" anchor="0"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="16" anchor="2"/>
+        <transitiontarget type="end" index="11" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -326,6 +366,11 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="4" anchor="1"/>
         <transitiontarget type="task" index="14" anchor="3"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="2"/>
+        <transitiontarget type="task" index="16" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

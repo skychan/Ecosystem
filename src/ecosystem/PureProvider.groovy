@@ -140,6 +140,81 @@ public class PureProvider  {
 
     /**
      *
+     * This is an agent property.
+     * @field taskFrequency
+     *
+     */
+    @Parameter (displayName = "Task Frequency", usageName = "taskFrequency")
+    public def getTaskFrequency() {
+        return taskFrequency
+    }
+    public void setTaskFrequency(def newValue) {
+        taskFrequency = newValue
+    }
+    public def taskFrequency = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field callList
+     *
+     */
+    @Parameter (displayName = "Call List", usageName = "callList")
+    public def getCallList() {
+        return callList
+    }
+    public void setCallList(def newValue) {
+        callList = newValue
+    }
+    public def callList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceCalling
+     *
+     */
+    @Parameter (displayName = "Service Calling", usageName = "serviceCalling")
+    public boolean getServiceCalling() {
+        return serviceCalling
+    }
+    public void setServiceCalling(boolean newValue) {
+        serviceCalling = newValue
+    }
+    public boolean serviceCalling = false
+
+    /**
+     *
+     * This is an agent property.
+     * @field ingredient
+     *
+     */
+    @Parameter (displayName = "Ingredient", usageName = "ingredient")
+    public def getIngredient() {
+        return ingredient
+    }
+    public void setIngredient(def newValue) {
+        ingredient = newValue
+    }
+    public def ingredient = [:]
+
+    /**
+     *
+     * Record the candidates
+     * @field candidates
+     *
+     */
+    @Parameter (displayName = "Candidates", usageName = "candidates")
+    public def getCandidates() {
+        return candidates
+    }
+    public void setCandidates(def newValue) {
+        candidates = newValue
+    }
+    public def candidates = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -418,6 +493,107 @@ public class PureProvider  {
 
         // This is a task.
         returnValue = Math.sqrt(tempsum/n)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addTaskFrequency
+     *
+     */
+    public def addTaskFrequency(theTask) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (theTask.getType() in this.taskFrequency.keySet()) {
+
+            // This is a task.
+            this.taskFrequency[theTask.getType()] += 1
+
+        } else  {
+
+            // This is a task.
+            this.taskFrequency[theTask.getType()] = 1
+            this.ingredient[theTask.getType()] = theTask.needResourceCapacity
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method ServiceCall
+     *
+     */
+    public def ServiceCall() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (true) {
+
+
+            // This is a loop.
+            for (pattern in this.taskFrequency) {
+
+
+                // This is an agent decision.
+                if (pattern.value >= 5) {
+
+                    // This is a task.
+                    this.setServiceCalling(true)
+                    this.callList << pattern.key
+
+                } else  {
+
+
+                }
+
+            }
+
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addCandidates
+     *
+     */
+    public def addCandidates(competitor) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.candidates[competitor.getType()]<<competitor
         // Return the results.
         return returnValue
 

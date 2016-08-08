@@ -320,6 +320,21 @@ public class Resource  {
 
     /**
      *
+     * The var to record compete order
+     * @field competeService
+     *
+     */
+    @Parameter (displayName = "Compete service", usageName = "competeService")
+    public def getCompeteService() {
+        return competeService
+    }
+    public void setCompeteService(def newValue) {
+        competeService = newValue
+    }
+    public def competeService = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -509,6 +524,7 @@ public class Resource  {
 
         // This is a task.
         this.compete.remove(theOne)
+        this.owner[0].addTaskFrequency(theOne)
 
         // This is an agent decision.
         if (this.getAvailable() < theOne.needResourceCapacity[this.getType()]) {
@@ -596,6 +612,7 @@ public class Resource  {
 
         // This is a task.
         this.shiftTask = []
+        this.owner[0].ServiceCall()
         // Return the results.
         return returnValue
 
@@ -621,6 +638,64 @@ public class Resource  {
         double h = theTask.getHardness()
         int p = theTask.getProcessingTime()
         this.reviews <<  (h * q / (t+p))
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method getFullLength
+     *
+     */
+    public int getFullLength() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        returnValue = this.jobList.size() + this.buffer.size() + this.readyTask.size()
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Response to the need call
+     * @method ResponseServiceCall
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeFieldNames = 'serviceCalling',
+        whenToTrigger = WatcherTriggerSchedule.LATER
+    )
+    public def ResponseServiceCall(ecosystem.PureProvider watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // Decide to take the task or not
+        if (true) {
+
+            // change the compete state
+            this.competeService << watchedAgent
+            watchedAgent.addCandidates(this)
+            //println this.toString() + " compete " + watchedAgent.toString()
+
+        } else  {
+
+
+        }
         // Return the results.
         return returnValue
 

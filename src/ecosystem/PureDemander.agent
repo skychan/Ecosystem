@@ -9,7 +9,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="270" y="292" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.addOwner(this)" command5="o.setOwner(this)">
+    <taskstep x="270" y="292" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.addOwner(this)" command5="o.setType(this.toString())">
       <label x="270" y="277" text="Generate Order"/>
     </taskstep>
     <taskstep x="271" y="383" comment="Set the order parameters" command1="o.setParameters(this.taskMap)" command2="println this.toString() + &quot; need &quot;+ o.toString()" command3="this.getOrderList().add(o)" command4="this.setNewOrder(o)" command5="this.setNeed(true)">
@@ -82,9 +82,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="339" y="1009"/>
-    <endstep x="533" y="238"/>
-    <endstep x="285" y="469"/>
+    <endstep x="344" y="1014"/>
+    <endstep x="538" y="243"/>
+    <endstep x="278" y="470"/>
   </endsteps>
   <connections>
     <transitions>

@@ -80,21 +80,6 @@ public class Order  {
 
     /**
      *
-     * Record the current owner
-     * @field owner
-     *
-     */
-    @Parameter (displayName = "Current owner", usageName = "owner")
-    public def getOwner() {
-        return owner
-    }
-    public void setOwner(def newValue) {
-        owner = newValue
-    }
-    public def owner = null
-
-    /**
-     *
      * Record the task an order contains
      * @field taskList
      *
@@ -107,6 +92,21 @@ public class Order  {
         taskList = newValue
     }
     public def taskList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field type
+     *
+     */
+    @Parameter (displayName = "Type", usageName = "type")
+    public def getType() {
+        return type
+    }
+    public void setType(def newValue) {
+        type = newValue
+    }
+    public def type = 0
 
     /**
      *
@@ -182,6 +182,8 @@ public class Order  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // This is a task.
+        int i = 1
 
         // This is a loop.
         for (tdata in taskMap) {
@@ -196,6 +198,9 @@ public class Order  {
                 t.setParameters(tdata)
                 t.addMaster(this)
                 this.taskList << t
+                // This is a task.
+                t.setType(this.getType() + "-" + (i).toString())
+                i+=1
 
             } else  {
 

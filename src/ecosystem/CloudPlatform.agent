@@ -109,8 +109,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="102" y="372"/>
-    <endstep x="216" y="394"/>
+    <endstep x="66" y="369"/>
+    <endstep x="174" y="372"/>
     <endstep x="460" y="436"/>
     <endstep x="664" y="353"/>
     <endstep x="650" y="918"/>

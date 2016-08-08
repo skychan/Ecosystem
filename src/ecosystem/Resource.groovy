@@ -230,21 +230,6 @@ public class Resource  {
 
     /**
      *
-     * Mark the Rank value
-     * @field rank
-     *
-     */
-    @Parameter (displayName = "Rank", usageName = "rank")
-    public double getRank() {
-        return rank
-    }
-    public void setRank(double newValue) {
-        rank = newValue
-    }
-    public double rank = 0
-
-    /**
-     *
      * The ready task mark
      * @field readyTask
      *
@@ -317,6 +302,21 @@ public class Resource  {
         shiftTask = newValue
     }
     public def shiftTask = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field chosenTime
+     *
+     */
+    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
+    public double getChosenTime() {
+        return chosenTime
+    }
+    public void setChosenTime(double newValue) {
+        chosenTime = newValue
+    }
+    public double chosenTime = 0
 
     /**
      *
@@ -431,10 +431,10 @@ public class Resource  {
     /**
      *
      * Change the service rank with depends on the review
-     * @method AdjustRank
+     * @method getRank
      *
      */
-    public def AdjustRank() {
+    public def getRank() {
 
         // Define the return value variable.
         def returnValue
@@ -443,6 +443,8 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        PureProvider user = this.owner[-1]
+        returnValue = user.getRank()
         // Return the results.
         return returnValue
 
@@ -526,6 +528,10 @@ public class Resource  {
             this.buffer << theOne
             this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
             theOne.prepareStatus[this.getType()] = true
+            double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+            int delta =  t - theOne.getChosenTime()
+            theOne.responseTime[this] = delta
+            theOne.inBufferTime[this] = t
             println this.toString() + " jobList " + this.jobList
             println this.toString() + " buffer " + this.buffer
             println this.toString() + " readytask " + this.readyTask
@@ -567,6 +573,10 @@ public class Resource  {
                 // This is a task.
                 this.queueLength -= 1
                 println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
+                double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                int delta = t - theOne.getChosenTime()
+                theOne.responseTime[this] = delta
+                theOne.inBufferTime[this] = t
 
             } else  {
 
@@ -597,7 +607,7 @@ public class Resource  {
      * @method Review
      *
      */
-    public def Review() {
+    public def Review(theTask) {
 
         // Define the return value variable.
         def returnValue
@@ -606,6 +616,11 @@ public class Resource  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        double q = theTask.getProductQuality()
+        int t = theTask.responseTime[this]
+        double h = theTask.getHardness()
+        int p = theTask.getProcessingTime()
+        this.reviews <<  (h * q / (t+p))
         // Return the results.
         return returnValue
 

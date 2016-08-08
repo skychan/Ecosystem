@@ -250,13 +250,148 @@ public class Task  {
      *
      */
     @Parameter (displayName = "Start time", usageName = "startTime")
-    public def getStartTime() {
+    public double getStartTime() {
         return startTime
     }
-    public void setStartTime(def newValue) {
+    public void setStartTime(double newValue) {
         startTime = newValue
     }
-    public def startTime = 0
+    public double startTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field span
+     *
+     */
+    @Parameter (displayName = "Span", usageName = "span")
+    public int getSpan() {
+        return span
+    }
+    public void setSpan(int newValue) {
+        span = newValue
+    }
+    public int span = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field chosenTime
+     *
+     */
+    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
+    public double getChosenTime() {
+        return chosenTime
+    }
+    public void setChosenTime(double newValue) {
+        chosenTime = newValue
+    }
+    public double chosenTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field responseTime
+     *
+     */
+    @Parameter (displayName = "Response Time", usageName = "responseTime")
+    public def getResponseTime() {
+        return responseTime
+    }
+    public void setResponseTime(def newValue) {
+        responseTime = newValue
+    }
+    public def responseTime = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field productQuality
+     *
+     */
+    @Parameter (displayName = "Product Quality", usageName = "productQuality")
+    public double getProductQuality() {
+        return productQuality
+    }
+    public void setProductQuality(double newValue) {
+        productQuality = newValue
+    }
+    public double productQuality = Math.exp(200)
+
+    /**
+     *
+     * This is an agent property.
+     * @field hardness
+     *
+     */
+    @Parameter (displayName = "Hardness", usageName = "hardness")
+    public double getHardness() {
+        return hardness
+    }
+    public void setHardness(double newValue) {
+        hardness = newValue
+    }
+    public double hardness = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field inBufferTime
+     *
+     */
+    @Parameter (displayName = "InBuff time", usageName = "inBufferTime")
+    public def getInBufferTime() {
+        return inBufferTime
+    }
+    public void setInBufferTime(def newValue) {
+        inBufferTime = newValue
+    }
+    public def inBufferTime = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field reviews
+     *
+     */
+    @Parameter (displayName = "Review Result", usageName = "reviews")
+    public def getReviews() {
+        return reviews
+    }
+    public void setReviews(def newValue) {
+        reviews = newValue
+    }
+    public def reviews = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field finishTime
+     *
+     */
+    @Parameter (displayName = "Finish Time", usageName = "finishTime")
+    public double getFinishTime() {
+        return finishTime
+    }
+    public void setFinishTime(double newValue) {
+        finishTime = newValue
+    }
+    public double finishTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field readyTime
+     *
+     */
+    @Parameter (displayName = "Ready Time", usageName = "readyTime")
+    public double getReadyTime() {
+        return readyTime
+    }
+    public void setReadyTime(double newValue) {
+        readyTime = newValue
+    }
+    public double readyTime = 0
 
     /**
      *
@@ -316,10 +451,10 @@ public class Task  {
         }
 
         // This is a task.
-        //println "task para setted"
+        println "task para setted"
         this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
         this.setType(tdata.key)
-        //println "start at " + this.getStartTime()
+        println "start at " + this.getStartTime()
     }
 
     /**
@@ -386,6 +521,7 @@ public class Task  {
         // This is a task.
         this.candidates.clear()
         //println "after the selection and clear"
+        this.setChosenTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
     }
 
     /**
@@ -564,14 +700,38 @@ public class Task  {
                     theRes.readyTask.remove(this)
                     theRes.Release(this.needResourceCapacity[theRes.getType()])
                     theRes.Next()
-                    theRes.Review()
+                    // This is a task.
+                    RandomHelper.createNormal(theRes.getQuality(),1)
+                    double tempQuality = RandomHelper.getNormal().nextDouble()
+
+                    // This is an agent decision.
+                    if (tempQuality < this.getProductQuality()) {
+
+                        // This is a task.
+                        this.setProductQuality(tempQuality)
+
+                    } else  {
+
+
+                    }
+
+                }
+
+
+                // This is a loop.
+                for (theRes in this.getAllocatedResource().values()) {
+
+                    // This is a task.
+                    theRes.Review(this)
+                    this.Review(theRes)
 
                 }
 
                 // This is a task.
                 println this.toString() + " is finished"
                 this.setFinish(true)
-                //println "spent " + (RunEnvironment.getInstance().getCurrentSchedule().getTickCount()-this.getStartTime())
+                this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                this.span = this.finishTime - this.getStartTime()
 
             } else  {
 
@@ -629,7 +789,7 @@ public class Task  {
      * @method Review
      *
      */
-    public def Review() {
+    public def Review(theRes) {
 
         // Define the return value variable.
         def returnValue
@@ -638,6 +798,10 @@ public class Task  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        int t = this.getReayTime() - this.inBufferTime[theRes]
+        int t2 = this.getFinishTime() - this.inBufferTime[theRes]
+        int q = this.needResourceCapacity[theRes.getType()] * t2
+        this.reviews << Math.exp(t)*q*theRes.getRank()
         // Return the results.
         return returnValue
 
@@ -680,6 +844,7 @@ public class Task  {
             // This is a task.
             this.Reset()
             this.setRemainingTime(this.getProcessingTime())
+            this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
 
         } else  {
 

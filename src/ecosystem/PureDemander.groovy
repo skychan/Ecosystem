@@ -140,6 +140,21 @@ public class PureDemander  {
 
     /**
      *
+     * This is an agent property.
+     * @field hardness
+     *
+     */
+    @Parameter (displayName = "Hardness", usageName = "hardness")
+    public double getHardness() {
+        return hardness
+    }
+    public void setHardness(double newValue) {
+        hardness = newValue
+    }
+    public double hardness = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -175,7 +190,7 @@ public class PureDemander  {
 
         // have need is to generate order
         Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
-        println this.taskMap
+        //println this.taskMap
         Order o = (Order) agent
         o.addOwner(this)
         o.setOwner(this)

@@ -320,7 +320,7 @@ public class Resource  {
 
     /**
      *
-     * The var to record compete order
+     * The var to record compete service
      * @field competeService
      *
      */
@@ -332,6 +332,66 @@ public class Resource  {
         competeService = newValue
     }
     public def competeService = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field sourceable
+     *
+     */
+    @Parameter (displayName = "Source-able", usageName = "sourceable")
+    public int getSourceable() {
+        return sourceable
+    }
+    public void setSourceable(int newValue) {
+        sourceable = newValue
+    }
+    public int sourceable = 0
+
+    /**
+     *
+     * The var to record compete service temp
+     * @field competeServiceTemp
+     *
+     */
+    @Parameter (displayName = "Compete service temp", usageName = "competeServiceTemp")
+    public def getCompeteServiceTemp() {
+        return competeServiceTemp
+    }
+    public void setCompeteServiceTemp(def newValue) {
+        competeServiceTemp = newValue
+    }
+    public def competeServiceTemp = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceNeedCapacity
+     *
+     */
+    @Parameter (displayName = "Service need cap", usageName = "serviceNeedCapacity")
+    public int getServiceNeedCapacity() {
+        return serviceNeedCapacity
+    }
+    public void setServiceNeedCapacity(int newValue) {
+        serviceNeedCapacity = newValue
+    }
+    public int serviceNeedCapacity = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceProvider
+     *
+     */
+    @Parameter (displayName = "Service Provider", usageName = "serviceProvider")
+    public def getServiceProvider() {
+        return serviceProvider
+    }
+    public void setServiceProvider(def newValue) {
+        serviceProvider = newValue
+    }
+    public def serviceProvider = 0
 
     /**
      *
@@ -368,10 +428,35 @@ public class Resource  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        int temp = this.getAvailable()
-        temp += amount
-        this.setAvailable(temp)
+
+        // This is an agent decision.
+        if (this.getServiceNeedCapacity() > 0) {
+
+
+            // This is an agent decision.
+            if (amount >= this.getServiceNeedCapacity()) {
+
+                // This is a task.
+                amount -= this.getServiceNeedCapacity()
+                this.setServiceNeedCapacity(0)
+                this.serviceProvider.serviceStatus[this] = true
+                // This is a task.
+                int temp = this.getAvailable()
+                temp += amount
+                this.setAvailable(temp)
+
+            } else  {
+
+                // This is a task.
+                amount = 0
+                this.setServiceNeedCapacity(this.getServiceNeedCapacity() - amount)
+
+            }
+
+        } else  {
+
+
+        }
     }
 
     /**
@@ -673,7 +758,9 @@ public class Resource  {
     @Watch(
         watcheeClassName = 'ecosystem.PureProvider',
         watcheeFieldNames = 'serviceCalling',
-        whenToTrigger = WatcherTriggerSchedule.LATER
+        triggerCondition = '$watcher.serviceNeedCapacity == 0',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d
     )
     public def ResponseServiceCall(ecosystem.PureProvider watchedAgent) {
 
@@ -687,13 +774,174 @@ public class Resource  {
         // Decide to take the task or not
         if (true) {
 
-            // change the compete state
-            this.competeService << watchedAgent
-            watchedAgent.addCandidates(this)
-            //println this.toString() + " compete " + watchedAgent.toString()
+
+            // This is an agent decision.
+            if (this.getSourceable() > 0) {
+
+
+                // This is an agent decision.
+                if (this.getType() in watchedAgent.callContent.keySet()) {
+
+                    // This is a task.
+                    this.competeServiceTemp << watchedAgent
+
+                } else  {
+
+
+                }
+
+            } else  {
+
+
+            }
 
         } else  {
 
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Response to the need call
+     * @method ResponseService
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeFieldNames = 'serviceCalling',
+        triggerCondition = '$watcher.serviceNeedCapacity == 0',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.2d
+    )
+    public def ResponseService(ecosystem.PureProvider watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getSourceable() > 0) {
+
+
+            // This is an agent decision.
+            if (this.getType() in watchedAgent.callContent.keySet()) {
+
+                // This is a task.
+                int tempCap = this.getSourceable()
+                int i = 0
+                Evaluation(this.competeServiceTemp)
+
+                // This is a loop.
+                while (tempCap > 0) {
+
+                    // This is a task.
+                    this.competeService << this.competeServiceTemp[i]
+                    i += 1
+                    tempCap -= this.competeServiceTemp[i].callContent[this.getType()]
+
+                    // This is an agent decision.
+                    if (i == this.competeServiceTemp.size()-1) {
+
+                        // This is a task.
+                        break
+
+                    } else  {
+
+
+                    }
+
+                }
+
+                // This is a task.
+                this.competeServiceTemp = []
+
+                // This is a loop.
+                for (prd in this.competeService) {
+
+                    // This is a task.
+                    prd.addCandidates(this)
+
+                }
+
+                // This is a task.
+                this.competeService = []
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Provider Evaluation
+     * @method Evaluation
+     *
+     */
+    public def Evaluation(providerList) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        providerList.sort{[-it.getRank()]}
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Ready to join
+     * @method Join
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'sourceable',
+        triggerCondition = '$watcher.toString() == $watchee.toString()',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public def Join(ecosystem.Resource watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getAvailable() >= this.getServiceNeedCapacity()) {
+
+            // This is a task.
+            this.setAvailable(this.getAvailable() - this.getServiceNeedCapacity())
+            this.serviceProvider.serviceStatus[this] = true
+            this.setServiceNeedCapacity(0)
+
+        } else  {
+
+            // This is a task.
+            this.setServiceNeedCapacity(this.getServiceNeedCapacity() - this.getAvailable())
+            this.setAvailable(0)
 
         }
         // Return the results.

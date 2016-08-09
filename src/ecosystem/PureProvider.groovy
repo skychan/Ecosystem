@@ -156,17 +156,17 @@ public class PureProvider  {
     /**
      *
      * This is an agent property.
-     * @field callList
+     * @field callContent
      *
      */
-    @Parameter (displayName = "Call List", usageName = "callList")
-    public def getCallList() {
-        return callList
+    @Parameter (displayName = "Call Content", usageName = "callContent")
+    public def getCallContent() {
+        return callContent
     }
-    public void setCallList(def newValue) {
-        callList = newValue
+    public void setCallContent(def newValue) {
+        callContent = newValue
     }
-    public def callList = []
+    public def callContent = [:]
 
     /**
      *
@@ -200,18 +200,33 @@ public class PureProvider  {
 
     /**
      *
-     * Record the candidates
-     * @field candidates
+     * This is an agent property.
+     * @field callCandidates
      *
      */
-    @Parameter (displayName = "Candidates", usageName = "candidates")
-    public def getCandidates() {
-        return candidates
+    @Parameter (displayName = "Call canididates", usageName = "callCandidates")
+    public def getCallCandidates() {
+        return callCandidates
     }
-    public void setCandidates(def newValue) {
-        candidates = newValue
+    public void setCallCandidates(def newValue) {
+        callCandidates = newValue
     }
-    public def candidates = [:]
+    public def callCandidates = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceStatus
+     *
+     */
+    @Parameter (displayName = "Record the service status", usageName = "serviceStatus")
+    public def getServiceStatus() {
+        return serviceStatus
+    }
+    public void setServiceStatus(def newValue) {
+        serviceStatus = newValue
+    }
+    public def serviceStatus = [:]
 
     /**
      *
@@ -266,6 +281,7 @@ public class PureProvider  {
             this.candidates << res
             println "create resource " + res.toString() + " with type " + res.getType()
             this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
+            res.setSourceable(res.getCapacity())
 
         }
 
@@ -559,7 +575,7 @@ public class PureProvider  {
 
                     // This is a task.
                     this.setServiceCalling(true)
-                    this.callList << pattern.key
+                    this.callContent = this.ingredient[pattern.key]
 
                 } else  {
 
@@ -592,8 +608,137 @@ public class PureProvider  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+
+        // This is an agent decision.
+        if (competitor.getType() in this.callCandidates.keySet()) {
+
+            // This is a task.
+            this.callCandidates[competitor.getType()]<<competitor
+
+        } else  {
+
+            // This is a task.
+            this.callCandidates[competitor.getType()] = competitor
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Select
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeFieldNames = 'serviceCalling',
+        triggerCondition = '$watchee.toString() == $watcher.toString()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.3d
+    )
+    public def Select(ecosystem.PureProvider watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (data in this.callCandidates) {
+
+            // This is a task.
+            int needCap = this.callContent[data.key]
+            Evaluation(data.value)
+
+            // This is a loop.
+            for (res in data.value) {
+
+
+                // This is an agent decision.
+                if (needCap <= res.getSourceable()) {
+
+                    // This is a task.
+                    res.setSourceable(res.getSourceable()-needCap)
+                    res.setServiceNeedCapacity(needCap)
+                    this.serviceStatus[res] = false
+                    needCap = 0
+                    res.setServiceProvider(this)
+                    // This is a task.
+                    break
+
+                } else  {
+
+                    // This is a task.
+                    needCap -= res.getSourceable()
+                    res.setSourceable(0)
+                    res.setServiceNeedCapacity(res.getSourceable())
+                    res.setServiceProvider(this)
+                    this.serviceStatus[res] = false
+
+                }
+
+            }
+
+
+        }
+
         // This is a task.
-        this.candidates[competitor.getType()]<<competitor
+        this.callContent = [:]
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Resource Evaluation
+     * @method Evaluation
+     *
+     */
+    public def Evaluation(resourceList) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        resource.sort{[-it.getSourceable(),-it.getRank()]}
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method GenerateService
+     *
+     */
+    public def GenerateService() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (false in this.serviceStatus.values()) {
+
+
+        } else  {
+
+            // This is a task.
+
+        }
         // Return the results.
         return returnValue
 

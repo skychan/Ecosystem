@@ -70,17 +70,17 @@ public class Service  {
      *
      */
     @Parameter (displayName = "Owner", usageName = "owner")
-    public def getOwner() {
+    public PureProvider getOwner() {
         return owner
     }
-    public void setOwner(def newValue) {
+    public void setOwner(PureProvider newValue) {
         owner = newValue
     }
-    public def owner = []
+    public PureProvider owner = null
 
     /**
      *
-     * This is an agent property.
+     * [res:quantity]
      * @field resources
      *
      */
@@ -329,26 +329,11 @@ public class Service  {
 
     /**
      *
-     * Set the owner is add to the owner list
-     * @method addOwner
-     *
-     */
-    public void addOwner(ownerID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add owner to the list
-        this.owner << ownerID
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method addResource
      *
      */
-    public def addResource(res) {
+    public def addResource(res, amount) {
 
         // Define the return value variable.
         def returnValue
@@ -357,7 +342,8 @@ public class Service  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.resourceList << res
+        this.resources[res] = amount
+        res.setMaster(this)
         // Return the results.
         return returnValue
 
@@ -610,6 +596,8 @@ public class Service  {
         double h = theTask.getHardness()
         int p = theTask.getProcessingTime()
         this.reviews <<  (h * q / (t+p))
+        // This is a task.
+        this.owner.addTaskFrequency(theTask)
         // Return the results.
         return returnValue
 

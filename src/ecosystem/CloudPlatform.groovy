@@ -365,11 +365,11 @@ public class CloudPlatform  {
         // This is an agent decision.
         if (res.getType() in this.typeQueueLength.keySet()) {
 
+            // This is a task.
+            this.typeQueueLength[res.getType()] = 0
 
         } else  {
 
-            // This is a task.
-            this.typeQueueLength[res.getType()] = 0
 
         }
         // Return the results.

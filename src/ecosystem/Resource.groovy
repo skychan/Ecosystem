@@ -100,13 +100,13 @@ public class Resource  {
      *
      */
     @Parameter (displayName = "Master", usageName = "master")
-    public def getMaster() {
+    public Service getMaster() {
         return master
     }
-    public void setMaster(def newValue) {
+    public void setMaster(Service newValue) {
         master = newValue
     }
-    public def master = []
+    public Service master = null
 
     /**
      *
@@ -130,13 +130,13 @@ public class Resource  {
      *
      */
     @Parameter (displayName = "Owner", usageName = "owner")
-    public def getOwner() {
+    public PureProvider getOwner() {
         return owner
     }
-    public void setOwner(def newValue) {
+    public void setOwner(PureProvider newValue) {
         owner = newValue
     }
-    public def owner = []
+    public PureProvider owner = null
 
     /**
      *
@@ -440,6 +440,7 @@ public class Resource  {
                 amount -= this.getServiceNeedCapacity()
                 this.setServiceNeedCapacity(0)
                 this.serviceProvider.serviceStatus[this] = true
+                this.serviceProvider.setServiceReady(true)
                 // This is a task.
                 int temp = this.getAvailable()
                 temp += amount
@@ -457,36 +458,6 @@ public class Resource  {
 
 
         }
-    }
-
-    /**
-     *
-     * Set the owner is add to the owner list
-     * @method addMaster
-     *
-     */
-    public void addMaster(masterID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add master to the list
-        this.master << masterID
-    }
-
-    /**
-     *
-     * Set the owner is add to the owner list
-     * @method addOwner
-     *
-     */
-    public void addOwner(ownerID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add owner to the list
-        this.owner << ownerID
     }
 
     /**
@@ -609,7 +580,6 @@ public class Resource  {
 
         // This is a task.
         this.compete.remove(theOne)
-        this.owner[0].addTaskFrequency(theOne)
 
         // This is an agent decision.
         if (this.getAvailable() < theOne.needResourceCapacity[this.getType()]) {
@@ -723,6 +693,8 @@ public class Resource  {
         double h = theTask.getHardness()
         int p = theTask.getProcessingTime()
         this.reviews <<  (h * q / (t+p))
+        // This is a task.
+        this.owner.addTaskFrequency(theTask)
         // Return the results.
         return returnValue
 
@@ -935,6 +907,7 @@ public class Resource  {
             // This is a task.
             this.setAvailable(this.getAvailable() - this.getServiceNeedCapacity())
             this.serviceProvider.serviceStatus[this] = true
+            this.serviceProvider.setServiceReady(true)
             this.setServiceNeedCapacity(0)
 
         } else  {

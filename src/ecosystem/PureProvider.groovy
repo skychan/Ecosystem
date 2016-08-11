@@ -66,17 +66,17 @@ public class PureProvider  {
     /**
      *
      * Record the service
-     * @field services
+     * @field serviceList
      *
      */
-    @Parameter (displayName = "Service List", usageName = "services")
-    public ArrayList getServices() {
-        return services
+    @Parameter (displayName = "Service List", usageName = "serviceList")
+    public def getServiceList() {
+        return serviceList
     }
-    public void setServices(ArrayList newValue) {
-        services = newValue
+    public void setServiceList(def newValue) {
+        serviceList = newValue
     }
-    public ArrayList services = new ArrayList()
+    public def serviceList = []
 
     /**
      *
@@ -92,21 +92,6 @@ public class PureProvider  {
         rank = newValue
     }
     public double rank = 1000
-
-    /**
-     *
-     * This is an agent property.
-     * @field serviceList
-     *
-     */
-    @Parameter (displayName = "Service List", usageName = "serviceList")
-    public def getServiceList() {
-        return serviceList
-    }
-    public void setServiceList(def newValue) {
-        serviceList = newValue
-    }
-    public def serviceList = []
 
     /**
      *
@@ -230,6 +215,51 @@ public class PureProvider  {
 
     /**
      *
+     * This is an agent property.
+     * @field serviceReady
+     *
+     */
+    @Parameter (displayName = "Ready mark", usageName = "serviceReady")
+    public boolean getServiceReady() {
+        return serviceReady
+    }
+    public void setServiceReady(boolean newValue) {
+        serviceReady = newValue
+    }
+    public boolean serviceReady = false
+
+    /**
+     *
+     * denote the task type pattern
+     * @field callPattern
+     *
+     */
+    @Parameter (displayName = "Call Pattern", usageName = "callPattern")
+    public def getCallPattern() {
+        return callPattern
+    }
+    public void setCallPattern(def newValue) {
+        callPattern = newValue
+    }
+    public def callPattern = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field prototype
+     *
+     */
+    @Parameter (displayName = "Service Prototype", usageName = "prototype")
+    public Service getPrototype() {
+        return prototype
+    }
+    public void setPrototype(Service newValue) {
+        prototype = newValue
+    }
+    public Service prototype = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -277,34 +307,13 @@ public class PureProvider  {
             res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
             res.setAvailable(res.getCapacity())
             // This is a task.
-            res.addOwner(this)
+            res.setOwner(this)
             this.candidates << res
             println "create resource " + res.toString() + " with type " + res.getType()
             this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
             res.setSourceable(res.getCapacity())
 
         }
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method addService
-     *
-     */
-    public def addService(ser) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.serviceList << ser
-        // Return the results.
-        return returnValue
 
     }
 
@@ -324,25 +333,6 @@ public class PureProvider  {
 
         // This is a task.
         this.resourceList << res
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Calculate the rank value depend on the resources' quality and scaricity
-     * @method ranking
-     *
-     */
-    public def ranking() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
         // Return the results.
         return returnValue
 
@@ -565,25 +555,26 @@ public class PureProvider  {
         // This is an agent decision.
         if (true) {
 
+            // This is a task.
+            this.taskFrequency = this.taskFrequency.sort{ [-it.value,-it.key.getHardness()]}
+            def pattern = this.taskFrequency.iterator()[0]
 
-            // This is a loop.
-            for (pattern in this.taskFrequency) {
+            // This is an agent decision.
+            if (pattern.value >= 5) {
 
+                // This is a task.
+                this.setServiceCalling(true)
+                this.callContent = this.ingredient[pattern.key]
+                this.callPattern = pattern.key
+                this.prototype = new Service()
+                this.prototype.setAppetite(pattern.key)
+                // This is a task.
+                this.taskFrequency.iterator()[0].value -= 5
 
-                // This is an agent decision.
-                if (pattern.value >= 5) {
+            } else  {
 
-                    // This is a task.
-                    this.setServiceCalling(true)
-                    this.callContent = this.ingredient[pattern.key]
-
-                } else  {
-
-
-                }
 
             }
-
 
         } else  {
 
@@ -666,19 +657,22 @@ public class PureProvider  {
                     res.setSourceable(res.getSourceable()-needCap)
                     res.setServiceNeedCapacity(needCap)
                     this.serviceStatus[res] = false
-                    needCap = 0
+                    this.prototype.addResource(res,needCap)
                     res.setServiceProvider(this)
                     // This is a task.
+                    needCap = 0
                     break
 
                 } else  {
 
                     // This is a task.
                     needCap -= res.getSourceable()
-                    res.setSourceable(0)
-                    res.setServiceNeedCapacity(res.getSourceable())
+                    this.prototype.addResource(res,res.getSourceable())
                     res.setServiceProvider(this)
                     this.serviceStatus[res] = false
+                    // This is a task.
+                    res.setServiceNeedCapacity(res.getSourceable())
+                    res.setSourceable(0)
 
                 }
 
@@ -721,7 +715,14 @@ public class PureProvider  {
      * @method GenerateService
      *
      */
-    public def GenerateService() {
+    @Watch(
+        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeFieldNames = 'serviceReady',
+        triggerCondition = '$watchee.toString() == $watcher.toString()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 1d
+    )
+    public def GenerateService(ecosystem.PureProvider watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -733,10 +734,17 @@ public class PureProvider  {
         // This is an agent decision.
         if (false in this.serviceStatus.values()) {
 
+            // This is a task.
+            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+            Service s = (Service) sagent
+            s = this.getPrototype()
+            this.prototype = null
+            s.changeQuality()
+            // This is a task.
+            s.setOwner(this)
 
         } else  {
 
-            // This is a task.
 
         }
         // Return the results.

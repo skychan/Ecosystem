@@ -276,21 +276,6 @@ public class Task  {
     /**
      *
      * This is an agent property.
-     * @field chosenTime
-     *
-     */
-    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
-    public double getChosenTime() {
-        return chosenTime
-    }
-    public void setChosenTime(double newValue) {
-        chosenTime = newValue
-    }
-    public double chosenTime = 0
-
-    /**
-     *
-     * This is an agent property.
      * @field responseTime
      *
      */
@@ -336,21 +321,6 @@ public class Task  {
     /**
      *
      * This is an agent property.
-     * @field inBufferTime
-     *
-     */
-    @Parameter (displayName = "InBuff time", usageName = "inBufferTime")
-    public def getInBufferTime() {
-        return inBufferTime
-    }
-    public void setInBufferTime(def newValue) {
-        inBufferTime = newValue
-    }
-    public def inBufferTime = [:]
-
-    /**
-     *
-     * This is an agent property.
      * @field reviews
      *
      */
@@ -377,21 +347,6 @@ public class Task  {
         finishTime = newValue
     }
     public double finishTime = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field readyTime
-     *
-     */
-    @Parameter (displayName = "Ready Time", usageName = "readyTime")
-    public double getReadyTime() {
-        return readyTime
-    }
-    public void setReadyTime(double newValue) {
-        readyTime = newValue
-    }
-    public double readyTime = 0
 
     /**
      *
@@ -568,7 +523,6 @@ public class Task  {
         // This is a task.
         this.candidates.clear()
         //println "after the selection and clear"
-        this.setChosenTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
     }
 
     /**
@@ -927,7 +881,6 @@ public class Task  {
             // This is a task.
             this.Reset()
             this.setRemainingTime(this.getProcessingTime())
-            this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
 
         } else  {
 
@@ -949,7 +902,6 @@ public class Task  {
                 // This is a task.
                 this.Reset()
                 this.setRemainingTime(this.getProcessingTime())
-                this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
 
             } else  {
 

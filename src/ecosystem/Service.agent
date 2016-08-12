@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="Service" agentparentclassname="" agentinterfaces="" agentimports="">
+<agent version="1" agentcomment="This is an agent." agentclassname="Service" agentparentclassname="ecosystem.Machine" agentinterfaces="" agentimports="">
   <behaviorsteps>
     <behaviorstep x="71" y="122" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="addResource" parameters="res,amount" exceptions="">
       <label x="71" y="107" text="Add Resource"/>

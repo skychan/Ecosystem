@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class Task  {
+public class Task extends ecosystem.Job  {
 
     /**
      *
@@ -107,21 +107,6 @@ public class Task  {
         processingTime = newValue
     }
     public int processingTime = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field allocatedResource
-     *
-     */
-    @Parameter (displayName = "Allocated Resource", usageName = "allocatedResource")
-    public def getAllocatedResource() {
-        return allocatedResource
-    }
-    public void setAllocatedResource(def newValue) {
-        allocatedResource = newValue
-    }
-    public def allocatedResource = [:]
 
     /**
      *
@@ -230,21 +215,6 @@ public class Task  {
 
     /**
      *
-     * To mark if the task is allocated or not
-     * @field allocated
-     *
-     */
-    @Parameter (displayName = "Allocated", usageName = "allocated")
-    public boolean getAllocated() {
-        return allocated
-    }
-    public void setAllocated(boolean newValue) {
-        allocated = newValue
-    }
-    public boolean allocated = false
-
-    /**
-     *
      * This is an agent property.
      * @field startTime
      *
@@ -272,6 +242,21 @@ public class Task  {
         span = newValue
     }
     public int span = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field chosenTime
+     *
+     */
+    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
+    public double getChosenTime() {
+        return chosenTime
+    }
+    public void setChosenTime(double newValue) {
+        chosenTime = newValue
+    }
+    public double chosenTime = 0
 
     /**
      *
@@ -321,6 +306,21 @@ public class Task  {
     /**
      *
      * This is an agent property.
+     * @field inBufferTime
+     *
+     */
+    @Parameter (displayName = "InBuff time", usageName = "inBufferTime")
+    public def getInBufferTime() {
+        return inBufferTime
+    }
+    public void setInBufferTime(def newValue) {
+        inBufferTime = newValue
+    }
+    public def inBufferTime = [:]
+
+    /**
+     *
+     * This is an agent property.
      * @field reviews
      *
      */
@@ -347,6 +347,21 @@ public class Task  {
         finishTime = newValue
     }
     public double finishTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field readyTime
+     *
+     */
+    @Parameter (displayName = "Ready Time", usageName = "readyTime")
+    public double getReadyTime() {
+        return readyTime
+    }
+    public void setReadyTime(double newValue) {
+        readyTime = newValue
+    }
+    public double readyTime = 0
 
     /**
      *
@@ -523,27 +538,7 @@ public class Task  {
         // This is a task.
         this.candidates.clear()
         //println "after the selection and clear"
-    }
-
-    /**
-     *
-     * Supplier Evaluation
-     * @method Evaluation
-     *
-     */
-    public def Evaluation(resourceList) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        //resourceList.sort{[-it.getAvailable(),it.jobList.size()]}
-        // Return the results.
-        return returnValue
-
+        this.setChosenTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
     }
 
     /**
@@ -881,6 +876,7 @@ public class Task  {
             // This is a task.
             this.Reset()
             this.setRemainingTime(this.getProcessingTime())
+            this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
 
         } else  {
 
@@ -902,6 +898,7 @@ public class Task  {
                 // This is a task.
                 this.Reset()
                 this.setRemainingTime(this.getProcessingTime())
+                this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
 
             } else  {
 
@@ -1098,6 +1095,17 @@ public class Task  {
         // Return the results.
         return returnValue
 
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Task
+     *
+     */
+    public def Task() {
+
+        // This is a task.
     }
 
     /**

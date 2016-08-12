@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agent version="1" agentcomment="This is an agent." agentclassname="ForTask" agentparentclassname="" agentinterfaces="ecosystem.SelectBehavior" agentimports="">
+  <behaviorsteps>
+    <behaviorstep x="231" y="54" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Select" visibility="0" returntype="def" compiledname="Select" parameters="t,candidates" exceptions="">
+      <label x="231" y="39" text="Select"/>
+    </behaviorstep>
+    <behaviorstep x="44" y="59" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="candidates" exceptions="">
+      <label x="44" y="44" text="Evaluation"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="231" y="306" comment="This is a task." command1="returnValue = chosenMap" command2="//println &quot;after the selection and clear&quot;" command3="" command4="" command5="">
+      <label x="231" y="291" text="Do Task"/>
+    </taskstep>
+    <taskstep x="45" y="147" comment="This is a task." command1="// returnValue = candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="" command3="" command4="" command5="">
+      <label x="45" y="132" text="Do Task"/>
+    </taskstep>
+    <taskstep x="341" y="212" comment="This is a task." command1="def theType = candidate.key" command2="def theList = candidate.value" command3="theList = Evaluation(theList)" command4="" command5="">
+      <label x="341" y="197" text="Do Task"/>
+    </taskstep>
+    <taskstep x="337" y="320" comment="This is a task." command1="chosenMap[theType] = theList[0]" command2="" command3="" command4="" command5="">
+      <label x="337" y="305" text="Do Task"/>
+    </taskstep>
+    <taskstep x="441" y="402" comment="This is a task." command1="res.compete.remove(t)" command2="" command3="" command4="" command5="">
+      <label x="441" y="387" text="Do Task"/>
+    </taskstep>
+    <taskstep x="229" y="125" comment="This is a task." command1="def chosenMap = [:]" command2="" command3="" command4="" command5="">
+      <label x="229" y="110" text="Do Task"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="232" y="211" comment="This is a loop." criteria="candidate in candidates" branchType="while">
+      <label x="232" y="196" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="338" y="403" comment="This is a loop." criteria="res in theList" branchType="while">
+      <label x="338" y="388" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
+  <joinsteps/>
+  <agentproperties/>
+  <endsteps>
+    <endstep x="244" y="409"/>
+    <endstep x="48" y="259"/>
+  </endsteps>
+  <connections>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="5" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="4" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
+  </connections>
+</agent>

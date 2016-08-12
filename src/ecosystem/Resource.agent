@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="Resource" agentparentclassname="" agentinterfaces="" agentimports="">
+<agent version="1" agentcomment="This is an agent." agentclassname="Resource" agentparentclassname="ecosystem.Machine" agentinterfaces="" agentimports="">
   <behaviorsteps>
     <behaviorstep x="1035" y="100" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="int amount" exceptions="">
       <label x="1035" y="85" text="Release the capacity"/>

@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class Service  {
+public class Service extends ecosystem.Machine  {
 
     /**
      *

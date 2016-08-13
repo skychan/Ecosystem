@@ -66,21 +66,6 @@ public class Task extends ecosystem.Job  {
     /**
      *
      * This is an agent property.
-     * @field type
-     *
-     */
-    @Parameter (displayName = "Type", usageName = "type")
-    public def getType() {
-        return type
-    }
-    public void setType(def newValue) {
-        type = newValue
-    }
-    public def type = 0
-
-    /**
-     *
-     * This is an agent property.
      * @field needResourceCapacity
      *
      */
@@ -167,21 +152,6 @@ public class Task extends ecosystem.Job  {
         master = newValue
     }
     public def master = []
-
-    /**
-     *
-     * Record the candidates
-     * @field candidates
-     *
-     */
-    @Parameter (displayName = "Candidates", usageName = "candidates")
-    public def getCandidates() {
-        return candidates
-    }
-    public void setCandidates(def newValue) {
-        candidates = newValue
-    }
-    public def candidates = [:]
 
     /**
      *
@@ -365,21 +335,6 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
-     * Record the candidates
-     * @field serviceCandidates
-     *
-     */
-    @Parameter (displayName = "Service Candidates", usageName = "serviceCandidates")
-    public def getServiceCandidates() {
-        return serviceCandidates
-    }
-    public void setServiceCandidates(def newValue) {
-        serviceCandidates = newValue
-    }
-    public def serviceCandidates = []
-
-    /**
-     *
      * This is an agent property.
      * @field allocatedService
      *
@@ -539,27 +494,6 @@ public class Task extends ecosystem.Job  {
         this.candidates.clear()
         //println "after the selection and clear"
         this.setChosenTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method addCandidates
-     *
-     */
-    public def addCandidates(competitor) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.candidates[competitor.getType()]<<competitor
-        // Return the results.
-        return returnValue
-
     }
 
     /**
@@ -906,27 +840,6 @@ public class Task extends ecosystem.Job  {
             }
 
         }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method addServiceCandidates
-     *
-     */
-    public def addServiceCandidates(competitor) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.serviceCandidates << competitor
         // Return the results.
         return returnValue
 

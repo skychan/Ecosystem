@@ -148,13 +148,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="395" y="698"/>
+    <joinstep x="400" y="703"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="229" y="40" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="PureProvider" defaultvalue="null">
       <label x="234" y="25" text="Owner"/>
     </agentproperty>
-    <agentproperty x="78" y="39" comment="[res:quantity]" visibility="0" compiledname="resources" type="def" defaultvalue="[:]">
+    <agentproperty x="78" y="39" comment="[res:quantity]" visibility="0" compiledname="resourceComposition" type="def" defaultvalue="[:]">
       <label x="83" y="24" text="Resource Composition"/>
     </agentproperty>
     <agentproperty x="1115" y="35" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="0">
@@ -201,20 +201,20 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="80" y="308"/>
-    <endstep x="1131" y="306"/>
-    <endstep x="557" y="358"/>
-    <endstep x="798" y="261"/>
-    <endstep x="796" y="628"/>
-    <endstep x="408" y="315"/>
-    <endstep x="393" y="790"/>
-    <endstep x="591" y="944"/>
-    <endstep x="39" y="856"/>
-    <endstep x="886" y="267"/>
-    <endstep x="970" y="853"/>
-    <endstep x="1146" y="857"/>
-    <endstep x="992" y="331"/>
-    <endstep x="835" y="915"/>
+    <endstep x="85" y="313"/>
+    <endstep x="1136" y="311"/>
+    <endstep x="562" y="363"/>
+    <endstep x="803" y="266"/>
+    <endstep x="801" y="633"/>
+    <endstep x="413" y="320"/>
+    <endstep x="398" y="795"/>
+    <endstep x="596" y="949"/>
+    <endstep x="44" y="861"/>
+    <endstep x="891" y="272"/>
+    <endstep x="975" y="858"/>
+    <endstep x="1151" y="862"/>
+    <endstep x="997" y="336"/>
+    <endstep x="840" y="920"/>
   </endsteps>
   <connections>
     <transitions>
@@ -389,13 +389,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="6" anchor="0"/>
+        <transitionsource type="task" index="24" anchor="2"/>
+        <transitiontarget type="end" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="24" anchor="2"/>
-        <transitiontarget type="end" index="7" anchor="0"/>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

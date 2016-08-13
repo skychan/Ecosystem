@@ -80,6 +80,36 @@ public class Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field responseBehavior
+     *
+     */
+    @Parameter (displayName = "ResponseBehavior", usageName = "responseBehavior")
+    public ResponseBehavior getResponseBehavior() {
+        return responseBehavior
+    }
+    public void setResponseBehavior(ResponseBehavior newValue) {
+        responseBehavior = newValue
+    }
+    public ResponseBehavior responseBehavior = null
+
+    /**
+     *
+     * This is an agent property.
+     * @field taskCompeteList
+     *
+     */
+    @Parameter (displayName = "Task Compete List", usageName = "taskCompeteList")
+    public def getTaskCompeteList() {
+        return taskCompeteList
+    }
+    public void setTaskCompeteList(def newValue) {
+        taskCompeteList = newValue
+    }
+    public def taskCompeteList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -111,9 +141,8 @@ public class Machine  {
     @Watch(
         watcheeClassName = 'ecosystem.Task',
         watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watchee.Exist($watcher.getType()) && $watchee.inNeed',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.1d
+        triggerCondition = '$watchee.inNeed',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
     )
     public def Response(ecosystem.Task watchedAgent) {
 
@@ -127,10 +156,19 @@ public class Machine  {
         // Decide to take the task or not
         if (true) {
 
-            // change the compete state
-            this.compete << watchedAgent
-            watchedAgent.addCandidates(this)
-            //println this.toString() + " compete " + watchedAgent.toString()
+
+            // This is an agent decision.
+            if (responseBehavior.Exist(watchedAgent,this)) {
+
+                // change the compete state
+                this.taskCompeteList << watchedAgent
+                watchedAgent.addCandidates(this)
+                //println this.toString() + " compete " + watchedAgent.toString()
+
+            } else  {
+
+
+            }
 
         } else  {
 

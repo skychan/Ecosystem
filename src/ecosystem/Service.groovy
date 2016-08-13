@@ -81,17 +81,17 @@ public class Service extends ecosystem.Machine  {
     /**
      *
      * [res:quantity]
-     * @field resources
+     * @field resourceComposition
      *
      */
-    @Parameter (displayName = "Resource Composition", usageName = "resources")
-    public def getResources() {
-        return resources
+    @Parameter (displayName = "Resource Composition", usageName = "resourceComposition")
+    public def getResourceComposition() {
+        return resourceComposition
     }
-    public void setResources(def newValue) {
-        resources = newValue
+    public void setResourceComposition(def newValue) {
+        resourceComposition = newValue
     }
-    public def resources = [:]
+    public def resourceComposition = [:]
 
     /**
      *

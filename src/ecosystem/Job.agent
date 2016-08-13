@@ -4,17 +4,32 @@
     <behaviorstep x="179" y="156" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="Select" parameters="" exceptions="">
       <label x="179" y="141" text="Select"/>
     </behaviorstep>
+    <behaviorstep x="473" y="114" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="addCandidates" parameters="competitor" exceptions="">
+      <label x="473" y="99" text="Add candidates"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="177" y="248" comment="This is a task." command1="this.theOne = selectBehavior.select(this.candidates)" command2="" command3="" command4="" command5="">
       <label x="177" y="233" text="Do Task"/>
     </taskstep>
+    <taskstep x="405" y="275" comment="This is a task." command1="this.candidates[competitor.getType()]&lt;&lt;competitor" command2="" command3="" command4="" command5="">
+      <label x="405" y="260" text="Do Task"/>
+    </taskstep>
+    <taskstep x="543" y="269" comment="This is a task." command1="this.candidates[service] &lt;&lt; competitor" command2="" command3="" command4="" command5="">
+      <label x="543" y="254" text="Do Task"/>
+    </taskstep>
   </tasksteps>
-  <decisionsteps/>
-  <joinsteps/>
+  <decisionsteps>
+    <decisionstep x="478" y="205" comment="This is an agent decision." criteria="competitor.getClass() == ecosystem.Service" branchType="if">
+      <label x="478" y="190" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
+  <joinsteps>
+    <joinstep x="488" y="350"/>
+  </joinsteps>
   <agentproperties>
-    <agentproperty x="178" y="48" comment="This is an agent property." visibility="0" compiledname="candidates" type="def" defaultvalue="[:]">
-      <label x="183" y="33" text="Candidates"/>
+    <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="def" defaultvalue="[:]">
+      <label x="181" y="31" text="Candidates"/>
     </agentproperty>
     <agentproperty x="316" y="44" comment="This is an agent property." visibility="0" compiledname="selectBehavior" type="SelectBehavior" defaultvalue="null">
       <label x="321" y="29" text="SelectBehavior"/>
@@ -27,7 +42,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="194" y="343"/>
+    <endstep x="186" y="353"/>
+    <endstep x="490" y="415"/>
   </endsteps>
   <connections>
     <transitions>
@@ -41,7 +57,38 @@
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="1"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

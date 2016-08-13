@@ -61,67 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class Job  {
-
-    /**
-     *
-     * This is an agent property.
-     * @field candidates
-     *
-     */
-    @Parameter (displayName = "Candidates", usageName = "candidates")
-    public def getCandidates() {
-        return candidates
-    }
-    public void setCandidates(def newValue) {
-        candidates = newValue
-    }
-    public def candidates = [:]
-
-    /**
-     *
-     * This is an agent property.
-     * @field selectBehavior
-     *
-     */
-    @Parameter (displayName = "SelectBehavior", usageName = "selectBehavior")
-    public SelectBehavior getSelectBehavior() {
-        return selectBehavior
-    }
-    public void setSelectBehavior(SelectBehavior newValue) {
-        selectBehavior = newValue
-    }
-    public SelectBehavior selectBehavior = null
-
-    /**
-     *
-     * This is an agent property.
-     * @field theOne
-     *
-     */
-    @Parameter (displayName = "TheOne", usageName = "theOne")
-    public def getTheOne() {
-        return theOne
-    }
-    public void setTheOne(def newValue) {
-        theOne = newValue
-    }
-    public def theOne = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field type
-     *
-     */
-    @Parameter (displayName = "Type", usageName = "type")
-    public def getType() {
-        return type
-    }
-    public void setType(def newValue) {
-        type = newValue
-    }
-    public def type = 0
+public class ServiceResponse implements ecosystem.ResponseBehavior {
 
     /**
      *
@@ -145,15 +85,15 @@ public class Job  {
      * @field agentID
      *
      */
-    protected String agentID = "Job " + (agentIDCounter++)
+    protected String agentID = "ServiceResponse " + (agentIDCounter++)
 
     /**
      *
-     * This is the step behavior.
-     * @method Select
+     * Check if a machine in needResourceCapacity
+     * @method Exist
      *
      */
-    public def Select() {
+    public boolean Exist(job, machine) {
 
         // Define the return value variable.
         def returnValue
@@ -162,36 +102,10 @@ public class Job  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.theOne = selectBehavior.select(this.candidates)
+        returnValue = (machine.getResourceComposition().equals(job.getNeedResourceCapacity()))
         // Return the results.
         return returnValue
 
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method addCandidates
-     *
-     */
-    public void addCandidates(competitor) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (competitor.getClass() == ecosystem.Service) {
-
-            // This is a task.
-            this.candidates[service] << competitor
-
-        } else  {
-
-            // This is a task.
-            this.candidates[competitor.getType()]<<competitor
-
-        }
     }
 
     /**

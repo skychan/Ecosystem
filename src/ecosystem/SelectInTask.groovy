@@ -110,15 +110,13 @@ public class SelectInTask implements ecosystem.SelectBehavior {
             // This is a task.
             def theType = candidate.key
             def theList = candidate.value
-            theList = Evaluation(theList)
-            // This is a task.
-            chosenMap[theType] = theList[0]
+            chosenMap[theType] = Evaluation(theList)
 
             // This is a loop.
             for (res in theList) {
 
                 // This is a task.
-                res.compete.remove(t)
+                res.competeList.remove(t)
 
             }
 
@@ -147,10 +145,116 @@ public class SelectInTask implements ecosystem.SelectBehavior {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        // returnValue = candidates.sort{[-it.getAvailable(),it.jobList.size()]}
+
+        // This is an agent decision.
+        if (candidates == []) {
+
+            // This is a task.
+            returnValue = null
+
+        } else  {
+
+            // This is a task.
+            candidates.sort{[-it.getAvailable(),it.jobList.size()]}
+            returnValue = candidates[0]
+
+        }
         // Return the results.
         return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Allocate
+     *
+     */
+    public Map Allocate(theOnes) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        int nullCount = theOnes.values().count(null)
+
+        // This is an agent decision.
+        if (nullCount > 1) {
+
+            // This is a task.
+            returnValue =  [success:false,allocation:[:]]
+
+        } else  {
+
+
+            // This is an agent decision.
+            if (nullCount == 1) {
+
+
+                // This is an agent decision.
+                if (theOnes[service] == null) {
+
+                    // This is a task.
+                    theOnes.remove(service)
+                    returnValue =  [success:true,allocation:theOnes]
+
+                } else  {
+
+                    // This is a task.
+                    returnValue =  [success:true,allocation:[service:theOnes[service]]]
+
+                }
+
+            } else  {
+
+                // This is a task.
+                List candidateList = theOnes.values()
+                candidateList.sort{ [ it.getFullLength(), -it.getQuality() ] }
+
+                // This is an agent decision.
+                if (candidateList[0].getClass() == ecosystem.Service) {
+
+                    // This is a task.
+                    returnValue =  [success:true,allocation:[service:theOnes[service]]]
+
+                } else  {
+
+                    // This is a task.
+                    theOnes.remove(service)
+                    returnValue =  [success:true,allocation:theOnes]
+
+                }
+
+            }
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Assign
+     *
+     */
+    public void Assign(allocation, t) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (mac in allocation.values()) {
+
+            // This is a task.
+            mac.Assign(t)
+
+        }
 
     }
 

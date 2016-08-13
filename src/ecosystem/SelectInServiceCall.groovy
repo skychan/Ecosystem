@@ -89,27 +89,6 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
 
     /**
      *
-     * Resource Evaluation
-     * @method Evaluation
-     *
-     */
-    public def Evaluation(candidates) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        returnValue = candidates.sort{[-it.getSourceable(),-it.getRank()]}
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method Select
      *
@@ -156,12 +135,126 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
             }
 
 
+            // This is a loop.
+            for (res in candidate.value) {
+
+                // This is a task.
+                res.competeList.reomve(sc)
+
+            }
+
+
+            // This is an agent decision.
+            if (needCap > 0) {
+
+                // This is a task.
+                chosenMap[candidate.key] = null
+
+            } else  {
+
+
+            }
+
         }
 
         // This is a task.
         returnValue = chosenMap
         // Return the results.
         return returnValue
+
+    }
+
+    /**
+     *
+     * Evaluation
+     * @method Evaluation
+     *
+     */
+    public def Evaluation(candidates) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (candidates == []) {
+
+            // This is a task.
+            returnValue = []
+
+        } else  {
+
+            // This is a task.
+            candidates.sort{[-it.getAvailable(),it.jobList.size()]}
+            returnValue = candidates
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Allocate
+     *
+     */
+    public Map Allocate(theOnes) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (null in theOnes.values()) {
+
+            // This is a task.
+            returnValue = [success:true,allocation:theOnes]
+
+        } else  {
+
+            // This is a task.
+            returnValue = [success:false,allocation:[:]]
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Assign
+     *
+     */
+    public void Assign(allocation, sc) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (resList in allocation.values()) {
+
+
+            // This is a loop.
+            for (data in resList) {
+
+                // This is a task.
+                data.key.Assign(sc,data.value)
+
+            }
+
+
+        }
 
     }
 

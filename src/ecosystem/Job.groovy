@@ -70,13 +70,13 @@ public class Job  {
      *
      */
     @Parameter (displayName = "Candidates", usageName = "candidates")
-    public def getCandidates() {
+    public Map getCandidates() {
         return candidates
     }
-    public void setCandidates(def newValue) {
+    public void setCandidates(Map newValue) {
         candidates = newValue
     }
-    public def candidates = [:]
+    public Map candidates = [:]
 
     /**
      *
@@ -96,17 +96,17 @@ public class Job  {
     /**
      *
      * This is an agent property.
-     * @field theOne
+     * @field theOnes
      *
      */
-    @Parameter (displayName = "TheOne", usageName = "theOne")
-    public def getTheOne() {
-        return theOne
+    @Parameter (displayName = "TheOnes", usageName = "theOnes")
+    public Map getTheOnes() {
+        return theOnes
     }
-    public void setTheOne(def newValue) {
-        theOne = newValue
+    public void setTheOnes(Map newValue) {
+        theOnes = newValue
     }
-    public def theOne = 0
+    public Map theOnes = [:]
 
     /**
      *
@@ -122,6 +122,306 @@ public class Job  {
         type = newValue
     }
     public def type = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field needResourceCapacity
+     *
+     */
+    @Parameter (displayName = "NeedResourceCapacity", usageName = "needResourceCapacity")
+    public def getNeedResourceCapacity() {
+        return needResourceCapacity
+    }
+    public void setNeedResourceCapacity(def newValue) {
+        needResourceCapacity = newValue
+    }
+    public def needResourceCapacity = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field remainingTime
+     *
+     */
+    @Parameter (displayName = "RemainingTime", usageName = "remainingTime")
+    public int getRemainingTime() {
+        return remainingTime
+    }
+    public void setRemainingTime(int newValue) {
+        remainingTime = newValue
+    }
+    public int remainingTime = -1
+
+    /**
+     *
+     * Record the owners of the task
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owners", usageName = "owner")
+    public def getOwner() {
+        return owner
+    }
+    public void setOwner(def newValue) {
+        owner = newValue
+    }
+    public def owner = null
+
+    /**
+     *
+     * the mark of the task stage
+     * @field finish
+     *
+     */
+    @Parameter (displayName = "Finish", usageName = "finish")
+    public boolean getFinish() {
+        return finish
+    }
+    public void setFinish(boolean newValue) {
+        finish = newValue
+    }
+    public boolean finish = false
+
+    /**
+     *
+     * Record the master of the task
+     * @field master
+     *
+     */
+    @Parameter (displayName = "Master", usageName = "master")
+    public def getMaster() {
+        return master
+    }
+    public void setMaster(def newValue) {
+        master = newValue
+    }
+    public def master = []
+
+    /**
+     *
+     * Record the prepare status for selected ones
+     * @field prepareStatus
+     *
+     */
+    @Parameter (displayName = "Prepare Status", usageName = "prepareStatus")
+    public def getPrepareStatus() {
+        return prepareStatus
+    }
+    public void setPrepareStatus(def newValue) {
+        prepareStatus = newValue
+    }
+    public def prepareStatus = [:]
+
+    /**
+     *
+     * Mark after the compete
+     * @field inNeed
+     *
+     */
+    @Parameter (displayName = "Need mark", usageName = "inNeed")
+    public boolean getInNeed() {
+        return inNeed
+    }
+    public void setInNeed(boolean newValue) {
+        inNeed = newValue
+    }
+    public boolean inNeed = false
+
+    /**
+     *
+     * This is an agent property.
+     * @field startTime
+     *
+     */
+    @Parameter (displayName = "Start time", usageName = "startTime")
+    public double getStartTime() {
+        return startTime
+    }
+    public void setStartTime(double newValue) {
+        startTime = newValue
+    }
+    public double startTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field span
+     *
+     */
+    @Parameter (displayName = "Span", usageName = "span")
+    public int getSpan() {
+        return span
+    }
+    public void setSpan(int newValue) {
+        span = newValue
+    }
+    public int span = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field chosenTime
+     *
+     */
+    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
+    public double getChosenTime() {
+        return chosenTime
+    }
+    public void setChosenTime(double newValue) {
+        chosenTime = newValue
+    }
+    public double chosenTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field responseTime
+     *
+     */
+    @Parameter (displayName = "Response Time", usageName = "responseTime")
+    public def getResponseTime() {
+        return responseTime
+    }
+    public void setResponseTime(def newValue) {
+        responseTime = newValue
+    }
+    public def responseTime = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field productQuality
+     *
+     */
+    @Parameter (displayName = "Product Quality", usageName = "productQuality")
+    public double getProductQuality() {
+        return productQuality
+    }
+    public void setProductQuality(double newValue) {
+        productQuality = newValue
+    }
+    public double productQuality = Math.exp(200)
+
+    /**
+     *
+     * This is an agent property.
+     * @field hardness
+     *
+     */
+    @Parameter (displayName = "Hardness", usageName = "hardness")
+    public double getHardness() {
+        return hardness
+    }
+    public void setHardness(double newValue) {
+        hardness = newValue
+    }
+    public double hardness = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field inBufferTime
+     *
+     */
+    @Parameter (displayName = "InBuff time", usageName = "inBufferTime")
+    public def getInBufferTime() {
+        return inBufferTime
+    }
+    public void setInBufferTime(def newValue) {
+        inBufferTime = newValue
+    }
+    public def inBufferTime = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field reviews
+     *
+     */
+    @Parameter (displayName = "Review Result", usageName = "reviews")
+    public def getReviews() {
+        return reviews
+    }
+    public void setReviews(def newValue) {
+        reviews = newValue
+    }
+    public def reviews = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field finishTime
+     *
+     */
+    @Parameter (displayName = "Finish Time", usageName = "finishTime")
+    public double getFinishTime() {
+        return finishTime
+    }
+    public void setFinishTime(double newValue) {
+        finishTime = newValue
+    }
+    public double finishTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field readyTime
+     *
+     */
+    @Parameter (displayName = "Ready Time", usageName = "readyTime")
+    public double getReadyTime() {
+        return readyTime
+    }
+    public void setReadyTime(double newValue) {
+        readyTime = newValue
+    }
+    public double readyTime = 0
+
+    /**
+     *
+     * T -- service; F -- resources
+     * @field choice
+     *
+     */
+    @Parameter (displayName = "Choice", usageName = "choice")
+    public boolean getChoice() {
+        return choice
+    }
+    public void setChoice(boolean newValue) {
+        choice = newValue
+    }
+    public boolean choice = false
+
+    /**
+     *
+     * This is an agent property.
+     * @field allocation
+     *
+     */
+    @Parameter (displayName = "Allocation", usageName = "allocation")
+    public Map getAllocation() {
+        return allocation
+    }
+    public void setAllocation(Map newValue) {
+        allocation = newValue
+    }
+    public Map allocation = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field allocated
+     *
+     */
+    @Parameter (displayName = "Allocated", usageName = "allocated")
+    public boolean getAllocated() {
+        return allocated
+    }
+    public void setAllocated(boolean newValue) {
+        allocated = newValue
+    }
+    public boolean allocated = false
 
     /**
      *
@@ -153,19 +453,43 @@ public class Job  {
      * @method Select
      *
      */
-    public def Select() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
+    @Watch(
+        watcheeClassName = 'ecosystem.Job',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watchee.equals($watcher)',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d
+    )
+    public def Select(ecosystem.Job watchedAgent) {
 
         // This is a task.
-        this.theOne = selectBehavior.select(this.candidates)
-        // Return the results.
-        return returnValue
+        this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)
+        Map result = selectBehavior.Allocate(this.theOnes)
+        this.setAllocation(result.allocation)
+        this.setAllocated(result.success)
+        // This is a task.
+        this.theOnes = [:]
+        this.candidates.each{ entry -> entry.value = [] }
 
+        // This is an agent decision.
+        if (this.getAllocated()) {
+
+
+            // This is a loop.
+            for (mac in this.allocation) {
+
+                // This is a task.
+                this.prepareStatus[mac] = false
+
+            }
+
+            // This is a task.
+            selectBehavior.Assign(watchedAgent.allocation,this)
+
+        } else  {
+
+
+        }
     }
 
     /**
@@ -192,6 +516,241 @@ public class Job  {
             this.candidates[competitor.getType()]<<competitor
 
         }
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addOwner
+     *
+     */
+    public void addOwner(ownerID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add owner to the list
+        this.owner << ownerID
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addMaster
+     *
+     */
+    public void addMaster(masterID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add master to the list
+        this.master << masterID
+    }
+
+    /**
+     *
+     * Check the lackness of resources
+     * @method CheckLackness
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.inNeed',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.2d
+    )
+    public def CheckLackness(ecosystem.Task watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.serviceCandidates == []) {
+
+
+            // This is an agent decision.
+            if ([] in this.candidates.values()) {
+
+
+                // This is a loop.
+                for (candidateList in this.candidates.values()) {
+
+                    // This is a task.
+                    candidateList.each{ it.compete.remove(this)}
+
+                }
+
+                // This is a task.
+                this.candidates.each{ it.value=[]}
+                //println this.toString() + " lack of resource"
+
+            } else  {
+
+                // This is a task.
+                //println this.candidates
+                this.Select()
+                this.setAllocated(true)
+                // println this.toString() + " selected resources"
+
+            }
+
+        } else  {
+
+            // This is a task.
+            this.setAllocated(true)
+            this.Select()
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Ready to process means to reset the task status in case
+     * @method Reset
+     *
+     */
+    public def Reset() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.setPrepareStatus([:])
+        this.setInNeed(false)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Repeat
+     * @method Need
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void Need() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getAllocated() == false) {
+
+            // This is a task.
+            this.setInNeed(true)
+            //println this.toString() + " lack response so publish need again"
+
+        } else  {
+
+
+        }
+    }
+
+    /**
+     *
+     * Review and comment after the task is finished
+     * @method Review
+     *
+     */
+    public def Review(theRes) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        int t = this.getReayTime() - this.inBufferTime[theRes]
+        int t2 = this.getFinishTime() - this.inBufferTime[theRes]
+        int q = this.needResourceCapacity[theRes.getType()] * t2
+        this.reviews << Math.exp(t)*q*theRes.getRank()
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Check if all the candidates are ready
+     * @method CheckStatus
+     *
+     */
+    @ScheduledMethod(
+        start = 0.3d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def CheckStatus() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getChoice()) {
+
+            // This is a task.
+            Service theSer = this.allocatedService
+            theSer.readyTask << this
+            theSer.buffer.remove(this)
+            // This is a task.
+            this.Reset()
+            this.setRemainingTime(this.getProcessingTime())
+            this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+
+        } else  {
+
+
+            // This is an agent decision.
+            if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
+
+
+                // This is a loop.
+                for (theRes in this.allocatedResource.values()) {
+
+                    // This is a task.
+                    theRes.readyTask << this
+                    theRes.buffer.remove(this)
+                    // what's that
+
+                }
+
+                // This is a task.
+                this.Reset()
+                this.setRemainingTime(this.getProcessingTime())
+                this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+
+            } else  {
+
+
+            }
+
+        }
+        // Return the results.
+        return returnValue
+
     }
 
     /**

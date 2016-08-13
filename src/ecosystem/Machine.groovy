@@ -96,17 +96,257 @@ public class Machine  {
     /**
      *
      * This is an agent property.
-     * @field taskCompeteList
+     * @field CompeteList
      *
      */
-    @Parameter (displayName = "Task Compete List", usageName = "taskCompeteList")
-    public def getTaskCompeteList() {
-        return taskCompeteList
+    @Parameter (displayName = "Compete List", usageName = "CompeteList")
+    public def getCompeteList() {
+        return CompeteList
     }
-    public void setTaskCompeteList(def newValue) {
-        taskCompeteList = newValue
+    public void setCompeteList(def newValue) {
+        CompeteList = newValue
     }
-    public def taskCompeteList = []
+    public def CompeteList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field available
+     *
+     */
+    @Parameter (displayName = "Available", usageName = "available")
+    public int getAvailable() {
+        return available
+    }
+    public void setAvailable(int newValue) {
+        available = newValue
+    }
+    public int available = 0
+
+    /**
+     *
+     * Record the master of the resource
+     * @field master
+     *
+     */
+    @Parameter (displayName = "Master", usageName = "master")
+    public Service getMaster() {
+        return master
+    }
+    public void setMaster(Service newValue) {
+        master = newValue
+    }
+    public Service master = null
+
+    /**
+     *
+     * The service owner, if not only one
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public PureProvider getOwner() {
+        return owner
+    }
+    public void setOwner(PureProvider newValue) {
+        owner = newValue
+    }
+    public PureProvider owner = null
+
+    /**
+     *
+     * Record be chose or not
+     * @field chose
+     *
+     */
+    @Parameter (displayName = "Chose", usageName = "chose")
+    public boolean getChose() {
+        return chose
+    }
+    public void setChose(boolean newValue) {
+        chose = newValue
+    }
+    public boolean chose = false
+
+    /**
+     *
+     * Count the finished jobs
+     * @field finish
+     *
+     */
+    @Parameter (displayName = "Finished", usageName = "finish")
+    public int getFinish() {
+        return finish
+    }
+    public void setFinish(int newValue) {
+        finish = newValue
+    }
+    public int finish = 0
+
+    /**
+     *
+     * Job list
+     * @field jobList
+     *
+     */
+    @Parameter (displayName = "Job List", usageName = "jobList")
+    public def getJobList() {
+        return jobList
+    }
+    public void setJobList(def newValue) {
+        jobList = newValue
+    }
+    public def jobList = []
+
+    /**
+     *
+     * Quality
+     * @field quality
+     *
+     */
+    @Parameter (displayName = "Quality", usageName = "quality")
+    public double getQuality() {
+        return quality
+    }
+    public void setQuality(double newValue) {
+        quality = newValue
+    }
+    public double quality = 0
+
+    /**
+     *
+     * Review history
+     * @field reviews
+     *
+     */
+    @Parameter (displayName = "Review History", usageName = "reviews")
+    public def getReviews() {
+        return reviews
+    }
+    public void setReviews(def newValue) {
+        reviews = newValue
+    }
+    public def reviews = []
+
+    /**
+     *
+     * The ready task mark
+     * @field readyTask
+     *
+     */
+    @Parameter (displayName = "Ready Task", usageName = "readyTask")
+    public def getReadyTask() {
+        return readyTask
+    }
+    public void setReadyTask(def newValue) {
+        readyTask = newValue
+    }
+    public def readyTask = []
+
+    /**
+     *
+     * This is the task buffer
+     * @field buffer
+     *
+     */
+    @Parameter (displayName = "Buffer", usageName = "buffer")
+    public def getBuffer() {
+        return buffer
+    }
+    public void setBuffer(def newValue) {
+        buffer = newValue
+    }
+    public def buffer = []
+
+    /**
+     *
+     * Mark queue in joblist or not
+     * @field queue
+     *
+     */
+    @Parameter (displayName = "Queue Status", usageName = "queue")
+    public boolean getQueue() {
+        return queue
+    }
+    public void setQueue(boolean newValue) {
+        queue = newValue
+    }
+    public boolean queue = false
+
+    /**
+     *
+     * This is an agent property.
+     * @field queueLength
+     *
+     */
+    @Parameter (displayName = "Queue Length", usageName = "queueLength")
+    public int getQueueLength() {
+        return queueLength
+    }
+    public void setQueueLength(int newValue) {
+        queueLength = newValue
+    }
+    public int queueLength = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field shiftTask
+     *
+     */
+    @Parameter (displayName = "Shift Task", usageName = "shiftTask")
+    public def getShiftTask() {
+        return shiftTask
+    }
+    public void setShiftTask(def newValue) {
+        shiftTask = newValue
+    }
+    public def shiftTask = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field chosenTime
+     *
+     */
+    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
+    public double getChosenTime() {
+        return chosenTime
+    }
+    public void setChosenTime(double newValue) {
+        chosenTime = newValue
+    }
+    public double chosenTime = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceNeedCapacity
+     *
+     */
+    @Parameter (displayName = "Service need cap", usageName = "serviceNeedCapacity")
+    public int getServiceNeedCapacity() {
+        return serviceNeedCapacity
+    }
+    public void setServiceNeedCapacity(int newValue) {
+        serviceNeedCapacity = newValue
+    }
+    public int serviceNeedCapacity = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceProvider
+     *
+     */
+    @Parameter (displayName = "Service Provider", usageName = "serviceProvider")
+    public def getServiceProvider() {
+        return serviceProvider
+    }
+    public void setServiceProvider(def newValue) {
+        serviceProvider = newValue
+    }
+    public def serviceProvider = 0
 
     /**
      *
@@ -144,10 +384,7 @@ public class Machine  {
         triggerCondition = '$watchee.inNeed',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
     )
-    public def Response(ecosystem.Task watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
+    public void Response(ecosystem.Task watchedAgent) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -161,7 +398,7 @@ public class Machine  {
             if (responseBehavior.Exist(watchedAgent,this)) {
 
                 // change the compete state
-                this.taskCompeteList << watchedAgent
+                this.competeList << watchedAgent
                 watchedAgent.addCandidates(this)
                 //println this.toString() + " compete " + watchedAgent.toString()
 
@@ -174,9 +411,285 @@ public class Machine  {
 
 
         }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Release
+     *
+     */
+    public void Release(int amount) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getServiceNeedCapacity() > 0) {
+
+
+            // This is an agent decision.
+            if (amount >= this.getServiceNeedCapacity()) {
+
+                // This is a task.
+                amount -= this.getServiceNeedCapacity()
+                this.setServiceNeedCapacity(0)
+                this.serviceProvider.serviceStatus[this] = true
+                this.serviceProvider.setServiceReady(true)
+                // This is a task.
+                int temp = this.getAvailable()
+                temp += amount
+                this.setAvailable(temp)
+
+            } else  {
+
+                // This is a task.
+                amount = 0
+                this.setServiceNeedCapacity(this.getServiceNeedCapacity() - amount)
+
+            }
+
+        } else  {
+
+
+        }
+    }
+
+    /**
+     *
+     * Change the service rank with depends on the review
+     * @method getRank
+     *
+     */
+    public def getRank() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        PureProvider user = this.owner[-1]
+        returnValue = user.getRank()
         // Return the results.
         return returnValue
 
+    }
+
+    /**
+     *
+     * Add review to history
+     * @method AddReview
+     *
+     */
+    public def AddReview(rvalue) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        //println "add demander's review to the history"
+        this.reviews << rvalue
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Chose the next task
+     * @method Next
+     *
+     */
+    public def Next() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (theOne in this.jobList) {
+
+
+            // This is an agent decision.
+            if (this.getAvailable() >= theOne.needResourceCapacity[this.getType()]) {
+
+                // This is a task.
+                this.buffer << theOne
+                this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
+                theOne.prepareStatus[this.getType()] = true
+                this.shiftTask << theOne
+                this.setQueue(false)
+                // This is a task.
+                this.queueLength -= 1
+                println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
+                double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                int delta = t - theOne.getChosenTime()
+                theOne.responseTime[this] = delta
+                theOne.inBufferTime[this] = t
+
+            } else  {
+
+
+            }
+
+        }
+
+
+        // This is a loop.
+        for (theOne in this.shiftTask) {
+
+            // This is a task.
+            this.jobList.remove(theOne)
+
+        }
+
+        // This is a task.
+        this.shiftTask = []
+        this.owner[0].ServiceCall()
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Review and comment after the task is finished
+     * @method Review
+     *
+     */
+    public def Review(theTask) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double q = theTask.getProductQuality()
+        int t = theTask.responseTime[this]
+        double h = theTask.getHardness()
+        int p = theTask.getProcessingTime()
+        this.reviews <<  (h * q / (t+p))
+        // This is a task.
+        this.owner.addTaskFrequency(theTask)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method getFullLength
+     *
+     */
+    public int getFullLength() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        returnValue = this.jobList.size() + this.buffer.size() + this.readyTask.size()
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Ready to join
+     * @method Join
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Resource',
+        watcheeFieldNames = 'sourceable',
+        triggerCondition = '$watcher.toString() == $watchee.toString()',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public def Join(ecosystem.Resource watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.getAvailable() >= this.getServiceNeedCapacity()) {
+
+            // This is a task.
+            this.setAvailable(this.getAvailable() - this.getServiceNeedCapacity())
+            this.serviceProvider.serviceStatus[this] = true
+            this.serviceProvider.setServiceReady(true)
+            this.setServiceNeedCapacity(0)
+
+        } else  {
+
+            // This is a task.
+            this.setServiceNeedCapacity(this.getServiceNeedCapacity() - this.getAvailable())
+            this.setAvailable(0)
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Assign
+     *
+     */
+    public void Assign(job) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+
+        // This is an agent decision.
+        if (this.getAvailable() < job.needResourceCapacity[this.getType()]) {
+
+            // This is a task.
+            this.jobList << theOne
+            println this.toString() + " jobList " + this.jobList
+            println this.toString() + " buffer " + this.buffer
+            println this.toString() + " readytask " + this.readyTask
+            this.queueLength += 1
+            this.setQueue(true)
+            println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
+
+        } else  {
+
+            // This is a task.
+            this.buffer << theOne
+            this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
+            theOne.prepareStatus[this.getType()] = true
+            double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+            int delta =  t - theOne.getChosenTime()
+            theOne.responseTime[this] = delta
+            theOne.inBufferTime[this] = t
+            println this.toString() + " jobList " + this.jobList
+            println this.toString() + " buffer " + this.buffer
+            println this.toString() + " readytask " + this.readyTask
+
+        }
     }
 
     /**

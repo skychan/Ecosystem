@@ -89,6 +89,19 @@ public class ServiceCall extends ecosystem.Job  {
 
     /**
      *
+     * This is the step behavior.
+     * @method ServiceCall
+     *
+     */
+    public def ServiceCall() {
+
+        // This is a task.
+        selectBehavior = new SelectInServiceCall()
+        candidates.remove(service)
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

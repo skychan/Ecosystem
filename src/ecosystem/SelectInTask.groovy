@@ -61,67 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class Job  {
-
-    /**
-     *
-     * This is an agent property.
-     * @field candidates
-     *
-     */
-    @Parameter (displayName = "Candidates", usageName = "candidates")
-    public def getCandidates() {
-        return candidates
-    }
-    public void setCandidates(def newValue) {
-        candidates = newValue
-    }
-    public def candidates = [:]
-
-    /**
-     *
-     * This is an agent property.
-     * @field selectBehavior
-     *
-     */
-    @Parameter (displayName = "SelectBehavior", usageName = "selectBehavior")
-    public SelectBehavior getSelectBehavior() {
-        return selectBehavior
-    }
-    public void setSelectBehavior(SelectBehavior newValue) {
-        selectBehavior = newValue
-    }
-    public SelectBehavior selectBehavior = null
-
-    /**
-     *
-     * This is an agent property.
-     * @field theOne
-     *
-     */
-    @Parameter (displayName = "TheOne", usageName = "theOne")
-    public def getTheOne() {
-        return theOne
-    }
-    public void setTheOne(def newValue) {
-        theOne = newValue
-    }
-    public def theOne = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field type
-     *
-     */
-    @Parameter (displayName = "Type", usageName = "type")
-    public def getType() {
-        return type
-    }
-    public void setType(def newValue) {
-        type = newValue
-    }
-    public def type = 0
+public class SelectInTask implements ecosystem.SelectBehavior {
 
     /**
      *
@@ -145,15 +85,15 @@ public class Job  {
      * @field agentID
      *
      */
-    protected String agentID = "Job " + (agentIDCounter++)
+    protected String agentID = "SelectInTask " + (agentIDCounter++)
 
     /**
      *
-     * This is the step behavior.
+     * Select
      * @method Select
      *
      */
-    public def Select() {
+    public def Select(t, candidates) {
 
         // Define the return value variable.
         def returnValue
@@ -162,7 +102,53 @@ public class Job  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.theOne = selectBehavior.select(this.candidates)
+        def chosenMap = [:]
+
+        // This is a loop.
+        for (candidate in candidates) {
+
+            // This is a task.
+            def theType = candidate.key
+            def theList = candidate.value
+            theList = Evaluation(theList)
+            // This is a task.
+            chosenMap[theType] = theList[0]
+
+            // This is a loop.
+            for (res in theList) {
+
+                // This is a task.
+                res.compete.remove(t)
+
+            }
+
+
+        }
+
+        // This is a task.
+        returnValue = chosenMap
+        //println "after the selection and clear"
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Evaluation
+     * @method Evaluation
+     *
+     */
+    public def Evaluation(candidates) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        // returnValue = candidates.sort{[-it.getAvailable(),it.jobList.size()]}
         // Return the results.
         return returnValue
 

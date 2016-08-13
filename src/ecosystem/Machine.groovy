@@ -65,6 +65,21 @@ public class Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field type
+     *
+     */
+    @Parameter (displayName = "Type", usageName = "type")
+    public def getType() {
+        return type
+    }
+    public void setType(def newValue) {
+        type = newValue
+    }
+    public def type = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -86,6 +101,45 @@ public class Machine  {
      *
      */
     protected String agentID = "Machine " + (agentIDCounter++)
+
+    /**
+     *
+     * Response to the need call
+     * @method Response
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watchee.Exist($watcher.getType()) && $watchee.inNeed',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d
+    )
+    public def Response(ecosystem.Task watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // Decide to take the task or not
+        if (true) {
+
+            // change the compete state
+            this.compete << watchedAgent
+            watchedAgent.addCandidates(this)
+            //println this.toString() + " compete " + watchedAgent.toString()
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
 
     /**
      *

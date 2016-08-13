@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Machine" agentparentclassname="" agentinterfaces="" agentimports="">
-  <behaviorsteps/>
-  <tasksteps/>
-  <decisionsteps/>
+  <behaviorsteps>
+    <behaviorstep x="139" y="31" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="$watchee.Exist($watcher.getType()) &amp;&amp; $watchee.inNeed" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="def" compiledname="Response" parameters="ecosystem.Task watchedAgent" exceptions="">
+      <label x="139" y="16" text="Response"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="141" y="199" comment="change the compete state" command1="this.compete &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="//println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
+      <label x="141" y="184" text="Change the comoete state"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps>
+    <decisionstep x="139" y="110" comment="Decide to take the task or not" criteria="true" branchType="if">
+      <label x="139" y="95" text="Take it or not"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
-  <agentproperties/>
-  <endsteps/>
+  <agentproperties>
+    <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
+      <label x="48" y="20" text="Type"/>
+    </agentproperty>
+  </agentproperties>
+  <endsteps>
+    <endstep x="146" y="298"/>
+  </endsteps>
   <connections>
-    <transitions/>
-    <booleantransitions/>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

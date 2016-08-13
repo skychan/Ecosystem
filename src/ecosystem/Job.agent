@@ -22,9 +22,12 @@
     <agentproperty x="315" y="133" comment="This is an agent property." visibility="0" compiledname="theOne" type="def" defaultvalue="0">
       <label x="320" y="118" text="TheOne"/>
     </agentproperty>
+    <agentproperty x="47" y="41" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
+      <label x="52" y="26" text="Type"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="189" y="338"/>
+    <endstep x="194" y="343"/>
   </endsteps>
   <connections>
     <transitions>

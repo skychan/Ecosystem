@@ -76,7 +76,7 @@ public class Job  {
     public void setCandidates(Map newValue) {
         candidates = newValue
     }
-    public Map candidates = [:]
+    public Map candidates = ['service':[]]
 
     /**
      *
@@ -140,21 +140,6 @@ public class Job  {
 
     /**
      *
-     * This is an agent property.
-     * @field remainingTime
-     *
-     */
-    @Parameter (displayName = "RemainingTime", usageName = "remainingTime")
-    public int getRemainingTime() {
-        return remainingTime
-    }
-    public void setRemainingTime(int newValue) {
-        remainingTime = newValue
-    }
-    public int remainingTime = -1
-
-    /**
-     *
      * the mark of the task stage
      * @field finish
      *
@@ -175,13 +160,13 @@ public class Job  {
      *
      */
     @Parameter (displayName = "Prepare Status", usageName = "prepareStatus")
-    public def getPrepareStatus() {
+    public Map getPrepareStatus() {
         return prepareStatus
     }
-    public void setPrepareStatus(def newValue) {
+    public void setPrepareStatus(Map newValue) {
         prepareStatus = newValue
     }
-    public def prepareStatus = [:]
+    public Map prepareStatus = [:]
 
     /**
      *
@@ -335,7 +320,7 @@ public class Job  {
 
     /**
      *
-     * This is an agent property.
+     * [type:res]
      * @field allocation
      *
      */
@@ -434,7 +419,7 @@ public class Job  {
             for (mac in this.allocation) {
 
                 // This is a task.
-                this.prepareStatus[mac] = false
+                this.prepareStatus[mac.key] = false
 
             }
 
@@ -463,7 +448,7 @@ public class Job  {
         if (competitor.getClass() == ecosystem.Service) {
 
             // This is a task.
-            this.candidates[service] << competitor
+            this.candidates['service'] << competitor
 
         } else  {
 
@@ -502,7 +487,7 @@ public class Job  {
      *
      */
     @ScheduledMethod(
-        start = 1d,
+        start = 0d,
         interval = 1d,
         shuffle = true
     )
@@ -555,11 +540,16 @@ public class Job  {
      * @method CheckStatus
      *
      */
+    @ScheduledMethod(
+        start = 0.3d,
+        interval = 1d,
+        shuffle = true
+    )
     public def CheckStatus() {
 
 
         // This is an agent decision.
-        if (this.getPrepareStatus().values().count(false) == 0) {
+        if (this.getPrepareStatus().values().count(false) == 0 && this.getPrepareStatus().size()>0) {
 
             // This is a task.
             this.processBehavior.Process(this)

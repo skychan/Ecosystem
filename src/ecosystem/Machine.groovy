@@ -442,17 +442,22 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        println toString() + " first assign "
 
         // This is an agent decision.
         if (this.assignBehavior.BufferEnterance(job,this)) {
 
             // This is a task.
             this.assignBehavior.Buffer(job,this)
+            println buffer
+            println jobList
 
         } else  {
 
             // This is a task.
             this.assignBehavior.Queue(job,this)
+            println jobList
+            println buffer
 
         }
     }
@@ -475,7 +480,10 @@ public class Machine  {
         if (this.jobList.size() > 0) {
 
             // This is a task.
+            println toString()
             releaseBehavior.Next(this)
+            println buffer
+            println jobList
 
         } else  {
 

@@ -624,7 +624,7 @@ public class Provider extends ecosystem.User  {
             // This is a task.
             res.setOwner(this)
             //this.candidates << res
-            println "create resource " + res.toString() + " with type " + res.getType()
+            //println "create resource " + res.toString() + " with type " + res.getType()
             //this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
             res.setSourceable(res.getCapacity())
 

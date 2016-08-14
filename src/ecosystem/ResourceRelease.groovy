@@ -116,7 +116,7 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
 
         // This is a task.
         m.jobList = m.jobList.sort{ [ -it.value, it.key.getType() ] }
-        def job = m.jobList[0]
+        def job = m.jobList.keySet()[0]
 
         // This is an agent decision.
         if (job.getClass() == ecosystem.ServiceCall) {

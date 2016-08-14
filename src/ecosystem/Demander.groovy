@@ -165,10 +165,8 @@ public class Demander extends ecosystem.User  {
         o.setOwner(this)
         o.setType("Order"+orderID)
         // Set the order parameters
-        o.setParameters(this.taskMap)
-        println this.toString() + " need "+ o.toString()
         this.getOrderList().add(o)
-        this.setNewOrder(o)
+        o.setParameters(this.taskMap)
     }
 
     /**

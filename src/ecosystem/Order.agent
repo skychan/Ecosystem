@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is order agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="281" y="54" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Supplier Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="" exceptions="">
-      <label x="281" y="39" text="Supplier Evaluation"/>
-    </behaviorstep>
-    <behaviorstep x="131" y="372" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the tasks belongs to this order" visibility="0" returntype="def" compiledname="setParameters" parameters="taskMap" exceptions="">
-      <label x="131" y="357" text="Set tasks"/>
+    <behaviorstep x="153" y="45" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the tasks belongs to this order" visibility="0" returntype="def" compiledname="setParameters" parameters="taskMap" exceptions="">
+      <label x="153" y="30" text="Set tasks"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="282" y="139" comment="This is a task." command1="this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}" command2="" command3="" command4="" command5="">
-      <label x="282" y="124" text="Do Task"/>
+    <taskstep x="156" y="284" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="156" y="269" text="Do Task"/>
     </taskstep>
-    <taskstep x="134" y="611" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
-      <label x="134" y="596" text="Do Task"/>
+    <taskstep x="246" y="281" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList &lt;&lt; t">
+      <label x="246" y="266" text="Do Task"/>
     </taskstep>
-    <taskstep x="224" y="608" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster(this)" command4="t.setParameters(tdata)" command5="this.taskList &lt;&lt; t">
-      <label x="224" y="593" text="Do Task"/>
+    <taskstep x="260" y="380" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="" command4="" command5="">
+      <label x="260" y="365" text="Set task type"/>
     </taskstep>
-    <taskstep x="231" y="706" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="" command4="" command5="">
-      <label x="231" y="691" text="Set task type"/>
-    </taskstep>
-    <taskstep x="129" y="442" comment="This is a task." command1="int i = 1" command2="" command3="" command4="" command5="">
-      <label x="129" y="427" text="Do Task"/>
+    <taskstep x="151" y="115" comment="This is a task." command1="int i = 1" command2="" command3="" command4="" command5="">
+      <label x="151" y="100" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="131" y="519" comment="This is a loop." criteria="tdata in taskMap" branchType="while">
-      <label x="131" y="504" text="Evaluate Criteria"/>
+    <decisionstep x="153" y="192" comment="This is a loop." criteria="tdata in taskMap" branchType="while">
+      <label x="153" y="177" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="233" y="516" comment="This is an agent decision." criteria="tdata.value.size() &gt; 1" branchType="if">
-      <label x="233" y="501" text="Evaluate Criteria"/>
+    <decisionstep x="255" y="189" comment="This is an agent decision." criteria="tdata.value.size() &gt; 1" branchType="if">
+      <label x="255" y="174" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -38,27 +32,21 @@
     <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="def" defaultvalue="null">
       <label x="47" y="19" text="Owner"/>
     </agentproperty>
-    <agentproperty x="236" y="415" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[]">
-      <label x="241" y="400" text="Task List"/>
+    <agentproperty x="258" y="88" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[]">
+      <label x="263" y="73" text="Task List"/>
     </agentproperty>
     <agentproperty x="468" y="47" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
       <label x="473" y="32" text="Type"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="319" y="300"/>
-    <endstep x="149" y="711"/>
+    <endstep x="164" y="378"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
-        <transitiontarget type="task" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -68,16 +56,11 @@
       </transition>
       <transition>
         <transitionsource type="task" index="1" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="4" anchor="2"/>
+        <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -90,12 +73,12 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="1" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

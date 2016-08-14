@@ -18,16 +18,16 @@
     <taskstep x="43" y="187" comment="This is a task." command1="selectBehavior = new SelectInTask()" command2="processBehavior = new ProcessInTask()" command3="" command4="" command5="">
       <label x="43" y="172" text="Do Task"/>
     </taskstep>
-    <taskstep x="273" y="313" comment="This is a task." command1="println &quot;task para setted&quot;" command2="this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())" command3="this.prepareStatus[service] = false" command4="println &quot;start at &quot; + this.getStartTime()" command5="this.candidates[service] = []">
+    <taskstep x="273" y="313" comment="This is a task." command1="println &quot;task para setted&quot;" command2="this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())" command3="" command4="println &quot;start at &quot; + this.getStartTime()" command5="">
       <label x="273" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="380" y="127" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="" command4="" command5="">
       <label x="380" y="112" text="Do Task"/>
     </taskstep>
-    <taskstep x="382" y="330" comment="This is a task." command1="this.needResourceCapacity &lt;&lt; data" command2="" command3="this.prepareStatus[data.key] = false" command4="this.candidates[data.key] = []" command5="">
+    <taskstep x="382" y="330" comment="This is a task." command1="this.needResourceCapacity &lt;&lt; data" command2="" command3="// this.prepareStatus[data.key] = false" command4="this.candidates[data.key] = []" command5="">
       <label x="382" y="315" text="Do Task"/>
     </taskstep>
-    <taskstep x="603" y="251" comment="This is a task." command1="this.setRemainingTime(this.getRemainingTime()-1)" command2="" command3="" command4="" command5="">
+    <taskstep x="603" y="251" comment="This is a task." command1="this.setRemainingTime(this.getRemainingTime()-1)" command2="println &quot;continue to process &quot; + toString()" command3="" command4="" command5="">
       <label x="603" y="236" text="Do Task"/>
     </taskstep>
     <taskstep x="710" y="419" comment="The finish step" command1="mac.Release(this)" command2="" command3="" command4="" command5="">
@@ -39,7 +39,7 @@
     <taskstep x="815" y="419" comment="This is a task." command1="RandomHelper.createNormal(mac.getQuality(),1)" command2="double tempQuality = RandomHelper.getNormal().nextDouble()" command3="" command4="" command5="">
       <label x="815" y="404" text="Do Task"/>
     </taskstep>
-    <taskstep x="813" y="241" comment="This is a task." command1="println this.toString() + &quot; is finished&quot;" command2="this.setFinish(true)" command3="this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="this.span = this.finishTime - this.getStartTime()" command5="">
+    <taskstep x="813" y="241" comment="This is a task." command1="println this.toString() + &quot; is finished&quot;" command2="this.setFinish(true)" command3="this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="this.span = this.finishTime - this.getStartTime()" command5="println &quot;finish mark &quot; + this.getFinish()">
       <label x="813" y="226" text="Finish"/>
     </taskstep>
     <taskstep x="931" y="336" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
@@ -77,18 +77,21 @@
     <agentproperty x="66" y="439" comment="This is an agent property." visibility="0" compiledname="processingTime" type="int" defaultvalue="0">
       <label x="71" y="424" text="ProcessingTime"/>
     </agentproperty>
-    <agentproperty x="187" y="649" comment="Record the master of the task" visibility="0" compiledname="master" type="def" defaultvalue="null">
-      <label x="192" y="634" text="Master"/>
-    </agentproperty>
     <agentproperty x="93" y="650" comment="Record the owners of the task" visibility="0" compiledname="owners" type="def" defaultvalue="[:]">
       <label x="98" y="635" text="Owners"/>
     </agentproperty>
+    <agentproperty x="189" y="503" comment="This is an agent property." visibility="0" compiledname="master" type="def" defaultvalue="null">
+      <label x="194" y="488" text="Master"/>
+    </agentproperty>
+    <agentproperty x="565" y="496" comment="This is an agent property." visibility="0" compiledname="remainingTime" type="int" defaultvalue="-1">
+      <label x="570" y="478" text="RemainingTime"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="56" y="304"/>
-    <endstep x="295" y="415"/>
-    <endstep x="619" y="508"/>
-    <endstep x="109" y="931"/>
+    <endstep x="71" y="319"/>
+    <endstep x="310" y="430"/>
+    <endstep x="634" y="523"/>
+    <endstep x="124" y="946"/>
   </endsteps>
   <connections>
     <transitions>
@@ -105,6 +108,11 @@
       <transition>
         <transitionsource type="behavior" index="2" anchor="0"/>
         <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -130,11 +138,6 @@
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="10" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -179,6 +182,11 @@
         <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="4" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="5" anchor="1"/>
         <transitiontarget type="task" index="6" anchor="3"/>
@@ -187,11 +195,6 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="6" anchor="3"/>
         <transitiontarget type="task" index="9" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="6" anchor="0"/>
-        <transitiontarget type="task" index="8" anchor="2"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

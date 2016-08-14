@@ -19,14 +19,14 @@
     <entry>
       <string>Provider Population</string>
       <repast.simphony.data2.engine.CountSourceDefinition>
-        <typeName>ecosystem.PureProvider</typeName>
+        <typeName>ecosystem.Provider</typeName>
         <id>Provider Population</id>
       </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
     <entry>
       <string>Demander Population</string>
       <repast.simphony.data2.engine.CountSourceDefinition>
-        <typeName>ecosystem.PureDemander</typeName>
+        <typeName>ecosystem.Demander</typeName>
         <id>Demander Population</id>
       </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>

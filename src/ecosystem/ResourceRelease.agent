@@ -15,7 +15,7 @@
     <taskstep x="480" y="415" comment="This is a task." command1="m.assignBehavior.Buffer(j,m)" command2="m.jobList.remove(j)" command3="" command4="" command5="">
       <label x="480" y="400" text="Do Task"/>
     </taskstep>
-    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList = m.jobList.sort{ [ -it.value, it.key.getType() ] }" command2="def job = m.jobList[0]" command3="" command4="" command5="">
+    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList = m.jobList.sort{ [ -it.value, it.key.getType() ] }" command2="def job = m.jobList.keySet()[0]" command3="" command4="" command5="">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
     <taskstep x="498" y="218" comment="This is a task." command1="m.assignBehavior.Buffer(job,m)" command2="m.jobList.remove(job)" command3="" command4="" command5="">
@@ -48,8 +48,8 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="78" y="284"/>
-    <endstep x="282" y="419"/>
+    <endstep x="72" y="292"/>
+    <endstep x="287" y="424"/>
   </endsteps>
   <connections>
     <transitions>
@@ -59,13 +59,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

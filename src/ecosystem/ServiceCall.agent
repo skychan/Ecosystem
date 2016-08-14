@@ -12,7 +12,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="48" y="151" comment="This is a task." command1="selectBehavior = new SelectInServiceCall()" command2="candidates.remove(service)" command3="processBehavior = new ProcessInServiceCall()" command4="" command5="">
+    <taskstep x="48" y="151" comment="This is a task." command1="selectBehavior = new SelectInServiceCall()" command2="candidates.remove(&apos;service&apos;)" command3="processBehavior = new ProcessInServiceCall()" command4="" command5="">
       <label x="48" y="136" text="Do Task"/>
     </taskstep>
     <taskstep x="148" y="401" comment="add owner to the list" command1="this.owner &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
@@ -33,9 +33,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="59" y="272"/>
-    <endstep x="176" y="534"/>
-    <endstep x="297" y="547"/>
+    <endstep x="64" y="277"/>
+    <endstep x="181" y="539"/>
+    <endstep x="302" y="552"/>
   </endsteps>
   <connections>
     <transitions>

@@ -80,7 +80,22 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
-     * Record the master of the task
+     * Record the owners of the task
+     * @field owners
+     *
+     */
+    @Parameter (displayName = "Owners", usageName = "owners")
+    public def getOwners() {
+        return owners
+    }
+    public void setOwners(def newValue) {
+        owners = newValue
+    }
+    public def owners = [:]
+
+    /**
+     *
+     * This is an agent property.
      * @field master
      *
      */
@@ -95,18 +110,18 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
-     * Record the owners of the task
-     * @field owners
+     * This is an agent property.
+     * @field remainingTime
      *
      */
-    @Parameter (displayName = "Owners", usageName = "owners")
-    public def getOwners() {
-        return owners
+    @Parameter (displayName = "RemainingTime", usageName = "remainingTime")
+    public int getRemainingTime() {
+        return remainingTime
     }
-    public void setOwners(def newValue) {
-        owners = newValue
+    public void setRemainingTime(int newValue) {
+        remainingTime = newValue
     }
-    public def owners = [:]
+    public int remainingTime = -1
 
     /**
      *
@@ -172,7 +187,7 @@ public class Task extends ecosystem.Job  {
 
                 // This is a task.
                 this.needResourceCapacity << data
-                this.prepareStatus[data.key] = false
+                // this.prepareStatus[data.key] = false
                 this.candidates[data.key] = []
 
             }
@@ -182,9 +197,7 @@ public class Task extends ecosystem.Job  {
         // This is a task.
         println "task para setted"
         this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
-        this.prepareStatus[service] = false
         println "start at " + this.getStartTime()
-        this.candidates[service] = []
     }
 
     /**
@@ -214,6 +227,7 @@ public class Task extends ecosystem.Job  {
 
             // This is a task.
             this.setRemainingTime(this.getRemainingTime()-1)
+            println "continue to process " + toString()
 
             // This is an agent decision.
             if (this.getRemainingTime() == 0) {
@@ -227,6 +241,12 @@ public class Task extends ecosystem.Job  {
 
                 }
 
+                // This is a task.
+                println this.toString() + " is finished"
+                this.setFinish(true)
+                this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                this.span = this.finishTime - this.getStartTime()
+                println "finish mark " + this.getFinish()
 
             } else  {
 

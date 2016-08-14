@@ -10,7 +10,7 @@
     <behaviorstep x="334" y="80" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="334" y="65" text="Create Provider"/>
     </behaviorstep>
-    <behaviorstep x="623" y="157" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="catch the finish task and add the count" visibility="0" returntype="def" compiledname="Accumulator" parameters="ecosystem.Task watchedAgent" exceptions="">
+    <behaviorstep x="623" y="157" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Job" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="catch the finish task and add the count" visibility="0" returntype="def" compiledname="Accumulator" parameters="ecosystem.Job watchedAgent" exceptions="">
       <label x="623" y="142" text="Accumulator"/>
     </behaviorstep>
     <behaviorstep x="516" y="487" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="Indexing" parameters="res" exceptions="">
@@ -33,7 +33,7 @@
     <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="" command5="pagent.GenerateResource()">
       <label x="327" y="245" text="Create Provider"/>
     </taskstep>
-    <taskstep x="623" y="233" comment="This is a task." command1="this.finishCount ++" command2="" command3="" command4="" command5="">
+    <taskstep x="623" y="233" comment="This is a task." command1="this.finishCount ++" command2="println &quot;finish watched &quot;" command3="" command4="" command5="">
       <label x="623" y="218" text="Do Task"/>
     </taskstep>
     <taskstep x="486" y="130" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
@@ -88,8 +88,8 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="657" y="782"/>
-    <joinstep x="170" y="807"/>
+    <joinstep x="662" y="787"/>
+    <joinstep x="175" y="812"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="58" y="48" comment="User list to record the user exist in the platform" visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -109,14 +109,14 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="76" y="379"/>
-    <endstep x="184" y="382"/>
-    <endstep x="455" y="453"/>
-    <endstep x="674" y="363"/>
-    <endstep x="660" y="928"/>
-    <endstep x="171" y="998"/>
-    <endstep x="364" y="855"/>
-    <endstep x="338" y="389"/>
+    <endstep x="81" y="384"/>
+    <endstep x="189" y="387"/>
+    <endstep x="460" y="458"/>
+    <endstep x="679" y="368"/>
+    <endstep x="665" y="933"/>
+    <endstep x="176" y="1003"/>
+    <endstep x="369" y="860"/>
+    <endstep x="343" y="394"/>
   </endsteps>
   <connections>
     <transitions>

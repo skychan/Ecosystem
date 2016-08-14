@@ -21,7 +21,7 @@
     <taskstep x="355" y="177" comment="This is a task." command1="s.jobList &lt;&lt; t " command2="" command3="" command4="" command5="">
       <label x="355" y="162" text="Do Task"/>
     </taskstep>
-    <taskstep x="516" y="180" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="" command3="t.prepareStatus[service] = true" command4="t.CheckStatus()" command5="">
+    <taskstep x="516" y="180" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="" command3="t.prepareStatus[&apos;service&apos;] = true" command4="" command5="">
       <label x="516" y="165" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -31,39 +31,19 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="91" y="288"/>
+    <joinstep x="101" y="298"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="94" y="370"/>
-    <endstep x="365" y="282"/>
-    <endstep x="518" y="282"/>
+    <endstep x="104" y="380"/>
+    <endstep x="375" y="292"/>
+    <endstep x="528" y="292"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="1"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="1" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="3"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -77,8 +57,28 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

@@ -230,12 +230,12 @@ public class CloudPlatform  {
      *
      */
     @Watch(
-        watcheeClassName = 'ecosystem.Task',
+        watcheeClassName = 'ecosystem.Job',
         watcheeFieldNames = 'finish',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
         scheduleTriggerDelta = 1d
     )
-    public def Accumulator(ecosystem.Task watchedAgent) {
+    public def Accumulator(ecosystem.Job watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -245,6 +245,7 @@ public class CloudPlatform  {
 
         // This is a task.
         this.finishCount ++
+        println "finish watched "
         // Return the results.
         return returnValue
 

@@ -127,7 +127,7 @@ public class ServiceCall extends ecosystem.Job  {
 
         // This is a task.
         selectBehavior = new SelectInServiceCall()
-        candidates.remove(service)
+        candidates.remove('service')
         processBehavior = new ProcessInServiceCall()
     }
 

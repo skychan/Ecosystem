@@ -233,144 +233,7 @@ public class Resource extends ecosystem.Machine  {
         // This is a task.
         responseBehavior = new ResourceResponse()
         assignBehavior = new ResourceAssign()
-    }
-
-    /**
-     *
-     * Response to the need call
-     * @method ResponseService
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureProvider',
-        watcheeFieldNames = 'serviceCalling',
-        triggerCondition = '$watcher.serviceNeedCapacity == 0',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.2d
-    )
-    public def ResponseService(ecosystem.PureProvider watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (this.getSourceable() > 0) {
-
-
-            // This is an agent decision.
-            if (this.getType() in watchedAgent.callContent.keySet()) {
-
-                // This is a task.
-                int tempCap = this.getSourceable()
-                int i = 0
-                Evaluation(this.competeServiceTemp)
-
-                // This is a loop.
-                while (tempCap > 0) {
-
-                    // This is a task.
-                    this.competeService << this.competeServiceTemp[i]
-                    i += 1
-                    tempCap -= this.competeServiceTemp[i].callContent[this.getType()]
-
-                    // This is an agent decision.
-                    if (i == this.competeServiceTemp.size()-1) {
-
-                        // This is a task.
-                        break
-
-                    } else  {
-
-
-                    }
-
-                }
-
-                // This is a task.
-                this.competeServiceTemp = []
-
-                // This is a loop.
-                for (prd in this.competeService) {
-
-                    // This is a task.
-                    prd.addCandidates(this)
-
-                }
-
-                // This is a task.
-                this.competeService = []
-
-            } else  {
-
-
-            }
-
-        } else  {
-
-
-        }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Response to the need call
-     * @method ResponseServiceCall
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureProvider',
-        watcheeFieldNames = 'serviceCalling',
-        triggerCondition = '$watcher.serviceNeedCapacity == 0',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.1d
-    )
-    public def ResponseServiceCall(ecosystem.PureProvider watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // Decide to take the task or not
-        if (true) {
-
-
-            // This is an agent decision.
-            if (this.getSourceable() > 0) {
-
-
-                // This is an agent decision.
-                if (this.getType() in watchedAgent.callContent.keySet()) {
-
-                    // This is a task.
-                    this.competeServiceTemp << watchedAgent
-
-                } else  {
-
-
-                }
-
-            } else  {
-
-
-            }
-
-        } else  {
-
-
-        }
-        // Return the results.
-        return returnValue
-
+        releaseBehavior  = new ResourceRelease()
     }
 
     /**
@@ -393,8 +256,8 @@ public class Resource extends ecosystem.Machine  {
 
             // This is a task.
             this.setAvailable(this.getAvailable() - amount)
-            sc.prepareStatus[this] = true
-            sc.CheckStatus()
+            sc.prepareStatus[this.getType()] = true
+
             this.needCap.remove(sc)
 
         } else  {

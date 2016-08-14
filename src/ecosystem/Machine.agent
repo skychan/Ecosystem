@@ -33,13 +33,13 @@
     <taskstep x="770" y="513" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
       <label x="770" y="498" text="Do Task"/>
     </taskstep>
-    <taskstep x="282" y="583" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="" command3="" command4="" command5="">
+    <taskstep x="282" y="583" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="println jobList" command3="println buffer" command4="" command5="">
       <label x="282" y="568" text="Do Task"/>
     </taskstep>
-    <taskstep x="428" y="583" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
+    <taskstep x="428" y="583" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="println buffer" command4="println jobList" command5="">
       <label x="428" y="568" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="475" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+    <taskstep x="355" y="475" comment="This is a task." command1="println toString() + &quot; first assign &quot;" command2="" command3="" command4="" command5="">
       <label x="355" y="460" text="Do Task"/>
     </taskstep>
     <taskstep x="580" y="767" comment="This is a task." command1="double q = theTask.getProductQuality()" command2="int t = theTask.responseTime[this]" command3="double h = theTask.getHardness()" command4="int p = theTask.getProcessingTime()" command5="this.reviews &lt;&lt;  (h * q / (t+p))">
@@ -54,7 +54,7 @@
     <taskstep x="531" y="134" comment="This is a task." command1="releaseBehavior.Release(t,this)" command2="" command3="" command4="" command5="">
       <label x="531" y="119" text="Do Task"/>
     </taskstep>
-    <taskstep x="630" y="219" comment="This is a task." command1="releaseBehavior.Next(this)" command2="" command3="" command4="" command5="">
+    <taskstep x="630" y="219" comment="This is a task." command1="println toString()" command2="releaseBehavior.Next(this)" command3="" command4="println buffer" command5="println jobList">
       <label x="630" y="204" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="366" y="711"/>
+    <joinstep x="371" y="716"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -120,13 +120,13 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="155" y="378"/>
-    <endstep x="925" y="648"/>
-    <endstep x="811" y="643"/>
-    <endstep x="371" y="803"/>
-    <endstep x="598" y="935"/>
-    <endstep x="317" y="1224"/>
-    <endstep x="544" y="322"/>
+    <endstep x="160" y="383"/>
+    <endstep x="930" y="653"/>
+    <endstep x="816" y="648"/>
+    <endstep x="376" y="808"/>
+    <endstep x="603" y="940"/>
+    <endstep x="322" y="1229"/>
+    <endstep x="549" y="327"/>
   </endsteps>
   <connections>
     <transitions>
@@ -158,6 +158,11 @@
       <transition>
         <transitionsource type="behavior" index="5" anchor="0"/>
         <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="6" anchor="0"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -206,18 +211,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="6" anchor="0"/>
-        <transitiontarget type="task" index="9" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="9" anchor="2"/>
         <transitiontarget type="decision" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -232,14 +232,14 @@
         <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="2" anchor="1"/>
-        <transitiontarget type="task" index="3" anchor="3"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="2" anchor="3"/>
         <transitiontarget type="task" index="4" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="2" anchor="1"/>
+        <transitiontarget type="task" index="3" anchor="3"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

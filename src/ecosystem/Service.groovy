@@ -143,6 +143,7 @@ public class Service extends ecosystem.Machine  {
         // This is a task.
         responseBehavior = new ServiceResponse()
         assignBehavior = new ServiceAssign()
+        releaseBehavior  = new ServiceRelease()
     }
 
     /**

@@ -10,13 +10,13 @@
     <behaviorstep x="1212" y="512" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Ready to process means to reset the task status in case" visibility="0" returntype="def" compiledname="Reset" parameters="" exceptions="">
       <label x="1212" y="497" text="Reset"/>
     </behaviorstep>
-    <behaviorstep x="158" y="141" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Repeat" visibility="0" returntype="void" compiledname="Need" parameters="" exceptions="">
+    <behaviorstep x="158" y="141" scheduleannotationstart="0" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Repeat" visibility="0" returntype="void" compiledname="Need" parameters="" exceptions="">
       <label x="158" y="126" text="Need"/>
     </behaviorstep>
     <behaviorstep x="1113" y="510" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Review and comment after the task is finished" visibility="0" returntype="def" compiledname="Review" parameters="theRes" exceptions="">
       <label x="1113" y="495" text="Review self"/>
     </behaviorstep>
-    <behaviorstep x="525" y="592" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Check if all the candidates are ready" visibility="0" returntype="" compiledname="CheckStatus" parameters="" exceptions="">
+    <behaviorstep x="525" y="592" scheduleannotationstart="0.3" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.9" watchannotationtriggerpriority="" watchannotationpick="" comment="Check if all the candidates are ready" visibility="0" returntype="" compiledname="CheckStatus" parameters="" exceptions="">
       <label x="525" y="577" text="Check Status"/>
     </behaviorstep>
   </behaviorsteps>
@@ -27,7 +27,7 @@
     <taskstep x="625" y="249" comment="This is a task." command1="this.candidates[competitor.getType()]&lt;&lt;competitor" command2="" command3="" command4="" command5="">
       <label x="625" y="234" text="Do Task"/>
     </taskstep>
-    <taskstep x="763" y="243" comment="This is a task." command1="this.candidates[service] &lt;&lt; competitor" command2="" command3="" command4="" command5="">
+    <taskstep x="763" y="243" comment="This is a task." command1="this.candidates[&apos;service&apos;] &lt;&lt; competitor" command2="" command3="" command4="" command5="">
       <label x="763" y="228" text="Do Task"/>
     </taskstep>
     <taskstep x="1212" y="604" comment="This is a task." command1="this.setPrepareStatus([:])" command2="this.setInNeed(false)" command3="" command4="" command5="">
@@ -48,7 +48,7 @@
     <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="335" comment="This is a task." command1="this.prepareStatus[mac] = false" command2="" command3="" command4="" command5="">
+    <taskstep x="355" y="335" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
       <label x="355" y="320" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -59,7 +59,7 @@
     <decisionstep x="157" y="221" comment="This is an agent decision." criteria="this.getAllocated() == false" branchType="if">
       <label x="157" y="206" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="526" y="672" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0" branchType="if">
+    <decisionstep x="526" y="672" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="526" y="657" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="257" y="430" comment="This is an agent decision." criteria="this.getAllocated()" branchType="if">
@@ -70,10 +70,10 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="723" y="339"/>
+    <joinstep x="728" y="344"/>
   </joinsteps>
   <agentproperties>
-    <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[:]">
+    <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
       <label x="181" y="31" text="Candidates"/>
     </agentproperty>
     <agentproperty x="316" y="44" comment="This is an agent property." visibility="0" compiledname="selectBehavior" type="SelectBehavior" defaultvalue="null">
@@ -88,13 +88,10 @@
     <agentproperty x="477" y="31" comment="This is an agent property." visibility="0" compiledname="needResourceCapacity" type="def" defaultvalue="[:]">
       <label x="482" y="16" text="NeedResourceCapacity"/>
     </agentproperty>
-    <agentproperty x="550" y="481" comment="This is an agent property." visibility="0" compiledname="remainingTime" type="int" defaultvalue="-1">
-      <label x="555" y="463" text="RemainingTime"/>
-    </agentproperty>
     <agentproperty x="635" y="503" comment="the mark of the task stage" visibility="0" compiledname="finish" type="boolean" defaultvalue="false">
       <label x="640" y="488" text="Finish"/>
     </agentproperty>
-    <agentproperty x="381" y="543" comment="Record the prepare status for selected ones" visibility="0" compiledname="prepareStatus" type="def" defaultvalue="[:]">
+    <agentproperty x="381" y="543" comment="Record the prepare status for selected ones" visibility="0" compiledname="prepareStatus" type="Map" defaultvalue="[:]">
       <label x="386" y="528" text="Prepare Status"/>
     </agentproperty>
     <agentproperty x="54" y="150" comment="Mark after the compete" visibility="0" compiledname="inNeed" type="boolean" defaultvalue="false">
@@ -127,7 +124,7 @@
     <agentproperty x="772" y="730" comment="T -- service; F -- resources" visibility="0" compiledname="choice" type="boolean" defaultvalue="false">
       <label x="777" y="715" text="Choice"/>
     </agentproperty>
-    <agentproperty x="55" y="226" comment="This is an agent property." visibility="0" compiledname="allocation" type="Map" defaultvalue="[:]">
+    <agentproperty x="55" y="226" comment="[type:res]" visibility="0" compiledname="allocation" type="Map" defaultvalue="[:]">
       <label x="60" y="211" text="Allocation"/>
     </agentproperty>
     <agentproperty x="61" y="309" comment="This is an agent property." visibility="0" compiledname="allocated" type="boolean" defaultvalue="false">
@@ -138,12 +135,12 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="270" y="542"/>
-    <endstep x="725" y="404"/>
-    <endstep x="1256" y="737"/>
-    <endstep x="171" y="414"/>
-    <endstep x="1155" y="721"/>
-    <endstep x="537" y="861"/>
+    <endstep x="275" y="547"/>
+    <endstep x="730" y="409"/>
+    <endstep x="1261" y="742"/>
+    <endstep x="176" y="419"/>
+    <endstep x="1160" y="726"/>
+    <endstep x="542" y="866"/>
   </endsteps>
   <connections>
     <transitions>

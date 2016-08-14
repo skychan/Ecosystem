@@ -45,7 +45,7 @@
     <taskstep x="257" y="248" comment="This is a task." command1="Resource res = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="res.setQuality(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(types[i])" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
       <label x="257" y="233" text="Create Resource"/>
     </taskstep>
-    <taskstep x="259" y="340" comment="This is a task." command1="res.setOwner(this)" command2="//this.candidates &lt;&lt; res" command3="println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType()" command4="//this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="res.setSourceable(res.getCapacity())">
+    <taskstep x="259" y="340" comment="This is a task." command1="res.setOwner(this)" command2="//this.candidates &lt;&lt; res" command3="//println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType()" command4="//this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="res.setSourceable(res.getCapacity())">
       <label x="259" y="325" text="Add the attr"/>
     </taskstep>
     <taskstep x="554" y="723" comment="This is a task." command1="AddAgentToContext(&quot;Ecosystem&quot;, res)" command2="this.addResource(res)" command3="platform.Indexing(res)" command4="platform.NewQueue(res)" command5="">
@@ -145,7 +145,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="866" y="400"/>
+    <joinstep x="871" y="405"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -183,16 +183,16 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="147" y="366"/>
-    <endstep x="564" y="385"/>
-    <endstep x="679" y="757"/>
-    <endstep x="62" y="807"/>
-    <endstep x="101" y="1253"/>
-    <endstep x="318" y="896"/>
-    <endstep x="868" y="481"/>
-    <endstep x="1019" y="733"/>
-    <endstep x="367" y="1191"/>
-    <endstep x="816" y="901"/>
+    <endstep x="152" y="371"/>
+    <endstep x="569" y="390"/>
+    <endstep x="684" y="762"/>
+    <endstep x="67" y="812"/>
+    <endstep x="106" y="1258"/>
+    <endstep x="323" y="901"/>
+    <endstep x="873" y="486"/>
+    <endstep x="1024" y="738"/>
+    <endstep x="372" y="1196"/>
+    <endstep x="821" y="906"/>
   </endsteps>
   <connections>
     <transitions>
@@ -239,6 +239,11 @@
       <transition>
         <transitionsource type="behavior" index="9" anchor="0"/>
         <transitiontarget type="decision" index="11" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="10" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -329,11 +334,6 @@
       <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="6" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="10" anchor="0"/>
-        <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

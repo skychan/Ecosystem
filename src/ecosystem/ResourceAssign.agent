@@ -21,7 +21,7 @@
     <taskstep x="340" y="162" comment="This is a task." command1="r.jobList[t] = r.getSourceable()" command2="" command3="" command4="" command5="">
       <label x="340" y="147" text="Do Task"/>
     </taskstep>
-    <taskstep x="531" y="195" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])" command3="t.prepareStatus[m.getType()] = true" command4="t.CheckStatus()" command5="">
+    <taskstep x="531" y="195" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])" command3="t.prepareStatus[m.getType()] = true" command4="" command5="">
       <label x="531" y="180" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -31,13 +31,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="116" y="313"/>
+    <joinstep x="121" y="318"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="119" y="395"/>
-    <endstep x="350" y="267"/>
-    <endstep x="538" y="280"/>
+    <endstep x="124" y="400"/>
+    <endstep x="355" y="272"/>
+    <endstep x="543" y="285"/>
   </endsteps>
   <connections>
     <transitions>
@@ -49,6 +49,11 @@
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -67,18 +72,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

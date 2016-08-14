@@ -134,27 +134,6 @@ public class Order  {
 
     /**
      *
-     * Supplier Evaluation
-     * @method Evaluation
-     *
-     */
-    public def Evaluation() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.getCandidates().sort{[it.jobList.size(),it.jobList[0]]}
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * Set the tasks belongs to this order
      * @method setParameters
      *
@@ -180,7 +159,7 @@ public class Order  {
                 // This is a task.
                 Object agent = CreateAgent("Ecosystem", "ecosystem.Task")
                 Task t = (Task) agent
-                t.setMaster(this)
+                t.setMaster( this )
                 t.setParameters(tdata)
                 this.taskList << t
                 // This is a task.

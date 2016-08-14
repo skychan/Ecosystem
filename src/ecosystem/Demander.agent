@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="Denamder" agentparentclassname="ecosystem.User" agentinterfaces="" agentimports="">
+<agent version="1" agentcomment="This is an agent." agentclassname="Demander" agentparentclassname="ecosystem.User" agentinterfaces="" agentimports="">
   <behaviorsteps>
     <behaviorstep x="289" y="57" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="GenerateOrder" parameters="String orderID" exceptions="">
       <label x="289" y="42" text="Generate Order"/>
@@ -12,7 +12,7 @@
     <taskstep x="285" y="307" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.setOwner(this)" command5="o.setType(&quot;Order&quot;+orderID)">
       <label x="285" y="292" text="Generate Order"/>
     </taskstep>
-    <taskstep x="286" y="398" comment="Set the order parameters" command1="o.setParameters(this.taskMap)" command2="println this.toString() + &quot; need &quot;+ o.toString()" command3="this.getOrderList().add(o)" command4="this.setNewOrder(o)" command5="">
+    <taskstep x="286" y="398" comment="Set the order parameters" command1="" command2="" command3="this.getOrderList().add(o)" command4="" command5="o.setParameters(this.taskMap)">
       <label x="286" y="383" text="Set parameters"/>
     </taskstep>
     <taskstep x="564" y="883" comment="This is a task." command1="int amount = sc.nextInt()" command2="" command3="" command4="" command5="">
@@ -76,9 +76,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="369" y="1039"/>
-    <endstep x="563" y="268"/>
-    <endstep x="303" y="495"/>
+    <endstep x="374" y="1044"/>
+    <endstep x="568" y="273"/>
+    <endstep x="297" y="503"/>
   </endsteps>
   <connections>
     <transitions>

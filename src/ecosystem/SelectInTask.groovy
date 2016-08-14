@@ -195,16 +195,16 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
 
                 // This is an agent decision.
-                if (theOnes[service] == null) {
+                if (theOnes['service'] == null) {
 
                     // This is a task.
-                    theOnes.remove(service)
+                    theOnes.remove('service')
                     returnValue =  [success:true,allocation:theOnes]
 
                 } else  {
 
                     // This is a task.
-                    returnValue =  [success:true,allocation:[service:theOnes[service]]]
+                    returnValue =  [success:true,allocation:['service':theOnes['service']]]
 
                 }
 
@@ -218,12 +218,12 @@ public class SelectInTask implements ecosystem.SelectBehavior {
                 if (candidateList[0].getClass() == ecosystem.Service) {
 
                     // This is a task.
-                    returnValue =  [success:true,allocation:[service:theOnes[service]]]
+                    returnValue =  [success:true,allocation:['service':theOnes['service']]]
 
                 } else  {
 
                     // This is a task.
-                    theOnes.remove(service)
+                    theOnes.remove('service')
                     returnValue =  [success:true,allocation:theOnes]
 
                 }

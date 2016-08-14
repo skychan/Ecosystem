@@ -694,18 +694,7 @@ public class Job  {
      * @method CheckStatus
      *
      */
-    @ScheduledMethod(
-        start = 0.3d,
-        interval = 1d,
-        shuffle = true
-    )
     public def CheckStatus() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
 
 
         // This is an agent decision.
@@ -748,9 +737,6 @@ public class Job  {
             }
 
         }
-        // Return the results.
-        return returnValue
-
     }
 
     /**

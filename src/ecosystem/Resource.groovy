@@ -110,6 +110,51 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field needCap
+     *
+     */
+    @Parameter (displayName = "Need Capacity", usageName = "needCap")
+    public int getNeedCap() {
+        return needCap
+    }
+    public void setNeedCap(int newValue) {
+        needCap = newValue
+    }
+    public int needCap = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field available
+     *
+     */
+    @Parameter (displayName = "Available", usageName = "available")
+    public int getAvailable() {
+        return available
+    }
+    public void setAvailable(int newValue) {
+        available = newValue
+    }
+    public int available = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field capacity
+     *
+     */
+    @Parameter (displayName = "Capacity", usageName = "capacity")
+    public int getCapacity() {
+        return capacity
+    }
+    public void setCapacity(int newValue) {
+        capacity = newValue
+    }
+    public int capacity = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -141,7 +186,8 @@ public class Resource extends ecosystem.Machine  {
     public def Resource() {
 
         // This is a task.
-        selectBehavior = new SelectInTask()
+        responseBehavior = new ResourceResponse()
+        assignBehavior = new ResourceAssign()
     }
 
     /**
@@ -294,6 +340,26 @@ public class Resource extends ecosystem.Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        this.setNeedCap(amount)
+        this.setSourceable(this.getSourceable() - amount)
+
+        // This is an agent decision.
+        if (this.getAvailable() >= amount) {
+
+            // This is a task.
+            this.setAvailable(this.getAvailable() - amount)
+            sc.prepareStatus[this] = true
+            sc.CheckStatus()
+            this.setNeedCap(0)
+
+        } else  {
+
+            // This is a task.
+            this.setNeedCap(amount - this.getAvailable())
+            this.setAvailable(0)
+            this.jobList << sc
+
+        }
     }
 
     /**

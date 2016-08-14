@@ -61,22 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class Service extends ecosystem.Machine  {
-
-    /**
-     *
-     * This is an agent property.
-     * @field resourceComposition
-     *
-     */
-    @Parameter (displayName = "ResourceComposition", usageName = "resourceComposition")
-    public def getResourceComposition() {
-        return resourceComposition
-    }
-    public void setResourceComposition(def newValue) {
-        resourceComposition = newValue
-    }
-    public def resourceComposition = [:]
+public class ServiceAssign implements ecosystem.AssignBehavior {
 
     /**
      *
@@ -100,19 +85,38 @@ public class Service extends ecosystem.Machine  {
      * @field agentID
      *
      */
-    protected String agentID = "Service " + (agentIDCounter++)
+    protected String agentID = "ServiceAssign " + (agentIDCounter++)
 
     /**
      *
      * This is the step behavior.
-     * @method Service
+     * @method BufferEnterance
      *
      */
-    public def Service() {
+    public boolean BufferEnterance(Task t, Machine m) {
 
-        // This is a task.
-        responseBehavior = new ServiceResponse()
-        assignBehavior = new ServiceAssign()
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (m.buffer == []) {
+
+            // This is a task.
+            returnValue = true
+
+        } else  {
+
+            // This is a task.
+            returnValue = false
+
+        }
+        // Return the results.
+        return returnValue
+
     }
 
     /**

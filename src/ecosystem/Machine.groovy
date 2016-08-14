@@ -190,13 +190,13 @@ public class Machine  {
      *
      */
     @Parameter (displayName = "Job List", usageName = "jobList")
-    public def getJobList() {
+    public List getJobList() {
         return jobList
     }
-    public void setJobList(def newValue) {
+    public void setJobList(List newValue) {
         jobList = newValue
     }
-    public def jobList = []
+    public List jobList = []
 
     /**
      *
@@ -230,33 +230,18 @@ public class Machine  {
 
     /**
      *
-     * The ready task mark
-     * @field readyTask
-     *
-     */
-    @Parameter (displayName = "Ready Task", usageName = "readyTask")
-    public def getReadyTask() {
-        return readyTask
-    }
-    public void setReadyTask(def newValue) {
-        readyTask = newValue
-    }
-    public def readyTask = []
-
-    /**
-     *
      * This is the task buffer
      * @field buffer
      *
      */
     @Parameter (displayName = "Buffer", usageName = "buffer")
-    public def getBuffer() {
+    public List getBuffer() {
         return buffer
     }
-    public void setBuffer(def newValue) {
+    public void setBuffer(List newValue) {
         buffer = newValue
     }
-    public def buffer = []
+    public List buffer = []
 
     /**
      *
@@ -347,6 +332,21 @@ public class Machine  {
         serviceProvider = newValue
     }
     public def serviceProvider = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field assignBehavior
+     *
+     */
+    @Parameter (displayName = "Assign Behavior", usageName = "assignBehavior")
+    public AssignBehavior getAssignBehavior() {
+        return assignBehavior
+    }
+    public void setAssignBehavior(AssignBehavior newValue) {
+        assignBehavior = newValue
+    }
+    public AssignBehavior assignBehavior = null
 
     /**
      *
@@ -664,30 +664,18 @@ public class Machine  {
         // This is a task.
 
         // This is an agent decision.
-        if (this.getAvailable() < job.needResourceCapacity[this.getType()]) {
+        if (this.assignBehavior.BufferEnterance(job,this)) {
 
             // This is a task.
-            this.jobList << theOne
-            println this.toString() + " jobList " + this.jobList
-            println this.toString() + " buffer " + this.buffer
-            println this.toString() + " readytask " + this.readyTask
-            this.queueLength += 1
-            this.setQueue(true)
-            println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
+            this.buffer << job
+            this.setAvailable(this.getAvailable()-job.needResourceCapacity[this.getType()])
+            job.prepareStatus[this.getType()] = true
+            job.CheckStatus()
 
         } else  {
 
             // This is a task.
-            this.buffer << theOne
-            this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
-            theOne.prepareStatus[this.getType()] = true
-            double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-            int delta =  t - theOne.getChosenTime()
-            theOne.responseTime[this] = delta
-            theOne.inBufferTime[this] = t
-            println this.toString() + " jobList " + this.jobList
-            println this.toString() + " buffer " + this.buffer
-            println this.toString() + " readytask " + this.readyTask
+            this.jobList << job
 
         }
     }

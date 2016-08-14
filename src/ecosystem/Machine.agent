@@ -42,10 +42,10 @@
     <taskstep x="770" y="513" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
       <label x="770" y="498" text="Do Task"/>
     </taskstep>
-    <taskstep x="282" y="583" comment="This is a task." command1="this.jobList &lt;&lt; theOne" command2="println this.toString() + &quot; jobList &quot; + this.jobList" command3="println this.toString() + &quot; buffer &quot; + this.buffer\fprintln this.toString() + &quot; readytask &quot; + this.readyTask" command4="this.queueLength += 1" command5="this.setQueue(true)\fprintln this.toString() + &quot; with type &quot;+ this.getType()+ &quot; queue length=&quot; + this.getQueueLength()">
+    <taskstep x="282" y="583" comment="This is a task." command1="this.jobList &lt;&lt; job" command2="" command3="" command4="" command5="">
       <label x="282" y="568" text="Do Task"/>
     </taskstep>
-    <taskstep x="428" y="583" comment="This is a task." command1="this.buffer &lt;&lt; theOne" command2="this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])" command3="theOne.prepareStatus[this.getType()] = true" command4="double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()\fint delta =  t - theOne.getChosenTime()\ftheOne.responseTime[this] = delta\ftheOne.inBufferTime[this] = t" command5="println this.toString() + &quot; jobList &quot; + this.jobList\fprintln this.toString() + &quot; buffer &quot; + this.buffer\fprintln this.toString() + &quot; readytask &quot; + this.readyTask">
+    <taskstep x="428" y="583" comment="This is a task." command1="this.buffer &lt;&lt; job" command2="this.setAvailable(this.getAvailable()-job.needResourceCapacity[this.getType()])" command3="job.prepareStatus[this.getType()] = true" command4="job.CheckStatus()" command5="">
       <label x="428" y="568" text="Do Task"/>
     </taskstep>
     <taskstep x="355" y="475" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
@@ -92,7 +92,7 @@
     <decisionstep x="138" y="195" comment="This is an agent decision." criteria="responseBehavior.Exist(watchedAgent,this)" branchType="if">
       <label x="138" y="180" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="354" y="556" comment="This is an agent decision." criteria="this.getAvailable() &lt; job.needResourceCapacity[this.getType()]" branchType="if">
+    <decisionstep x="354" y="556" comment="This is an agent decision." criteria="this.assignBehavior.BufferEnterance(job,this)" branchType="if">
       <label x="354" y="541" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="195" y="655" comment="This is an agent decision." criteria="this.getAvailable() &gt;= theOne.needResourceCapacity[this.getType()]" branchType="if">
@@ -115,7 +115,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="393" y="711"/>
+    <joinstep x="366" y="711"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -127,8 +127,8 @@
     <agentproperty x="41" y="133" comment="This is an agent property." visibility="0" compiledname="CompeteList" type="def" defaultvalue="[]">
       <label x="46" y="118" text="Compete List"/>
     </agentproperty>
-    <agentproperty x="1055" y="41" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="0">
-      <label x="1060" y="26" text="Available"/>
+    <agentproperty x="860" y="91" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="0">
+      <label x="865" y="76" text="Available"/>
     </agentproperty>
     <agentproperty x="584" y="86" comment="Record the master of the resource" visibility="0" compiledname="master" type="Service" defaultvalue="null">
       <label x="589" y="71" text="Master"/>
@@ -142,8 +142,8 @@
     <agentproperty x="720" y="294" comment="Count the finished jobs" visibility="0" compiledname="finish" type="int" defaultvalue="0">
       <label x="725" y="279" text="Finished"/>
     </agentproperty>
-    <agentproperty x="573" y="445" comment="Job list" visibility="0" compiledname="jobList" type="def" defaultvalue="[]">
-      <label x="578" y="430" text="Job List"/>
+    <agentproperty x="557" y="517" comment="Job list" visibility="0" compiledname="jobList" type="List" defaultvalue="[]">
+      <label x="562" y="502" text="Job List"/>
     </agentproperty>
     <agentproperty x="822" y="303" comment="Quality" visibility="0" compiledname="quality" type="double" defaultvalue="0">
       <label x="827" y="288" text="Quality"/>
@@ -151,11 +151,8 @@
     <agentproperty x="677" y="772" comment="Review history" visibility="0" compiledname="reviews" type="def" defaultvalue="[]">
       <label x="682" y="757" text="Review History"/>
     </agentproperty>
-    <agentproperty x="663" y="517" comment="The ready task mark" visibility="0" compiledname="readyTask" type="def" defaultvalue="[]">
-      <label x="668" y="502" text="Ready Task"/>
-    </agentproperty>
-    <agentproperty x="661" y="441" comment="This is the task buffer" visibility="0" compiledname="buffer" type="def" defaultvalue="[]">
-      <label x="666" y="426" text="Buffer"/>
+    <agentproperty x="555" y="439" comment="This is the task buffer" visibility="0" compiledname="buffer" type="List" defaultvalue="[]">
+      <label x="560" y="424" text="Buffer"/>
     </agentproperty>
     <agentproperty x="300" y="894" comment="Mark queue in joblist or not" visibility="0" compiledname="queue" type="boolean" defaultvalue="false">
       <label x="305" y="879" text="Queue Status"/>
@@ -166,8 +163,8 @@
     <agentproperty x="25" y="575" comment="This is an agent property." visibility="0" compiledname="shiftTask" type="def" defaultvalue="[]">
       <label x="30" y="560" text="Shift Task"/>
     </agentproperty>
-    <agentproperty x="466" y="470" comment="This is an agent property." visibility="0" compiledname="chosenTime" type="double" defaultvalue="0">
-      <label x="471" y="455" text="Chosen time"/>
+    <agentproperty x="575" y="306" comment="This is an agent property." visibility="0" compiledname="chosenTime" type="double" defaultvalue="0">
+      <label x="580" y="291" text="Chosen time"/>
     </agentproperty>
     <agentproperty x="740" y="1038" comment="This is an agent property." visibility="0" compiledname="serviceNeedCapacity" type="int" defaultvalue="0">
       <label x="745" y="1023" text="Service need cap"/>
@@ -175,28 +172,26 @@
     <agentproperty x="736" y="1128" comment="This is an agent property." visibility="0" compiledname="serviceProvider" type="def" defaultvalue="0">
       <label x="741" y="1113" text="Service Provider"/>
     </agentproperty>
+    <agentproperty x="250" y="414" comment="This is an agent property." visibility="0" compiledname="assignBehavior" type="AssignBehavior" defaultvalue="null">
+      <label x="255" y="399" text="Assign Behavior"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="150" y="373"/>
-    <endstep x="1067" y="574"/>
-    <endstep x="920" y="643"/>
-    <endstep x="806" y="638"/>
-    <endstep x="391" y="804"/>
-    <endstep x="593" y="930"/>
-    <endstep x="60" y="859"/>
-    <endstep x="845" y="925"/>
-    <endstep x="864" y="1275"/>
+    <endstep x="155" y="378"/>
+    <endstep x="1072" y="579"/>
+    <endstep x="925" y="648"/>
+    <endstep x="811" y="643"/>
+    <endstep x="371" y="803"/>
+    <endstep x="598" y="935"/>
+    <endstep x="65" y="864"/>
+    <endstep x="850" y="930"/>
+    <endstep x="869" y="1280"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -232,6 +227,16 @@
       <transition>
         <transitionsource type="behavior" index="7" anchor="0"/>
         <transitiontarget type="decision" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="8" anchor="0"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -304,11 +309,6 @@
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
-      <transition>
-        <transitionsource type="behavior" index="8" anchor="0"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
-        <bendpoints/>
-      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -321,12 +321,12 @@
         <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="true">
+      <booleantransition value="false">
         <transitionsource type="decision" index="2" anchor="1"/>
         <transitiontarget type="task" index="4" anchor="3"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
+      <booleantransition value="true">
         <transitionsource type="decision" index="2" anchor="3"/>
         <transitiontarget type="task" index="5" anchor="1"/>
         <bendpoints/>

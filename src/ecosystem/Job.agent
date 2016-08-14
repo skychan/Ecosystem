@@ -25,7 +25,7 @@
     <behaviorstep x="1113" y="510" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Review and comment after the task is finished" visibility="0" returntype="def" compiledname="Review" parameters="theRes" exceptions="">
       <label x="1113" y="495" text="Review self"/>
     </behaviorstep>
-    <behaviorstep x="534" y="599" scheduleannotationstart="0.3" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Check if all the candidates are ready" visibility="0" returntype="def" compiledname="CheckStatus" parameters="" exceptions="">
+    <behaviorstep x="534" y="599" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Check if all the candidates are ready" visibility="0" returntype="" compiledname="CheckStatus" parameters="" exceptions="">
       <label x="534" y="584" text="Check Status"/>
     </behaviorstep>
   </behaviorsteps>
@@ -121,7 +121,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="718" y="334"/>
+    <joinstep x="723" y="339"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[:]">
@@ -198,16 +198,16 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="265" y="537"/>
-    <endstep x="720" y="399"/>
-    <endstep x="84" y="906"/>
-    <endstep x="205" y="919"/>
-    <endstep x="1251" y="732"/>
-    <endstep x="1069" y="378"/>
-    <endstep x="166" y="409"/>
-    <endstep x="1150" y="716"/>
-    <endstep x="679" y="976"/>
-    <endstep x="462" y="910"/>
+    <endstep x="270" y="542"/>
+    <endstep x="725" y="404"/>
+    <endstep x="89" y="911"/>
+    <endstep x="210" y="924"/>
+    <endstep x="1256" y="737"/>
+    <endstep x="1074" y="383"/>
+    <endstep x="171" y="414"/>
+    <endstep x="1155" y="721"/>
+    <endstep x="684" y="981"/>
+    <endstep x="467" y="915"/>
   </endsteps>
   <connections>
     <transitions>
@@ -219,26 +219,6 @@
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="task" index="16" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="1" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="1"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="3"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -274,6 +254,21 @@
       <transition>
         <transitionsource type="behavior" index="8" anchor="0"/>
         <transitiontarget type="decision" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="task" index="16" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -324,6 +319,11 @@
       <transition>
         <transitionsource type="task" index="16" anchor="2"/>
         <transitiontarget type="decision" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class ResourceAssign implements ecosystem.AssignBehavior {
+public class ServiceRelease implements ecosystem.ReleaseBehavior {
 
     /**
      *
@@ -85,53 +85,21 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
      * @field agentID
      *
      */
-    protected String agentID = "ResourceAssign " + (agentIDCounter++)
+    protected String agentID = "ServiceRelease " + (agentIDCounter++)
 
     /**
      *
      * This is the step behavior.
-     * @method BufferEnterance
+     * @method Release
      *
      */
-    public boolean BufferEnterance(Task t, Machine m) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (m.getAvailable() < t.needResourceCapacity[m.getType()]) {
-
-            // This is a task.
-            returnValue = false
-
-        } else  {
-
-            // This is a task.
-            returnValue = true
-
-        }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Queue
-     *
-     */
-    public void Queue(Task t, Machine r) {
+    public void Release(Task t, Machine s) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        r.jobList[t] = r.getSourceable()
+        s.buffer.remove(t)
     }
 
     /**

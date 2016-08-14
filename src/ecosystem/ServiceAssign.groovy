@@ -121,6 +121,21 @@ public class ServiceAssign implements ecosystem.AssignBehavior {
 
     /**
      *
+     * This is the step behavior.
+     * @method Queue
+     *
+     */
+    public void Queue(Task t, Machine s) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        s.jobList << t 
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

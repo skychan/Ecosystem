@@ -39,13 +39,13 @@
     <taskstep x="512" y="1237" comment="This is a task." command1="this.competeService &lt;&lt; this.competeServiceTemp[i]" command2="i += 1" command3="tempCap -= this.competeServiceTemp[i].callContent[this.getType()]" command4="" command5="">
       <label x="512" y="1222" text="Do Task"/>
     </taskstep>
-    <taskstep x="370" y="490" comment="This is a task." command1="this.setNeedCap(amount)" command2="this.setSourceable(this.getSourceable() - amount)" command3="" command4="" command5="">
+    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="this.setSourceable(this.getSourceable() - amount)" command3="" command4="" command5="">
       <label x="370" y="475" text="Do Task"/>
     </taskstep>
-    <taskstep x="265" y="630" comment="This is a task." command1="this.setNeedCap(amount - this.getAvailable())" command2="this.setAvailable(0)" command3="this.jobList &lt;&lt; sc" command4="" command5="">
+    <taskstep x="265" y="630" comment="This is a task." command1="this.jobList[sc] = this.getSourceable()" command2="" command3="" command4="" command5="">
       <label x="265" y="615" text="Do Task"/>
     </taskstep>
-    <taskstep x="481" y="633" comment="This is a task." command1="this.setAvailable(this.getAvailable() - amount)" command2="sc.prepareStatus[this] = true" command3="sc.CheckStatus()" command4="this.setNeedCap(0)" command5="">
+    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="sc.CheckStatus()" command5="this.needCap.remove(sc)">
       <label x="481" y="618" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -74,7 +74,7 @@
     <decisionstep x="222" y="1208" comment="This is an agent decision." criteria="this.getType() in watchedAgent.callContent.keySet()" branchType="if">
       <label x="222" y="1193" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="369" y="571" comment="This is an agent decision." criteria="this.getAvailable() &gt;= amount" branchType="if">
+    <decisionstep x="369" y="571" comment="This is an agent decision." criteria="this.getFullLength() == 0" branchType="if">
       <label x="369" y="556" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
@@ -91,7 +91,7 @@
     <agentproperty x="119" y="1002" comment="The var to record compete service" visibility="0" compiledname="competeService" type="def" defaultvalue="[]">
       <label x="124" y="987" text="Compete service"/>
     </agentproperty>
-    <agentproperty x="240" y="422" comment="This is an agent property." visibility="0" compiledname="needCap" type="int" defaultvalue="0">
+    <agentproperty x="240" y="422" comment="This is an agent property." visibility="0" compiledname="needCap" type="Map" defaultvalue="[:]">
       <label x="245" y="407" text="Need Capacity"/>
     </agentproperty>
     <agentproperty x="586" y="243" comment="This is an agent property." visibility="0" compiledname="available" type="int" defaultvalue="0">
@@ -99,6 +99,9 @@
     </agentproperty>
     <agentproperty x="363" y="255" comment="This is an agent property." visibility="0" compiledname="capacity" type="int" defaultvalue="0">
       <label x="368" y="240" text="Capacity"/>
+    </agentproperty>
+    <agentproperty x="254" y="256" comment="Job list" visibility="0" compiledname="jobList" type="Map" defaultvalue="[:]">
+      <label x="259" y="241" text="Job List"/>
     </agentproperty>
   </agentproperties>
   <endsteps>

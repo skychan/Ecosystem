@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="AssignInResource" agentparentclassname="" agentinterfaces="ecosystem.AssignBehavior" agentimports="">
+<agent version="1" agentcomment="This is an agent." agentclassname="ResourceAssign" agentparentclassname="" agentinterfaces="ecosystem.AssignBehavior" agentimports="">
   <behaviorsteps>
     <behaviorstep x="91" y="77" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="boolean" compiledname="BufferEnterance" parameters="Task t,Machine m" exceptions="">
       <label x="91" y="62" text="Entrance"/>
+    </behaviorstep>
+    <behaviorstep x="340" y="79" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Queue" parameters="Task t, Machine r" exceptions="">
+      <label x="340" y="64" text="Queue"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -12,6 +15,9 @@
     <taskstep x="37" y="215" comment="This is a task." command1="returnValue = true" command2="" command3="" command4="" command5="">
       <label x="37" y="200" text="Do Task"/>
     </taskstep>
+    <taskstep x="340" y="162" comment="This is a task." command1="r.jobList[t] = r.getSourceable()" command2="" command3="" command4="" command5="">
+      <label x="340" y="147" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="94" y="159" comment="This is an agent decision." criteria="m.getAvailable() &lt; t.needResourceCapacity[m.getType()]" branchType="if">
@@ -19,17 +25,18 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="106" y="303"/>
+    <joinstep x="111" y="308"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="109" y="385"/>
+    <endstep x="114" y="390"/>
+    <endstep x="345" y="262"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -38,25 +45,35 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="0" anchor="0"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="1" anchor="2"/>
         <transitiontarget type="join" index="0" anchor="1"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="0" anchor="1"/>
-        <transitiontarget type="task" index="1" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="3"/>
         <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="1"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

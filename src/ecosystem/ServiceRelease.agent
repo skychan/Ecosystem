@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agent version="1" agentcomment="This is an agent." agentclassname="ServiceRelease" agentparentclassname="" agentinterfaces="ecosystem.ReleaseBehavior" agentimports="">
+  <behaviorsteps>
+    <behaviorstep x="89" y="71" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="Task t,Machine s" exceptions="">
+      <label x="89" y="56" text="Release the capacity"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="86" y="166" comment="This is a task." command1="s.buffer.remove(t)" command2="" command3="" command4="" command5="">
+      <label x="86" y="151" text="Do Task"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps/>
+  <joinsteps/>
+  <agentproperties/>
+  <endsteps>
+    <endstep x="98" y="304"/>
+  </endsteps>
+  <connections>
+    <transitions>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions/>
+  </connections>
+</agent>

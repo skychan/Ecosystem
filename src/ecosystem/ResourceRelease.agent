@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agent version="1" agentcomment="This is an agent." agentclassname="ResourceRelease" agentparentclassname="" agentinterfaces="ecosystem.ReleaseBehavior" agentimports="">
+  <behaviorsteps>
+    <behaviorstep x="74" y="56" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="Task t,Machine r" exceptions="">
+      <label x="74" y="41" text="Release the capacity"/>
+    </behaviorstep>
+    <behaviorstep x="269" y="59" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="Next" parameters="" exceptions="">
+      <label x="269" y="44" text="Next"/>
+    </behaviorstep>
+  </behaviorsteps>
+  <tasksteps>
+    <taskstep x="71" y="151" comment="This is a task." command1="r.setAvailable( r.getAvailable() + t.needResourceCapacity[ r.getType() ] )" command2="r.buffer.remove(t)" command3="" command4="" command5="">
+      <label x="71" y="136" text="Do Task"/>
+    </taskstep>
+    <taskstep x="272" y="145" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="272" y="130" text="Do Task"/>
+    </taskstep>
+  </tasksteps>
+  <decisionsteps/>
+  <joinsteps/>
+  <agentproperties/>
+  <endsteps>
+    <endstep x="78" y="284"/>
+  </endsteps>
+  <connections>
+    <transitions>
+      <transition>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+    </transitions>
+    <booleantransitions/>
+  </connections>
+</agent>

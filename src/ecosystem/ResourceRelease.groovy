@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class ResourceAssign implements ecosystem.AssignBehavior {
+public class ResourceRelease implements ecosystem.ReleaseBehavior {
 
     /**
      *
@@ -85,15 +85,31 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
      * @field agentID
      *
      */
-    protected String agentID = "ResourceAssign " + (agentIDCounter++)
+    protected String agentID = "ResourceRelease " + (agentIDCounter++)
 
     /**
      *
      * This is the step behavior.
-     * @method BufferEnterance
+     * @method Release
      *
      */
-    public boolean BufferEnterance(Task t, Machine m) {
+    public void Release(Task t, Machine r) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        r.setAvailable( r.getAvailable() + t.needResourceCapacity[ r.getType() ] )
+        r.buffer.remove(t)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Next
+     *
+     */
+    public def Next() {
 
         // Define the return value variable.
         def returnValue
@@ -101,37 +117,9 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-
-        // This is an agent decision.
-        if (m.getAvailable() < t.needResourceCapacity[m.getType()]) {
-
-            // This is a task.
-            returnValue = false
-
-        } else  {
-
-            // This is a task.
-            returnValue = true
-
-        }
         // Return the results.
         return returnValue
 
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Queue
-     *
-     */
-    public void Queue(Task t, Machine r) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        r.jobList[t] = r.getSourceable()
     }
 
     /**

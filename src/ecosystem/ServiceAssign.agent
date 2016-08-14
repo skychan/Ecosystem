@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<agent version="1" agentcomment="This is an agent." agentclassname="AssignInService" agentparentclassname="" agentinterfaces="ecosystem.AssignBehavior" agentimports="">
+<agent version="1" agentcomment="This is an agent." agentclassname="ServiceAssign" agentparentclassname="" agentinterfaces="ecosystem.AssignBehavior" agentimports="">
   <behaviorsteps>
     <behaviorstep x="76" y="62" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="boolean" compiledname="BufferEnterance" parameters="Task t,Machine m" exceptions="">
       <label x="76" y="47" text="Entrance"/>
+    </behaviorstep>
+    <behaviorstep x="355" y="94" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Queue" parameters="Task t, Machine s" exceptions="">
+      <label x="355" y="79" text="Queue"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -12,6 +15,9 @@
     <taskstep x="149" y="204" comment="This is a task." command1="returnValue = false" command2="" command3="" command4="" command5="">
       <label x="149" y="189" text="Do Task"/>
     </taskstep>
+    <taskstep x="355" y="177" comment="This is a task." command1="s.jobList &lt;&lt; t " command2="" command3="" command4="" command5="">
+      <label x="355" y="162" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="79" y="144" comment="This is an agent decision." criteria="m.buffer == []" branchType="if">
@@ -19,11 +25,12 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="86" y="283"/>
+    <joinstep x="91" y="288"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="89" y="365"/>
+    <endstep x="94" y="370"/>
+    <endstep x="365" y="282"/>
   </endsteps>
   <connections>
     <transitions>
@@ -45,6 +52,16 @@
       <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

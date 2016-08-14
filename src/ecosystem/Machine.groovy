@@ -110,21 +110,6 @@ public class Machine  {
 
     /**
      *
-     * This is an agent property.
-     * @field available
-     *
-     */
-    @Parameter (displayName = "Available", usageName = "available")
-    public int getAvailable() {
-        return available
-    }
-    public void setAvailable(int newValue) {
-        available = newValue
-    }
-    public int available = 0
-
-    /**
-     *
      * Record the master of the resource
      * @field master
      *
@@ -182,21 +167,6 @@ public class Machine  {
         finish = newValue
     }
     public int finish = 0
-
-    /**
-     *
-     * Job list
-     * @field jobList
-     *
-     */
-    @Parameter (displayName = "Job List", usageName = "jobList")
-    public List getJobList() {
-        return jobList
-    }
-    public void setJobList(List newValue) {
-        jobList = newValue
-    }
-    public List jobList = []
 
     /**
      *
@@ -306,36 +276,6 @@ public class Machine  {
     /**
      *
      * This is an agent property.
-     * @field serviceNeedCapacity
-     *
-     */
-    @Parameter (displayName = "Service need cap", usageName = "serviceNeedCapacity")
-    public int getServiceNeedCapacity() {
-        return serviceNeedCapacity
-    }
-    public void setServiceNeedCapacity(int newValue) {
-        serviceNeedCapacity = newValue
-    }
-    public int serviceNeedCapacity = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field serviceProvider
-     *
-     */
-    @Parameter (displayName = "Service Provider", usageName = "serviceProvider")
-    public def getServiceProvider() {
-        return serviceProvider
-    }
-    public void setServiceProvider(def newValue) {
-        serviceProvider = newValue
-    }
-    public def serviceProvider = 0
-
-    /**
-     *
-     * This is an agent property.
      * @field assignBehavior
      *
      */
@@ -347,6 +287,21 @@ public class Machine  {
         assignBehavior = newValue
     }
     public AssignBehavior assignBehavior = null
+
+    /**
+     *
+     * This is an agent property.
+     * @field releaseBehavior
+     *
+     */
+    @Parameter (displayName = "Release Behavior", usageName = "releaseBehavior")
+    public ReleaseBehavior getReleaseBehavior() {
+        return releaseBehavior
+    }
+    public void setReleaseBehavior(ReleaseBehavior newValue) {
+        releaseBehavior = newValue
+    }
+    public ReleaseBehavior releaseBehavior = null
 
     /**
      *
@@ -404,49 +359,6 @@ public class Machine  {
 
             } else  {
 
-
-            }
-
-        } else  {
-
-
-        }
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Release
-     *
-     */
-    public void Release(int amount) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (this.getServiceNeedCapacity() > 0) {
-
-
-            // This is an agent decision.
-            if (amount >= this.getServiceNeedCapacity()) {
-
-                // This is a task.
-                amount -= this.getServiceNeedCapacity()
-                this.setServiceNeedCapacity(0)
-                this.serviceProvider.serviceStatus[this] = true
-                this.serviceProvider.setServiceReady(true)
-                // This is a task.
-                int temp = this.getAvailable()
-                temp += amount
-                this.setAvailable(temp)
-
-            } else  {
-
-                // This is a task.
-                amount = 0
-                this.setServiceNeedCapacity(this.getServiceNeedCapacity() - amount)
 
             }
 
@@ -602,49 +514,7 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        returnValue = this.jobList.size() + this.buffer.size() + this.readyTask.size()
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Ready to join
-     * @method Join
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Resource',
-        watcheeFieldNames = 'sourceable',
-        triggerCondition = '$watcher.toString() == $watchee.toString()',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
-    )
-    public def Join(ecosystem.Resource watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (this.getAvailable() >= this.getServiceNeedCapacity()) {
-
-            // This is a task.
-            this.setAvailable(this.getAvailable() - this.getServiceNeedCapacity())
-            this.serviceProvider.serviceStatus[this] = true
-            this.serviceProvider.setServiceReady(true)
-            this.setServiceNeedCapacity(0)
-
-        } else  {
-
-            // This is a task.
-            this.setServiceNeedCapacity(this.getServiceNeedCapacity() - this.getAvailable())
-            this.setAvailable(0)
-
-        }
+        returnValue = this.jobList.size() + this.buffer.size()
         // Return the results.
         return returnValue
 
@@ -675,9 +545,24 @@ public class Machine  {
         } else  {
 
             // This is a task.
-            this.jobList << job
+            this.assignBehavior.Queue(job,this)
 
         }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Release
+     *
+     */
+    public void Release(Task t) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        releaseBehavior.Release(t,this)
     }
 
     /**

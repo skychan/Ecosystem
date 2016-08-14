@@ -115,13 +115,13 @@ public class Resource extends ecosystem.Machine  {
      *
      */
     @Parameter (displayName = "Need Capacity", usageName = "needCap")
-    public int getNeedCap() {
+    public Map getNeedCap() {
         return needCap
     }
-    public void setNeedCap(int newValue) {
+    public void setNeedCap(Map newValue) {
         needCap = newValue
     }
-    public int needCap = 0
+    public Map needCap = [:]
 
     /**
      *
@@ -152,6 +152,21 @@ public class Resource extends ecosystem.Machine  {
         capacity = newValue
     }
     public int capacity = 0
+
+    /**
+     *
+     * Job list
+     * @field jobList
+     *
+     */
+    @Parameter (displayName = "Job List", usageName = "jobList")
+    public Map getJobList() {
+        return jobList
+    }
+    public void setJobList(Map newValue) {
+        jobList = newValue
+    }
+    public Map jobList = [:]
 
     /**
      *
@@ -340,24 +355,22 @@ public class Resource extends ecosystem.Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        this.setNeedCap(amount)
+        this.needCap[ sc ] = amount
         this.setSourceable(this.getSourceable() - amount)
 
         // This is an agent decision.
-        if (this.getAvailable() >= amount) {
+        if (this.getFullLength() == 0) {
 
             // This is a task.
             this.setAvailable(this.getAvailable() - amount)
             sc.prepareStatus[this] = true
             sc.CheckStatus()
-            this.setNeedCap(0)
+            this.needCap.remove(sc)
 
         } else  {
 
             // This is a task.
-            this.setNeedCap(amount - this.getAvailable())
-            this.setAvailable(0)
-            this.jobList << sc
+            this.jobList[sc] = this.getSourceable()
 
         }
     }

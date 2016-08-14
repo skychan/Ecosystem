@@ -80,6 +80,21 @@ public class Service extends ecosystem.Machine  {
 
     /**
      *
+     * Job list
+     * @field jobList
+     *
+     */
+    @Parameter (displayName = "Job List", usageName = "jobList")
+    public List getJobList() {
+        return jobList
+    }
+    public void setJobList(List newValue) {
+        jobList = newValue
+    }
+    public List jobList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

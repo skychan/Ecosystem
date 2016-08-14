@@ -136,6 +136,24 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
 
     /**
      *
+     * This is the step behavior.
+     * @method Buffer
+     *
+     */
+    public void Buffer(Task t, Machine m) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        m.buffer << t
+        m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])
+        t.prepareStatus[m.getType()] = true
+        t.CheckStatus()
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

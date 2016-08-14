@@ -414,66 +414,6 @@ public class Machine  {
 
     /**
      *
-     * Chose the next task
-     * @method Next
-     *
-     */
-    public def Next() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is a loop.
-        for (theOne in this.jobList) {
-
-
-            // This is an agent decision.
-            if (this.getAvailable() >= theOne.needResourceCapacity[this.getType()]) {
-
-                // This is a task.
-                this.buffer << theOne
-                this.setAvailable(this.getAvailable()-theOne.needResourceCapacity[this.getType()])
-                theOne.prepareStatus[this.getType()] = true
-                this.shiftTask << theOne
-                this.setQueue(false)
-                // This is a task.
-                this.queueLength -= 1
-                println this.toString() + " with type "+ this.getType()+ " queue length=" + this.getQueueLength()
-                double t = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-                int delta = t - theOne.getChosenTime()
-                theOne.responseTime[this] = delta
-                theOne.inBufferTime[this] = t
-
-            } else  {
-
-
-            }
-
-        }
-
-
-        // This is a loop.
-        for (theOne in this.shiftTask) {
-
-            // This is a task.
-            this.jobList.remove(theOne)
-
-        }
-
-        // This is a task.
-        this.shiftTask = []
-        this.owner[0].ServiceCall()
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * Review and comment after the task is finished
      * @method Review
      *
@@ -537,10 +477,7 @@ public class Machine  {
         if (this.assignBehavior.BufferEnterance(job,this)) {
 
             // This is a task.
-            this.buffer << job
-            this.setAvailable(this.getAvailable()-job.needResourceCapacity[this.getType()])
-            job.prepareStatus[this.getType()] = true
-            job.CheckStatus()
+            this.assignBehavior.Buffer(job,this)
 
         } else  {
 
@@ -563,6 +500,17 @@ public class Machine  {
 
         // This is a task.
         releaseBehavior.Release(t,this)
+
+        // This is an agent decision.
+        if (this.jobList.size() > 0) {
+
+            // This is a task.
+            releaseBehavior.Next(this)
+
+        } else  {
+
+
+        }
     }
 
     /**

@@ -109,17 +109,67 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
      * @method Next
      *
      */
-    public def Next() {
-
-        // Define the return value variable.
-        def returnValue
+    public void Next(Machine m) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Return the results.
-        return returnValue
+        // This is a task.
+        m.jobList = m.jobList.sort{ [ -it.value, it.key.getType() ] }
+        def job = m.jobList[0]
 
+        // This is an agent decision.
+        if (job.getClass() == ecosystem.ServiceCall) {
+
+
+            // This is an agent decision.
+            if (m.buffer == []) {
+
+                // This is a task.
+                m.assignBehavior.Buffer(job,m)
+                m.jobList.remove(job)
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+            // This is a loop.
+            for (j in m.jobList.keySet()) {
+
+
+                // This is an agent decision.
+                if (j.getClass() == ecosystem.ServiceCall) {
+
+                    // This is a task.
+                    break
+
+                } else  {
+
+
+                    // This is an agent decision.
+                    if (m.getAvailable() >= j.needResourceCapacity[m.getType()]) {
+
+                        // This is a task.
+                        m.assignBehavior.Buffer(j,m)
+                        m.jobList.remove(j)
+
+                    } else  {
+
+                        // This is a task.
+                        break
+
+                    }
+
+                }
+
+            }
+
+
+        }
     }
 
     /**

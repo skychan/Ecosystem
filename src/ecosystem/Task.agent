@@ -27,7 +27,7 @@
     <taskstep x="603" y="251" comment="This is a task." command1="this.setRemainingTime(this.getRemainingTime()-1)" command2="" command3="" command4="" command5="">
       <label x="603" y="236" text="Do Task"/>
     </taskstep>
-    <taskstep x="710" y="419" comment="The finish step" command1="mac.Release(this)" command2="mac.Next()" command3="theRes.Next()" command4="" command5="">
+    <taskstep x="710" y="419" comment="The finish step" command1="mac.Release(this)" command2="" command3="" command4="" command5="">
       <label x="710" y="404" text="Afterward"/>
     </taskstep>
     <taskstep x="793" y="1132" comment="This is a task." command1="println this.toString() + &quot; is finished&quot;" command2="this.setFinish(true)" command3="this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="this.span = this.finishTime - this.getStartTime()" command5="">

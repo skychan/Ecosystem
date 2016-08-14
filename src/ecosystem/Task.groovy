@@ -192,8 +192,6 @@ public class Task extends ecosystem.Job  {
 
                     // The finish step
                     mac.Release(this)
-                    mac.Next()
-                    theRes.Next()
                     // This is a task.
                     RandomHelper.createNormal(mac.getQuality(),1)
                     double tempQuality = RandomHelper.getNormal().nextDouble()

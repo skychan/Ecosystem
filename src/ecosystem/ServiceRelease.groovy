@@ -104,6 +104,25 @@ public class ServiceRelease implements ecosystem.ReleaseBehavior {
 
     /**
      *
+     * This is the step behavior.
+     * @method Next
+     *
+     */
+    public void Next(Machine m) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        m.jobList = m.jobList.sort{ [ it.value.getType() ] }
+        def job = m.jobList[0]
+        // This is a task.
+        m.assignBehavior.Buffer(job,m)
+        m.jobList.remove(job)
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

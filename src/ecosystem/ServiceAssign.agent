@@ -7,6 +7,9 @@
     <behaviorstep x="355" y="94" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Queue" parameters="Task t, Machine s" exceptions="">
       <label x="355" y="79" text="Queue"/>
     </behaviorstep>
+    <behaviorstep x="513" y="97" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Buffer" parameters="Task t, Machine m" exceptions="">
+      <label x="513" y="82" text="Buffer"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="22" y="200" comment="This is a task." command1="returnValue = true" command2="" command3="" command4="" command5="">
@@ -17,6 +20,9 @@
     </taskstep>
     <taskstep x="355" y="177" comment="This is a task." command1="s.jobList &lt;&lt; t " command2="" command3="" command4="" command5="">
       <label x="355" y="162" text="Do Task"/>
+    </taskstep>
+    <taskstep x="516" y="180" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="" command3="t.prepareStatus[service] = true" command4="t.CheckStatus()" command5="">
+      <label x="516" y="165" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -31,6 +37,7 @@
   <endsteps>
     <endstep x="94" y="370"/>
     <endstep x="365" y="282"/>
+    <endstep x="518" y="282"/>
   </endsteps>
   <connections>
     <transitions>
@@ -62,6 +69,16 @@
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

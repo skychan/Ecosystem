@@ -110,36 +110,6 @@ public class Machine  {
 
     /**
      *
-     * Record the master of the resource
-     * @field master
-     *
-     */
-    @Parameter (displayName = "Master", usageName = "master")
-    public Service getMaster() {
-        return master
-    }
-    public void setMaster(Service newValue) {
-        master = newValue
-    }
-    public Service master = null
-
-    /**
-     *
-     * The service owner, if not only one
-     * @field owner
-     *
-     */
-    @Parameter (displayName = "Owner", usageName = "owner")
-    public PureProvider getOwner() {
-        return owner
-    }
-    public void setOwner(PureProvider newValue) {
-        owner = newValue
-    }
-    public PureProvider owner = null
-
-    /**
-     *
      * Record be chose or not
      * @field chose
      *

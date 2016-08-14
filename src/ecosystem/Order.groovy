@@ -66,17 +66,17 @@ public class Order  {
     /**
      *
      * The order owner, if not only one
-     * @field ownerList
+     * @field owner
      *
      */
-    @Parameter (displayName = "Owner List", usageName = "ownerList")
-    public def getOwnerList() {
-        return ownerList
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public def getOwner() {
+        return owner
     }
-    public void setOwnerList(def newValue) {
-        ownerList = newValue
+    public void setOwner(def newValue) {
+        owner = newValue
     }
-    public def ownerList = []
+    public def owner = null
 
     /**
      *
@@ -134,21 +134,6 @@ public class Order  {
 
     /**
      *
-     * Set the owner is add to the owner list
-     * @method addOwner
-     *
-     */
-    public void addOwner(ownerID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add owner to the list
-        this.ownerList << ownerID
-    }
-
-    /**
-     *
      * Supplier Evaluation
      * @method Evaluation
      *
@@ -195,8 +180,8 @@ public class Order  {
                 // This is a task.
                 Object agent = CreateAgent("Ecosystem", "ecosystem.Task")
                 Task t = (Task) agent
+                t.setMaster(this)
                 t.setParameters(tdata)
-                t.addMaster(this)
                 this.taskList << t
                 // This is a task.
                 t.setType(this.getType() + "-" + (i).toString())

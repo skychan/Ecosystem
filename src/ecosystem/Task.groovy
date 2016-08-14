@@ -80,6 +80,36 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
+     * Record the master of the task
+     * @field master
+     *
+     */
+    @Parameter (displayName = "Master", usageName = "master")
+    public def getMaster() {
+        return master
+    }
+    public void setMaster(def newValue) {
+        master = newValue
+    }
+    public def master = null
+
+    /**
+     *
+     * Record the owners of the task
+     * @field owners
+     *
+     */
+    @Parameter (displayName = "Owners", usageName = "owners")
+    public def getOwners() {
+        return owners
+    }
+    public void setOwners(def newValue) {
+        owners = newValue
+    }
+    public def owners = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -136,6 +166,7 @@ public class Task extends ecosystem.Job  {
 
                 // This is a task.
                 this.setProcessingTime(data.value)
+                this.addOwner(this.getMaster().getOwner(),data.value)
 
             } else  {
 
@@ -151,14 +182,15 @@ public class Task extends ecosystem.Job  {
         // This is a task.
         println "task para setted"
         this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
-        this.setType(tdata.key)
+        this.prepareStatus[service] = false
         println "start at " + this.getStartTime()
+        this.candidates[service] = []
     }
 
     /**
      *
      * Process the task
-     * @method process
+     * @method Process
      *
      */
     @Watch(
@@ -168,7 +200,7 @@ public class Task extends ecosystem.Job  {
         whenToTrigger = WatcherTriggerSchedule.LATER,
         scheduleTriggerDelta = 1d
     )
-    public def process(ecosystem.Task watchedAgent) {
+    public def Process(ecosystem.Task watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -192,38 +224,9 @@ public class Task extends ecosystem.Job  {
 
                     // The finish step
                     mac.Release(this)
-                    // This is a task.
-                    RandomHelper.createNormal(mac.getQuality(),1)
-                    double tempQuality = RandomHelper.getNormal().nextDouble()
-
-                    // This is an agent decision.
-                    if (tempQuality < this.getProductQuality()) {
-
-                        // This is a task.
-                        this.setProductQuality(tempQuality)
-
-                    } else  {
-
-
-                    }
 
                 }
 
-
-                // This is a loop.
-                for (mac in this.getAllocation().values()) {
-
-                    // This is a task.
-                    mac.Review(this)
-                    this.Review(mac)
-
-                }
-
-                // This is a task.
-                println this.toString() + " is finished"
-                this.setFinish(true)
-                this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-                this.span = this.finishTime - this.getStartTime()
 
             } else  {
 
@@ -237,6 +240,21 @@ public class Task extends ecosystem.Job  {
         // Return the results.
         return returnValue
 
+    }
+
+    /**
+     *
+     * Set the owner is add to the owner list
+     * @method addOwner
+     *
+     */
+    public void addOwner(owner, p) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // add owner to the list
+        this.owners[owner] = p
     }
 
     /**

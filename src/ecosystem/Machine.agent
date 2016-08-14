@@ -85,12 +85,6 @@
     <agentproperty x="41" y="133" comment="This is an agent property." visibility="0" compiledname="CompeteList" type="def" defaultvalue="[]">
       <label x="46" y="118" text="Compete List"/>
     </agentproperty>
-    <agentproperty x="908" y="17" comment="Record the master of the resource" visibility="0" compiledname="master" type="Service" defaultvalue="null">
-      <label x="913" y="2" text="Master"/>
-    </agentproperty>
-    <agentproperty x="792" y="40" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="PureProvider" defaultvalue="null">
-      <label x="797" y="25" text="Owner"/>
-    </agentproperty>
     <agentproperty x="384" y="286" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
       <label x="389" y="271" text="Chose"/>
     </agentproperty>

@@ -4,17 +4,38 @@
     <behaviorstep x="52" y="69" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="" compiledname="ServiceCall" parameters="" exceptions="">
       <label x="52" y="54" text="Constructor"/>
     </behaviorstep>
+    <behaviorstep x="150" y="323" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="ownerID" exceptions="">
+      <label x="150" y="308" text="Add Owner"/>
+    </behaviorstep>
+    <behaviorstep x="253" y="316" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addMaster" parameters="masterID" exceptions="">
+      <label x="253" y="301" text="Add Master"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="48" y="151" comment="This is a task." command1="selectBehavior = new SelectInServiceCall()" command2="candidates.remove(service)" command3="processBehavior = new ProcessInServiceCall()" command4="" command5="">
       <label x="48" y="136" text="Do Task"/>
     </taskstep>
+    <taskstep x="148" y="401" comment="add owner to the list" command1="this.owner &lt;&lt; ownerID" command2="" command3="" command4="" command5="">
+      <label x="148" y="386" text="set owner"/>
+    </taskstep>
+    <taskstep x="251" y="394" comment="add master to the list" command1="this.master &lt;&lt; masterID" command2="" command3="" command4="" command5="">
+      <label x="251" y="379" text="set master"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps/>
   <joinsteps/>
-  <agentproperties/>
+  <agentproperties>
+    <agentproperty x="249" y="247" comment="Record the master of the task" visibility="0" compiledname="master" type="def" defaultvalue="[]">
+      <label x="254" y="232" text="Master"/>
+    </agentproperty>
+    <agentproperty x="155" y="248" comment="Record the owners of the task" visibility="0" compiledname="owner" type="def" defaultvalue="null">
+      <label x="160" y="233" text="Owners"/>
+    </agentproperty>
+  </agentproperties>
   <endsteps>
     <endstep x="59" y="272"/>
+    <endstep x="176" y="534"/>
+    <endstep x="297" y="547"/>
   </endsteps>
   <connections>
     <transitions>

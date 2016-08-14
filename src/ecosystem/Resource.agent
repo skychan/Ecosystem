@@ -103,6 +103,12 @@
     <agentproperty x="254" y="256" comment="Job list" visibility="0" compiledname="jobList" type="Map" defaultvalue="[:]">
       <label x="259" y="241" text="Job List"/>
     </agentproperty>
+    <agentproperty x="518" y="58" comment="Record the master of the resource" visibility="0" compiledname="master" type="def" defaultvalue="[:]">
+      <label x="523" y="43" text="Master"/>
+    </agentproperty>
+    <agentproperty x="402" y="81" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="def" defaultvalue="null">
+      <label x="407" y="66" text="Owner"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="76" y="324"/>

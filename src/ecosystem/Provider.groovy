@@ -65,6 +65,171 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
+     * Record the service
+     * @field serviceList
+     *
+     */
+    @Parameter (displayName = "Service List", usageName = "serviceList")
+    public def getServiceList() {
+        return serviceList
+    }
+    public void setServiceList(def newValue) {
+        serviceList = newValue
+    }
+    public def serviceList = []
+
+    /**
+     *
+     * The provider difficulty rank value
+     * @field rank
+     *
+     */
+    @Parameter (displayName = "Rank", usageName = "rank")
+    public double getRank() {
+        return rank
+    }
+    public void setRank(double newValue) {
+        rank = newValue
+    }
+    public double rank = 1000
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceList
+     *
+     */
+    @Parameter (displayName = "Resource List", usageName = "resourceList")
+    public def getResourceList() {
+        return resourceList
+    }
+    public void setResourceList(def newValue) {
+        resourceList = newValue
+    }
+    public def resourceList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field candidates
+     *
+     */
+    @Parameter (displayName = "Resource candidates", usageName = "candidates")
+    public def getCandidates() {
+        return candidates
+    }
+    public void setCandidates(def newValue) {
+        candidates = newValue
+    }
+    public def candidates = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field taskFrequency
+     *
+     */
+    @Parameter (displayName = "Task Frequency", usageName = "taskFrequency")
+    public def getTaskFrequency() {
+        return taskFrequency
+    }
+    public void setTaskFrequency(def newValue) {
+        taskFrequency = newValue
+    }
+    public def taskFrequency = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field callContent
+     *
+     */
+    @Parameter (displayName = "Call Content", usageName = "callContent")
+    public def getCallContent() {
+        return callContent
+    }
+    public void setCallContent(def newValue) {
+        callContent = newValue
+    }
+    public def callContent = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceCalling
+     *
+     */
+    @Parameter (displayName = "Service Calling", usageName = "serviceCalling")
+    public boolean getServiceCalling() {
+        return serviceCalling
+    }
+    public void setServiceCalling(boolean newValue) {
+        serviceCalling = newValue
+    }
+    public boolean serviceCalling = false
+
+    /**
+     *
+     * This is an agent property.
+     * @field ingredient
+     *
+     */
+    @Parameter (displayName = "Ingredient", usageName = "ingredient")
+    public def getIngredient() {
+        return ingredient
+    }
+    public void setIngredient(def newValue) {
+        ingredient = newValue
+    }
+    public def ingredient = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceStatus
+     *
+     */
+    @Parameter (displayName = "Record the service status", usageName = "serviceStatus")
+    public def getServiceStatus() {
+        return serviceStatus
+    }
+    public void setServiceStatus(def newValue) {
+        serviceStatus = newValue
+    }
+    public def serviceStatus = [:]
+
+    /**
+     *
+     * denote the task type pattern
+     * @field callPattern
+     *
+     */
+    @Parameter (displayName = "Call Pattern", usageName = "callPattern")
+    public def getCallPattern() {
+        return callPattern
+    }
+    public void setCallPattern(def newValue) {
+        callPattern = newValue
+    }
+    public def callPattern = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field prototype
+     *
+     */
+    @Parameter (displayName = "Service Prototype", usageName = "prototype")
+    public Service getPrototype() {
+        return prototype
+    }
+    public void setPrototype(Service newValue) {
+        prototype = newValue
+    }
+    public Service prototype = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -86,6 +251,386 @@ public class Provider extends ecosystem.User  {
      *
      */
     protected String agentID = "Provider " + (agentIDCounter++)
+
+    /**
+     *
+     * Generate Resource
+     * @method GenerateResource
+     *
+     */
+    public void GenerateResource(typeQuality, typeQueueLength) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addResource
+     *
+     */
+    public def addResource(res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.resourceList << res
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Judge the resource to exit
+     * @method ResourceJudege
+     *
+     */
+    public def ResourceJudege(typeQuality, typeQueueLength, type, res) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (type in typeQuality.keySet()) {
+
+
+            // This is an agent decision.
+            if (typeQueueLength[type] < 5) {
+
+                // This is a task.
+                double mu = this.WM(typeQuality[type])
+                double sigma = this.WSTD(typeQuality[type])
+                RandomHelper.createNormal(mu,sigma)
+
+                // This is an agent decision.
+                if (RandomHelper.getNormal().nextDouble() > res.getQuality()) {
+
+                    // This is a task.
+                    this.candidates.remove(res)
+
+                } else  {
+
+
+                }
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Enter
+     *
+     */
+    public def Enter(platform) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.candidates.isEmpty()) {
+
+            // This is a task.
+            returnValue = false
+
+        } else  {
+
+
+            // This is a loop.
+            for (res in this.candidates) {
+
+                // This is a task.
+                AddAgentToContext("Ecosystem", res)
+                this.addResource(res)
+                platform.Indexing(res)
+                platform.NewQueue(res)
+
+            }
+
+            // This is a task.
+            this.candidates = []
+            returnValue = true
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Calculate weighted average
+     * @method WM
+     *
+     */
+    public def WM(dataMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double tempsum = 0
+        int n = 0
+
+        // This is a loop.
+        for (data in dataMap) {
+
+            // This is a task.
+            tempsum += data.key*data.value
+            n += data.value
+
+        }
+
+        // This is a task.
+        returnValue = tempsum/n
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Calculate the standard variation
+     * @method WSTD
+     *
+     */
+    public def WSTD(dataMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double tempsum = 0
+        int n = 0
+        double mean = this.WM(dataMap)
+
+        // This is a loop.
+        for (data in dataMap) {
+
+            // This is a task.
+            tempsum += (data.key - mean)*(data.key - mean) *data.value
+            n += data.value
+
+        }
+
+        // This is a task.
+        returnValue = Math.sqrt(tempsum/n)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addTaskFrequency
+     *
+     */
+    public def addTaskFrequency(theTask) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (theTask.getType() in this.taskFrequency.keySet()) {
+
+            // This is a task.
+            this.taskFrequency[theTask.getType()] += 1
+
+        } else  {
+
+            // This is a task.
+            this.taskFrequency[theTask.getType()] = 1
+            this.ingredient[theTask.getType()] = theTask.needResourceCapacity
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method ServiceCall
+     *
+     */
+    public def ServiceCall() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (true) {
+
+            // This is a task.
+            this.taskFrequency = this.taskFrequency.sort{ [-it.value,-it.key.getHardness()]}
+            def pattern = this.taskFrequency.iterator()[0]
+
+            // This is an agent decision.
+            if (pattern.value >= 5) {
+
+                // This is a task.
+                this.setServiceCalling(true)
+                this.callContent = this.ingredient[pattern.key]
+                this.callPattern = pattern.key
+                this.prototype = new Service()
+                this.prototype.setAppetite(pattern.key)
+                // This is a task.
+                this.taskFrequency.iterator()[0].value -= 5
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Resource Evaluation
+     * @method Evaluation
+     *
+     */
+    public def Evaluation(resourceList) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        resource.sort{[-it.getSourceable(),-it.getRank()]}
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method GenerateService
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.PureProvider',
+        watcheeFieldNames = 'serviceReady',
+        triggerCondition = '$watchee.toString() == $watcher.toString()',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 1d
+    )
+    public def GenerateService(ecosystem.PureProvider watchedAgent) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (false in this.serviceStatus.values()) {
+
+            // This is a task.
+            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+            Service s = (Service) sagent
+            s = this.getPrototype()
+            this.prototype = null
+            s.changeQuality()
+            // This is a task.
+            s.setOwner(this)
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Generate Resource
+     * @method GenerateResource
+     *
+     */
+    public void GenerateResource() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        ArrayList types = 1..10
+        SimUtilities.shuffle(types,RandomHelper.getUniform())
+
+        // This is a loop.
+        for (i in 0..<RandomHelper.nextIntFromTo(1,4)) {
+
+            // This is a task.
+            Resource res = CreateAgent("Ecosystem", "ecosystem.Resource")
+            res.setQuality(RandomHelper.nextDoubleFromTo(0,30))
+            res.setType(types[i])
+            res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
+            res.setAvailable(res.getCapacity())
+            // This is a task.
+            res.setOwner(this)
+            //this.candidates << res
+            println "create resource " + res.toString() + " with type " + res.getType()
+            //this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
+            res.setSourceable(res.getCapacity())
+
+        }
+
+    }
 
     /**
      *

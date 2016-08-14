@@ -170,6 +170,36 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
+     * Record the master of the resource
+     * @field master
+     *
+     */
+    @Parameter (displayName = "Master", usageName = "master")
+    public def getMaster() {
+        return master
+    }
+    public void setMaster(def newValue) {
+        master = newValue
+    }
+    public def master = [:]
+
+    /**
+     *
+     * The service owner, if not only one
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public def getOwner() {
+        return owner
+    }
+    public void setOwner(def newValue) {
+        owner = newValue
+    }
+    public def owner = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

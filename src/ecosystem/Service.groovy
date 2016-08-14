@@ -95,6 +95,21 @@ public class Service extends ecosystem.Machine  {
 
     /**
      *
+     * The service owner, if not only one
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public def getOwner() {
+        return owner
+    }
+    public void setOwner(def newValue) {
+        owner = newValue
+    }
+    public def owner = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

@@ -155,21 +155,6 @@ public class Job  {
 
     /**
      *
-     * Record the owners of the task
-     * @field owner
-     *
-     */
-    @Parameter (displayName = "Owners", usageName = "owner")
-    public def getOwner() {
-        return owner
-    }
-    public void setOwner(def newValue) {
-        owner = newValue
-    }
-    public def owner = null
-
-    /**
-     *
      * the mark of the task stage
      * @field finish
      *
@@ -182,21 +167,6 @@ public class Job  {
         finish = newValue
     }
     public boolean finish = false
-
-    /**
-     *
-     * Record the master of the task
-     * @field master
-     *
-     */
-    @Parameter (displayName = "Master", usageName = "master")
-    public def getMaster() {
-        return master
-    }
-    public void setMaster(def newValue) {
-        master = newValue
-    }
-    public def master = []
 
     /**
      *
@@ -501,36 +471,6 @@ public class Job  {
             this.candidates[competitor.getType()]<<competitor
 
         }
-    }
-
-    /**
-     *
-     * Set the owner is add to the owner list
-     * @method addOwner
-     *
-     */
-    public void addOwner(ownerID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add owner to the list
-        this.owner << ownerID
-    }
-
-    /**
-     *
-     * Set the owner is add to the owner list
-     * @method addMaster
-     *
-     */
-    public void addMaster(masterID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // add master to the list
-        this.master << masterID
     }
 
     /**

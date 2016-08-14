@@ -199,7 +199,7 @@ public class CloudPlatform  {
      *
      */
     @ScheduledMethod(
-        start = 0d,
+        start = 1d,
         interval = 1d,
         shuffle = true
     )
@@ -213,20 +213,9 @@ public class CloudPlatform  {
         if (RandomHelper.nextIntFromTo(0, 1)) {
 
             // Create Provider at a random distribution
-            PureProvider pagent = new PureProvider()
-            pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
-
-            // This is an agent decision.
-            if (pagent.Enter(this)) {
-
-                // This is a task.
-                AddAgentToContext("Ecosystem", pagent)
-                this.addUser(pagent)
-
-            } else  {
-
-
-            }
+            Provider pagent = CreateAgent("Ecosystem", "ecosystem.Provider")
+            // pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
+            pagent.GenerateResource()
 
         } else  {
 

@@ -58,55 +58,70 @@ import static repast.simphony.essentials.RepastEssentials.*
 
 /**
  *
- * This is a model initializer.
+ * This is an agent.
  *
  */
-public class ModelInitializer  {
+public class Demander extends ecosystem.User  {
+
+    /**
+     *
+     * Order List
+     * @field orderList
+     *
+     */
+    @Parameter (displayName = "Order List", usageName = "orderList")
+    public List getOrderList() {
+        return orderList
+    }
+    public void setOrderList(List newValue) {
+        orderList = newValue
+    }
+    public List orderList = []
+
+    /**
+     *
+     * Task data read from file
+     * @field taskMap
+     *
+     */
+    @Parameter (displayName = "Task Map", usageName = "taskMap")
+    public def getTaskMap() {
+        return taskMap
+    }
+    public void setTaskMap(def newValue) {
+        taskMap = newValue
+    }
+    public def taskMap = [:]
+
+    /**
+     *
+     * Mark the difficulty level of the order type
+     * @field level
+     *
+     */
+    @Parameter (displayName = "Level", usageName = "level")
+    public def getLevel() {
+        return level
+    }
+    public void setLevel(def newValue) {
+        level = newValue
+    }
+    public def level = [:]
 
     /**
      *
      * This is an agent property.
-     * @field providerCount
+     * @field hardness
      *
      */
-    @Parameter (displayName = "Provider Count", usageName = "providerCount")
-    public int getProviderCount() {
-        return providerCount
+    @Parameter (displayName = "Hardness", usageName = "hardness")
+    public double getHardness() {
+        return hardness
     }
-    public void setProviderCount(int newValue) {
-        providerCount = newValue
+    public void setHardness(double newValue) {
+        hardness = newValue
     }
-    public int providerCount = 50
-
-    /**
-     *
-     * This is an agent property.
-     * @field demanderList
-     *
-     */
-    @Parameter (displayName = "Demander List", usageName = "demanderList")
-    public ArrayList getDemanderList() {
-        return demanderList
-    }
-    public void setDemanderList(ArrayList newValue) {
-        demanderList = newValue
-    }
-    public ArrayList demanderList = new ArrayList()
-
-    /**
-     *
-     * This is an agent property.
-     * @field providerList
-     *
-     */
-    @Parameter (displayName = "Provider List", usageName = "providerList")
-    public ArrayList getProviderList() {
-        return providerList
-    }
-    public void setProviderList(ArrayList newValue) {
-        providerList = newValue
-    }
-    public ArrayList providerList = new ArrayList()
+    public double hardness = 0
 
     /**
      *
@@ -130,15 +145,39 @@ public class ModelInitializer  {
      * @field agentID
      *
      */
-    protected String agentID = "ModelInitializer " + (agentIDCounter++)
+    protected String agentID = "Demander " + (agentIDCounter++)
 
     /**
      *
-     * This is the user model builder
-     * @method initializeModel
+     * Generate Need
+     * @method GenerateOrder
      *
      */
-    public def initializeModel() {
+    public void GenerateOrder(String orderID) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // have need is to generate order
+        Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
+        //println this.taskMap
+        Order o = (Order) agent
+        o.setOwner(this)
+        o.setType("Order"+orderID)
+        // Set the order parameters
+        o.setParameters(this.taskMap)
+        println this.toString() + " need "+ o.toString()
+        this.getOrderList().add(o)
+        this.setNewOrder(o)
+    }
+
+    /**
+     *
+     * Read data from file
+     * @method ReadData
+     *
+     */
+    public def ReadData(String orderID) {
 
         // Define the return value variable.
         def returnValue
@@ -147,21 +186,54 @@ public class ModelInitializer  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        Object agent = CreateAgent("Ecosystem", "ecosystem.CloudPlatform")
-        CloudPlatform platform = (CloudPlatform) agent
+        Scanner sc = new Scanner(new File("cases/Order"+orderID+".rcp"))
+        int nTasks = sc.nextInt()
+        int nServices = sc.nextInt()
+        sc.nextLine()
+        sc.nextLine()
 
         // This is a loop.
-        for (i in 249..<250) {
+        for (int i in 1..nTasks) {
 
             // This is a task.
-            Object dagent = CreateAgent("Ecosystem", "ecosystem.Demander")
-            Demander demander = (Demander) dagent
-            demander.ReadData((i).toString())
-            platform.addUser(demander)
-            demander.GenerateOrder((i).toString())
+            def templist = [:]
+            templist << [p:sc.nextInt()]
+
+            // This is a loop.
+            for (int j in 1..nServices) {
+
+                // This is a task.
+                int amount = sc.nextInt()
+
+                // This is an agent decision.
+                if (amount > 0) {
+
+                    // This is a task.
+                    templist << [(j):amount]
+
+                } else  {
+
+
+                }
+
+            }
+
+            // This is a task.
+            this.taskMap << [(i): templist]
+            int nSuccessor = sc.nextInt()
+
+            // This is a loop.
+            for (int s in 0..<nSuccessor) {
+
+                // This is a task.
+                sc.nextInt()
+
+            }
+
 
         }
 
+        // This is a task.
         // Return the results.
         return returnValue
 

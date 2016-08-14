@@ -7,7 +7,7 @@
     <behaviorstep x="170" y="166" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Eliminate user include pure and complex users" visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
       <label x="170" y="151" text="Eliminate User"/>
     </behaviorstep>
-    <behaviorstep x="334" y="80" scheduleannotationstart="0" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
+    <behaviorstep x="334" y="80" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="334" y="65" text="Create Provider"/>
     </behaviorstep>
     <behaviorstep x="623" y="157" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="catch the finish task and add the count" visibility="0" returntype="def" compiledname="Accumulator" parameters="ecosystem.Task watchedAgent" exceptions="">
@@ -30,7 +30,7 @@
     <taskstep x="170" y="245" comment="This is a task." command1="this.userList.remove(o)" command2="" command3="" command4="" command5="">
       <label x="170" y="230" text="eliminate user"/>
     </taskstep>
-    <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="PureProvider pagent = new PureProvider()" command2="pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="" command5="">
+    <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="" command5="pagent.GenerateResource()">
       <label x="327" y="245" text="Create Provider"/>
     </taskstep>
     <taskstep x="623" y="233" comment="This is a task." command1="this.finishCount ++" command2="" command3="" command4="" command5="">
@@ -88,8 +88,8 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="652" y="777"/>
-    <joinstep x="165" y="802"/>
+    <joinstep x="657" y="782"/>
+    <joinstep x="170" y="807"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="58" y="48" comment="User list to record the user exist in the platform" visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -109,13 +109,14 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="71" y="374"/>
-    <endstep x="179" y="377"/>
-    <endstep x="450" y="448"/>
-    <endstep x="669" y="358"/>
-    <endstep x="655" y="923"/>
-    <endstep x="166" y="993"/>
-    <endstep x="359" y="850"/>
+    <endstep x="76" y="379"/>
+    <endstep x="184" y="382"/>
+    <endstep x="455" y="453"/>
+    <endstep x="674" y="363"/>
+    <endstep x="660" y="928"/>
+    <endstep x="171" y="998"/>
+    <endstep x="364" y="855"/>
+    <endstep x="338" y="389"/>
   </endsteps>
   <connections>
     <transitions>
@@ -166,7 +167,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="2" anchor="3"/>
-        <transitiontarget type="decision" index="1" anchor="1"/>
+        <transitiontarget type="end" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

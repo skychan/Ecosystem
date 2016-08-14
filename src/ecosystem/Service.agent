@@ -19,6 +19,9 @@
     <agentproperty x="214" y="209" comment="Job list" visibility="0" compiledname="jobList" type="List" defaultvalue="[]">
       <label x="219" y="194" text="Job List"/>
     </agentproperty>
+    <agentproperty x="458" y="133" comment="The service owner, if not only one" visibility="0" compiledname="owner" type="def" defaultvalue="null">
+      <label x="463" y="118" text="Owner"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="71" y="319"/>

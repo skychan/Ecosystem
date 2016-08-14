@@ -39,7 +39,7 @@
     <taskstep x="1116" y="591" comment="This is a task." command1="int t = this.getReayTime() - this.inBufferTime[theRes]" command2="int t2 = this.getFinishTime() - this.inBufferTime[theRes]" command3="int q = this.needResourceCapacity[theRes.getType()] * t2" command4="this.reviews &lt;&lt; Math.exp(t)*q*theRes.getRank()" command5="">
       <label x="1116" y="576" text="Do Task"/>
     </taskstep>
-    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="" command3="" command4="" command5="">
+    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="" command4="" command5="">
       <label x="528" y="753" text="Do Task"/>
     </taskstep>
     <taskstep x="259" y="336" comment="This is a task." command1="" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
@@ -70,7 +70,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="728" y="344"/>
+    <joinstep x="733" y="349"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -135,12 +135,12 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="275" y="547"/>
-    <endstep x="730" y="409"/>
-    <endstep x="1261" y="742"/>
-    <endstep x="176" y="419"/>
-    <endstep x="1160" y="726"/>
-    <endstep x="542" y="866"/>
+    <endstep x="280" y="552"/>
+    <endstep x="735" y="414"/>
+    <endstep x="1266" y="747"/>
+    <endstep x="181" y="424"/>
+    <endstep x="1165" y="731"/>
+    <endstep x="547" y="871"/>
   </endsteps>
   <connections>
     <transitions>

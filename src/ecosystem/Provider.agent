@@ -31,8 +31,8 @@
     <behaviorstep x="805" y="553" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.PureProvider" watchannotationtargetfieldnames="serviceReady" watchannotationtriggercondition="$watchee.toString() == $watcher.toString()" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="GenerateService" parameters="ecosystem.PureProvider watchedAgent" exceptions="">
       <label x="805" y="538" text="Generate Service"/>
     </behaviorstep>
-    <behaviorstep x="238" y="96" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Resource" visibility="0" returntype="void" compiledname="GenerateResource" parameters="" exceptions="">
-      <label x="238" y="81" text="Generate Resource"/>
+    <behaviorstep x="226" y="89" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Resource" visibility="0" returntype="void" compiledname="GenerateResource" parameters="" exceptions="">
+      <label x="226" y="74" text="Generate Resource"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -107,7 +107,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="135" y="248" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
+    <decisionstep x="135" y="248" comment="This is a loop." criteria="i in 0..5" branchType="while">
       <label x="135" y="233" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="551" y="634" comment="This is a loop." criteria="res in this.candidates" branchType="while">
@@ -143,9 +143,12 @@
     <decisionstep x="804" y="628" comment="This is an agent decision." criteria="false in this.serviceStatus.values()" branchType="if">
       <label x="804" y="613" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="34" y="243" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
+      <label x="34" y="228" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="871" y="405"/>
+    <joinstep x="876" y="410"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -183,16 +186,16 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="152" y="371"/>
-    <endstep x="569" y="390"/>
-    <endstep x="684" y="762"/>
-    <endstep x="67" y="812"/>
-    <endstep x="106" y="1258"/>
-    <endstep x="323" y="901"/>
-    <endstep x="873" y="486"/>
-    <endstep x="1024" y="738"/>
-    <endstep x="372" y="1196"/>
-    <endstep x="821" y="906"/>
+    <endstep x="157" y="376"/>
+    <endstep x="574" y="395"/>
+    <endstep x="689" y="767"/>
+    <endstep x="72" y="817"/>
+    <endstep x="111" y="1263"/>
+    <endstep x="328" y="906"/>
+    <endstep x="878" y="491"/>
+    <endstep x="1029" y="743"/>
+    <endstep x="377" y="1201"/>
+    <endstep x="826" y="911"/>
   </endsteps>
   <connections>
     <transitions>

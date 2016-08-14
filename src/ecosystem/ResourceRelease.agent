@@ -12,28 +12,31 @@
     <taskstep x="71" y="151" comment="This is a task." command1="r.setAvailable( r.getAvailable() + t.needResourceCapacity[ r.getType() ] )" command2="r.buffer.remove(t)" command3="" command4="" command5="">
       <label x="71" y="136" text="Do Task"/>
     </taskstep>
-    <taskstep x="480" y="415" comment="This is a task." command1="m.assignBehavior.Buffer(j,m)" command2="m.jobList.remove(j)" command3="" command4="" command5="">
-      <label x="480" y="400" text="Do Task"/>
+    <taskstep x="485" y="471" comment="This is a task." command1="m.assignBehavior.Buffer(j,m)" command2="m.jobList.remove(j)" command3="" command4="" command5="">
+      <label x="485" y="456" text="Do Task"/>
     </taskstep>
-    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList = m.jobList.sort{ [ -it.value, it.key.getType() ] }" command2="def job = m.jobList.keySet()[0]" command3="" command4="" command5="">
+    <taskstep x="272" y="143" comment="This is a task." command1="Map newList = m.jobList.sort{ [ -it.value, it.key.getType() ] }" command2="def job = newList.keySet()[0]" command3="println &quot;always get here?&quot;" command4="" command5="">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
     <taskstep x="498" y="218" comment="This is a task." command1="m.assignBehavior.Buffer(job,m)" command2="m.jobList.remove(job)" command3="" command4="" command5="">
       <label x="498" y="203" text="Service Call Resource Ready"/>
     </taskstep>
-    <taskstep x="381" y="406" comment="This is a task." command1="break" command2="" command3="" command4="" command5="">
-      <label x="381" y="391" text="Do Task"/>
+    <taskstep x="386" y="462" comment="This is a task." command1="println &quot;can i get here?&quot;" command2="break" command3="" command4="" command5="">
+      <label x="386" y="447" text="Do Task"/>
     </taskstep>
-    <taskstep x="580" y="330" comment="This is a task." command1="break" command2="" command3="" command4="" command5="">
-      <label x="580" y="315" text="Do Task"/>
+    <taskstep x="585" y="386" comment="This is a task." command1="break" command2="" command3="" command4="" command5="">
+      <label x="585" y="371" text="Do Task"/>
+    </taskstep>
+    <taskstep x="187" y="291" comment="This is a task." command1="println &quot;always get here?&quot;" command2="println &quot;the mistery list&quot; + m.jobList.keySet()" command3="" command4="" command5="">
+      <label x="187" y="276" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="274" y="322" comment="This is a loop." criteria="j in m.jobList.keySet()" branchType="while">
-      <label x="274" y="307" text="Evaluate Criteria"/>
+    <decisionstep x="279" y="378" comment="This is a loop." criteria="j in newList.keySet()" branchType="while">
+      <label x="279" y="363" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="478" y="326" comment="This is an agent decision." criteria="m.getAvailable() &gt;= j.needResourceCapacity[m.getType()]" branchType="if">
-      <label x="478" y="311" text="Evaluate Criteria"/>
+    <decisionstep x="483" y="382" comment="This is an agent decision." criteria="m.getAvailable() &gt;= j.needResourceCapacity[m.getType()]" branchType="if">
+      <label x="483" y="367" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="275" y="218" comment="This is an agent decision." criteria="job.getClass() == ecosystem.ServiceCall" branchType="if">
       <label x="275" y="203" text="Evaluate Criteria"/>
@@ -41,15 +44,15 @@
     <decisionstep x="392" y="220" comment="This is an agent decision." criteria="m.buffer == []" branchType="if">
       <label x="392" y="205" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="375" y="323" comment="This is an agent decision." criteria="j.getClass() == ecosystem.ServiceCall" branchType="if">
-      <label x="375" y="308" text="Evaluate Criteria"/>
+    <decisionstep x="380" y="379" comment="This is an agent decision." criteria="j.getClass() == ecosystem.ServiceCall" branchType="if">
+      <label x="380" y="364" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="72" y="292"/>
-    <endstep x="287" y="424"/>
+    <endstep x="77" y="297"/>
+    <endstep x="302" y="490"/>
   </endsteps>
   <connections>
     <transitions>
@@ -71,6 +74,11 @@
       <transition>
         <transitionsource type="task" index="2" anchor="2"/>
         <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="3"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -102,7 +110,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="2" anchor="2"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

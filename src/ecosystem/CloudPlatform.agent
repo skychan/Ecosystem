@@ -7,7 +7,7 @@
     <behaviorstep x="170" y="166" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Eliminate user include pure and complex users" visibility="0" returntype="void" compiledname="EliminateUser" parameters="Object o" exceptions="">
       <label x="170" y="151" text="Eliminate User"/>
     </behaviorstep>
-    <behaviorstep x="334" y="80" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
+    <behaviorstep x="334" y="80" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="ScheduleParameters.FIRST_PRIORITY" watchannotationpick="" comment="Create provider procedure" visibility="0" returntype="void" compiledname="CreateProvider" parameters="" exceptions="">
       <label x="334" y="65" text="Create Provider"/>
     </behaviorstep>
     <behaviorstep x="623" y="157" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Job" watchannotationtargetfieldnames="finish" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="catch the finish task and add the count" visibility="0" returntype="def" compiledname="Accumulator" parameters="ecosystem.Job watchedAgent" exceptions="">
@@ -68,8 +68,8 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="331" y="159" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
-      <label x="331" y="144" text="Evaluate Criteria"/>
+    <decisionstep x="374" y="162" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
+      <label x="374" y="147" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="439" y="257" comment="This is an agent decision." criteria="pagent.Enter(this)" branchType="if">
       <label x="439" y="242" text="Evaluate Criteria"/>
@@ -88,8 +88,8 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="662" y="787"/>
-    <joinstep x="175" y="812"/>
+    <joinstep x="667" y="792"/>
+    <joinstep x="180" y="817"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="58" y="48" comment="User list to record the user exist in the platform" visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -109,14 +109,14 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="81" y="384"/>
-    <endstep x="189" y="387"/>
-    <endstep x="460" y="458"/>
-    <endstep x="679" y="368"/>
-    <endstep x="665" y="933"/>
-    <endstep x="176" y="1003"/>
-    <endstep x="369" y="860"/>
-    <endstep x="343" y="394"/>
+    <endstep x="86" y="389"/>
+    <endstep x="194" y="392"/>
+    <endstep x="465" y="463"/>
+    <endstep x="684" y="373"/>
+    <endstep x="670" y="938"/>
+    <endstep x="181" y="1008"/>
+    <endstep x="374" y="865"/>
+    <endstep x="348" y="399"/>
   </endsteps>
   <connections>
     <transitions>
@@ -132,7 +132,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -227,11 +227,6 @@
       </transition>
     </transitions>
     <booleantransitions>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="0" anchor="2"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="task" index="5" anchor="0"/>

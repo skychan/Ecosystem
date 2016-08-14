@@ -7,6 +7,9 @@
     <behaviorstep x="335" y="640" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Read data from file" visibility="0" returntype="def" compiledname="ReadData" parameters="String orderID" exceptions="">
       <label x="335" y="625" text="Read Data"/>
     </behaviorstep>
+    <behaviorstep x="211" y="67" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+      <label x="211" y="52" text="Step"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="285" y="307" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.setOwner(this)" command5="o.setType(&quot;Order&quot;+orderID)">
@@ -42,6 +45,9 @@
     <taskstep x="413" y="141" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="RandomHelper.init()" command4="RandomHelper.createPoisson(mean)" command5="">
       <label x="413" y="126" text="Randomize"/>
     </taskstep>
+    <taskstep x="194" y="240" comment="This is a task." command1="GenerateOrder((249).toString())" command2="" command3="" command4="" command5="">
+      <label x="194" y="225" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="453" y="881" comment="This is a loop." criteria="int j in 1..nServices" branchType="while">
@@ -58,6 +64,9 @@
     </decisionstep>
     <decisionstep x="411" y="217" comment="This is a loop." criteria="int i in RandomHelper.getPoisson().nextInt()" branchType="while">
       <label x="411" y="202" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="203" y="149" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
+      <label x="203" y="134" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -76,9 +85,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="374" y="1044"/>
-    <endstep x="568" y="273"/>
-    <endstep x="297" y="503"/>
+    <endstep x="379" y="1049"/>
+    <endstep x="573" y="278"/>
+    <endstep x="302" y="508"/>
+    <endstep x="204" y="321"/>
   </endsteps>
   <connections>
     <transitions>
@@ -132,6 +142,16 @@
         <transitiontarget type="decision" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -167,6 +187,11 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="4" anchor="3"/>
         <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="2"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

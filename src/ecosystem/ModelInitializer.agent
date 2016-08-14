@@ -24,6 +24,9 @@
     <taskstep x="609" y="509" comment="This is a task." command1="" command2="pureProvider.addResource(res)" command3="" command4="" command5="">
       <label x="609" y="494" text="Do Task"/>
     </taskstep>
+    <taskstep x="328" y="292" comment="This is a task." command1="platform.CreateProvider()" command2="" command3="" command4="" command5="">
+      <label x="328" y="277" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 249..&lt;250" branchType="while">
@@ -46,7 +49,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="90" y="469"/>
+    <endstep x="95" y="474"/>
   </endsteps>
   <connections>
     <transitions>
@@ -58,6 +61,11 @@
       <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="3"/>
+        <transitiontarget type="task" index="6" anchor="1"/>
         <bendpoints/>
       </transition>
       <transition>

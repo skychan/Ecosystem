@@ -159,6 +159,8 @@ public class ModelInitializer  {
             demander.ReadData((i).toString())
             platform.addUser(demander)
             demander.GenerateOrder((i).toString())
+            // This is a task.
+            platform.CreateProvider()
 
         }
 

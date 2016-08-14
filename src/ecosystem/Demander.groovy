@@ -239,6 +239,41 @@ public class Demander extends ecosystem.User  {
 
     /**
      *
+     * This is the step behavior.
+     * @method step
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def step() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // to need or not
+        if (RandomHelper.nextIntFromTo(0, 1)) {
+
+            // This is a task.
+            GenerateOrder((249).toString())
+
+        } else  {
+
+
+        }
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

@@ -553,6 +553,7 @@ public class Job  {
 
             // This is a task.
             this.processBehavior.Process(this)
+            this.prepareStatus.each{it -> it.value = false}
 
         } else  {
 

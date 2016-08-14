@@ -115,8 +115,9 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        m.jobList = m.jobList.sort{ [ -it.value, it.key.getType() ] }
-        def job = m.jobList.keySet()[0]
+        Map newList = m.jobList.sort{ [ -it.value, it.key.getType() ] }
+        def job = newList.keySet()[0]
+        println "always get here?"
 
         // This is an agent decision.
         if (job.getClass() == ecosystem.ServiceCall) {
@@ -136,15 +137,19 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
 
         } else  {
 
+            // This is a task.
+            println "always get here?"
+            println "the mistery list" + m.jobList.keySet()
 
             // This is a loop.
-            for (j in m.jobList.keySet()) {
+            for (j in newList.keySet()) {
 
 
                 // This is an agent decision.
                 if (j.getClass() == ecosystem.ServiceCall) {
 
                     // This is a task.
+                    println "can i get here?"
                     break
 
                 } else  {

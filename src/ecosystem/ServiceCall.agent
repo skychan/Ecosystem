@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="48" y="151" comment="This is a task." command1="selectBehavior = new SelectInServiceCall()" command2="candidates.remove(service)" command3="" command4="" command5="">
+    <taskstep x="48" y="151" comment="This is a task." command1="selectBehavior = new SelectInServiceCall()" command2="candidates.remove(service)" command3="processBehavior = new ProcessInServiceCall()" command4="" command5="">
       <label x="48" y="136" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -14,18 +14,18 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="54" y="267"/>
+    <endstep x="59" y="272"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
+        <transitionsource type="behavior" index="0" anchor="0"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="0" anchor="0"/>
-        <transitiontarget type="task" index="0" anchor="0"/>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

@@ -261,36 +261,6 @@ public class Job  {
     /**
      *
      * This is an agent property.
-     * @field chosenTime
-     *
-     */
-    @Parameter (displayName = "Chosen time", usageName = "chosenTime")
-    public double getChosenTime() {
-        return chosenTime
-    }
-    public void setChosenTime(double newValue) {
-        chosenTime = newValue
-    }
-    public double chosenTime = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field responseTime
-     *
-     */
-    @Parameter (displayName = "Response Time", usageName = "responseTime")
-    public def getResponseTime() {
-        return responseTime
-    }
-    public void setResponseTime(def newValue) {
-        responseTime = newValue
-    }
-    public def responseTime = [:]
-
-    /**
-     *
-     * This is an agent property.
      * @field productQuality
      *
      */
@@ -425,6 +395,21 @@ public class Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field processBehavior
+     *
+     */
+    @Parameter (displayName = "Process Behavior", usageName = "processBehavior")
+    public ProcessBehavior getProcessBehavior() {
+        return processBehavior
+    }
+    public void setProcessBehavior(ProcessBehavior newValue) {
+        processBehavior = newValue
+    }
+    public ProcessBehavior processBehavior = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -550,70 +535,6 @@ public class Job  {
 
     /**
      *
-     * Check the lackness of resources
-     * @method CheckLackness
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watcher.toString() == $watchee.toString() && $watchee.inNeed',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.2d
-    )
-    public def CheckLackness(ecosystem.Task watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (this.serviceCandidates == []) {
-
-
-            // This is an agent decision.
-            if ([] in this.candidates.values()) {
-
-
-                // This is a loop.
-                for (candidateList in this.candidates.values()) {
-
-                    // This is a task.
-                    candidateList.each{ it.compete.remove(this)}
-
-                }
-
-                // This is a task.
-                this.candidates.each{ it.value=[]}
-                //println this.toString() + " lack of resource"
-
-            } else  {
-
-                // This is a task.
-                //println this.candidates
-                this.Select()
-                this.setAllocated(true)
-                // println this.toString() + " selected resources"
-
-            }
-
-        } else  {
-
-            // This is a task.
-            this.setAllocated(true)
-            this.Select()
-
-        }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * Ready to process means to reset the task status in case
      * @method Reset
      *
@@ -698,43 +619,13 @@ public class Job  {
 
 
         // This is an agent decision.
-        if (this.getChoice()) {
+        if (this.getPrepareStatus().values().count(false) == 0) {
 
             // This is a task.
-            Service theSer = this.allocatedService
-            theSer.readyTask << this
-            theSer.buffer.remove(this)
-            // This is a task.
-            this.Reset()
-            this.setRemainingTime(this.getProcessingTime())
-            this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+            this.processBehavior.Process(this)
 
         } else  {
 
-
-            // This is an agent decision.
-            if (!(false in this.getPrepareStatus().values() || this.getPrepareStatus().isEmpty())) {
-
-
-                // This is a loop.
-                for (theRes in this.allocatedResource.values()) {
-
-                    // This is a task.
-                    theRes.readyTask << this
-                    theRes.buffer.remove(this)
-                    // what's that
-
-                }
-
-                // This is a task.
-                this.Reset()
-                this.setRemainingTime(this.getProcessingTime())
-                this.readyTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-
-            } else  {
-
-
-            }
 
         }
     }

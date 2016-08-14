@@ -65,21 +65,6 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
-     * The capacity of the service
-     * @field capacity
-     *
-     */
-    @Parameter (displayName = "Capacity", usageName = "capacity")
-    public int getCapacity() {
-        return capacity
-    }
-    public void setCapacity(int newValue) {
-        capacity = newValue
-    }
-    public int capacity = 0
-
-    /**
-     *
      * This is an agent property.
      * @field processingTime
      *
@@ -127,6 +112,7 @@ public class Task extends ecosystem.Job  {
 
         // This is a task.
         selectBehavior = new SelectInTask()
+        processBehavior = new ProcessInTask()
     }
 
     /**
@@ -201,61 +187,45 @@ public class Task extends ecosystem.Job  {
             if (this.getRemainingTime() == 0) {
 
 
-                // This is an agent decision.
-                if (this.getChoice()) {
+                // This is a loop.
+                for (mac in this.getAllocation().values()) {
 
                     // The finish step
-                    Service theSer = this.allocatedService
-                    theSer.readyTask.remove(this)
-                    theSer.Release(this.needResourceCapacity[theRes.getType()])
-                    theSer.Next()
+                    mac.Release(this)
+                    mac.Next()
+                    theRes.Next()
                     // This is a task.
-                    this.setProductQuality(theSer.getQuality())
+                    RandomHelper.createNormal(mac.getQuality(),1)
+                    double tempQuality = RandomHelper.getNormal().nextDouble()
 
-                } else  {
-
-
-                    // This is a loop.
-                    for (theRes in this.getAllocatedResource().values()) {
-
-                        // The finish step
-                        theRes.readyTask.remove(this)
-                        theRes.Release(this.needResourceCapacity[theRes.getType()])
-                        theRes.Next()
-                        // This is a task.
-                        RandomHelper.createNormal(theRes.getQuality(),1)
-                        double tempQuality = RandomHelper.getNormal().nextDouble()
-
-                        // This is an agent decision.
-                        if (tempQuality < this.getProductQuality()) {
-
-                            // This is a task.
-                            this.setProductQuality(tempQuality)
-
-                        } else  {
-
-
-                        }
-
-                    }
-
-
-                    // This is a loop.
-                    for (theRes in this.getAllocatedResource().values()) {
+                    // This is an agent decision.
+                    if (tempQuality < this.getProductQuality()) {
 
                         // This is a task.
-                        theRes.Review(this)
-                        this.Review(theRes)
+                        this.setProductQuality(tempQuality)
+
+                    } else  {
+
 
                     }
-
-                    // This is a task.
-                    println this.toString() + " is finished"
-                    this.setFinish(true)
-                    this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-                    this.span = this.finishTime - this.getStartTime()
 
                 }
+
+
+                // This is a loop.
+                for (mac in this.getAllocation().values()) {
+
+                    // This is a task.
+                    mac.Review(this)
+                    this.Review(mac)
+
+                }
+
+                // This is a task.
+                println this.toString() + " is finished"
+                this.setFinish(true)
+                this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+                this.span = this.finishTime - this.getStartTime()
 
             } else  {
 

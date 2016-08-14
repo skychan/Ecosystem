@@ -61,7 +61,7 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class ServiceCall extends ecosystem.Job  {
+public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
 
     /**
      *
@@ -85,20 +85,21 @@ public class ServiceCall extends ecosystem.Job  {
      * @field agentID
      *
      */
-    protected String agentID = "ServiceCall " + (agentIDCounter++)
+    protected String agentID = "ProcessInServiceCall " + (agentIDCounter++)
 
     /**
      *
      * This is the step behavior.
-     * @method ServiceCall
+     * @method Process
      *
      */
-    public def ServiceCall() {
+    public void Process(Job sc) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        selectBehavior = new SelectInServiceCall()
-        candidates.remove(service)
-        processBehavior = new ProcessInServiceCall()
+        sc.owners[0].GenerateService()
     }
 
     /**

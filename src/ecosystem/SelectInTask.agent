@@ -30,8 +30,8 @@
     <taskstep x="229" y="125" comment="This is a task." command1="def chosenMap = [:]" command2="" command3="" command4="" command5="">
       <label x="229" y="110" text="Do Task"/>
     </taskstep>
-    <taskstep x="134" y="249" comment="This is a task." command1="candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
-      <label x="134" y="234" text="Do Task"/>
+    <taskstep x="79" y="313" comment="This is a task." command1="candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
+      <label x="79" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="568" y="130" comment="This is a task." command1="int nullCount = theOnes.values().count(null)" command2="" command3="" command4="" command5="">
       <label x="568" y="115" text="Do Task"/>
@@ -75,7 +75,7 @@
     <taskstep x="1630" y="215" comment="This is a task." command1="qlength = theList[0].getFullLength()" command2="" command3="" command4="" command5="">
       <label x="1630" y="200" text="Do Task"/>
     </taskstep>
-    <taskstep x="569" y="376" comment="This is a task." command1="List candidateList = theOnes.values()" command2="candidateList.sort{ [ it.getFullLength(), -it.getQuality() ] }" command3="" command4="" command5="">
+    <taskstep x="569" y="376" comment="This is a task." command1="def candidateList = theOnes.values()" command2="candidateList.sort{ [ it.getFullLength(), -it.getQuality() ] }" command3="" command4="" command5="">
       <label x="569" y="361" text="Do Task"/>
     </taskstep>
     <taskstep x="567" y="558" comment="This is a task." command1="returnValue =  [success:true,allocation:[&apos;service&apos;:theOnes[&apos;service&apos;]]]" command2="" command3="" command4="" command5="">
@@ -86,6 +86,9 @@
     </taskstep>
     <taskstep x="1037" y="140" comment="This is a task." command1="mac.Assign(t)" command2="" command3="" command4="" command5="">
       <label x="1037" y="125" text="Do Task"/>
+    </taskstep>
+    <taskstep x="178" y="319" comment="This is a task." command1="candidates.sort{[it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
+      <label x="176" y="297" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -137,17 +140,21 @@
     <decisionstep x="921" y="150" comment="This is a loop." criteria="mac in allocation.values()" branchType="while">
       <label x="921" y="135" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="132" y="244" comment="This is an agent decision." criteria="candidates[0].getClass() == ecosystem.Service" branchType="if">
+      <label x="132" y="229" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="88" y="340"/>
+    <joinstep x="89" y="516"/>
+    <joinstep x="133" y="425"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="250" y="429"/>
-    <endstep x="87" y="425"/>
-    <endstep x="1721" y="697"/>
-    <endstep x="788" y="223"/>
-    <endstep x="941" y="325"/>
+    <endstep x="255" y="434"/>
+    <endstep x="89" y="634"/>
+    <endstep x="1726" y="702"/>
+    <endstep x="793" y="228"/>
+    <endstep x="946" y="330"/>
   </endsteps>
   <connections>
     <transitions>
@@ -193,7 +200,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="5" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="3"/>
+        <transitiontarget type="join" index="1" anchor="1"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -241,6 +248,16 @@
         <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="24" anchor="2"/>
+        <transitiontarget type="join" index="1" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="1" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -265,7 +282,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="2" anchor="3"/>
-        <transitiontarget type="task" index="5" anchor="0"/>
+        <transitiontarget type="decision" index="16" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -381,6 +398,16 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="15" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="16" anchor="3"/>
+        <transitiontarget type="task" index="24" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="16" anchor="1"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

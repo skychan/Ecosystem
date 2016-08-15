@@ -6,14 +6,14 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="156" y="284" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
-      <label x="156" y="269" text="Do Task"/>
+    <taskstep x="155" y="288" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="155" y="273" text="Do Task"/>
     </taskstep>
-    <taskstep x="246" y="281" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList &lt;&lt; t">
-      <label x="246" y="266" text="Do Task"/>
+    <taskstep x="262" y="287" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList &lt;&lt; t">
+      <label x="262" y="272" text="Do Task"/>
     </taskstep>
-    <taskstep x="260" y="380" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="" command4="" command5="">
-      <label x="260" y="365" text="Set task type"/>
+    <taskstep x="264" y="376" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="println t.getType()" command4="" command5="">
+      <label x="264" y="361" text="Set task type"/>
     </taskstep>
     <taskstep x="151" y="115" comment="This is a task." command1="int i = 1" command2="" command3="" command4="" command5="">
       <label x="151" y="100" text="Do Task"/>
@@ -23,8 +23,8 @@
     <decisionstep x="153" y="192" comment="This is a loop." criteria="tdata in taskMap" branchType="while">
       <label x="153" y="177" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="255" y="189" comment="This is an agent decision." criteria="tdata.value.size() &gt; 1" branchType="if">
-      <label x="255" y="174" text="Evaluate Criteria"/>
+    <decisionstep x="262" y="193" comment="This is an agent decision." criteria="tdata.value.size() &gt; 1" branchType="if">
+      <label x="262" y="178" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -40,7 +40,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="164" y="378"/>
+    <endstep x="162" y="390"/>
   </endsteps>
   <connections>
     <transitions>

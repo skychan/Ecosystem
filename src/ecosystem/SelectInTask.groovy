@@ -154,9 +154,21 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
         } else  {
 
-            // This is a task.
-            candidates.sort{[-it.getAvailable(),it.jobList.size()]}
-            returnValue = candidates[0]
+
+            // This is an agent decision.
+            if (candidates[0].getClass() == ecosystem.Service) {
+
+                // This is a task.
+                candidates.sort{[it.jobList.size()]}
+                returnValue = candidates[0]
+
+            } else  {
+
+                // This is a task.
+                candidates.sort{[-it.getAvailable(),it.jobList.size()]}
+                returnValue = candidates[0]
+
+            }
 
         }
         // Return the results.
@@ -211,7 +223,7 @@ public class SelectInTask implements ecosystem.SelectBehavior {
             } else  {
 
                 // This is a task.
-                List candidateList = theOnes.values()
+                def candidateList = theOnes.values()
                 candidateList.sort{ [ it.getFullLength(), -it.getQuality() ] }
 
                 // This is an agent decision.

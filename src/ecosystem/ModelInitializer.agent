@@ -9,8 +9,8 @@
     <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
-    <taskstep x="205" y="281" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Demander&quot;)" command2="Demander demander = (Demander) dagent" command3="demander.ReadData((i).toString())" command4="platform.addUser(demander)" command5="demander.GenerateOrder((i).toString())">
-      <label x="205" y="266" text="Create Demander"/>
+    <taskstep x="185" y="279" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Demander&quot;)" command2="Demander demander = (Demander) dagent" command3="demander.ReadData((i).toString())" command4="platform.addUser(demander)" command5="demander.GenerateOrder((i).toString())">
+      <label x="185" y="264" text="Create Demander"/>
     </taskstep>
     <taskstep x="361" y="510" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(i)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
       <label x="361" y="495" text="Create Resource"/>
@@ -24,8 +24,11 @@
     <taskstep x="609" y="509" comment="This is a task." command1="" command2="pureProvider.addResource(res)" command3="" command4="" command5="">
       <label x="609" y="494" text="Do Task"/>
     </taskstep>
-    <taskstep x="328" y="292" comment="This is a task." command1="platform.CreateProvider()" command2="" command3="" command4="" command5="">
-      <label x="328" y="277" text="Do Task"/>
+    <taskstep x="297" y="279" comment="This is a task." command1="platform.CreateProvider()" command2="def serdata = [\f[2:1,3:1,4:1],\f[2:4],\f[2:6],\f[1:1],\f[3:5,4:7],\f[2:7,3:7,4:5],\f[1:7,2:6,4:5],\f[1:7,4:6],\f[1:5,2:6,3:7,4:6]\f]" command3="" command4="" command5="">
+      <label x="297" y="264" text="Do Task"/>
+    </taskstep>
+    <taskstep x="398" y="369" comment="This is a task." command1="Service sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="sagent.resourceComposition = data" command3="" command4="" command5="">
+      <label x="398" y="354" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -34,6 +37,9 @@
     </decisionstep>
     <decisionstep x="239" y="508" comment="This is a loop." criteria="i in test" branchType="while">
       <label x="239" y="493" text="Count Provider"/>
+    </decisionstep>
+    <decisionstep x="400" y="277" comment="This is a loop." criteria="data in serdata" branchType="while">
+      <label x="400" y="262" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -49,7 +55,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="95" y="474"/>
+    <endstep x="75" y="432"/>
   </endsteps>
   <connections>
     <transitions>
@@ -83,6 +89,11 @@
         <transitiontarget type="task" index="5" anchor="1"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="3"/>
+        <transitiontarget type="decision" index="2" anchor="1"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -98,6 +109,11 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="3"/>
         <transitiontarget type="task" index="2" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

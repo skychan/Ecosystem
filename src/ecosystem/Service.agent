@@ -6,8 +6,8 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="57" y="212" comment="This is a task." command1="responseBehavior = new ServiceResponse()" command2="assignBehavior = new ServiceAssign()" command3="releaseBehavior  = new ServiceRelease()" command4="" command5="">
-      <label x="57" y="197" text="Do Task"/>
+    <taskstep x="62" y="213" comment="This is a task." command1="responseBehavior = new ServiceResponse()" command2="assignBehavior = new ServiceAssign()" command3="releaseBehavior  = new ServiceRelease()" command4="" command5="">
+      <label x="62" y="198" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps/>
@@ -24,7 +24,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="76" y="324"/>
+    <endstep x="72" y="319"/>
   </endsteps>
   <connections>
     <transitions>

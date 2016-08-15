@@ -165,6 +165,7 @@ public class Order  {
                 // This is a task.
                 t.setType(this.getType() + "-" + (i).toString())
                 i+=1
+                println t.getType()
 
             } else  {
 

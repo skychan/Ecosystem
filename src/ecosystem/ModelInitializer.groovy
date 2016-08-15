@@ -161,6 +161,27 @@ public class ModelInitializer  {
             demander.GenerateOrder((i).toString())
             // This is a task.
             platform.CreateProvider()
+            def serdata = [
+            [2:1,3:1,4:1],
+            [2:4],
+            [2:6],
+            [1:1],
+            [3:5,4:7],
+            [2:7,3:7,4:5],
+            [1:7,2:6,4:5],
+            [1:7,4:6],
+            [1:5,2:6,3:7,4:6]
+            ]
+
+            // This is a loop.
+            for (data in serdata) {
+
+                // This is a task.
+                Service sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+                sagent.resourceComposition = data
+
+            }
+
 
         }
 

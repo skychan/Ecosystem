@@ -198,6 +198,7 @@ public class Task extends ecosystem.Job  {
         println "task para setted"
         this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
         println "start at " + this.getStartTime()
+        println this.needResourceCapacity
     }
 
     /**

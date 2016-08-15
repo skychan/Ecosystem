@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="371" y="716"/>
+    <joinstep x="367" y="700"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -120,13 +120,13 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="160" y="383"/>
-    <endstep x="930" y="653"/>
-    <endstep x="816" y="648"/>
-    <endstep x="376" y="808"/>
-    <endstep x="603" y="940"/>
-    <endstep x="322" y="1229"/>
-    <endstep x="549" y="327"/>
+    <endstep x="143" y="397"/>
+    <endstep x="890" y="636"/>
+    <endstep x="774" y="646"/>
+    <endstep x="367" y="802"/>
+    <endstep x="587" y="950"/>
+    <endstep x="312" y="1228"/>
+    <endstep x="536" y="340"/>
   </endsteps>
   <connections>
     <transitions>

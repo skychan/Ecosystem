@@ -88,9 +88,6 @@
     <agentproperty x="384" y="286" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
       <label x="389" y="271" text="Chose"/>
     </agentproperty>
-    <agentproperty x="885" y="161" comment="Count the finished jobs" visibility="0" compiledname="finish" type="int" defaultvalue="0">
-      <label x="890" y="146" text="Finished"/>
-    </agentproperty>
     <agentproperty x="964" y="212" comment="Quality" visibility="0" compiledname="quality" type="double" defaultvalue="0">
       <label x="969" y="197" text="Quality"/>
     </agentproperty>

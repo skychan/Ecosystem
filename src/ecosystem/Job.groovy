@@ -423,13 +423,25 @@ public class Job  {
                 // This is a loop.
                 for (mac in this.allocation) {
 
-                    // This is a task.
-                    this.prepareStatus[mac.key] = false
+
+                    // This is an agent decision.
+                    if (mac.key.getClass() == ecosystem.Resource) {
+
+                        // This is a task.
+                        this.prepareStatus[mac.key] = false
+
+                    } else  {
+
+                        // This is a task.
+                        this.prepareStatus[mac.value] = false
+
+                    }
 
                 }
 
                 // This is a task.
                 selectBehavior.Assign(watchedAgent.allocation,this)
+                println this.prepareStatus
 
             } else  {
 
@@ -564,6 +576,13 @@ public class Job  {
             // This is a task.
             this.processBehavior.Process(this)
             this.prepareStatus.each{it -> it.value = false}
+            println ""
+            println toString() + " is all ready"
+            def templist = [:]
+            for( mac in this.prepareStatus.keySet()){
+            	templist[mac] = mac.getSourceable()
+            }
+            println templist
 
         } else  {
 

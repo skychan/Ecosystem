@@ -39,17 +39,20 @@
     <taskstep x="1116" y="591" comment="This is a task." command1="int t = this.getReayTime() - this.inBufferTime[theRes]" command2="int t2 = this.getFinishTime() - this.inBufferTime[theRes]" command3="int q = this.needResourceCapacity[theRes.getType()] * t2" command4="this.reviews &lt;&lt; Math.exp(t)*q*theRes.getRank()" command5="">
       <label x="1116" y="576" text="Do Task"/>
     </taskstep>
-    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="" command4="" command5="">
+    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="println &quot;&quot;" command4="println toString() + &quot; is all ready&quot;" command5="def templist = [:]\ffor( mac in this.prepareStatus.keySet()){\f&#x9;templist[mac] = mac.getSourceable()\f}\fprintln templist">
       <label x="528" y="753" text="Do Task"/>
     </taskstep>
     <taskstep x="259" y="336" comment="This is a task." command1="println toString() + &quot;selected &quot; + this.getAllocation()" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
       <label x="259" y="321" text="Do Task"/>
     </taskstep>
-    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="" command3="" command4="" command5="">
+    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="println this.prepareStatus" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="335" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
-      <label x="355" y="320" text="Do Task"/>
+    <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
+      <label x="362" y="219" text="Do Task"/>
+    </taskstep>
+    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="" command3="" command4="" command5="">
+      <label x="448" y="309" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -71,9 +74,12 @@
     <decisionstep x="260" y="173" comment="This is an agent decision." criteria="watchedAgent.equals(this)" branchType="if">
       <label x="260" y="158" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="357" y="327" comment="This is an agent decision." criteria="mac.key.getClass() == ecosystem.Resource" branchType="if">
+      <label x="357" y="312" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="743" y="359"/>
+    <joinstep x="748" y="364"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -138,12 +144,12 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="290" y="562"/>
-    <endstep x="745" y="424"/>
-    <endstep x="1276" y="757"/>
-    <endstep x="191" y="434"/>
-    <endstep x="1175" y="741"/>
-    <endstep x="557" y="881"/>
+    <endstep x="295" y="567"/>
+    <endstep x="750" y="429"/>
+    <endstep x="1281" y="762"/>
+    <endstep x="196" y="439"/>
+    <endstep x="1180" y="746"/>
+    <endstep x="562" y="886"/>
   </endsteps>
   <connections>
     <transitions>
@@ -256,7 +262,7 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="4" anchor="0"/>
-        <transitiontarget type="task" index="9" anchor="2"/>
+        <transitiontarget type="decision" index="6" anchor="2"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
@@ -267,6 +273,16 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="5" anchor="2"/>
         <transitiontarget type="task" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="6" anchor="0"/>
+        <transitiontarget type="task" index="9" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="6" anchor="3"/>
+        <transitiontarget type="task" index="10" anchor="1"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

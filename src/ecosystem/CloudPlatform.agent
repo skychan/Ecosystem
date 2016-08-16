@@ -36,8 +36,8 @@
     <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="" command5="pagent.GenerateResource()">
       <label x="327" y="245" text="Create Provider"/>
     </taskstep>
-    <taskstep x="623" y="233" comment="This is a task." command1="this.finishCount ++" command2="println &quot;finish watched &quot;" command3="" command4="" command5="">
-      <label x="623" y="218" text="Do Task"/>
+    <taskstep x="557" y="278" comment="This is a task." command1="this.finishCount ++" command2="println &quot;finish watched &quot;" command3="" command4="" command5="">
+      <label x="557" y="263" text="Do Task"/>
     </taskstep>
     <taskstep x="486" y="130" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
       <label x="486" y="115" text="Randomize"/>
@@ -75,6 +75,9 @@
     <taskstep x="302" y="1197" comment="This is a task." command1="ServiceCall sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.ServiceCall&quot;)" command2="sagent.setParameters(data)" command3="" command4="" command5="">
       <label x="302" y="1182" text="Do Task"/>
     </taskstep>
+    <taskstep x="684" y="282" comment="This is a task." command1="this.serviceGeneratedCount++" command2="" command3="" command4="" command5="">
+      <label x="684" y="267" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="374" y="162" comment="to need or not" criteria="RandomHelper.nextIntFromTo(0, 1)" branchType="if">
@@ -95,10 +98,14 @@
     <decisionstep x="340" y="669" comment="This is an agent decision." criteria="res.getType() in this.typeQueueLength.keySet()" branchType="if">
       <label x="340" y="654" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="623" y="223" comment="This is an agent decision." criteria="watchedAgent.getClass() == ecosystem.Task" branchType="if">
+      <label x="623" y="208" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
     <joinstep x="677" y="802"/>
     <joinstep x="190" y="827"/>
+    <joinstep x="642" y="348"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="58" y="48" comment="User list to record the user exist in the platform" visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -119,12 +126,15 @@
     <agentproperty x="445" y="1016" comment="This is an agent property." visibility="0" compiledname="serdata" type="def" defaultvalue="[[2:1,3:1,4:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:4],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[3:5,4:7],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:7,3:7,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,2:6,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,4:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:5,2:6,3:7,4:6]]">
       <label x="450" y="1001" text="Service Call Data"/>
     </agentproperty>
+    <agentproperty x="720" y="72" comment="Count the fininshed jobs" visibility="0" compiledname="serviceGeneratedCount" type="int" defaultvalue="0">
+      <label x="725" y="57" text="Service Generate count"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="96" y="399"/>
     <endstep x="204" y="402"/>
     <endstep x="475" y="473"/>
-    <endstep x="694" y="383"/>
+    <endstep x="636" y="413"/>
     <endstep x="680" y="948"/>
     <endstep x="191" y="1018"/>
     <endstep x="384" y="875"/>
@@ -150,7 +160,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
+        <transitiontarget type="decision" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -190,7 +200,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
+        <transitiontarget type="join" index="2" anchor="1"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -253,6 +263,16 @@
         <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="16" anchor="2"/>
+        <transitiontarget type="join" index="2" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="2" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -293,6 +313,16 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="5" anchor="2"/>
         <transitiontarget type="task" index="13" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="6" anchor="1"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="6" anchor="3"/>
+        <transitiontarget type="task" index="16" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

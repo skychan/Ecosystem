@@ -214,7 +214,18 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
         } else  {
 
             // This is a task.
-            returnValue = [success:true,allocation:theOnes]
+            def tempOnes = [:]
+
+            // This is a loop.
+            for (dataList in theOnes.values()) {
+
+                // This is a task.
+                tempOnes << dataList
+
+            }
+
+            // This is a task.
+            returnValue = [success:true,allocation:tempOnes]
 
         }
         // Return the results.
@@ -235,17 +246,10 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
 
 
         // This is a loop.
-        for (resList in allocation.values()) {
+        for (data in allocation) {
 
-
-            // This is a loop.
-            for (data in resList) {
-
-                // This is a task.
-                data.key.Assign(sc,data.value)
-
-            }
-
+            // This is a task.
+            data.key.Assign(sc,data.value)
 
         }
 

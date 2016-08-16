@@ -271,7 +271,7 @@ public class Resource extends ecosystem.Machine  {
 
             // This is a task.
             this.setAvailable(this.getAvailable() - amount)
-            sc.prepareStatus[this.getType()] = true
+            sc.prepareStatus[this] = true
 
             this.needCap.remove(sc)
 

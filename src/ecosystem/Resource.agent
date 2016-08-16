@@ -24,7 +24,7 @@
     <taskstep x="265" y="630" comment="This is a task." command1="this.jobList[sc] = this.getSourceable()" command2="" command3="" command4="" command5="">
       <label x="265" y="615" text="Do Task"/>
     </taskstep>
-    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this.getType()] = true" command4="&#xa;" command5="this.needCap.remove(sc)">
+    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="&#xa;" command5="this.needCap.remove(sc)">
       <label x="481" y="618" text="Do Task"/>
     </taskstep>
     <taskstep x="728" y="638" comment="change the compete state" command1="this.competeList &lt;&lt; theCall" command2="theCall.addCandidates(this)" command3="println this.toString() + &quot; compete &quot; + theCall.toString()" command4="this.responseList = []" command5="">

@@ -24,6 +24,15 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>Finish ServiceCall Count</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Finish ServiceCall Count</id>
+        <className>ecosystem.CloudPlatform</className>
+        <methodName>getServiceGeneratedCount</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map"/>
   <customNADataSources class="linked-hash-map"/>

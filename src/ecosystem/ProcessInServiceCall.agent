@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="146" y="202" comment="This is a task." command1="//sc.owner.GenerateService()" command2="println &quot;service call fininshed and we should to generate service&quot;" command3="" command4="" command5="">
+    <taskstep x="146" y="202" comment="This is a task." command1="//sc.owner.GenerateService()" command2="println &quot;service call fininshed and we should to generate service&quot;" command3="sc.setFinish(true)" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
   </tasksteps>

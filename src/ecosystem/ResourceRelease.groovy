@@ -127,7 +127,7 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
             if (m.buffer == []) {
 
                 // This is a task.
-                job.prepareStatus[m.getType()] = true
+                job.prepareStatus[m] = true
                 m.jobList.remove(job)
                 m.setAvailable(m.getAvailable() - m.needCap[job])
 

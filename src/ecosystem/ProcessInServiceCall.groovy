@@ -101,6 +101,7 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
         // This is a task.
         //sc.owner.GenerateService()
         println "service call fininshed and we should to generate service"
+        sc.setFinish(true)
     }
 
     /**

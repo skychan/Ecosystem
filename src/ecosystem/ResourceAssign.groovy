@@ -147,11 +147,8 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
 
         // This is a task.
         m.buffer << t
-		println "to buffer"
-		println "with machine " + m.toString()
-		println "with task " + t.toString()
         m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])
-        t.prepareStatus[m.getType()] = true
+        t.prepareStatus[m] = true
     }
 
     /**

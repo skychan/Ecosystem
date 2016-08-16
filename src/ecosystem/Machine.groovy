@@ -125,21 +125,6 @@ public class Machine  {
 
     /**
      *
-     * Count the finished jobs
-     * @field finish
-     *
-     */
-    @Parameter (displayName = "Finished", usageName = "finish")
-    public int getFinish() {
-        return finish
-    }
-    public void setFinish(int newValue) {
-        finish = newValue
-    }
-    public int finish = 0
-
-    /**
-     *
      * Quality
      * @field quality
      *

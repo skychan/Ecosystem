@@ -163,6 +163,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * Count the fininshed jobs
+     * @field serviceGeneratedCount
+     *
+     */
+    @Parameter (displayName = "Service Generate count", usageName = "serviceGeneratedCount")
+    public int getServiceGeneratedCount() {
+        return serviceGeneratedCount
+    }
+    public void setServiceGeneratedCount(int newValue) {
+        serviceGeneratedCount = newValue
+    }
+    public int serviceGeneratedCount = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -252,9 +267,20 @@ public class CloudPlatform  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        this.finishCount ++
-        println "finish watched "
+
+        // This is an agent decision.
+        if (watchedAgent.getClass() == ecosystem.Task) {
+
+            // This is a task.
+            this.finishCount ++
+            println "finish watched "
+
+        } else  {
+
+            // This is a task.
+            this.serviceGeneratedCount++
+
+        }
         // Return the results.
         return returnValue
 

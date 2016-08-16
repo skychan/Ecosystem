@@ -39,7 +39,7 @@
     <taskstep x="1116" y="591" comment="This is a task." command1="int t = this.getReayTime() - this.inBufferTime[theRes]" command2="int t2 = this.getFinishTime() - this.inBufferTime[theRes]" command3="int q = this.needResourceCapacity[theRes.getType()] * t2" command4="this.reviews &lt;&lt; Math.exp(t)*q*theRes.getRank()" command5="">
       <label x="1116" y="576" text="Do Task"/>
     </taskstep>
-    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="println &quot;&quot;" command4="println toString() + &quot; is all ready&quot;" command5="def templist = [:]\ffor( mac in this.prepareStatus.keySet()){\f&#x9;templist[mac] = mac.getSourceable()\f}\fprintln templist">
+    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="println &quot;&quot;" command4="println toString() + &quot; is all ready&quot;" command5="">
       <label x="528" y="753" text="Do Task"/>
     </taskstep>
     <taskstep x="259" y="336" comment="This is a task." command1="println toString() + &quot;selected &quot; + this.getAllocation()" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
@@ -51,7 +51,7 @@
     <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
       <label x="362" y="219" text="Do Task"/>
     </taskstep>
-    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="" command3="" command4="" command5="">
+    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="println &quot;prepare status&quot; + prepareStatus" command3="" command4="" command5="">
       <label x="448" y="309" text="Do Task"/>
     </taskstep>
   </tasksteps>

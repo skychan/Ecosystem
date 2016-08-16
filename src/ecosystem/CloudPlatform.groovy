@@ -244,6 +244,7 @@ public class CloudPlatform  {
         // Create Provider at a random distribution
         Provider pagent = CreateAgent("Ecosystem", "ecosystem.Provider")
         // pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
+        pagent.GenerateService()
         pagent.GenerateResource()
     }
 

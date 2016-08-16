@@ -93,7 +93,7 @@
     <taskstep x="346" y="1072" comment="This is a task." command1="resource.sort{[-it.getSourceable(),-it.getRank()]}" command2="" command3="" command4="" command5="">
       <label x="346" y="1057" text="Do Task"/>
     </taskstep>
-    <taskstep x="802" y="723" comment="This is a task." command1="Object sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service s = (Service) sagent" command3="s = this.getPrototype()" command4="this.prototype = null" command5="s.changeQuality()">
+    <taskstep x="802" y="723" comment="This is a task." command1="Object sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service s = (Service) sagent" command3="s.resourceComposition = data" command4="" command5="">
       <label x="802" y="708" text="Start to generate service"/>
     </taskstep>
     <taskstep x="805" y="800" comment="This is a task." command1="s.setOwner(this)" command2="" command3="" command4="" command5="">
@@ -140,11 +140,14 @@
     <decisionstep x="1005" y="445" comment="This is an agent decision." criteria="pattern.value &gt;= 5" branchType="if">
       <label x="1005" y="430" text="frequency"/>
     </decisionstep>
-    <decisionstep x="804" y="628" comment="This is an agent decision." criteria="false in this.serviceStatus.values()" branchType="if">
+    <decisionstep x="804" y="628" comment="This is an agent decision." criteria="true" branchType="if">
       <label x="804" y="613" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="34" y="243" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
       <label x="34" y="228" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="731" y="674" comment="This is a loop." criteria="data in serdata" branchType="while">
+      <label x="731" y="659" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
@@ -183,6 +186,9 @@
     </agentproperty>
     <agentproperty x="1188" y="238" comment="This is an agent property." visibility="0" compiledname="prototype" type="Service" defaultvalue="null">
       <label x="1193" y="223" text="Service Prototype"/>
+    </agentproperty>
+    <agentproperty x="883" y="794" comment="This is an agent property." visibility="0" compiledname="serdata" type="def" defaultvalue="[[2:1,3:1,4:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:4],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[3:5,4:7],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:7,3:7,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,2:6,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,4:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:5,2:6,3:7,4:6]]">
+      <label x="888" y="779" text="Service Call Data"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
@@ -433,7 +439,12 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="11" anchor="2"/>
-        <transitiontarget type="task" index="19" anchor="0"/>
+        <transitiontarget type="decision" index="13" anchor="3"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="13" anchor="2"/>
+        <transitiontarget type="task" index="19" anchor="1"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

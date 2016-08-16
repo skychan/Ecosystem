@@ -301,7 +301,7 @@ public class Machine  {
 
 
         // Decide to take the task or not
-        if (true && this.getSourceable() >= watchedAgent.needResourceCapacity[this.getType()]) {
+        if (true ) {
 
 
             // This is an agent decision.

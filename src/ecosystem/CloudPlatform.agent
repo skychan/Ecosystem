@@ -33,7 +33,7 @@
     <taskstep x="170" y="245" comment="This is a task." command1="this.userList.remove(o)" command2="" command3="" command4="" command5="">
       <label x="170" y="230" text="eliminate user"/>
     </taskstep>
-    <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="" command5="pagent.GenerateResource()">
+    <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="pagent.GenerateService()" command5="pagent.GenerateResource()">
       <label x="327" y="245" text="Create Provider"/>
     </taskstep>
     <taskstep x="557" y="278" comment="This is a task." command1="this.finishCount ++" command2="println &quot;finish watched &quot;" command3="" command4="" command5="">

@@ -434,6 +434,7 @@ public class Job  {
 
                         // This is a task.
                         this.prepareStatus[mac.value] = false
+                        println "prepare status" + prepareStatus
 
                     }
 
@@ -578,11 +579,6 @@ public class Job  {
             this.prepareStatus.each{it -> it.value = false}
             println ""
             println toString() + " is all ready"
-            def templist = [:]
-            for( mac in this.prepareStatus.keySet()){
-            	templist[mac] = mac.getSourceable()
-            }
-            println templist
 
         } else  {
 

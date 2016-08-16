@@ -59,7 +59,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="139" y="110" comment="Decide to take the task or not" criteria="true &amp;&amp; this.getSourceable() &gt;= watchedAgent.needResourceCapacity[this.getType()]" branchType="if">
+    <decisionstep x="139" y="110" comment="Decide to take the task or not" criteria="true " branchType="if">
       <label x="139" y="95" text="Take it or not"/>
     </decisionstep>
     <decisionstep x="138" y="195" comment="This is an agent decision." criteria="responseBehavior.Exist(watchedAgent,this)" branchType="if">

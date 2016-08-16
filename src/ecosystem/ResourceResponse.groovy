@@ -102,7 +102,7 @@ public class ResourceResponse implements ecosystem.ResponseBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        returnValue = (machine.getType() in job.getNeedResourceCapacity().keySet())
+        returnValue = (machine.getType() in job.getNeedResourceCapacity().keySet() && machine.getSourceable() >= job.needResourceCapacity[machine.getType()] )
         // Return the results.
         return returnValue
 

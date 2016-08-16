@@ -230,6 +230,29 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
+     * This is an agent property.
+     * @field serdata
+     *
+     */
+    @Parameter (displayName = "Service Call Data", usageName = "serdata")
+    public def getSerdata() {
+        return serdata
+    }
+    public void setSerdata(def newValue) {
+        serdata = newValue
+    }
+    public def serdata = [[2:1,3:1,4:1],
+						[2:4],
+						[2:6],
+						[1:1],
+						[3:5,4:7],
+						[2:7,3:7,4:5],
+						[1:7,2:6,4:5],
+						[1:7,4:6],
+						[1:5,2:6,3:7,4:6]]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -570,16 +593,21 @@ public class Provider extends ecosystem.User  {
 
 
         // This is an agent decision.
-        if (false in this.serviceStatus.values()) {
+        if (true) {
 
-            // This is a task.
-            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
-            Service s = (Service) sagent
-            s = this.getPrototype()
-            this.prototype = null
-            s.changeQuality()
-            // This is a task.
-            s.setOwner(this)
+
+            // This is a loop.
+            for (data in serdata) {
+
+                // This is a task.
+                Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+                Service s = (Service) sagent
+                s.resourceComposition = data
+                // This is a task.
+                s.setOwner(this)
+
+            }
+
 
         } else  {
 

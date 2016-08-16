@@ -149,7 +149,21 @@ public class ModelInitializer  {
         // This is a task.
         Object agent = CreateAgent("Ecosystem", "ecosystem.CloudPlatform")
         CloudPlatform platform = (CloudPlatform) agent
-        platform.CreateProvider()
+
+        // This is a loop.
+        for (i in 249..<250) {
+
+            // This is a task.
+            Object dagent = CreateAgent("Ecosystem", "ecosystem.Demander")
+            Demander demander = (Demander) dagent
+            demander.ReadData((i).toString())
+            platform.addUser(demander)
+            demander.GenerateOrder((i).toString())
+            // This is a task.
+            platform.CreateProvider()
+
+        }
+
         // Return the results.
         return returnValue
 

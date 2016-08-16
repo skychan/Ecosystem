@@ -147,7 +147,7 @@ public class ServiceAssign implements ecosystem.AssignBehavior {
 
         // This is a task.
         m.buffer << t
-        t.prepareStatus['service'] = true
+        t.prepareStatus[m] = true
     }
 
     /**

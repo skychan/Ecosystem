@@ -103,6 +103,8 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
 
         // This is a task.
         def chosenMap = [:]
+        println "candidates are "
+        println candidates
 
         // This is a loop.
         for (candidate in candidates) {
@@ -131,15 +133,6 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
                     chosenMap[candidate.key][res] = res.getSourceable()
 
                 }
-
-            }
-
-
-            // This is a loop.
-            for (res in candidate.value) {
-
-                // This is a task.
-                res.competeList.reomve(sc)
 
             }
 
@@ -216,12 +209,12 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
         if (null in theOnes.values()) {
 
             // This is a task.
-            returnValue = [success:true,allocation:theOnes]
+            returnValue = [success:false,allocation:[:]]
 
         } else  {
 
             // This is a task.
-            returnValue = [success:false,allocation:[:]]
+            returnValue = [success:true,allocation:theOnes]
 
         }
         // Return the results.

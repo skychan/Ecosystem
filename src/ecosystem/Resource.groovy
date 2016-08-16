@@ -200,6 +200,21 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field responseList
+     *
+     */
+    @Parameter (displayName = "Response List", usageName = "responseList")
+    public List getResponseList() {
+        return responseList
+    }
+    public void setResponseList(List newValue) {
+        responseList = newValue
+    }
+    public List responseList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -264,6 +279,81 @@ public class Resource extends ecosystem.Machine  {
 
             // This is a task.
             this.jobList[sc] = this.getSourceable()
+
+        }
+    }
+
+    /**
+     *
+     * Response to the need call
+     * @method Response
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.ServiceCall',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watchee.getInNeed() && $watcher.getSourceable()>0',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public void Response(ecosystem.ServiceCall watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // Decide to take the task or not
+        if (true) {
+
+
+            // This is an agent decision.
+            if (responseBehavior.Exist(watchedAgent,this)) {
+
+                // This is a task.
+                this.responseList << watchedAgent
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
+    }
+
+    /**
+     *
+     * Response to the need call
+     * @method Reply
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.ServiceCall',
+        watcheeFieldNames = 'inNeed',
+        triggerCondition = '$watchee.getInNeed() && $watcher.getSourceable()>0',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d
+    )
+    public void Reply(ecosystem.ServiceCall watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.responseList.size() > 0) {
+
+            // This is a task.
+            def theCall = this.responseList[0]
+            // change the compete state
+            this.competeList << theCall
+            theCall.addCandidates(this)
+            println this.toString() + " compete " + theCall.toString()
+            this.responseList = []
+
+        } else  {
+
 
         }
     }

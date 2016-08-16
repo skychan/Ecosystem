@@ -215,7 +215,7 @@ public class Task extends ecosystem.Job  {
         scheduleTriggerDelta = 1d
     )
     public def Process(ecosystem.Task watchedAgent) {
-
+        println toString() + " watch " + watchedAgent.toString() + " Process()"
         // Define the return value variable.
         def returnValue
 

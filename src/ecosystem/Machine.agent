@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Machine" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="139" y="31" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="$watchee.inNeed" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="void" compiledname="Response" parameters="ecosystem.Task watchedAgent" exceptions="">
-      <label x="139" y="16" text="Response"/>
+    <behaviorstep x="139" y="31" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="$watchee.getInNeed()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="void" compiledname="Response" parameters="ecosystem.Task watchedAgent" exceptions="">
+      <label x="139" y="16" text="Response for Task"/>
     </behaviorstep>
     <behaviorstep x="884" y="421" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Change the service rank with depends on the review" visibility="0" returntype="def" compiledname="getRank" parameters="" exceptions="">
       <label x="884" y="406" text="Get the provider&apos;s rank"/>
@@ -24,10 +24,10 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="138" y="279" comment="change the compete state" command1="this.competeList &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="//println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
+    <taskstep x="138" y="279" comment="change the compete state" command1="this.competeList &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
       <label x="138" y="264" text="Change the comoete state"/>
     </taskstep>
-    <taskstep x="885" y="516" comment="This is a task." command1="PureProvider user = this.owner[-1]" command2="returnValue = user.getRank()" command3="" command4="" command5="">
+    <taskstep x="885" y="516" comment="This is a task." command1="Provider user = this.owner[-1]" command2="returnValue = user.getRank()" command3="" command4="" command5="">
       <label x="885" y="501" text="Do Task"/>
     </taskstep>
     <taskstep x="770" y="513" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
@@ -59,7 +59,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="139" y="110" comment="Decide to take the task or not" criteria="true" branchType="if">
+    <decisionstep x="139" y="110" comment="Decide to take the task or not" criteria="true &amp;&amp; this.getSourceable() &gt;= watchedAgent.needResourceCapacity[this.getType()]" branchType="if">
       <label x="139" y="95" text="Take it or not"/>
     </decisionstep>
     <decisionstep x="138" y="195" comment="This is an agent decision." criteria="responseBehavior.Exist(watchedAgent,this)" branchType="if">
@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="367" y="700"/>
+    <joinstep x="377" y="710"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -120,13 +120,13 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="143" y="397"/>
-    <endstep x="890" y="636"/>
-    <endstep x="774" y="646"/>
-    <endstep x="367" y="802"/>
-    <endstep x="587" y="950"/>
-    <endstep x="312" y="1228"/>
-    <endstep x="536" y="340"/>
+    <endstep x="153" y="407"/>
+    <endstep x="900" y="646"/>
+    <endstep x="784" y="656"/>
+    <endstep x="377" y="812"/>
+    <endstep x="597" y="960"/>
+    <endstep x="322" y="1238"/>
+    <endstep x="546" y="350"/>
   </endsteps>
   <connections>
     <transitions>

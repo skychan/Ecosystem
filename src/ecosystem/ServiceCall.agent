@@ -10,6 +10,9 @@
     <behaviorstep x="253" y="316" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addMaster" parameters="masterID" exceptions="">
       <label x="253" y="301" text="Add Master"/>
     </behaviorstep>
+    <behaviorstep x="368" y="44" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="setParameters" parameters="data" exceptions="">
+      <label x="368" y="29" text="Set Values"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="48" y="151" comment="This is a task." command1="selectBehavior = new SelectInServiceCall()" command2="candidates.remove(&apos;service&apos;)" command3="processBehavior = new ProcessInServiceCall()" command4="" command5="">
@@ -21,8 +24,21 @@
     <taskstep x="251" y="394" comment="add master to the list" command1="this.master &lt;&lt; masterID" command2="" command3="" command4="" command5="">
       <label x="251" y="379" text="set master"/>
     </taskstep>
+    <taskstep x="369" y="148" comment="This is a task." command1="this.needResourceCapacity = data" command2="" command3="// this.prepareStatus[data.key] = false" command4="" command5="">
+      <label x="369" y="133" text="Do Task"/>
+    </taskstep>
+    <taskstep x="475" y="47" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="" command4="" command5="">
+      <label x="475" y="32" text="Set Owner"/>
+    </taskstep>
+    <taskstep x="487" y="239" comment="This is a task." command1="this.candidates[type] = []" command2="" command3="" command4="" command5="">
+      <label x="487" y="224" text="Do Task"/>
+    </taskstep>
   </tasksteps>
-  <decisionsteps/>
+  <decisionsteps>
+    <decisionstep x="372" y="236" comment="This is a loop." criteria="type in data.keySet()" branchType="while">
+      <label x="372" y="221" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
   <agentproperties>
     <agentproperty x="249" y="247" comment="Record the master of the task" visibility="0" compiledname="master" type="def" defaultvalue="[]">
@@ -33,9 +49,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="64" y="277"/>
-    <endstep x="181" y="539"/>
-    <endstep x="302" y="552"/>
+    <endstep x="69" y="282"/>
+    <endstep x="186" y="544"/>
+    <endstep x="307" y="557"/>
+    <endstep x="372" y="339"/>
   </endsteps>
   <connections>
     <transitions>
@@ -49,7 +66,28 @@
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="2"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="5" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

@@ -306,7 +306,7 @@ public class Machine  {
     @Watch(
         watcheeClassName = 'ecosystem.Task',
         watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watchee.inNeed',
+        triggerCondition = '$watchee.getInNeed()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
     )
     public void Response(ecosystem.Task watchedAgent) {
@@ -316,7 +316,7 @@ public class Machine  {
 
 
         // Decide to take the task or not
-        if (true) {
+        if (true && this.getSourceable() >= watchedAgent.needResourceCapacity[this.getType()]) {
 
 
             // This is an agent decision.
@@ -325,7 +325,7 @@ public class Machine  {
                 // change the compete state
                 this.competeList << watchedAgent
                 watchedAgent.addCandidates(this)
-                //println this.toString() + " compete " + watchedAgent.toString()
+                println this.toString() + " compete " + watchedAgent.toString()
 
             } else  {
 
@@ -353,7 +353,7 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        PureProvider user = this.owner[-1]
+        Provider user = this.owner[-1]
         returnValue = user.getRank()
         // Return the results.
         return returnValue

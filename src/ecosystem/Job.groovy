@@ -396,35 +396,45 @@ public class Job  {
     @Watch(
         watcheeClassName = 'ecosystem.Job',
         watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watchee.equals($watcher)',
         whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.1d
+        scheduleTriggerDelta = 0.2d
     )
     public def Select(ecosystem.Job watchedAgent) {
 
-        // This is a task.
-        this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)
-        Map result = selectBehavior.Allocate(this.theOnes)
-        this.setAllocation(result.allocation)
-        this.setAllocated(result.success)
-        // This is a task.
-        this.theOnes = [:]
-        this.candidates.each{ entry -> entry.value = [] }
 
         // This is an agent decision.
-        if (this.getAllocated()) {
-
-
-            // This is a loop.
-            for (mac in this.allocation) {
-
-                // This is a task.
-                this.prepareStatus[mac.key] = false
-
-            }
+        if (watchedAgent.equals(this)) {
 
             // This is a task.
-            selectBehavior.Assign(watchedAgent.allocation,this)
+            this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)
+            Map result = selectBehavior.Allocate(this.theOnes)
+            this.setAllocation(result.allocation)
+            this.setAllocated(result.success)
+            println " allocated ?" + this.allocated
+            // This is a task.
+            println toString() + "selected " + this.getAllocation()
+            this.theOnes = [:]
+            this.candidates.each{ entry -> entry.value = [] }
+
+            // This is an agent decision.
+            if (this.getAllocated()) {
+
+
+                // This is a loop.
+                for (mac in this.allocation) {
+
+                    // This is a task.
+                    this.prepareStatus[mac.key] = false
+
+                }
+
+                // This is a task.
+                selectBehavior.Assign(watchedAgent.allocation,this)
+
+            } else  {
+
+
+            }
 
         } else  {
 

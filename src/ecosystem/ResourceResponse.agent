@@ -14,7 +14,7 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="100" y="243"/>
+    <endstep x="105" y="248"/>
   </endsteps>
   <connections>
     <transitions>

@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
+    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="platform.CreateProvider()" command4="" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
     <taskstep x="185" y="279" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Demander&quot;)" command2="Demander demander = (Demander) dagent" command3="demander.ReadData((i).toString())" command4="platform.addUser(demander)" command5="demander.GenerateOrder((i).toString())">
@@ -55,7 +55,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="75" y="432"/>
+    <endstep x="85" y="442"/>
+    <endstep x="20" y="272"/>
   </endsteps>
   <connections>
     <transitions>
@@ -66,7 +67,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -87,11 +88,6 @@
       <transition>
         <transitionsource type="task" index="4" anchor="3"/>
         <transitiontarget type="task" index="5" anchor="1"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="6" anchor="3"/>
-        <transitiontarget type="decision" index="2" anchor="1"/>
         <bendpoints/>
       </transition>
     </transitions>

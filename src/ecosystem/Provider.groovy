@@ -560,14 +560,7 @@ public class Provider extends ecosystem.User  {
      * @method GenerateService
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.PureProvider',
-        watcheeFieldNames = 'serviceReady',
-        triggerCondition = '$watchee.toString() == $watcher.toString()',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 1d
-    )
-    public def GenerateService(ecosystem.PureProvider watchedAgent) {
+    public def GenerateService() {
 
         // Define the return value variable.
         def returnValue
@@ -609,11 +602,11 @@ public class Provider extends ecosystem.User  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        ArrayList types = 1..10
+        ArrayList types = 1..5
         SimUtilities.shuffle(types,RandomHelper.getUniform())
 
         // This is a loop.
-        for (i in 0..5) {
+        for (i in 0..4) {
 
             // This is a task.
             Resource res = CreateAgent("Ecosystem", "ecosystem.Resource")
@@ -624,7 +617,7 @@ public class Provider extends ecosystem.User  {
             // This is a task.
             res.setOwner(this)
             //this.candidates << res
-            //println "create resource " + res.toString() + " with type " + res.getType()
+            println "create resource " + res.toString() + " with type " + res.getType() + "and cap" + res.getCapacity()
             //this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
             res.setSourceable(res.getCapacity())
 

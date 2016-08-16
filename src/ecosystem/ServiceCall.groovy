@@ -159,6 +159,31 @@ public class ServiceCall extends ecosystem.Job  {
 
     /**
      *
+     * This is the step behavior.
+     * @method setParameters
+     *
+     */
+    public void setParameters(data) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.needResourceCapacity = data
+        // this.prepareStatus[data.key] = false
+
+        // This is a loop.
+        for (type in data.keySet()) {
+
+            // This is a task.
+            this.candidates[type] = []
+
+        }
+
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

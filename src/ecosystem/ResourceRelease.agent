@@ -18,7 +18,7 @@
     <taskstep x="272" y="143" comment="This is a task." command1="Map newList = m.jobList.sort{ [ -it.value, it.key.getType() ] }" command2="def job = newList.keySet()[0]" command3="println &quot;always get here?&quot;" command4="" command5="">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
-    <taskstep x="498" y="218" comment="This is a task." command1="m.assignBehavior.Buffer(job,m)" command2="m.jobList.remove(job)" command3="" command4="" command5="">
+    <taskstep x="498" y="218" comment="This is a task." command1="job.prepareStatus[m.getType()] = true" command2="m.jobList.remove(job)" command3="m.setAvailable(m.getAvailable() - m.needCap[job])" command4="" command5="">
       <label x="498" y="203" text="Service Call Resource Ready"/>
     </taskstep>
     <taskstep x="386" y="462" comment="This is a task." command1="println &quot;can i get here?&quot;" command2="break" command3="" command4="" command5="">
@@ -51,8 +51,8 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="77" y="297"/>
-    <endstep x="302" y="490"/>
+    <endstep x="82" y="302"/>
+    <endstep x="307" y="495"/>
   </endsteps>
   <connections>
     <transitions>

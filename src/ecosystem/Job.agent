@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Job" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="259" y="152" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Job" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="$watchee.equals($watcher)" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="" compiledname="Select" parameters="ecosystem.Job watchedAgent" exceptions="">
-      <label x="259" y="137" text="Select"/>
+    <behaviorstep x="257" y="102" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Job" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.2" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="" compiledname="Select" parameters="ecosystem.Job watchedAgent" exceptions="">
+      <label x="257" y="87" text="Select"/>
     </behaviorstep>
     <behaviorstep x="693" y="88" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="addCandidates" parameters="competitor" exceptions="">
       <label x="693" y="73" text="Add candidates"/>
@@ -21,7 +21,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="255" y="247" comment="This is a task." command1="this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)" command2="Map result = selectBehavior.Allocate(this.theOnes)" command3="this.setAllocation(result.allocation)" command4="this.setAllocated(result.success)" command5="">
+    <taskstep x="255" y="247" comment="This is a task." command1="this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)" command2="Map result = selectBehavior.Allocate(this.theOnes)" command3="this.setAllocation(result.allocation)" command4="this.setAllocated(result.success)" command5="println &quot; allocated ?&quot; + this.allocated">
       <label x="255" y="232" text="Do Task"/>
     </taskstep>
     <taskstep x="625" y="249" comment="This is a task." command1="this.candidates[competitor.getType()]&lt;&lt;competitor" command2="" command3="" command4="" command5="">
@@ -42,7 +42,7 @@
     <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="" command4="" command5="">
       <label x="528" y="753" text="Do Task"/>
     </taskstep>
-    <taskstep x="259" y="336" comment="This is a task." command1="" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
+    <taskstep x="259" y="336" comment="This is a task." command1="println toString() + &quot;selected &quot; + this.getAllocation()" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
       <label x="259" y="321" text="Do Task"/>
     </taskstep>
     <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="" command3="" command4="" command5="">
@@ -68,9 +68,12 @@
     <decisionstep x="359" y="433" comment="This is a loop." criteria="mac in this.allocation" branchType="while">
       <label x="359" y="418" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="260" y="173" comment="This is an agent decision." criteria="watchedAgent.equals(this)" branchType="if">
+      <label x="260" y="158" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="733" y="349"/>
+    <joinstep x="743" y="359"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -135,18 +138,18 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="280" y="552"/>
-    <endstep x="735" y="414"/>
-    <endstep x="1266" y="747"/>
-    <endstep x="181" y="424"/>
-    <endstep x="1165" y="731"/>
-    <endstep x="547" y="871"/>
+    <endstep x="290" y="562"/>
+    <endstep x="745" y="424"/>
+    <endstep x="1276" y="757"/>
+    <endstep x="191" y="434"/>
+    <endstep x="1175" y="741"/>
+    <endstep x="557" y="881"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
-        <transitiontarget type="task" index="0" anchor="0"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -259,6 +262,11 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="4" anchor="3"/>
         <transitiontarget type="task" index="8" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="2"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

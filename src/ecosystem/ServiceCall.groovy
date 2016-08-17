@@ -65,33 +65,18 @@ public class ServiceCall extends ecosystem.Job  {
 
     /**
      *
-     * Record the master of the task
-     * @field master
-     *
-     */
-    @Parameter (displayName = "Master", usageName = "master")
-    public def getMaster() {
-        return master
-    }
-    public void setMaster(def newValue) {
-        master = newValue
-    }
-    public def master = []
-
-    /**
-     *
      * Record the owners of the task
      * @field owner
      *
      */
-    @Parameter (displayName = "Owners", usageName = "owner")
-    public def getOwner() {
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public ecosystem.Provider getOwner() {
         return owner
     }
-    public void setOwner(def newValue) {
+    public void setOwner(ecosystem.Provider newValue) {
         owner = newValue
     }
-    public def owner = null
+    public ecosystem.Provider owner = null
 
     /**
      *
@@ -129,32 +114,6 @@ public class ServiceCall extends ecosystem.Job  {
         selectBehavior = new SelectInServiceCall()
         candidates.remove('service')
         processBehavior = new ProcessInServiceCall()
-    }
-
-    /**
-     *
-     * Set the owner is add to the owner list
-     * @method addOwner
-     *
-     */
-    public void addOwner(ownerID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-    }
-
-    /**
-     *
-     * Set the owner is add to the owner list
-     * @method addMaster
-     *
-     */
-    public void addMaster(masterID) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
     }
 
     /**

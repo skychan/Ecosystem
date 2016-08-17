@@ -80,18 +80,18 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
-     * Record the owners of the task
-     * @field owners
+     * [user:pt]
+     * @field owner
      *
      */
-    @Parameter (displayName = "Owners", usageName = "owners")
-    public def getOwners() {
-        return owners
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public Map getOwner() {
+        return owner
     }
-    public void setOwners(def newValue) {
-        owners = newValue
+    public void setOwner(Map newValue) {
+        owner = newValue
     }
-    public def owners = [:]
+    public Map owner = [:]
 
     /**
      *
@@ -100,13 +100,13 @@ public class Task extends ecosystem.Job  {
      *
      */
     @Parameter (displayName = "Master", usageName = "master")
-    public def getMaster() {
+    public ecosystem.Order getMaster() {
         return master
     }
-    public void setMaster(def newValue) {
+    public void setMaster(ecosystem.Order newValue) {
         master = newValue
     }
-    public def master = null
+    public ecosystem.Order master = null
 
     /**
      *
@@ -269,13 +269,13 @@ public class Task extends ecosystem.Job  {
      * @method addOwner
      *
      */
-    public void addOwner(owner, p) {
+    public void addOwner(user, p) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // add owner to the list
-        this.owners[owner] = p
+        this.owner[user] = p
     }
 
     /**

@@ -70,13 +70,13 @@ public class Order  {
      *
      */
     @Parameter (displayName = "Owner", usageName = "owner")
-    public def getOwner() {
+    public ecosystem.Demander getOwner() {
         return owner
     }
-    public void setOwner(def newValue) {
+    public void setOwner(ecosystem.Demander newValue) {
         owner = newValue
     }
-    public def owner = null
+    public ecosystem.Demander owner = null
 
     /**
      *

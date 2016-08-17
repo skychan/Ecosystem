@@ -29,7 +29,7 @@
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
-    <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="def" defaultvalue="null">
+    <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="ecosystem.Demander" defaultvalue="null">
       <label x="47" y="19" text="Owner"/>
     </agentproperty>
     <agentproperty x="258" y="88" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[]">
@@ -40,7 +40,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="162" y="390"/>
+    <endstep x="167" y="395"/>
   </endsteps>
   <connections>
     <transitions>

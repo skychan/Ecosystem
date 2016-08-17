@@ -10,8 +10,8 @@
     <behaviorstep x="602" y="91" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Task" watchannotationtargetfieldnames="remainingTime" watchannotationtriggercondition="$watchee.equals($watcher)" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Process the task" visibility="0" returntype="def" compiledname="Process" parameters="ecosystem.Task watchedAgent" exceptions="">
       <label x="602" y="76" text="Process"/>
     </behaviorstep>
-    <behaviorstep x="86" y="730" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="owner,p" exceptions="">
-      <label x="86" y="715" text="Add Owner"/>
+    <behaviorstep x="47" y="617" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="user,p" exceptions="">
+      <label x="47" y="602" text="Add Owner"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -45,8 +45,8 @@
     <taskstep x="931" y="336" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
       <label x="931" y="321" text="Review"/>
     </taskstep>
-    <taskstep x="86" y="826" comment="add owner to the list" command1="this.owners[owner] = p" command2="" command3="" command4="" command5="">
-      <label x="86" y="811" text="set owner"/>
+    <taskstep x="47" y="713" comment="add owner to the list" command1="this.owner[user] = p" command2="" command3="" command4="" command5="">
+      <label x="47" y="698" text="set owner"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -77,21 +77,21 @@
     <agentproperty x="66" y="439" comment="This is an agent property." visibility="0" compiledname="processingTime" type="int" defaultvalue="0">
       <label x="71" y="424" text="ProcessingTime"/>
     </agentproperty>
-    <agentproperty x="93" y="650" comment="Record the owners of the task" visibility="0" compiledname="owners" type="def" defaultvalue="[:]">
-      <label x="98" y="635" text="Owners"/>
+    <agentproperty x="54" y="537" comment="[user:pt]" visibility="0" compiledname="owner" type="Map" defaultvalue="[:]">
+      <label x="59" y="522" text="Owner"/>
     </agentproperty>
-    <agentproperty x="189" y="503" comment="This is an agent property." visibility="0" compiledname="master" type="def" defaultvalue="null">
-      <label x="194" y="488" text="Master"/>
+    <agentproperty x="148" y="538" comment="This is an agent property." visibility="0" compiledname="master" type="ecosystem.Order" defaultvalue="null">
+      <label x="153" y="523" text="Master"/>
     </agentproperty>
     <agentproperty x="565" y="496" comment="This is an agent property." visibility="0" compiledname="remainingTime" type="int" defaultvalue="-1">
       <label x="570" y="478" text="RemainingTime"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="53" y="312"/>
-    <endstep x="284" y="476"/>
-    <endstep x="644" y="533"/>
-    <endstep x="96" y="920"/>
+    <endstep x="58" y="317"/>
+    <endstep x="289" y="481"/>
+    <endstep x="649" y="538"/>
+    <endstep x="57" y="812"/>
   </endsteps>
   <connections>
     <transitions>

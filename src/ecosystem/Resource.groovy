@@ -80,36 +80,6 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
-     * The var to record compete service temp
-     * @field competeServiceTemp
-     *
-     */
-    @Parameter (displayName = "Compete service temp", usageName = "competeServiceTemp")
-    public def getCompeteServiceTemp() {
-        return competeServiceTemp
-    }
-    public void setCompeteServiceTemp(def newValue) {
-        competeServiceTemp = newValue
-    }
-    public def competeServiceTemp = []
-
-    /**
-     *
-     * The var to record compete service
-     * @field competeService
-     *
-     */
-    @Parameter (displayName = "Compete service", usageName = "competeService")
-    public def getCompeteService() {
-        return competeService
-    }
-    public void setCompeteService(def newValue) {
-        competeService = newValue
-    }
-    public def competeService = []
-
-    /**
-     *
      * This is an agent property.
      * @field needCap
      *
@@ -170,33 +140,18 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
-     * Record the master of the resource
+     * [service:amount]
      * @field master
      *
      */
     @Parameter (displayName = "Master", usageName = "master")
-    public def getMaster() {
+    public Map getMaster() {
         return master
     }
-    public void setMaster(def newValue) {
+    public void setMaster(Map newValue) {
         master = newValue
     }
-    public def master = [:]
-
-    /**
-     *
-     * The service owner, if not only one
-     * @field owner
-     *
-     */
-    @Parameter (displayName = "Owner", usageName = "owner")
-    public def getOwner() {
-        return owner
-    }
-    public void setOwner(def newValue) {
-        owner = newValue
-    }
-    public def owner = null
+    public Map master = [:]
 
     /**
      *
@@ -356,6 +311,21 @@ public class Resource extends ecosystem.Machine  {
 
 
         }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addMaster
+     *
+     */
+    public void addMaster(ser, amount) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.master[ser] = amount
     }
 
     /**

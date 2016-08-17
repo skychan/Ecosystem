@@ -260,6 +260,21 @@ public class Machine  {
 
     /**
      *
+     * Record the owners of the task
+     * @field owner
+     *
+     */
+    @Parameter (displayName = "Owner", usageName = "owner")
+    public ecosystem.Provider getOwner() {
+        return owner
+    }
+    public void setOwner(ecosystem.Provider newValue) {
+        owner = newValue
+    }
+    public ecosystem.Provider owner = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

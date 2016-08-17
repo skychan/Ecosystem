@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="377" y="710"/>
+    <joinstep x="382" y="715"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -115,15 +115,18 @@
     <agentproperty x="619" y="55" comment="This is an agent property." visibility="0" compiledname="releaseBehavior" type="ReleaseBehavior" defaultvalue="null">
       <label x="624" y="40" text="Release Behavior"/>
     </agentproperty>
+    <agentproperty x="40" y="247" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
+      <label x="45" y="232" text="Owner"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="153" y="407"/>
-    <endstep x="900" y="646"/>
-    <endstep x="784" y="656"/>
-    <endstep x="377" y="812"/>
-    <endstep x="597" y="960"/>
-    <endstep x="322" y="1238"/>
-    <endstep x="546" y="350"/>
+    <endstep x="158" y="412"/>
+    <endstep x="905" y="651"/>
+    <endstep x="789" y="661"/>
+    <endstep x="382" y="817"/>
+    <endstep x="602" y="965"/>
+    <endstep x="327" y="1243"/>
+    <endstep x="551" y="355"/>
   </endsteps>
   <connections>
     <transitions>

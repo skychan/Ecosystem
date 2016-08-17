@@ -1,7 +1,7 @@
 package ecosystem;
 
 interface SelectBehavior {
-    def Evaluation(def candidates)
+    def Evaluation(def t,def candidates)
         
     def Select(Object job,def candidates)
     

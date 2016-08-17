@@ -417,6 +417,7 @@ public class Job  {
 
                         // This is a task.
                         this.prepareStatus[mac.value] = false
+                        this.owner[mac.value] = this.remainingTime
 
                     }
 

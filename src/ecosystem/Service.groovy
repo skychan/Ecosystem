@@ -118,6 +118,55 @@ public class Service extends ecosystem.Machine  {
 
     /**
      *
+     * This is the step behavior.
+     * @method OutSource
+     *
+     */
+    public void OutSource() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.jobList.size() > 0) {
+
+
+            // This is an agent decision.
+            if (true) {
+
+                // This is a task.
+                List tempList = this.buffer + this.jobList
+                // tempList.sort{}
+                Task theTask = tempList[0]
+
+                // This is an agent decision.
+                if (theTask in this.buffer) {
+
+                    // This is a task.
+                    theTask.setPause(true)
+                    theTask.setAllocated(false)
+
+                } else  {
+
+                    // This is a task.
+                    theTask.setAllocated(false)
+
+                }
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

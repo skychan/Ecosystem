@@ -140,6 +140,21 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field pause
+     *
+     */
+    @Parameter (displayName = "Pause Mark", usageName = "pause")
+    public boolean getPause() {
+        return pause
+    }
+    public void setPause(boolean newValue) {
+        pause = newValue
+    }
+    public boolean pause = true
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -197,6 +212,7 @@ public class Task extends ecosystem.Job  {
                 // This is a task.
                 this.setProcessingTime(data.value)
                 this.addOwner(this.getMaster().getOwner(),data.value)
+                this.setRemainingTime(data.value)
 
             } else  {
 
@@ -236,7 +252,7 @@ public class Task extends ecosystem.Job  {
 
 
         // This is an agent decision.
-        if (this.getRemainingTime() > 0) {
+        if (this.getRemainingTime() > 0 && !this.pause) {
 
             // This is a task.
             this.setRemainingTime(this.getRemainingTime()-1)

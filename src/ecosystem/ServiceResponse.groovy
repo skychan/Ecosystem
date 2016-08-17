@@ -103,9 +103,7 @@ public class ServiceResponse implements ecosystem.ResponseBehavior {
 
         // This is a task.
         returnValue = (machine.getResourceComposition().equals(job.getNeedResourceCapacity()))
-        println machine.toString() + " check:"
-        println machine.getResourceComposition()
-        println job.getNeedResourceCapacity()
+        machine.OutSource()
         // Return the results.
         return returnValue
 

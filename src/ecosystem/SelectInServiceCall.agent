@@ -4,7 +4,7 @@
     <behaviorstep x="249" y="53" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="Select" parameters="sc,candidates" exceptions="">
       <label x="249" y="38" text="Select"/>
     </behaviorstep>
-    <behaviorstep x="86" y="83" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="candidates" exceptions="">
+    <behaviorstep x="86" y="83" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="sc,candidates" exceptions="">
       <label x="86" y="68" text="Evaluation"/>
     </behaviorstep>
     <behaviorstep x="809" y="56" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="Map" compiledname="Allocate" parameters="theOnes" exceptions="">
@@ -18,7 +18,7 @@
     <taskstep x="240" y="342" comment="This is a task." command1="returnValue = chosenMap" command2="" command3="" command4="" command5="">
       <label x="240" y="327" text="Reset"/>
     </taskstep>
-    <taskstep x="356" y="222" comment="This is a task." command1="int needCap = sc.needResourceCapacity[candidate.key]" command2="candidate.value = Evaluation(candidate.value)" command3="chosenMap[candidate.key] = [:]" command4="" command5="">
+    <taskstep x="356" y="222" comment="This is a task." command1="int needCap = sc.needResourceCapacity[candidate.key]" command2="candidate.value = Evaluation(sc,candidate.value)" command3="chosenMap[candidate.key] = [:]" command4="" command5="">
       <label x="356" y="207" text="Do Task"/>
     </taskstep>
     <taskstep x="471" y="60" comment="This is a task." command1="res.setSourceable(res.getSourceable()-needCap)" command2="res.setServiceNeedCapacity(needCap)" command3="this.serviceStatus[res] = false" command4="this.prototype.addResource(res,needCap)" command5="res.setServiceProvider(this)">
@@ -85,15 +85,15 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="113" y="365"/>
-    <joinstep x="761" y="311"/>
+    <joinstep x="118" y="370"/>
+    <joinstep x="766" y="316"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="265" y="473"/>
-    <endstep x="112" y="450"/>
-    <endstep x="768" y="399"/>
-    <endstep x="960" y="302"/>
+    <endstep x="270" y="478"/>
+    <endstep x="117" y="455"/>
+    <endstep x="773" y="404"/>
+    <endstep x="965" y="307"/>
   </endsteps>
   <connections>
     <transitions>

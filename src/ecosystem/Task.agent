@@ -24,7 +24,7 @@
     <taskstep x="273" y="313" comment="This is a task." command1="" command2="this.setStartTime(GetTickCount())" command3="" command4="" command5="">
       <label x="273" y="298" text="Do Task"/>
     </taskstep>
-    <taskstep x="380" y="127" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="" command4="" command5="">
+    <taskstep x="380" y="127" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="this.setRemainingTime(data.value)" command4="" command5="">
       <label x="380" y="112" text="Do Task"/>
     </taskstep>
     <taskstep x="382" y="330" comment="This is a task." command1="this.needResourceCapacity &lt;&lt; data" command2="" command3="// this.prepareStatus[data.key] = false" command4="this.candidates[data.key] = []" command5="">
@@ -62,7 +62,7 @@
     <decisionstep x="374" y="219" comment="This is an agent decision." criteria="data.key == &quot;p&quot;" branchType="if">
       <label x="374" y="204" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="601" y="159" comment="This is an agent decision." criteria="this.getRemainingTime() &gt; 0" branchType="if">
+    <decisionstep x="601" y="159" comment="This is an agent decision." criteria="this.getRemainingTime() &gt; 0 &amp;&amp; !this.pause" branchType="if">
       <label x="601" y="144" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="603" y="328" comment="This is an agent decision." criteria="this.getRemainingTime() == 0" branchType="if">
@@ -97,6 +97,9 @@
     </agentproperty>
     <agentproperty x="127" y="85" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
       <label x="132" y="70" text="Type"/>
+    </agentproperty>
+    <agentproperty x="730" y="98" comment="This is an agent property." visibility="0" compiledname="pause" type="boolean" defaultvalue="true">
+      <label x="735" y="83" text="Pause Mark"/>
     </agentproperty>
   </agentproperties>
   <endsteps>

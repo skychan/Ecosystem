@@ -109,7 +109,7 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
 
             // This is a task.
             int needCap = sc.needResourceCapacity[candidate.key]
-            candidate.value = Evaluation(candidate.value)
+            candidate.value = Evaluation(sc,candidate.value)
             chosenMap[candidate.key] = [:]
 
             // This is a loop.
@@ -161,7 +161,7 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
      * @method Evaluation
      *
      */
-    public def Evaluation(candidates) {
+    public def Evaluation(sc, candidates) {
 
         // Define the return value variable.
         def returnValue

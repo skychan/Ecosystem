@@ -45,7 +45,7 @@
     <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
       <label x="362" y="219" text="Do Task"/>
     </taskstep>
-    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="" command3="" command4="" command5="">
+    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="this.owner[mac.value] = this.remainingTime" command3="" command4="" command5="">
       <label x="448" y="309" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -132,10 +132,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="300" y="572"/>
+    <endstep x="271" y="538"/>
     <endstep x="755" y="434"/>
     <endstep x="1286" y="767"/>
-    <endstep x="201" y="444"/>
+    <endstep x="169" y="415"/>
     <endstep x="1185" y="751"/>
   </endsteps>
   <connections>

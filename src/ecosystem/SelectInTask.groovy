@@ -110,7 +110,7 @@ public class SelectInTask implements ecosystem.SelectBehavior {
             // This is a task.
             def theType = candidate.key
             def theList = candidate.value
-            chosenMap[theType] = Evaluation(theList)
+            chosenMap[theType] = Evaluation(t,theList)
 
             // This is a loop.
             for (res in theList) {
@@ -137,7 +137,7 @@ public class SelectInTask implements ecosystem.SelectBehavior {
      * @method Evaluation
      *
      */
-    public def Evaluation(candidates) {
+    public def Evaluation(t, candidates) {
 
         // Define the return value variable.
         def returnValue
@@ -159,6 +159,7 @@ public class SelectInTask implements ecosystem.SelectBehavior {
             if (candidates[0].getClass() == ecosystem.Service) {
 
                 // This is a task.
+                candidates.dropWhile{ it in t.owner.keySet() }
                 candidates.sort{[it.jobList.size()]}
                 returnValue = candidates[0]
 

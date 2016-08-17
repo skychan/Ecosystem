@@ -4,7 +4,7 @@
     <behaviorstep x="231" y="54" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Select" visibility="0" returntype="def" compiledname="Select" parameters="t,candidates" exceptions="">
       <label x="231" y="39" text="Select"/>
     </behaviorstep>
-    <behaviorstep x="71" y="68" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="candidates" exceptions="">
+    <behaviorstep x="71" y="68" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="t,candidates" exceptions="">
       <label x="71" y="53" text="Evaluation"/>
     </behaviorstep>
     <behaviorstep x="564" y="55" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="Map" compiledname="Allocate" parameters="theOnes" exceptions="">
@@ -21,7 +21,7 @@
     <taskstep x="5" y="249" comment="This is a task." command1="returnValue = null" command2="" command3="" command4="" command5="">
       <label x="5" y="234" text="Do Task"/>
     </taskstep>
-    <taskstep x="341" y="212" comment="This is a task." command1="def theType = candidate.key" command2="def theList = candidate.value" command3="chosenMap[theType] = Evaluation(theList)" command4="" command5="">
+    <taskstep x="341" y="212" comment="This is a task." command1="def theType = candidate.key" command2="def theList = candidate.value" command3="chosenMap[theType] = Evaluation(t,theList)" command4="" command5="">
       <label x="341" y="197" text="Do Task"/>
     </taskstep>
     <taskstep x="442" y="317" comment="This is a task." command1="res.competeList.remove(t)" command2="" command3="" command4="" command5="">
@@ -87,7 +87,7 @@
     <taskstep x="1037" y="140" comment="This is a task." command1="mac.Assign(t)" command2="" command3="" command4="" command5="">
       <label x="1037" y="125" text="Do Task"/>
     </taskstep>
-    <taskstep x="178" y="319" comment="This is a task." command1="candidates.sort{[it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
+    <taskstep x="178" y="319" comment="This is a task." command1="candidates.dropWhile{ it in t.owner.keySet() }" command2="candidates.sort{[it.jobList.size()]}" command3="returnValue = candidates[0]" command4="" command5="">
       <label x="176" y="297" text="Do Task"/>
     </taskstep>
   </tasksteps>

@@ -210,7 +210,7 @@ public class Task extends ecosystem.Job  {
         }
 
         // This is a task.
-        this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
+        this.setStartTime(GetTickCount())
     }
 
     /**
@@ -255,8 +255,8 @@ public class Task extends ecosystem.Job  {
 
                 // This is a task.
                 this.setFinish(true)
-                this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
-                this.span = this.finishTime - this.getStartTime()
+                this.finishTime = GetTickCount()
+                this.span = (int)(this.finishTime - this.getStartTime())
 
             } else  {
 
@@ -285,6 +285,33 @@ public class Task extends ecosystem.Job  {
 
         // add owner to the list
         this.owner[user] = p
+    }
+
+    /**
+     *
+     * Check if all the candidates are ready
+     * @method CheckStatus
+     *
+     */
+    @ScheduledMethod(
+        start = 0.3d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def CheckStatus() {
+
+
+        // This is an agent decision.
+        if (this.getPrepareStatus().values().count(false) == 0 && this.getPrepareStatus().size()>0) {
+
+            // This is a task.
+            this.processBehavior.Process(this)
+            this.prepareStatus = [:]
+
+        } else  {
+
+
+        }
     }
 
     /**

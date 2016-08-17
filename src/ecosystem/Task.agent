@@ -13,12 +13,15 @@
     <behaviorstep x="47" y="617" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the owner is add to the owner list" visibility="0" returntype="void" compiledname="addOwner" parameters="user,p" exceptions="">
       <label x="47" y="602" text="Add Owner"/>
     </behaviorstep>
+    <behaviorstep x="399" y="547" scheduleannotationstart="0.3" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.9" watchannotationtriggerpriority="" watchannotationpick="" comment="Check if all the candidates are ready" visibility="0" returntype="" compiledname="CheckStatus" parameters="" exceptions="">
+      <label x="399" y="532" text="Check Status"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="43" y="187" comment="This is a task." command1="selectBehavior = new SelectInTask()" command2="processBehavior = new ProcessInTask()" command3="" command4="" command5="">
       <label x="43" y="172" text="Do Task"/>
     </taskstep>
-    <taskstep x="273" y="313" comment="This is a task." command1="" command2="this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())" command3="" command4="" command5="">
+    <taskstep x="273" y="313" comment="This is a task." command1="" command2="this.setStartTime(GetTickCount())" command3="" command4="" command5="">
       <label x="273" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="380" y="127" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="" command4="" command5="">
@@ -39,7 +42,7 @@
     <taskstep x="815" y="419" comment="This is a task." command1="RandomHelper.createNormal(mac.getQuality(),1)" command2="double tempQuality = RandomHelper.getNormal().nextDouble()" command3="" command4="" command5="">
       <label x="815" y="404" text="Do Task"/>
     </taskstep>
-    <taskstep x="813" y="241" comment="This is a task." command1="" command2="this.setFinish(true)" command3="this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="this.span = this.finishTime - this.getStartTime()" command5="">
+    <taskstep x="813" y="241" comment="This is a task." command1="" command2="this.setFinish(true)" command3="this.finishTime = GetTickCount()" command4="this.span = (int)(this.finishTime - this.getStartTime())" command5="">
       <label x="813" y="226" text="Finish"/>
     </taskstep>
     <taskstep x="931" y="336" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
@@ -47,6 +50,9 @@
     </taskstep>
     <taskstep x="47" y="713" comment="add owner to the list" command1="this.owner[user] = p" command2="" command3="" command4="" command5="">
       <label x="47" y="698" text="set owner"/>
+    </taskstep>
+    <taskstep x="401" y="729" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus = [:]" command3="" command4="" command5="">
+      <label x="401" y="714" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -70,6 +76,9 @@
     </decisionstep>
     <decisionstep x="823" y="336" comment="This is a loop." criteria="mac in this.getAllocation().values()" branchType="while">
       <label x="823" y="321" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="400" y="632" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
+      <label x="400" y="617" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -95,6 +104,7 @@
     <endstep x="289" y="481"/>
     <endstep x="649" y="538"/>
     <endstep x="57" y="812"/>
+    <endstep x="408" y="829"/>
   </endsteps>
   <connections>
     <transitions>
@@ -141,6 +151,16 @@
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="decision" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -198,6 +218,11 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="6" anchor="3"/>
         <transitiontarget type="task" index="9" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="7" anchor="2"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

@@ -671,6 +671,21 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
+     * This is the step behavior.
+     * @method RemoveServiceCall
+     *
+     */
+    public void RemoveServiceCall(sc) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        RemoveAgentFromModel(sc)
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

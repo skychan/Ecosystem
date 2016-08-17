@@ -175,13 +175,13 @@ public class Job  {
      *
      */
     @Parameter (displayName = "Start time", usageName = "startTime")
-    public double getStartTime() {
+    public def getStartTime() {
         return startTime
     }
-    public void setStartTime(double newValue) {
+    public void setStartTime(def newValue) {
         startTime = newValue
     }
-    public double startTime = 0
+    public def startTime = 0
 
     /**
      *
@@ -265,13 +265,13 @@ public class Job  {
      *
      */
     @Parameter (displayName = "Finish Time", usageName = "finishTime")
-    public double getFinishTime() {
+    public def getFinishTime() {
         return finishTime
     }
-    public void setFinishTime(double newValue) {
+    public void setFinishTime(def newValue) {
         finishTime = newValue
     }
-    public double finishTime = 0
+    public def finishTime = 0
 
     /**
      *
@@ -536,33 +536,6 @@ public class Job  {
         // Return the results.
         return returnValue
 
-    }
-
-    /**
-     *
-     * Check if all the candidates are ready
-     * @method CheckStatus
-     *
-     */
-    @ScheduledMethod(
-        start = 0.3d,
-        interval = 1d,
-        shuffle = true
-    )
-    public def CheckStatus() {
-
-
-        // This is an agent decision.
-        if (this.getPrepareStatus().values().count(false) == 0 && this.getPrepareStatus().size()>0) {
-
-            // This is a task.
-            this.processBehavior.Process(this)
-            this.prepareStatus = [:]
-
-        } else  {
-
-
-        }
     }
 
     /**

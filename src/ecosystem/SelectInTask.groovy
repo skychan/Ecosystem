@@ -194,31 +194,31 @@ public class SelectInTask implements ecosystem.SelectBehavior {
         int nullCount = theOnes.values().count(null)
 
         // This is an agent decision.
-        if (nullCount > 1) {
+        if (theOnes['service'] == null) {
 
-            // This is a task.
-            returnValue =  [success:false,allocation:[:]]
+
+            // This is an agent decision.
+            if (nullCount > 1) {
+
+                // This is a task.
+                returnValue =  [success:false,allocation:[:]]
+
+            } else  {
+
+                // This is a task.
+                theOnes.remove('service')
+                returnValue =  [success:true,allocation:theOnes]
+
+            }
 
         } else  {
 
 
             // This is an agent decision.
-            if (nullCount == 1) {
+            if (nullCount > 0) {
 
-
-                // This is an agent decision.
-                if (theOnes['service'] == null) {
-
-                    // This is a task.
-                    theOnes.remove('service')
-                    returnValue =  [success:true,allocation:theOnes]
-
-                } else  {
-
-                    // This is a task.
-                    returnValue =  [success:true,allocation:['service':theOnes['service']]]
-
-                }
+                // This is a task.
+                returnValue =  [success:true,allocation:['service':theOnes['service']]]
 
             } else  {
 

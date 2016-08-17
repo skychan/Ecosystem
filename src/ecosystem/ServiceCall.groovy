@@ -144,7 +144,7 @@ public class ServiceCall extends ecosystem.Job  {
 
         // This is a task.
         this.needResourceCapacity = data
-        // this.prepareStatus[data.key] = false
+        this.startTime = GetTickCount() 
 
         // This is a loop.
         for (type in data.keySet()) {
@@ -154,6 +154,93 @@ public class ServiceCall extends ecosystem.Job  {
 
         }
 
+    }
+
+    /**
+     *
+     * Check if all the candidates are ready
+     * @method CheckStatus
+     *
+     */
+    @ScheduledMethod(
+        start = 0.3d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def CheckStatus() {
+
+        // This is a task.
+        def time = GetTickCount()
+
+        // This is an agent decision.
+        if (time - this.startTime >200) {
+
+            // This is a task.
+            this.recall()
+
+        } else  {
+
+
+            // This is an agent decision.
+            if (this.getPrepareStatus().values().count(false) == 0 && this.getPrepareStatus().size()>0) {
+
+                // This is a task.
+                this.processBehavior.Process(this)
+                this.prepareStatus = [:]
+
+            } else  {
+
+
+            }
+
+        }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method recall
+     *
+     */
+    public void recall() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.allocated) {
+
+
+            // This is a loop.
+            for (resdata in this.prepareStatus) {
+
+                // This is a task.
+                resdata.key.available += this.allocation[resdata.key]
+
+                // This is an agent decision.
+                if (resdata.value) {
+
+                    // This is a task.
+                    this.owner.RemoveServiceCall(this)
+
+                } else  {
+
+                    // This is a task.
+                    resdata.key.jobList.remove(this)
+                    this.owner.RemoveServiceCall(this)
+
+                }
+
+            }
+
+
+        } else  {
+
+            // This is a task.
+            this.owner.RemoveServiceCall(this)
+
+        }
     }
 
     /**

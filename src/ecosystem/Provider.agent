@@ -37,6 +37,9 @@
     <behaviorstep x="664" y="1023" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="generateServiceCall" parameters="" exceptions="">
       <label x="664" y="1008" text="Test the ServiceCall"/>
     </behaviorstep>
+    <behaviorstep x="852" y="1014" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="RemoveServiceCall" parameters="sc" exceptions="">
+      <label x="852" y="999" text="Remove SC"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="541" y="252" comment="This is a task." command1="this.resourceList &lt;&lt; res" command2="" command3="" command4="" command5="">
@@ -113,6 +116,9 @@
     </taskstep>
     <taskstep x="664" y="1093" comment="This is a task." command1="int i = RandomHelper.nextIntFromTo(0,this.serdata.size()-1)" command2="def data = this.serdata[i]" command3="" command4="" command5="">
       <label x="664" y="1078" text="Do Task"/>
+    </taskstep>
+    <taskstep x="858" y="1102" comment="This is a task." command1="RemoveAgentFromModel(sc)" command2="" command3="" command4="" command5="">
+      <label x="858" y="1087" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -209,6 +215,7 @@
     <endstep x="387" y="1211"/>
     <endstep x="836" y="921"/>
     <endstep x="704" y="1285"/>
+    <endstep x="861" y="1201"/>
   </endsteps>
   <connections>
     <transitions>
@@ -365,6 +372,16 @@
       <transition>
         <transitionsource type="task" index="24" anchor="2"/>
         <transitiontarget type="task" index="23" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="12" anchor="0"/>
+        <transitiontarget type="task" index="25" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="25" anchor="2"/>
+        <transitiontarget type="end" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

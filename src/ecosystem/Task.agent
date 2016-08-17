@@ -18,7 +18,7 @@
     <taskstep x="43" y="187" comment="This is a task." command1="selectBehavior = new SelectInTask()" command2="processBehavior = new ProcessInTask()" command3="" command4="" command5="">
       <label x="43" y="172" text="Do Task"/>
     </taskstep>
-    <taskstep x="273" y="313" comment="This is a task." command1="println &quot;task para setted&quot;" command2="this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())" command3="" command4="println &quot;start at &quot; + this.getStartTime()" command5="println this.needResourceCapacity">
+    <taskstep x="273" y="313" comment="This is a task." command1="" command2="this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())" command3="" command4="" command5="">
       <label x="273" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="380" y="127" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="" command4="" command5="">
@@ -27,7 +27,7 @@
     <taskstep x="382" y="330" comment="This is a task." command1="this.needResourceCapacity &lt;&lt; data" command2="" command3="// this.prepareStatus[data.key] = false" command4="this.candidates[data.key] = []" command5="">
       <label x="382" y="315" text="Do Task"/>
     </taskstep>
-    <taskstep x="603" y="251" comment="This is a task." command1="this.setRemainingTime(this.getRemainingTime()-1)" command2="println &quot;continue to process &quot; + toString()" command3="" command4="" command5="">
+    <taskstep x="603" y="251" comment="This is a task." command1="this.setRemainingTime(this.getRemainingTime()-1)" command2="" command3="" command4="" command5="">
       <label x="603" y="236" text="Do Task"/>
     </taskstep>
     <taskstep x="710" y="419" comment="The finish step" command1="mac.Release(this)" command2="" command3="" command4="" command5="">
@@ -39,7 +39,7 @@
     <taskstep x="815" y="419" comment="This is a task." command1="RandomHelper.createNormal(mac.getQuality(),1)" command2="double tempQuality = RandomHelper.getNormal().nextDouble()" command3="" command4="" command5="">
       <label x="815" y="404" text="Do Task"/>
     </taskstep>
-    <taskstep x="813" y="241" comment="This is a task." command1="println this.toString() + &quot; is finished&quot;" command2="this.setFinish(true)" command3="this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="this.span = this.finishTime - this.getStartTime()" command5="println &quot;finish mark &quot; + this.getFinish()">
+    <taskstep x="813" y="241" comment="This is a task." command1="" command2="this.setFinish(true)" command3="this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="this.span = this.finishTime - this.getStartTime()" command5="">
       <label x="813" y="226" text="Finish"/>
     </taskstep>
     <taskstep x="931" y="336" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
@@ -77,7 +77,7 @@
     <agentproperty x="66" y="439" comment="This is an agent property." visibility="0" compiledname="processingTime" type="int" defaultvalue="0">
       <label x="71" y="424" text="ProcessingTime"/>
     </agentproperty>
-    <agentproperty x="54" y="537" comment="[user:pt]" visibility="0" compiledname="owner" type="Map" defaultvalue="[:]">
+    <agentproperty x="54" y="537" comment="[user]" visibility="0" compiledname="owner" type="Map" defaultvalue="[:]">
       <label x="59" y="522" text="Owner"/>
     </agentproperty>
     <agentproperty x="148" y="538" comment="This is an agent property." visibility="0" compiledname="master" type="ecosystem.Order" defaultvalue="null">
@@ -85,6 +85,9 @@
     </agentproperty>
     <agentproperty x="565" y="496" comment="This is an agent property." visibility="0" compiledname="remainingTime" type="int" defaultvalue="-1">
       <label x="570" y="478" text="RemainingTime"/>
+    </agentproperty>
+    <agentproperty x="127" y="85" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
+      <label x="132" y="70" text="Type"/>
     </agentproperty>
   </agentproperties>
   <endsteps>

@@ -80,6 +80,21 @@ public class ServiceCall extends ecosystem.Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field type
+     *
+     */
+    @Parameter (displayName = "Type", usageName = "type")
+    public String getType() {
+        return type
+    }
+    public void setType(String newValue) {
+        type = newValue
+    }
+    public String type = "ServiceCall"
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

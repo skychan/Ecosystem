@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="131" y="187" comment="This is a task." command1="t.setRemainingTime(t.getProcessingTime())" command2="println &quot;start to process &quot; + t.toString()" command3="" command4="" command5="">
+    <taskstep x="131" y="187" comment="This is a task." command1="t.setRemainingTime(t.getProcessingTime())" command2="" command3="" command4="" command5="">
       <label x="131" y="172" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -14,7 +14,7 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="153" y="296"/>
+    <endstep x="158" y="301"/>
   </endsteps>
   <connections>
     <transitions>

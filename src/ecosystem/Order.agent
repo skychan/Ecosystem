@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is order agent." agentclassname="Order" agentparentclassname="" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="153" y="45" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the tasks belongs to this order" visibility="0" returntype="def" compiledname="setParameters" parameters="taskMap" exceptions="">
+    <behaviorstep x="153" y="45" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the tasks belongs to this order" visibility="0" returntype="void" compiledname="setParameters" parameters="taskMap" exceptions="">
       <label x="153" y="30" text="Set tasks"/>
     </behaviorstep>
   </behaviorsteps>
@@ -12,7 +12,7 @@
     <taskstep x="262" y="287" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList &lt;&lt; t">
       <label x="262" y="272" text="Do Task"/>
     </taskstep>
-    <taskstep x="264" y="376" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="println t.getType()" command4="" command5="">
+    <taskstep x="264" y="376" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="" command4="" command5="">
       <label x="264" y="361" text="Set task type"/>
     </taskstep>
     <taskstep x="151" y="115" comment="This is a task." command1="int i = 1" command2="" command3="" command4="" command5="">
@@ -35,8 +35,8 @@
     <agentproperty x="258" y="88" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[]">
       <label x="263" y="73" text="Task List"/>
     </agentproperty>
-    <agentproperty x="468" y="47" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
-      <label x="473" y="32" text="Type"/>
+    <agentproperty x="383" y="74" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
+      <label x="388" y="59" text="Type"/>
     </agentproperty>
   </agentproperties>
   <endsteps>

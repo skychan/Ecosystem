@@ -30,7 +30,7 @@
     <taskstep x="355" y="462" comment="This is a task." command1="needCap -= res.getSourceable()" command2="chosenMap[candidate.key][res] = res.getSourceable()" command3="" command4="" command5="">
       <label x="355" y="447" text="Do Task"/>
     </taskstep>
-    <taskstep x="253" y="143" comment="This is a task." command1="def chosenMap = [:]" command2="println &quot;candidates are &quot;" command3="println candidates" command4="" command5="">
+    <taskstep x="253" y="143" comment="This is a task." command1="def chosenMap = [:]" command2="" command3="" command4="" command5="">
       <label x="253" y="128" text="Do Task"/>
     </taskstep>
     <taskstep x="20" y="264" comment="This is a task." command1="returnValue = []" command2="" command3="" command4="" command5="">
@@ -85,15 +85,15 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="108" y="360"/>
-    <joinstep x="756" y="306"/>
+    <joinstep x="113" y="365"/>
+    <joinstep x="761" y="311"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="260" y="468"/>
-    <endstep x="107" y="445"/>
-    <endstep x="763" y="394"/>
-    <endstep x="955" y="297"/>
+    <endstep x="265" y="473"/>
+    <endstep x="112" y="450"/>
+    <endstep x="768" y="399"/>
+    <endstep x="960" y="302"/>
   </endsteps>
   <connections>
     <transitions>
@@ -153,6 +153,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="decision" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
@@ -160,11 +165,6 @@
       <transition>
         <transitionsource type="join" index="1" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="12" anchor="2"/>
-        <transitiontarget type="decision" index="7" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -224,14 +224,14 @@
         <transitiontarget type="task" index="12" anchor="3"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="6" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="6" anchor="3"/>
         <transitiontarget type="task" index="11" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="6" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

@@ -80,7 +80,7 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
-     * [user:pt]
+     * [user]
      * @field owner
      *
      */
@@ -122,6 +122,21 @@ public class Task extends ecosystem.Job  {
         remainingTime = newValue
     }
     public int remainingTime = -1
+
+    /**
+     *
+     * This is an agent property.
+     * @field type
+     *
+     */
+    @Parameter (displayName = "Type", usageName = "type")
+    public String getType() {
+        return type
+    }
+    public void setType(String newValue) {
+        type = newValue
+    }
+    public String type = ""
 
     /**
      *
@@ -195,10 +210,7 @@ public class Task extends ecosystem.Job  {
         }
 
         // This is a task.
-        println "task para setted"
         this.setStartTime(RunEnvironment.getInstance().getCurrentSchedule().getTickCount())
-        println "start at " + this.getStartTime()
-        println this.needResourceCapacity
     }
 
     /**
@@ -228,7 +240,6 @@ public class Task extends ecosystem.Job  {
 
             // This is a task.
             this.setRemainingTime(this.getRemainingTime()-1)
-            println "continue to process " + toString()
 
             // This is an agent decision.
             if (this.getRemainingTime() == 0) {
@@ -243,11 +254,9 @@ public class Task extends ecosystem.Job  {
                 }
 
                 // This is a task.
-                println this.toString() + " is finished"
                 this.setFinish(true)
                 this.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
                 this.span = this.finishTime - this.getStartTime()
-                println "finish mark " + this.getFinish()
 
             } else  {
 

@@ -21,7 +21,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="255" y="247" comment="This is a task." command1="this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)" command2="Map result = selectBehavior.Allocate(this.theOnes)" command3="this.setAllocation(result.allocation)" command4="this.setAllocated(result.success)" command5="println &quot; allocated ?&quot; + this.allocated">
+    <taskstep x="255" y="247" comment="This is a task." command1="this.theOnes = selectBehavior.Select(watchedAgent,this.candidates)" command2="Map result = selectBehavior.Allocate(this.theOnes)" command3="this.setAllocation(result.allocation)" command4="this.setAllocated(result.success)" command5="">
       <label x="255" y="232" text="Do Task"/>
     </taskstep>
     <taskstep x="625" y="249" comment="This is a task." command1="this.candidates[competitor.getType()]&lt;&lt;competitor" command2="" command3="" command4="" command5="">
@@ -39,20 +39,23 @@
     <taskstep x="1116" y="591" comment="This is a task." command1="int t = this.getReayTime() - this.inBufferTime[theRes]" command2="int t2 = this.getFinishTime() - this.inBufferTime[theRes]" command3="int q = this.needResourceCapacity[theRes.getType()] * t2" command4="this.reviews &lt;&lt; Math.exp(t)*q*theRes.getRank()" command5="">
       <label x="1116" y="576" text="Do Task"/>
     </taskstep>
-    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus.each{it -&gt; it.value = false}" command3="println &quot;&quot;" command4="println toString() + &quot; is all ready&quot;" command5="">
+    <taskstep x="528" y="768" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus = [:]" command3="" command4="" command5="">
       <label x="528" y="753" text="Do Task"/>
     </taskstep>
-    <taskstep x="259" y="336" comment="This is a task." command1="println toString() + &quot;selected &quot; + this.getAllocation()" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
+    <taskstep x="259" y="336" comment="This is a task." command1="" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
       <label x="259" y="321" text="Do Task"/>
     </taskstep>
-    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="println this.prepareStatus" command3="" command4="" command5="">
+    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
     <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
       <label x="362" y="219" text="Do Task"/>
     </taskstep>
-    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="println &quot;prepare status&quot; + prepareStatus" command3="" command4="" command5="">
+    <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="" command3="" command4="" command5="">
       <label x="448" y="309" text="Do Task"/>
+    </taskstep>
+    <taskstep x="329" y="659" comment="This is a task." command1="println toString() + &quot; : &quot; + prepareStatus" command2="" command3="" command4="" command5="">
+      <label x="329" y="644" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -62,8 +65,8 @@
     <decisionstep x="157" y="221" comment="This is an agent decision." criteria="this.getAllocated() == false" branchType="if">
       <label x="157" y="206" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="526" y="672" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
-      <label x="526" y="657" text="Evaluate Criteria"/>
+    <decisionstep x="526" y="681" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
+      <label x="526" y="666" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="257" y="430" comment="This is an agent decision." criteria="this.getAllocated()" branchType="if">
       <label x="257" y="415" text="Evaluate Criteria"/>
@@ -79,7 +82,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="748" y="364"/>
+    <joinstep x="753" y="369"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -90,9 +93,6 @@
     </agentproperty>
     <agentproperty x="583" y="113" comment="This is an agent property." visibility="0" compiledname="theOnes" type="Map" defaultvalue="[:]">
       <label x="588" y="98" text="TheOnes"/>
-    </agentproperty>
-    <agentproperty x="30" y="36" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
-      <label x="35" y="21" text="Type"/>
     </agentproperty>
     <agentproperty x="477" y="31" comment="This is an agent property." visibility="0" compiledname="needResourceCapacity" type="def" defaultvalue="[:]">
       <label x="482" y="16" text="NeedResourceCapacity"/>
@@ -144,12 +144,12 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="295" y="567"/>
-    <endstep x="750" y="429"/>
-    <endstep x="1281" y="762"/>
-    <endstep x="196" y="439"/>
-    <endstep x="1180" y="746"/>
-    <endstep x="562" y="886"/>
+    <endstep x="300" y="572"/>
+    <endstep x="755" y="434"/>
+    <endstep x="1286" y="767"/>
+    <endstep x="201" y="444"/>
+    <endstep x="1185" y="751"/>
+    <endstep x="567" y="891"/>
   </endsteps>
   <connections>
     <transitions>

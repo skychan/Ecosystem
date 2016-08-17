@@ -583,10 +583,7 @@ public class Provider extends ecosystem.User  {
      * @method GenerateService
      *
      */
-    public def GenerateService() {
-
-        // Define the return value variable.
-        def returnValue
+    public void GenerateService(serviceData) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -595,27 +592,17 @@ public class Provider extends ecosystem.User  {
         // This is an agent decision.
         if (true) {
 
-
-            // This is a loop.
-            for (data in serdata) {
-
-                // This is a task.
-                Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
-                Service s = (Service) sagent
-                s.resourceComposition = data
-                // This is a task.
-                s.setOwner(this)
-
-            }
-
+            // This is a task.
+            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
+            Service s = (Service) sagent
+            s.resourceComposition = serviceData
+            // This is a task.
+            s.setOwner(this)
 
         } else  {
 
 
         }
-        // Return the results.
-        return returnValue
-
     }
 
     /**
@@ -644,12 +631,41 @@ public class Provider extends ecosystem.User  {
             res.setAvailable(res.getCapacity())
             // This is a task.
             res.setOwner(this)
-            //this.candidates << res
-            println "create resource " + res.toString() + " with type " + res.getType() + "and cap" + res.getCapacity()
             //this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
             res.setSourceable(res.getCapacity())
 
         }
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method generateServiceCall
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def generateServiceCall() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        int i = RandomHelper.nextIntFromTo(0,this.serdata.size()-1)
+        def data = this.serdata[i]
+        // This is a task.
+        ServiceCall sagent = CreateAgent("Ecosystem", "ecosystem.ServiceCall")
+        sagent.setParameters(data)
+        sagent.setOwner(this)
+        // Return the results.
+        return returnValue
 
     }
 

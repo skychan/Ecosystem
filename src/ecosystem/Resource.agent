@@ -24,13 +24,13 @@
     <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="this.setSourceable(this.getSourceable() - amount)" command3="" command4="" command5="">
       <label x="370" y="475" text="Do Task"/>
     </taskstep>
-    <taskstep x="265" y="630" comment="This is a task." command1="this.jobList[sc] = this.getSourceable()" command2="" command3="" command4="" command5="">
+    <taskstep x="265" y="630" comment="This is a task." command1="// this.jobList[sc] = this.getSourceable()" command2="this.assignBehavior.Queue(sc,this)" command3="" command4="" command5="">
       <label x="265" y="615" text="Do Task"/>
     </taskstep>
     <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="&#xa;" command5="this.needCap.remove(sc)">
       <label x="481" y="618" text="Do Task"/>
     </taskstep>
-    <taskstep x="728" y="638" comment="change the compete state" command1="this.competeList &lt;&lt; theCall" command2="theCall.addCandidates(this)" command3="println this.toString() + &quot; compete &quot; + theCall.toString()" command4="this.responseList = []" command5="">
+    <taskstep x="728" y="638" comment="change the compete state" command1="this.competeList &lt;&lt; theCall" command2="theCall.addCandidates(this)" command3="" command4="this.responseList = []" command5="">
       <label x="728" y="623" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="590" y="624" comment="This is a task." command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
@@ -58,7 +58,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="406" y="751"/>
+    <joinstep x="377" y="748"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="476" y="244" comment="This is an agent property." visibility="0" compiledname="sourceable" type="int" defaultvalue="0">
@@ -73,9 +73,6 @@
     <agentproperty x="363" y="255" comment="This is an agent property." visibility="0" compiledname="capacity" type="int" defaultvalue="0">
       <label x="368" y="240" text="Capacity"/>
     </agentproperty>
-    <agentproperty x="254" y="256" comment="Job list" visibility="0" compiledname="jobList" type="Map" defaultvalue="[:]">
-      <label x="259" y="241" text="Job List"/>
-    </agentproperty>
     <agentproperty x="43" y="508" comment="[service:amount]" visibility="0" compiledname="master" type="Map" defaultvalue="[:]">
       <label x="48" y="493" text="Master"/>
     </agentproperty>
@@ -85,7 +82,7 @@
   </agentproperties>
   <endsteps>
     <endstep x="96" y="344"/>
-    <endstep x="406" y="847"/>
+    <endstep x="378" y="840"/>
     <endstep x="607" y="735"/>
     <endstep x="745" y="755"/>
     <endstep x="50" y="786"/>

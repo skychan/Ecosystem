@@ -100,7 +100,6 @@ public class ProcessInTask implements ecosystem.ProcessBehavior {
 
         // This is a task.
         t.setRemainingTime(t.getProcessingTime())
-        println "start to process " + t.toString()
     }
 
     /**

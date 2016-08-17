@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="ServiceRelease" agentparentclassname="" agentinterfaces="ecosystem.ReleaseBehavior" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="89" y="71" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="Task t,Machine s" exceptions="">
+    <behaviorstep x="89" y="71" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="Job job,Machine s" exceptions="">
       <label x="89" y="56" text="Release the capacity"/>
     </behaviorstep>
     <behaviorstep x="284" y="74" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Next" parameters="Machine m" exceptions="">
@@ -9,7 +9,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="86" y="166" comment="This is a task." command1="s.buffer.remove(t)" command2="" command3="" command4="" command5="">
+    <taskstep x="86" y="166" comment="This is a task." command1="s.buffer.remove(job)" command2="" command3="" command4="" command5="">
       <label x="86" y="151" text="Do Task"/>
     </taskstep>
     <taskstep x="288" y="226" comment="This is a task." command1="m.assignBehavior.Buffer(job,m)" command2="m.jobList.remove(job)" command3="" command4="" command5="">
@@ -23,8 +23,8 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="103" y="309"/>
-    <endstep x="296" y="329"/>
+    <endstep x="108" y="314"/>
+    <endstep x="301" y="334"/>
   </endsteps>
   <connections>
     <transitions>

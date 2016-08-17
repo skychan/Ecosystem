@@ -6,15 +6,25 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="146" y="202" comment="This is a task." command1="//sc.owner.GenerateService()" command2="println &quot;service call fininshed and we should to generate service&quot;" command3="sc.setFinish(true)" command4="" command5="">
+    <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call fininshed and we should to generate service&quot;" command3="" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
+    <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
+      <label x="291" y="91" text="Finish"/>
+    </taskstep>
+    <taskstep x="292" y="299" comment="The finish step" command1="mac.Release(sc)" command2="" command3="" command4="" command5="">
+      <label x="292" y="284" text="Afterward"/>
+    </taskstep>
   </tasksteps>
-  <decisionsteps/>
+  <decisionsteps>
+    <decisionstep x="291" y="204" comment="This is a loop." criteria="mac in sc.getAllocation().keySet()" branchType="while">
+      <label x="291" y="189" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="168" y="311"/>
+    <endstep x="408" y="121"/>
   </endsteps>
   <connections>
     <transitions>
@@ -24,11 +34,27 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
+        <transitionsource type="task" index="0" anchor="3"/>
+        <transitiontarget type="decision" index="0" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="3"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="0"/>
+        <transitiontarget type="task" index="1" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

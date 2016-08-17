@@ -32,6 +32,9 @@
     <agentproperty x="161" y="68" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
       <label x="166" y="53" text="Owner"/>
     </agentproperty>
+    <agentproperty x="173" y="159" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;ServiceCall&quot;">
+      <label x="178" y="144" text="Type"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="74" y="287"/>

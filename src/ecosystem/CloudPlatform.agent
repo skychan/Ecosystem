@@ -22,9 +22,6 @@
     <behaviorstep x="339" y="587" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="NewQueue" parameters="res" exceptions="">
       <label x="339" y="572" text="New Queue"/>
     </behaviorstep>
-    <behaviorstep x="293" y="1054" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="generateServiceCall" parameters="" exceptions="">
-      <label x="293" y="1039" text="Test the ServiceCall"/>
-    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="63" y="240" comment="This is a task." command1="this.userList &lt;&lt; userID" command2="" command3="" command4="" command5="">
@@ -33,10 +30,10 @@
     <taskstep x="170" y="245" comment="This is a task." command1="this.userList.remove(o)" command2="" command3="" command4="" command5="">
       <label x="170" y="230" text="eliminate user"/>
     </taskstep>
-    <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="pagent.GenerateService()" command5="pagent.GenerateResource()">
+    <taskstep x="327" y="260" comment="Create Provider at a random distribution" command1="Provider pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Provider&quot;)" command2="// pagent.GenerateResource(this.typeQuality,this.typeQueueLength)" command3="" command4="" command5="pagent.GenerateResource()">
       <label x="327" y="245" text="Create Provider"/>
     </taskstep>
-    <taskstep x="557" y="278" comment="This is a task." command1="this.finishCount ++" command2="println &quot;finish watched &quot;" command3="" command4="" command5="">
+    <taskstep x="557" y="278" comment="This is a task." command1="this.finishCount ++" command2="" command3="" command4="" command5="">
       <label x="557" y="263" text="Do Task"/>
     </taskstep>
     <taskstep x="486" y="130" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="int providerCount = RandomHelper.getPoisson().nextInt()">
@@ -69,12 +66,6 @@
     <taskstep x="344" y="763" comment="This is a task." command1="this.typeQueueLength[res.getType()] = 0" command2="" command3="" command4="" command5="">
       <label x="344" y="748" text="Do Task"/>
     </taskstep>
-    <taskstep x="293" y="1124" comment="This is a task." command1="int i = RandomHelper.nextIntFromTo(0,this.serdata.size()-1)" command2="def data = this.serdata[i]" command3="" command4="" command5="">
-      <label x="293" y="1109" text="Do Task"/>
-    </taskstep>
-    <taskstep x="302" y="1197" comment="This is a task." command1="ServiceCall sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.ServiceCall&quot;)" command2="sagent.setParameters(data)" command3="" command4="" command5="">
-      <label x="302" y="1182" text="Do Task"/>
-    </taskstep>
     <taskstep x="684" y="282" comment="This is a task." command1="this.serviceGeneratedCount++" command2="" command3="" command4="" command5="">
       <label x="684" y="267" text="Do Task"/>
     </taskstep>
@@ -103,9 +94,9 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="677" y="802"/>
-    <joinstep x="190" y="827"/>
-    <joinstep x="642" y="348"/>
+    <joinstep x="682" y="807"/>
+    <joinstep x="195" y="832"/>
+    <joinstep x="647" y="353"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="58" y="48" comment="User list to record the user exist in the platform" visibility="0" compiledname="userList" type="ArrayList" defaultvalue="new ArrayList()">
@@ -123,23 +114,19 @@
     <agentproperty x="138" y="481" comment="This is an agent property." visibility="0" compiledname="typeQueueLength" type="def" defaultvalue="[:]">
       <label x="143" y="466" text="Resource Queue"/>
     </agentproperty>
-    <agentproperty x="445" y="1016" comment="This is an agent property." visibility="0" compiledname="serdata" type="def" defaultvalue="[[2:1,3:1,4:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:4],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[3:5,4:7],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:7,3:7,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,2:6,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,4:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:5,2:6,3:7,4:6]]">
-      <label x="450" y="1001" text="Service Call Data"/>
-    </agentproperty>
     <agentproperty x="720" y="72" comment="Count the fininshed jobs" visibility="0" compiledname="serviceGeneratedCount" type="int" defaultvalue="0">
       <label x="725" y="57" text="Service Generate count"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="96" y="399"/>
-    <endstep x="204" y="402"/>
-    <endstep x="475" y="473"/>
-    <endstep x="636" y="413"/>
-    <endstep x="680" y="948"/>
-    <endstep x="191" y="1018"/>
-    <endstep x="384" y="875"/>
-    <endstep x="358" y="409"/>
-    <endstep x="318" y="1301"/>
+    <endstep x="101" y="404"/>
+    <endstep x="209" y="407"/>
+    <endstep x="480" y="478"/>
+    <endstep x="641" y="418"/>
+    <endstep x="685" y="953"/>
+    <endstep x="196" y="1023"/>
+    <endstep x="389" y="880"/>
+    <endstep x="363" y="414"/>
   </endsteps>
   <connections>
     <transitions>
@@ -176,11 +163,6 @@
       <transition>
         <transitionsource type="behavior" index="6" anchor="0"/>
         <transitiontarget type="decision" index="5" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="7" anchor="0"/>
-        <transitiontarget type="task" index="14" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -245,12 +227,7 @@
       </transition>
       <transition>
         <transitionsource type="task" index="14" anchor="2"/>
-        <transitiontarget type="task" index="15" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="15" anchor="2"/>
-        <transitiontarget type="end" index="8" anchor="0"/>
+        <transitiontarget type="join" index="2" anchor="3"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -261,11 +238,6 @@
       <transition>
         <transitionsource type="join" index="1" anchor="2"/>
         <transitiontarget type="task" index="11" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="16" anchor="2"/>
-        <transitiontarget type="join" index="2" anchor="3"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -322,7 +294,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="6" anchor="3"/>
-        <transitiontarget type="task" index="16" anchor="0"/>
+        <transitiontarget type="task" index="14" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

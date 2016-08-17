@@ -125,21 +125,6 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
-     * Job list
-     * @field jobList
-     *
-     */
-    @Parameter (displayName = "Job List", usageName = "jobList")
-    public Map getJobList() {
-        return jobList
-    }
-    public void setJobList(Map newValue) {
-        jobList = newValue
-    }
-    public Map jobList = [:]
-
-    /**
-     *
      * [service:amount]
      * @field master
      *
@@ -233,7 +218,8 @@ public class Resource extends ecosystem.Machine  {
         } else  {
 
             // This is a task.
-            this.jobList[sc] = this.getSourceable()
+            // this.jobList[sc] = this.getSourceable()
+            this.assignBehavior.Queue(sc,this)
 
         }
     }
@@ -304,7 +290,6 @@ public class Resource extends ecosystem.Machine  {
             // change the compete state
             this.competeList << theCall
             theCall.addCandidates(this)
-            println this.toString() + " compete " + theCall.toString()
             this.responseList = []
 
         } else  {

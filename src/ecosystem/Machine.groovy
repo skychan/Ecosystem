@@ -275,6 +275,21 @@ public class Machine  {
 
     /**
      *
+     * Job list
+     * @field jobList
+     *
+     */
+    @Parameter (displayName = "Job List", usageName = "jobList")
+    public List getJobList() {
+        return jobList
+    }
+    public void setJobList(List newValue) {
+        jobList = newValue
+    }
+    public List jobList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -325,7 +340,6 @@ public class Machine  {
                 // change the compete state
                 this.competeList << watchedAgent
                 watchedAgent.addCandidates(this)
-                println this.toString() + " compete " + watchedAgent.toString()
 
             } else  {
 
@@ -442,22 +456,17 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        println toString() + " first assign "
 
         // This is an agent decision.
         if (this.assignBehavior.BufferEnterance(job,this)) {
 
             // This is a task.
             this.assignBehavior.Buffer(job,this)
-            println buffer
-            println jobList
 
         } else  {
 
             // This is a task.
             this.assignBehavior.Queue(job,this)
-            println jobList
-            println buffer
 
         }
     }
@@ -468,22 +477,19 @@ public class Machine  {
      * @method Release
      *
      */
-    public void Release(Task t) {
+    public void Release(job) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        releaseBehavior.Release(t,this)
+        releaseBehavior.Release(job,this)
 
         // This is an agent decision.
         if (this.jobList.size() > 0) {
 
             // This is a task.
-            println toString()
             releaseBehavior.Next(this)
-            println buffer
-            println jobList
 
         } else  {
 

@@ -15,7 +15,7 @@
     <taskstep x="285" y="307" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.setOwner(this)" command5="o.setType(&quot;Order&quot;+orderID)">
       <label x="285" y="292" text="Generate Order"/>
     </taskstep>
-    <taskstep x="286" y="398" comment="Set the order parameters" command1="" command2="" command3="this.getOrderList().add(o)" command4="" command5="o.setParameters(this.taskMap)">
+    <taskstep x="286" y="398" comment="Set the order parameters" command1="" command2="" command3="this.orderList.add(o)" command4="" command5="o.setParameters(this.taskMap)">
       <label x="286" y="383" text="Set parameters"/>
     </taskstep>
     <taskstep x="564" y="883" comment="This is a task." command1="int amount = sc.nextInt()" command2="" command3="" command4="" command5="">
@@ -85,10 +85,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="379" y="1049"/>
-    <endstep x="573" y="278"/>
-    <endstep x="302" y="508"/>
-    <endstep x="204" y="321"/>
+    <endstep x="384" y="1054"/>
+    <endstep x="578" y="283"/>
+    <endstep x="307" y="513"/>
+    <endstep x="209" y="326"/>
   </endsteps>
   <connections>
     <transitions>
@@ -100,6 +100,11 @@
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
         <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -140,11 +145,6 @@
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="decision" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

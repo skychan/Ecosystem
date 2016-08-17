@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="90" y="128" comment="This is a task." command1="returnValue = (machine.getResourceComposition().equals(job.getNeedResourceCapacity()))" command2="" command3="" command4="" command5="">
+    <taskstep x="90" y="128" comment="This is a task." command1="returnValue = (machine.getResourceComposition().equals(job.getNeedResourceCapacity()))" command2="println machine.toString() + &quot; check:&quot;" command3="println machine.getResourceComposition()" command4="println job.getNeedResourceCapacity()" command5="">
       <label x="90" y="113" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -14,7 +14,7 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="105" y="248"/>
+    <endstep x="110" y="253"/>
   </endsteps>
   <connections>
     <transitions>

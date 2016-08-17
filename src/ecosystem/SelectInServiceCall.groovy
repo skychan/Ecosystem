@@ -103,8 +103,6 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
 
         // This is a task.
         def chosenMap = [:]
-        println "candidates are "
-        println candidates
 
         // This is a loop.
         for (candidate in candidates) {

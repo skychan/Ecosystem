@@ -125,7 +125,7 @@ public class ServiceAssign implements ecosystem.AssignBehavior {
      * @method Queue
      *
      */
-    public void Queue(Task t, Machine s) {
+    public void Queue(Job t, Machine s) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()

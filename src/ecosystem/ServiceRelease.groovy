@@ -93,13 +93,13 @@ public class ServiceRelease implements ecosystem.ReleaseBehavior {
      * @method Release
      *
      */
-    public void Release(Task t, Machine s) {
+    public void Release(Job job, Machine s) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        s.buffer.remove(t)
+        s.buffer.remove(job)
     }
 
     /**

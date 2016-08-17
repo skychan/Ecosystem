@@ -103,15 +103,15 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
 
 
         // This is an agent decision.
-        if (m.getAvailable() < t.needResourceCapacity[m.getType()]) {
+        if (m.jobList.size()==0 && m.getAvailable() >= t.needResourceCapacity[m.getType()]) {
 
             // This is a task.
-            returnValue = false
+            returnValue = true
 
         } else  {
 
             // This is a task.
-            returnValue = true
+            returnValue = false
 
         }
         // Return the results.
@@ -125,13 +125,13 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
      * @method Queue
      *
      */
-    public void Queue(Task t, Machine r) {
+    public void Queue(Job t, Machine r) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        r.jobList[t] = r.getSourceable()
+        r.jobList << t
     }
 
     /**

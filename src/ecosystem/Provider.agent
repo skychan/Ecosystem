@@ -28,11 +28,14 @@
     <behaviorstep x="348" y="973" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Resource Evaluation" visibility="0" returntype="def" compiledname="Evaluation" parameters="resourceList" exceptions="">
       <label x="348" y="958" text="Resource Evaluation"/>
     </behaviorstep>
-    <behaviorstep x="805" y="553" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="serviceReady" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="GenerateService" parameters="" exceptions="">
+    <behaviorstep x="805" y="553" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="serviceReady" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="GenerateService" parameters="serviceData" exceptions="">
       <label x="805" y="538" text="Generate Service"/>
     </behaviorstep>
     <behaviorstep x="226" y="89" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Resource" visibility="0" returntype="void" compiledname="GenerateResource" parameters="" exceptions="">
       <label x="226" y="74" text="Generate Resource"/>
+    </behaviorstep>
+    <behaviorstep x="664" y="1023" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="generateServiceCall" parameters="" exceptions="">
+      <label x="664" y="1008" text="Test the ServiceCall"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -45,7 +48,7 @@
     <taskstep x="257" y="248" comment="This is a task." command1="Resource res = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="res.setQuality(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(types[i])" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
       <label x="257" y="233" text="Create Resource"/>
     </taskstep>
-    <taskstep x="259" y="340" comment="This is a task." command1="res.setOwner(this)" command2="//this.candidates &lt;&lt; res" command3="println &quot;create resource &quot; + res.toString() + &quot; with type &quot; + res.getType() + &quot;and cap&quot; + res.getCapacity()" command4="//this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="res.setSourceable(res.getCapacity())">
+    <taskstep x="259" y="340" comment="This is a task." command1="res.setOwner(this)" command2="" command3="" command4="//this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="res.setSourceable(res.getCapacity())">
       <label x="259" y="325" text="Add the attr"/>
     </taskstep>
     <taskstep x="554" y="723" comment="This is a task." command1="AddAgentToContext(&quot;Ecosystem&quot;, res)" command2="this.addResource(res)" command3="platform.Indexing(res)" command4="platform.NewQueue(res)" command5="">
@@ -93,7 +96,7 @@
     <taskstep x="346" y="1072" comment="This is a task." command1="resource.sort{[-it.getSourceable(),-it.getRank()]}" command2="" command3="" command4="" command5="">
       <label x="346" y="1057" text="Do Task"/>
     </taskstep>
-    <taskstep x="802" y="723" comment="This is a task." command1="Object sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service s = (Service) sagent" command3="s.resourceComposition = data" command4="" command5="">
+    <taskstep x="802" y="723" comment="This is a task." command1="Object sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="Service s = (Service) sagent" command3="s.resourceComposition = serviceData" command4="" command5="">
       <label x="802" y="708" text="Start to generate service"/>
     </taskstep>
     <taskstep x="805" y="800" comment="This is a task." command1="s.setOwner(this)" command2="" command3="" command4="" command5="">
@@ -104,6 +107,12 @@
     </taskstep>
     <taskstep x="1004" y="629" comment="This is a task." command1="this.taskFrequency.iterator()[0].value -= 5" command2="" command3="" command4="" command5="">
       <label x="1004" y="614" text="Do Task"/>
+    </taskstep>
+    <taskstep x="673" y="1166" comment="This is a task." command1="ServiceCall sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.ServiceCall&quot;)" command2="sagent.setParameters(data)" command3="sagent.setOwner(this)" command4="" command5="">
+      <label x="673" y="1151" text="Do Task"/>
+    </taskstep>
+    <taskstep x="664" y="1093" comment="This is a task." command1="int i = RandomHelper.nextIntFromTo(0,this.serdata.size()-1)" command2="def data = this.serdata[i]" command3="" command4="" command5="">
+      <label x="664" y="1078" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -146,12 +155,9 @@
     <decisionstep x="34" y="243" comment="This is a loop." criteria="i in 0..&lt;RandomHelper.nextIntFromTo(1,4)" branchType="while">
       <label x="34" y="228" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="731" y="674" comment="This is a loop." criteria="data in serdata" branchType="while">
-      <label x="731" y="659" text="Evaluate Criteria"/>
-    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="881" y="415"/>
+    <joinstep x="886" y="420"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -192,16 +198,17 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="162" y="381"/>
-    <endstep x="579" y="400"/>
-    <endstep x="694" y="772"/>
-    <endstep x="77" y="822"/>
-    <endstep x="116" y="1268"/>
-    <endstep x="333" y="911"/>
-    <endstep x="883" y="496"/>
-    <endstep x="1034" y="748"/>
-    <endstep x="382" y="1206"/>
-    <endstep x="831" y="916"/>
+    <endstep x="167" y="386"/>
+    <endstep x="584" y="405"/>
+    <endstep x="699" y="777"/>
+    <endstep x="82" y="827"/>
+    <endstep x="121" y="1273"/>
+    <endstep x="338" y="916"/>
+    <endstep x="888" y="501"/>
+    <endstep x="1039" y="753"/>
+    <endstep x="387" y="1211"/>
+    <endstep x="836" y="921"/>
+    <endstep x="704" y="1285"/>
   </endsteps>
   <connections>
     <transitions>
@@ -345,6 +352,21 @@
         <transitiontarget type="end" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="11" anchor="0"/>
+        <transitiontarget type="task" index="24" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="23" anchor="2"/>
+        <transitiontarget type="end" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="24" anchor="2"/>
+        <transitiontarget type="task" index="23" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -439,12 +461,7 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="11" anchor="2"/>
-        <transitiontarget type="decision" index="13" anchor="3"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="13" anchor="2"/>
-        <transitiontarget type="task" index="19" anchor="1"/>
+        <transitiontarget type="task" index="19" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

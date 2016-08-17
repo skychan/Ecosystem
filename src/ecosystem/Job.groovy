@@ -111,21 +111,6 @@ public class Job  {
     /**
      *
      * This is an agent property.
-     * @field type
-     *
-     */
-    @Parameter (displayName = "Type", usageName = "type")
-    public def getType() {
-        return type
-    }
-    public void setType(def newValue) {
-        type = newValue
-    }
-    public def type = 0
-
-    /**
-     *
-     * This is an agent property.
      * @field needResourceCapacity
      *
      */
@@ -410,9 +395,7 @@ public class Job  {
             Map result = selectBehavior.Allocate(this.theOnes)
             this.setAllocation(result.allocation)
             this.setAllocated(result.success)
-            println " allocated ?" + this.allocated
             // This is a task.
-            println toString() + "selected " + this.getAllocation()
             this.theOnes = [:]
             this.candidates.each{ entry -> entry.value = [] }
 
@@ -434,7 +417,6 @@ public class Job  {
 
                         // This is a task.
                         this.prepareStatus[mac.value] = false
-                        println "prepare status" + prepareStatus
 
                     }
 
@@ -442,7 +424,6 @@ public class Job  {
 
                 // This is a task.
                 selectBehavior.Assign(watchedAgent.allocation,this)
-                println this.prepareStatus
 
             } else  {
 
@@ -576,9 +557,7 @@ public class Job  {
 
             // This is a task.
             this.processBehavior.Process(this)
-            this.prepareStatus.each{it -> it.value = false}
-            println ""
-            println toString() + " is all ready"
+            this.prepareStatus = [:]
 
         } else  {
 

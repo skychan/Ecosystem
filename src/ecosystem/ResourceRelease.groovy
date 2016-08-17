@@ -93,14 +93,23 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
      * @method Release
      *
      */
-    public void Release(Task t, Machine r) {
+    public void Release(Job job, Machine r) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        r.setAvailable( r.getAvailable() + t.needResourceCapacity[ r.getType() ] )
-        r.buffer.remove(t)
+
+        // This is an agent decision.
+        if (job.getClass() == ecosystem.Task) {
+
+            // This is a task.
+            r.setAvailable( r.getAvailable() + job.needResourceCapacity[ r.getType() ] )
+            r.buffer.remove(job)
+
+        } else  {
+
+
+        }
     }
 
     /**
@@ -115,13 +124,18 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        Map newList = m.jobList.sort{ [ -it.value, it.key.getType() ] }
-        def job = newList.keySet()[0]
-        println "always get here?"
+        println m.toString()
+        int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }
+        List newList = []
+        println m.jobList
+        println m.buffer
 
         // This is an agent decision.
-        if (job.getClass() == ecosystem.ServiceCall) {
+        if (i == 0) {
 
+            // This is a task.
+            def job = m.jobList[i]
+            println m.toString() + " ready to process service call "
 
             // This is an agent decision.
             if (m.buffer == []) {
@@ -130,6 +144,7 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
                 job.prepareStatus[m] = true
                 m.jobList.remove(job)
                 m.setAvailable(m.getAvailable() - m.needCap[job])
+                println job.prepareStatus
 
             } else  {
 
@@ -138,37 +153,36 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
 
         } else  {
 
-            // This is a task.
-            println "always get here?"
-            println "the mistery list" + m.jobList.keySet()
+
+            // This is an agent decision.
+            if (i == -1) {
+
+                // This is a task.
+                newList = m.jobList.clone()
+
+            } else  {
+
+                // This is a task.
+                newList = m.jobList.take(i)
+
+            }
+            // Sort
 
             // This is a loop.
-            for (j in newList.keySet()) {
+            for (j in newList) {
 
 
                 // This is an agent decision.
-                if (j.getClass() == ecosystem.ServiceCall) {
+                if (m.getAvailable() >= j.needResourceCapacity[m.getType()]) {
 
                     // This is a task.
-                    println "can i get here?"
-                    break
+                    m.assignBehavior.Buffer(j,m)
+                    m.jobList.remove(j)
 
                 } else  {
 
-
-                    // This is an agent decision.
-                    if (m.getAvailable() >= j.needResourceCapacity[m.getType()]) {
-
-                        // This is a task.
-                        m.assignBehavior.Buffer(j,m)
-                        m.jobList.remove(j)
-
-                    } else  {
-
-                        // This is a task.
-                        break
-
-                    }
+                    // This is a task.
+                    break
 
                 }
 

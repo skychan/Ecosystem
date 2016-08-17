@@ -100,13 +100,13 @@ public class Order  {
      *
      */
     @Parameter (displayName = "Type", usageName = "type")
-    public def getType() {
+    public String getType() {
         return type
     }
-    public void setType(def newValue) {
+    public void setType(String newValue) {
         type = newValue
     }
-    public def type = 0
+    public String type = ""
 
     /**
      *
@@ -138,10 +138,7 @@ public class Order  {
      * @method setParameters
      *
      */
-    public def setParameters(taskMap) {
-
-        // Define the return value variable.
-        def returnValue
+    public void setParameters(taskMap) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -165,7 +162,6 @@ public class Order  {
                 // This is a task.
                 t.setType(this.getType() + "-" + (i).toString())
                 i+=1
-                println t.getType()
 
             } else  {
 
@@ -175,9 +171,6 @@ public class Order  {
         }
 
         // This is a task.
-        // Return the results.
-        return returnValue
-
     }
 
     /**

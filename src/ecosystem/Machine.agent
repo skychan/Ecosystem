@@ -19,12 +19,12 @@
     <behaviorstep x="356" y="384" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Assign" parameters="job" exceptions="">
       <label x="356" y="369" text="Assign"/>
     </behaviorstep>
-    <behaviorstep x="532" y="48" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="Task t" exceptions="">
+    <behaviorstep x="532" y="48" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="job" exceptions="">
       <label x="532" y="33" text="Release"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="138" y="279" comment="change the compete state" command1="this.competeList &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="println this.toString() + &quot; compete &quot; + watchedAgent.toString()" command4="" command5="">
+    <taskstep x="138" y="279" comment="change the compete state" command1="this.competeList &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="" command4="" command5="">
       <label x="138" y="264" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="885" y="516" comment="This is a task." command1="Provider user = this.owner[-1]" command2="returnValue = user.getRank()" command3="" command4="" command5="">
@@ -33,13 +33,13 @@
     <taskstep x="770" y="513" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
       <label x="770" y="498" text="Do Task"/>
     </taskstep>
-    <taskstep x="282" y="583" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="println jobList" command3="println buffer" command4="" command5="">
+    <taskstep x="282" y="583" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="" command3="" command4="" command5="">
       <label x="282" y="568" text="Do Task"/>
     </taskstep>
-    <taskstep x="428" y="583" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="println buffer" command4="println jobList" command5="">
+    <taskstep x="428" y="583" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
       <label x="428" y="568" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="475" comment="This is a task." command1="println toString() + &quot; first assign &quot;" command2="" command3="" command4="" command5="">
+    <taskstep x="355" y="475" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="355" y="460" text="Do Task"/>
     </taskstep>
     <taskstep x="580" y="767" comment="This is a task." command1="double q = theTask.getProductQuality()" command2="int t = theTask.responseTime[this]" command3="double h = theTask.getHardness()" command4="int p = theTask.getProcessingTime()" command5="this.reviews &lt;&lt;  (h * q / (t+p))">
@@ -51,10 +51,10 @@
     <taskstep x="581" y="844" comment="This is a task." command1="this.owner.addTaskFrequency(theTask)" command2="" command3="" command4="" command5="">
       <label x="581" y="829" text="Do Task"/>
     </taskstep>
-    <taskstep x="531" y="134" comment="This is a task." command1="releaseBehavior.Release(t,this)" command2="" command3="" command4="" command5="">
+    <taskstep x="531" y="134" comment="This is a task." command1="releaseBehavior.Release(job,this)" command2="" command3="" command4="" command5="">
       <label x="531" y="119" text="Do Task"/>
     </taskstep>
-    <taskstep x="630" y="219" comment="This is a task." command1="println toString()" command2="releaseBehavior.Next(this)" command3="" command4="println buffer" command5="println jobList">
+    <taskstep x="630" y="219" comment="This is a task." command1="" command2="releaseBehavior.Next(this)" command3="" command4="" command5="">
       <label x="630" y="204" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -117,6 +117,9 @@
     </agentproperty>
     <agentproperty x="40" y="247" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
       <label x="45" y="232" text="Owner"/>
+    </agentproperty>
+    <agentproperty x="250" y="484" comment="Job list" visibility="0" compiledname="jobList" type="List" defaultvalue="[]">
+      <label x="255" y="469" text="Job List"/>
     </agentproperty>
   </agentproperties>
   <endsteps>

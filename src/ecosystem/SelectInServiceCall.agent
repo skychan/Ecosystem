@@ -39,8 +39,8 @@
     <taskstep x="149" y="264" comment="This is a task." command1="candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates" command3="" command4="" command5="">
       <label x="149" y="249" text="Do Task"/>
     </taskstep>
-    <taskstep x="555" y="372" comment="This is a task." command1="chosenMap[candidate.key] = null" command2="" command3="" command4="" command5="">
-      <label x="555" y="357" text="Do Task"/>
+    <taskstep x="555" y="384" comment="This is a task." command1="chosenMap[candidate.key] = null" command2="" command3="" command4="" command5="">
+      <label x="555" y="369" text="Do Task"/>
     </taskstep>
     <taskstep x="652" y="297" comment="This is a task." command1="returnValue = [success:true,allocation:tempOnes]" command2="" command3="" command4="" command5="">
       <label x="652" y="282" text="Do Task"/>
@@ -60,6 +60,9 @@
     <taskstep x="1034" y="339" comment="This is a task." command1="println &quot;Fuck!!! sc&quot;" command2="" command3="" command4="" command5="">
       <label x="1034" y="324" text="Do Task"/>
     </taskstep>
+    <taskstep x="469" y="222" comment="This is a task." command1="res.competeList.remove(sc)" command2="" command3="" command4="" command5="">
+      <label x="469" y="207" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="356" y="376" comment="This is an agent decision." criteria="needCap &lt;= res.getSourceable()" branchType="if">
@@ -74,8 +77,8 @@
     <decisionstep x="85" y="184" comment="This is an agent decision." criteria="candidates == []" branchType="if">
       <label x="85" y="169" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="550" y="286" comment="This is an agent decision." criteria="needCap &gt; 0" branchType="if">
-      <label x="550" y="271" text="Evaluate Criteria"/>
+    <decisionstep x="555" y="297" comment="This is an agent decision." criteria="needCap &gt; 0" branchType="if">
+      <label x="555" y="282" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="810" y="139" comment="This is an agent decision." criteria="null in theOnes.values()" branchType="if">
       <label x="810" y="124" text="Evaluate Criteria"/>
@@ -88,6 +91,9 @@
     </decisionstep>
     <decisionstep x="1029" y="254" comment="This is an agent decision." criteria="data.key.sourceable &lt; data.value" branchType="if">
       <label x="1029" y="239" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="463" y="301" comment="This is a loop." criteria="res in candidate.value" branchType="while">
+      <label x="463" y="286" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
@@ -202,7 +208,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="2" anchor="3"/>
-        <transitiontarget type="decision" index="4" anchor="1"/>
+        <transitiontarget type="decision" index="9" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -253,6 +259,16 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="8" anchor="2"/>
         <transitiontarget type="task" index="14" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="9" anchor="0"/>
+        <transitiontarget type="task" index="15" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="9" anchor="3"/>
+        <transitiontarget type="decision" index="4" anchor="1"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

@@ -135,6 +135,15 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
             }
 
 
+            // This is a loop.
+            for (res in candidate.value) {
+
+                // This is a task.
+                res.competeList.remove(sc)
+
+            }
+
+
             // This is an agent decision.
             if (needCap > 0) {
 

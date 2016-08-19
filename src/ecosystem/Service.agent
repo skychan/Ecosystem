@@ -15,8 +15,8 @@
     <taskstep x="402" y="346" comment="This is a task." command1="List tempList = this.buffer + this.jobList" command2="// tempList.sort{}" command3="Task theTask = tempList[0]" command4="" command5="">
       <label x="402" y="331" text="Sort by desperation"/>
     </taskstep>
-    <taskstep x="338" y="483" comment="This is a task." command1="theTask.setPause(true)" command2="theTask.setAllocated(false)" command3="" command4="" command5="">
-      <label x="338" y="468" text="Do Task"/>
+    <taskstep x="295" y="585" comment="This is a task." command1="theTask.setPause(true)" command2="theTask.setAllocated(false)" command3="theTask.remainingTime -= 1" command4="" command5="">
+      <label x="295" y="570" text="Do Task"/>
     </taskstep>
     <taskstep x="501" y="481" comment="This is a task." command1="theTask.setAllocated(false)" command2="" command3="" command4="" command5="">
       <label x="501" y="466" text="Do Task"/>
@@ -26,15 +26,18 @@
     <decisionstep x="396" y="183" comment="This is an agent decision." criteria="this.jobList.size() &gt; 0" branchType="if">
       <label x="396" y="168" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="401" y="260" comment="This is an agent decision." criteria="true" branchType="if">
-      <label x="401" y="245" text="Have the right"/>
+    <decisionstep x="400" y="268" comment="This is an agent decision." criteria="RandomHelper.nextIntFromTo(0,5) &gt;3" branchType="if">
+      <label x="400" y="253" text="Have the right"/>
     </decisionstep>
     <decisionstep x="404" y="431" comment="This is an agent decision." criteria="theTask in this.buffer" branchType="if">
       <label x="404" y="416" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="295" y="501" comment="This is an agent decision." criteria="theTask.remainingTime &gt; 1" branchType="if">
+      <label x="295" y="486" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="422" y="559"/>
+    <joinstep x="419" y="661"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="211" y="118" comment="This is an agent property." visibility="0" compiledname="resourceComposition" type="def" defaultvalue="[:]">
@@ -43,7 +46,7 @@
   </agentproperties>
   <endsteps>
     <endstep x="82" y="329"/>
-    <endstep x="428" y="637"/>
+    <endstep x="421" y="750"/>
   </endsteps>
   <connections>
     <transitions>
@@ -96,12 +99,17 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="2" anchor="1"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitiontarget type="decision" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="2" anchor="3"/>
         <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="3" anchor="2"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

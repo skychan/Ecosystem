@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="146" y="202" comment="This is a task." command1="//sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="" command4="" command5="">
+    <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="Scanner reader = new Scanner(System.in)\fSystem.out.println(&quot;Generate Resource &quot;)\fint n = reader.nextInt()" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
     <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
@@ -24,7 +24,7 @@
     <taskstep x="583" y="389" comment="This is a task." command1="println job" command2="println job.prepareStatus" command3="println &quot; need = &quot; + job.needResourceCapacity[mac.getType()]" command4="" command5="">
       <label x="583" y="374" text="Do Task"/>
     </taskstep>
-    <taskstep x="293" y="373" comment="The finish step" command1="" command2="println mac" command3="println &quot; jobList &quot;" command4="println &quot;sourceable = &quot; + mac.sourceable" command5="println &quot;available = &quot; + mac.available\fprintln &quot;useage = &quot; + mac.useage">
+    <taskstep x="293" y="373" comment="The finish step" command1="" command2="println mac" command3="println &quot; jobList &quot;" command4="println &quot;sourceable = &quot; + mac.sourceable" command5="println &quot;available = &quot; + mac.available">
       <label x="293" y="358" text="Afterward"/>
     </taskstep>
   </tasksteps>

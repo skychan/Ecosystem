@@ -63,7 +63,7 @@
     <taskstep x="763" y="745" comment="This is a task." command1="println job" command2="println job.prepareStatus" command3="println &quot; need = &quot; + job.needResourceCapacity[mac.getType()]" command4="" command5="">
       <label x="763" y="730" text="Do Task"/>
     </taskstep>
-    <taskstep x="559" y="576" comment="This is a task." command1="if(mac.getClass() == ecosystem.Resource){\f&#x9;println &quot; sourceable = &quot; + mac.sourceable\f&#x9;println &quot; available = &quot;+ mac.available\f&#x9;println &quot; useage = &quot; + mac.useage\f}" command2="" command3="" command4="" command5="">
+    <taskstep x="559" y="576" comment="This is a task." command1="if(mac.getClass() == ecosystem.Resource){\f&#x9;println &quot; sourceable = &quot; + mac.sourceable\f&#x9;println &quot; available = &quot;+ mac.available\f}" command2="" command3="" command4="" command5="">
       <label x="559" y="561" text="Do Task"/>
     </taskstep>
     <taskstep x="556" y="475" comment="The finish step" command1="" command2="println mac" command3="println &quot;jobList&quot;" command4="" command5="">

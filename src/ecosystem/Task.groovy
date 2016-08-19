@@ -273,7 +273,6 @@ public class Task extends ecosystem.Job  {
                     if(mac.getClass() == ecosystem.Resource){
                     	println " sourceable = " + mac.sourceable
                     	println " available = "+ mac.available
-                    	println " useage = " + mac.useage
                     }
 
                     // This is a loop.

@@ -133,7 +133,7 @@ public class Service extends ecosystem.Machine  {
 
 
             // This is an agent decision.
-            if (true) {
+            if (RandomHelper.nextIntFromTo(0,5) >3) {
 
                 // This is a task.
                 List tempList = this.buffer + this.jobList
@@ -143,9 +143,19 @@ public class Service extends ecosystem.Machine  {
                 // This is an agent decision.
                 if (theTask in this.buffer) {
 
-                    // This is a task.
-                    theTask.setPause(true)
-                    theTask.setAllocated(false)
+
+                    // This is an agent decision.
+                    if (theTask.remainingTime > 1) {
+
+                        // This is a task.
+                        theTask.setPause(true)
+                        theTask.setAllocated(false)
+                        theTask.remainingTime -= 1
+
+                    } else  {
+
+
+                    }
 
                 } else  {
 

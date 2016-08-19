@@ -147,7 +147,6 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
                 m.jobList.remove(job)
                 m.jobList2.remove(job)
                 m.setAvailable(m.getAvailable() - m.needCap[job])
-                m.setUseage(m.getUseage() -m.needCap[job])
                 m.needCap.remove(job)
                 // This is a task.
 
@@ -177,7 +176,6 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
             //newList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
             println m.toString() + " avialable = " + m.getAvailable()
             println m.toString() + " sourceable = " + m.getSourceable()
-            println "useage = " + m.getUseage()
             println newList
 
             // This is a loop.

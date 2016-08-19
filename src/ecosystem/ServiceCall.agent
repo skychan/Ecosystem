@@ -30,7 +30,7 @@
     <taskstep x="58" y="673" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus = [:]" command3="" command4="" command5="">
       <label x="58" y="658" text="Do Task"/>
     </taskstep>
-    <taskstep x="157" y="504" comment="This is a task." command1="this.recall()" command2="Scanner reader = new Scanner(System.in)\fprintln &quot;recall the sevicecall &quot; + this.toString()\fint n = reader.nextInt()" command3="" command4="" command5="">
+    <taskstep x="157" y="504" comment="This is a task." command1="this.recall()" command2="" command3="" command4="" command5="">
       <label x="157" y="489" text="Do Task"/>
     </taskstep>
     <taskstep x="220" y="550" comment="This is a task." command1="this.owner.RemoveServiceCall(this)" command2="" command3="" command4="" command5="">
@@ -39,7 +39,7 @@
     <taskstep x="64" y="411" comment="This is a task." command1="def time = GetTickCount()" command2="" command3="" command4="" command5="">
       <label x="64" y="396" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="551" comment="This is a task." command1="" command2="Scanner reader = new Scanner(System.in)\fprintln &quot;forget about it&quot;\fint n = reader.nextInt()" command3="" command4="" command5="">
+    <taskstep x="355" y="551" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="355" y="536" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -50,7 +50,7 @@
     <decisionstep x="55" y="584" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="55" y="569" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="55" y="506" comment="This is an agent decision." criteria="time - this.startTime &gt; 10" branchType="if">
+    <decisionstep x="55" y="506" comment="This is an agent decision." criteria="time - this.startTime &gt; 100000" branchType="if">
       <label x="55" y="491" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="287" y="460" comment="This is an agent decision." criteria="this.allocated" branchType="if">

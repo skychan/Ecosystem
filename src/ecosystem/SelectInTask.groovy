@@ -267,17 +267,6 @@ public class SelectInTask implements ecosystem.SelectBehavior {
             // This is a task.
             mac.Assign(t)
 
-            // This is an agent decision.
-            if (mac.sourceable < t.needResourceCapacity[mac.getType()]) {
-
-                // This is a task.
-                println "Fuck!!! t"
-
-            } else  {
-
-
-            }
-
         }
 
     }

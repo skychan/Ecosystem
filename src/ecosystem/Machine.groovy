@@ -486,7 +486,6 @@ public class Machine  {
 
         // This is a task.
         println job.toString() + " need = " + job.needResourceCapacity[this.getType()]
-        println "useage = " + this.useage
 
         // This is an agent decision.
         if (this.assignBehavior.BufferEnterance(job,this)) {

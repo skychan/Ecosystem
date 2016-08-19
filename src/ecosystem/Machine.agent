@@ -45,7 +45,7 @@
     <taskstep x="209" y="838" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
       <label x="209" y="823" text="Do Task"/>
     </taskstep>
-    <taskstep x="136" y="730" comment="This is a task." command1="println job.toString() + &quot; need = &quot; + job.needResourceCapacity[this.getType()]" command2="println &quot;useage = &quot; + this.useage" command3="" command4="" command5="">
+    <taskstep x="136" y="730" comment="This is a task." command1="println job.toString() + &quot; need = &quot; + job.needResourceCapacity[this.getType()]" command2="" command3="" command4="" command5="">
       <label x="136" y="715" text="Do Task"/>
     </taskstep>
     <taskstep x="580" y="767" comment="This is a task." command1="double q = theTask.getProductQuality()" command2="int t = theTask.responseTime[this]" command3="double h = theTask.getHardness()" command4="int p = theTask.getProcessingTime()" command5="this.reviews &lt;&lt;  (h * q / (t+p))">

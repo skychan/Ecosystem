@@ -90,9 +90,6 @@
     <taskstep x="178" y="319" comment="This is a task." command1="candidates.dropWhile{ it in t.owner.keySet() }" command2="candidates.sort{[it.jobList.size()]}" command3="returnValue = candidates[0]" command4="" command5="">
       <label x="176" y="297" text="Do Task"/>
     </taskstep>
-    <taskstep x="1047" y="326" comment="This is a task." command1="println &quot;Fuck!!! t&quot;" command2="" command3="" command4="" command5="">
-      <label x="1047" y="311" text="Do Task"/>
-    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="232" y="211" comment="This is a loop." criteria="candidate in candidates" branchType="while">
@@ -145,9 +142,6 @@
     </decisionstep>
     <decisionstep x="677" y="205" comment="This is an agent decision." criteria="nullCount &gt; 1" branchType="if">
       <label x="677" y="190" text="Evaluate Criteria"/>
-    </decisionstep>
-    <decisionstep x="1037" y="239" comment="This is an agent decision." criteria="mac.sourceable &lt; t.needResourceCapacity[mac.getType()]" branchType="if">
-      <label x="1037" y="224" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
@@ -247,11 +241,6 @@
       <transition>
         <transitionsource type="task" index="20" anchor="2"/>
         <transitiontarget type="decision" index="13" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="23" anchor="2"/>
-        <transitiontarget type="decision" index="17" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -419,11 +408,6 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="16" anchor="2"/>
         <transitiontarget type="task" index="9" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="17" anchor="2"/>
-        <transitiontarget type="task" index="25" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

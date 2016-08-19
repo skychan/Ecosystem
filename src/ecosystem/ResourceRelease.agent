@@ -18,7 +18,7 @@
     <taskstep x="272" y="143" comment="This is a task." command1="m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="//println m.toString()" command4="//println m.jobList" command5="//println m.buffer">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
-    <taskstep x="583" y="217" comment="This is a task." command1="job.prepareStatus[m] = true" command2="m.jobList.remove(job)\fm.jobList2.remove(job)" command3="m.setAvailable(m.getAvailable() - m.needCap[job])" command4="m.setUseage(m.getUseage() -m.needCap[job])" command5="m.needCap.remove(job)">
+    <taskstep x="583" y="217" comment="This is a task." command1="job.prepareStatus[m] = true" command2="m.jobList.remove(job)\fm.jobList2.remove(job)" command3="m.setAvailable(m.getAvailable() - m.needCap[job])" command4="" command5="m.needCap.remove(job)">
       <label x="583" y="202" text="Service Call Resource Ready"/>
     </taskstep>
     <taskstep x="491" y="617" comment="This is a task." command1="break" command2="" command3="" command4="" command5="">
@@ -33,7 +33,7 @@
     <taskstep x="371" y="377" comment="This is a task." command1="newList = m.jobList.clone()" command2="" command3="" command4="" command5="">
       <label x="371" y="362" text="Do Task"/>
     </taskstep>
-    <taskstep x="273" y="503" comment="Sort" command1="//newList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="println m.toString() + &quot; avialable = &quot; + m.getAvailable()" command3="println m.toString() + &quot; sourceable = &quot; + m.getSourceable()" command4="println &quot;useage = &quot; + m.getUseage()" command5="println newList">
+    <taskstep x="273" y="503" comment="Sort" command1="//newList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="println m.toString() + &quot; avialable = &quot; + m.getAvailable()" command3="println m.toString() + &quot; sourceable = &quot; + m.getSourceable()" command4="" command5="println newList">
       <label x="273" y="488" text="Sort"/>
     </taskstep>
     <taskstep x="193" y="276" comment="This is a task." command1="List newList = []" command2="" command3="" command4="" command5="">

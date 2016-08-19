@@ -631,7 +631,6 @@ public class Provider extends ecosystem.User  {
             res.setAvailable(res.getCapacity())
             // This is a task.
             res.setOwner(this)
-            res.setUseage(res.getCapacity())
             //this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
             res.setSourceable(res.getCapacity())
 

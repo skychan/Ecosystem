@@ -99,8 +99,11 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        //sc.owner.GenerateService(sc.needResourceCapacity)
+        sc.owner.GenerateService(sc.needResourceCapacity)
         println "service call " + sc + " fininshed and we should to generate service"
+        Scanner reader = new Scanner(System.in)
+        System.out.println("Generate Resource ")
+        int n = reader.nextInt()
 
         // This is a loop.
         for (mac in sc.getAllocation().keySet()) {
@@ -112,7 +115,6 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
             println " jobList "
             println "sourceable = " + mac.sourceable
             println "available = " + mac.available
-            println "useage = " + mac.useage
 
             // This is a loop.
             for (job in mac.jobList) {

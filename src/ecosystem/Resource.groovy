@@ -140,21 +140,6 @@ public class Resource extends ecosystem.Machine  {
 
     /**
      *
-     * This is an agent property.
-     * @field useage
-     *
-     */
-    @Parameter (displayName = "Useage", usageName = "useage")
-    public int getUseage() {
-        return useage
-    }
-    public void setUseage(int newValue) {
-        useage = newValue
-    }
-    public int useage = 0
-
-    /**
-     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -206,13 +191,11 @@ public class Resource extends ecosystem.Machine  {
         this.needCap[ sc ] = amount
         println sc.toString() + " need = " +amount
         this.setSourceable(this.getSourceable() - amount)
-        println "useage = " + this.useage
 
         // This is an agent decision.
         if (this.getFullLength() == 0) {
 
             // This is a task.
-            this.setUseage(this.getUseage() -amount)
             this.setAvailable(this.getAvailable() - amount)
             sc.prepareStatus[this] = true
             println "first assign sc with " +(this.available - this.sourceable).toString()

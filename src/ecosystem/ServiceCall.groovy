@@ -158,81 +158,42 @@ public class ServiceCall extends ecosystem.Job  {
 
     /**
      *
-     * Check if all the candidates are ready
-     * @method CheckStatus
+     * This is the step behavior.
+     * @method Recall
      *
      */
     @ScheduledMethod(
-        start = 0.3d,
+        start = 0.4d,
         interval = 1d,
         shuffle = true
     )
-    public def CheckStatus() {
-
-        // This is a task.
-        def time = GetTickCount()
-
-        // This is an agent decision.
-        if (time - this.startTime > 10) {
-
-            // This is a task.
-            this.recall(time)
-
-        } else  {
-
-
-            // This is an agent decision.
-            if (this.getPrepareStatus().values().count(false) == 0 && this.getPrepareStatus().size()>0) {
-
-                // This is a task.
-                this.processBehavior.Process(this)
-                this.prepareStatus = [:]
-
-            } else  {
-
-
-            }
-
-        }
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method recall
-     *
-     */
-    public void recall(t) {
+    public void Recall() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // This is a task.
+        time = GetTickCount()
 
         // This is an agent decision.
-        if (this.allocated) {
+        if (time - this.startTime > 10) {
 
-            // This is a task.
 
-        } else  {
-
-            // This is a task.
-            def so = [:]
-
-            // This is a loop.
-            for (res in this.owner.resourceList) {
+            // This is an agent decision.
+            if (this.allocated) {
 
                 // This is a task.
-                so[res] = res.sourceable
+
+            } else  {
+
+                // This is a task.
+                this.owner.RemoveServiceCall(this)
+                println toString() + " recalled"
 
             }
 
-            // This is a task.
-            Scanner reader = new Scanner(System.in)
-            println so
-            int n = reader.nextInt()
-            // This is a task.
-            this.owner.RemoveServiceCall(this)
-            println toString() + " recalled"
+        } else  {
+
 
         }
     }

@@ -549,11 +549,6 @@ public class Machine  {
 
         // This is a task.
         def scList = competeList.findAll{ it-> it.getClass() == ecosystem.ServiceCall }
-        if(scList.size() >1){
-        	Scanner reader = new Scanner(System.in)
-        	println "Fuck the reply"
-        	int n = reader.nextInt()
-        }
         this.responseList = []
     }
 

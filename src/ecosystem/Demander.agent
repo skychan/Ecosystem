@@ -7,7 +7,7 @@
     <behaviorstep x="335" y="640" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Read data from file" visibility="0" returntype="def" compiledname="ReadData" parameters="String orderID" exceptions="">
       <label x="335" y="625" text="Read Data"/>
     </behaviorstep>
-    <behaviorstep x="211" y="67" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
+    <behaviorstep x="211" y="67" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="step" parameters="" exceptions="">
       <label x="211" y="52" text="Step"/>
     </behaviorstep>
   </behaviorsteps>
@@ -85,10 +85,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="389" y="1059"/>
-    <endstep x="583" y="288"/>
-    <endstep x="312" y="518"/>
-    <endstep x="214" y="331"/>
+    <endstep x="394" y="1064"/>
+    <endstep x="588" y="293"/>
+    <endstep x="317" y="523"/>
+    <endstep x="219" y="336"/>
   </endsteps>
   <connections>
     <transitions>

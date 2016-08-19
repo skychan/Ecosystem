@@ -538,6 +538,33 @@ public class Job  {
 
     /**
      *
+     * Check if all the candidates are ready
+     * @method CheckStatus
+     *
+     */
+    @ScheduledMethod(
+        start = 0.3d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def CheckStatus() {
+
+
+        // This is an agent decision.
+        if (this.getPrepareStatus().values().count(false) == 0 && this.getPrepareStatus().size()>0) {
+
+            // This is a task.
+            this.processBehavior.Process(this)
+            this.prepareStatus = [:]
+
+        } else  {
+
+
+        }
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

@@ -18,7 +18,7 @@
     <taskstep x="58" y="202" comment="This is a task." command1="responseBehavior = new ResourceResponse()" command2="assignBehavior = new ResourceAssign()" command3="releaseBehavior  = new ResourceRelease()" command4="" command5="">
       <label x="58" y="187" text="Do Task"/>
     </taskstep>
-    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="println this.toString()" command3="this.setSourceable(this.getSourceable() - amount)" command4="Scanner reader = new Scanner(System.in)\fprintln sc.toString()\fprintln sc.allocated\fint n = reader.nextInt()" command5="">
+    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="println this.toString()" command3="this.setSourceable(this.getSourceable() - amount)" command4="" command5="">
       <label x="370" y="475" text="Do Task"/>
     </taskstep>
     <taskstep x="265" y="630" comment="This is a task." command1="sc.predecessor += this.jobList" command2="this.assignBehavior.Queue(sc,this)" command3="" command4="" command5="">
@@ -49,7 +49,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="392" y="763"/>
+    <joinstep x="397" y="768"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="476" y="244" comment="This is an agent property." visibility="0" compiledname="sourceable" type="int" defaultvalue="0">
@@ -69,10 +69,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="111" y="359"/>
-    <endstep x="393" y="855"/>
-    <endstep x="609" y="752"/>
-    <endstep x="65" y="801"/>
+    <endstep x="116" y="364"/>
+    <endstep x="398" y="860"/>
+    <endstep x="614" y="757"/>
+    <endstep x="70" y="806"/>
   </endsteps>
   <connections>
     <transitions>

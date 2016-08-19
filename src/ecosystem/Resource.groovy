@@ -191,10 +191,6 @@ public class Resource extends ecosystem.Machine  {
         this.needCap[ sc ] = amount
         println this.toString()
         this.setSourceable(this.getSourceable() - amount)
-        Scanner reader = new Scanner(System.in)
-        println sc.toString()
-        println sc.allocated
-        int n = reader.nextInt()
 
         // This is an agent decision.
         if (this.getFullLength() == 0) {

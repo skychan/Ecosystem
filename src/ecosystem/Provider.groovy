@@ -637,20 +637,6 @@ public class Provider extends ecosystem.User  {
 
         }
 
-        // This is a task.
-        def so = [:]
-
-        // This is a loop.
-        for (res in this.resourceList) {
-
-            // This is a task.
-            so[res] = res.sourceable
-
-        }
-
-        // This is a task.
-        Scanner reader = new Scanner(System.in)
-        int n = reader.nextInt()
     }
 
     /**
@@ -697,52 +683,6 @@ public class Provider extends ecosystem.User  {
 
         // This is a task.
         RemoveAgentFromContext("Ecosystem", sc)
-        def so = [:]
-
-        // This is a loop.
-        for (res in this.resourceList) {
-
-            // This is a task.
-            so[res] = res.sourceable
-
-        }
-
-        // This is a task.
-        Scanner reader = new Scanner(System.in)
-        println so
-        int n = reader.nextInt()
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method inspect
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Resource',
-        watcheeFieldNames = 'sourceable',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public def inspect(ecosystem.Resource watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        println watchedAgent
-        println watchedAgent.jobList
-        println watchedAgent.buffer
-        Scanner reader = new Scanner(System.in)
-        println so
-        int n = reader.nextInt()
-        // Return the results.
-        return returnValue
-
     }
 
     /**

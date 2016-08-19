@@ -106,7 +106,6 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
             r.setAvailable( r.getAvailable() + job.needResourceCapacity[ r.getType() ] )
             r.buffer.remove(job)
             def bufferamount = [:]
-            println "after release the task " + r.jobList2
 
         } else  {
 
@@ -128,9 +127,9 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
         // This is a task.
         m.jobList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
         int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }
-        //println m.toString()
-        //println m.jobList
-        //println m.buffer
+        println m.toString()
+        println m.buffer
+        println m.jobList
 
         // This is an agent decision.
         if (i == 0) {

@@ -485,7 +485,6 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        println job.toString() + " need = " + job.needResourceCapacity[this.getType()]
 
         // This is an agent decision.
         if (this.assignBehavior.BufferEnterance(job,this)) {

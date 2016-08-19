@@ -30,13 +30,13 @@
     <taskstep x="355" y="462" comment="This is a task." command1="needCap -= res.getSourceable()" command2="chosenMap[candidate.key][res] = res.getSourceable()" command3="" command4="" command5="">
       <label x="355" y="447" text="Do Task"/>
     </taskstep>
-    <taskstep x="253" y="143" comment="This is a task." command1="def chosenMap = [:]" command2="" command3="" command4="" command5="">
+    <taskstep x="253" y="143" comment="This is a task." command1="def chosenMap = [:]" command2="println sc" command3="println candidates" command4="" command5="">
       <label x="253" y="128" text="Do Task"/>
     </taskstep>
     <taskstep x="20" y="264" comment="This is a task." command1="returnValue = []" command2="" command3="" command4="" command5="">
       <label x="20" y="249" text="Do Task"/>
     </taskstep>
-    <taskstep x="149" y="264" comment="This is a task." command1="candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates" command3="" command4="" command5="">
+    <taskstep x="149" y="264" comment="This is a task." command1="//candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates" command3="" command4="" command5="">
       <label x="149" y="249" text="Do Task"/>
     </taskstep>
     <taskstep x="555" y="384" comment="This is a task." command1="chosenMap[candidate.key] = null" command2="" command3="" command4="" command5="">
@@ -97,15 +97,15 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="123" y="375"/>
-    <joinstep x="771" y="321"/>
+    <joinstep x="128" y="380"/>
+    <joinstep x="776" y="326"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="275" y="483"/>
-    <endstep x="122" y="460"/>
-    <endstep x="778" y="409"/>
-    <endstep x="970" y="312"/>
+    <endstep x="252" y="468"/>
+    <endstep x="127" y="465"/>
+    <endstep x="783" y="414"/>
+    <endstep x="975" y="317"/>
   </endsteps>
   <connections>
     <transitions>

@@ -9,13 +9,13 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="66" y="255" comment="This is a task." command1="r.setAvailable( r.getAvailable() + job.needResourceCapacity[ r.getType() ] )" command2="r.buffer.remove(job)" command3="def bufferamount = [:]" command4="println &quot;after release the task &quot; + r.jobList2" command5="">
+    <taskstep x="66" y="255" comment="This is a task." command1="r.setAvailable( r.getAvailable() + job.needResourceCapacity[ r.getType() ] )" command2="r.buffer.remove(job)" command3="def bufferamount = [:]" command4="" command5="">
       <label x="66" y="240" text="Do Task"/>
     </taskstep>
     <taskstep x="391" y="702" comment="This is a task." command1="m.assignBehavior.Buffer(j,m)" command2="m.jobList.remove(j)" command3="m.jobList2.remove(j)" command4="" command5="">
       <label x="391" y="687" text="Do Task"/>
     </taskstep>
-    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="//println m.toString()" command4="//println m.jobList" command5="//println m.buffer">
+    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="println m.toString()" command4="println m.buffer" command5="println m.jobList">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
     <taskstep x="583" y="217" comment="This is a task." command1="job.prepareStatus[m] = true" command2="m.jobList.remove(job)\fm.jobList2.remove(job)" command3="m.setAvailable(m.getAvailable() - m.needCap[job])" command4="" command5="m.needCap.remove(job)">
@@ -76,13 +76,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="293" y="447"/>
+    <joinstep x="298" y="452"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="88" y="611"/>
-    <endstep x="291" y="736"/>
-    <endstep x="9" y="338"/>
+    <endstep x="93" y="616"/>
+    <endstep x="296" y="741"/>
+    <endstep x="14" y="343"/>
   </endsteps>
   <connections>
     <transitions>

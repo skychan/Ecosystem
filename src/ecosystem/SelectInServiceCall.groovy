@@ -103,6 +103,8 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
 
         // This is a task.
         def chosenMap = [:]
+        println sc
+        println candidates
 
         // This is a loop.
         for (candidate in candidates) {
@@ -188,7 +190,7 @@ public class SelectInServiceCall implements ecosystem.SelectBehavior {
         } else  {
 
             // This is a task.
-            candidates.sort{[-it.getAvailable(),it.jobList.size()]}
+            //candidates.sort{[-it.getAvailable(),it.jobList.size()]}
             returnValue = candidates
 
         }

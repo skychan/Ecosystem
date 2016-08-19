@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="Scanner reader = new Scanner(System.in)\fSystem.out.println(&quot;Generate Resource &quot;)\fint n = reader.nextInt()" command4="" command5="">
+    <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
     <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
@@ -59,11 +59,6 @@
       <transition>
         <transitionsource type="task" index="1" anchor="3"/>
         <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="2" anchor="2"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

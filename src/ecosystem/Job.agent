@@ -30,10 +30,10 @@
     <taskstep x="1116" y="591" comment="This is a task." command1="int t = this.getReayTime() - this.inBufferTime[theRes]" command2="int t2 = this.getFinishTime() - this.inBufferTime[theRes]" command3="int q = this.needResourceCapacity[theRes.getType()] * t2" command4="this.reviews &lt;&lt; Math.exp(t)*q*theRes.getRank()" command5="">
       <label x="1116" y="576" text="Do Task"/>
     </taskstep>
-    <taskstep x="259" y="336" comment="This is a task." command1="" command2="" command3="" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
+    <taskstep x="259" y="336" comment="This is a task." command1="println this.allocated" command2="println this.toString()" command3="println this.allocation" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
       <label x="259" y="321" text="Do Task"/>
     </taskstep>
-    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="" command3="" command4="" command5="">
+    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="println this.prepareStatus" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
     <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
@@ -64,7 +64,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="758" y="374"/>
+    <joinstep x="763" y="379"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -129,10 +129,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="276" y="543"/>
-    <endstep x="760" y="439"/>
-    <endstep x="174" y="420"/>
-    <endstep x="1190" y="756"/>
+    <endstep x="281" y="548"/>
+    <endstep x="765" y="444"/>
+    <endstep x="179" y="425"/>
+    <endstep x="1195" y="761"/>
   </endsteps>
   <connections>
     <transitions>

@@ -9,12 +9,21 @@
     <taskstep x="90" y="128" comment="This is a task." command1="" command2="returnValue = (machine.getType() in job.getNeedResourceCapacity().keySet() &amp;&amp; machine.getSourceable() &gt;= job.needResourceCapacity[machine.getType()] )" command3="" command4="" command5="">
       <label x="90" y="113" text="Do Task"/>
     </taskstep>
+    <taskstep x="212" y="211" comment="This is a task." command1="println machine.toString() + &quot; for &quot; + job.toString()" command2="println machine.sourceable" command3="println job.needResourceCapacity[machine.getType()]" command4="println returnValue" command5="">
+      <label x="212" y="196" text="Do Task"/>
+    </taskstep>
   </tasksteps>
-  <decisionsteps/>
-  <joinsteps/>
+  <decisionsteps>
+    <decisionstep x="204" y="128" comment="This is an agent decision." criteria="machine.getType() in job.getNeedResourceCapacity().keySet()" branchType="if">
+      <label x="204" y="113" text="Evaluate Criteria"/>
+    </decisionstep>
+  </decisionsteps>
+  <joinsteps>
+    <joinstep x="111" y="237"/>
+  </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="114" y="321"/>
+    <endstep x="119" y="326"/>
   </endsteps>
   <connections>
     <transitions>
@@ -24,11 +33,32 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
+        <transitionsource type="task" index="0" anchor="3"/>
+        <transitiontarget type="decision" index="0" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="1" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
-    <booleantransitions/>
+    <booleantransitions>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="join" index="0" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+    </booleantransitions>
   </connections>
 </agent>

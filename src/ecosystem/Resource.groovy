@@ -189,8 +189,12 @@ public class Resource extends ecosystem.Machine  {
 
         // This is a task.
         this.needCap[ sc ] = amount
-        println sc.toString() + " need = " +amount
+        println this.toString()
         this.setSourceable(this.getSourceable() - amount)
+        Scanner reader = new Scanner(System.in)
+        println sc.toString()
+        println sc.allocated
+        int n = reader.nextInt()
 
         // This is an agent decision.
         if (this.getFullLength() == 0) {
@@ -198,7 +202,9 @@ public class Resource extends ecosystem.Machine  {
             // This is a task.
             this.setAvailable(this.getAvailable() - amount)
             sc.prepareStatus[this] = true
-            println "first assign sc with " +(this.available - this.sourceable).toString()
+            println "first assign sc with "
+            println this.buffer
+            println this.jobList
             this.needCap.remove(sc)
 
         } else  {
@@ -219,7 +225,7 @@ public class Resource extends ecosystem.Machine  {
     @Watch(
         watcheeClassName = 'ecosystem.ServiceCall',
         watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watchee.getInNeed() && $watcher.getSourceable()>0',
+        triggerCondition = '$watchee.getInNeed()',
         whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
     )
     public void Response(ecosystem.ServiceCall watchedAgent) {

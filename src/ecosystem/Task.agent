@@ -124,11 +124,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="63" y="322"/>
-    <endstep x="294" y="486"/>
-    <endstep x="512" y="416"/>
-    <endstep x="62" y="817"/>
-    <endstep x="413" y="834"/>
+    <endstep x="68" y="327"/>
+    <endstep x="299" y="491"/>
+    <endstep x="517" y="421"/>
+    <endstep x="67" y="822"/>
+    <endstep x="418" y="839"/>
   </endsteps>
   <connections>
     <transitions>
@@ -170,11 +170,6 @@
       <transition>
         <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="decision" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="5" anchor="1"/>
-        <transitiontarget type="task" index="16" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

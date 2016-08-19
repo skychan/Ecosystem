@@ -411,6 +411,9 @@ public class Job  {
             this.setAllocation(result.allocation)
             this.setAllocated(result.success)
             // This is a task.
+            println this.allocated
+            println this.toString()
+            println this.allocation
             this.theOnes = [:]
             this.candidates.each{ entry -> entry.value = [] }
 
@@ -440,6 +443,7 @@ public class Job  {
 
                 // This is a task.
                 selectBehavior.Assign(watchedAgent.allocation,this)
+                println this.prepareStatus
 
             } else  {
 

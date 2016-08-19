@@ -7,7 +7,7 @@
     <behaviorstep x="371" y="403" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Assign" parameters="sc,amount" exceptions="">
       <label x="371" y="388" text="Assign"/>
     </behaviorstep>
-    <behaviorstep x="594" y="374" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.ServiceCall" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="$watchee.getInNeed() &amp;&amp; $watcher.getSourceable()&gt;0" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="void" compiledname="Response" parameters="ecosystem.ServiceCall watchedAgent" exceptions="">
+    <behaviorstep x="594" y="374" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.ServiceCall" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="$watchee.getInNeed()" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="void" compiledname="Response" parameters="ecosystem.ServiceCall watchedAgent" exceptions="">
       <label x="594" y="359" text="Response for ServiceCall"/>
     </behaviorstep>
     <behaviorstep x="47" y="601" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="addMaster" parameters="ser,amount" exceptions="">
@@ -18,13 +18,13 @@
     <taskstep x="58" y="202" comment="This is a task." command1="responseBehavior = new ResourceResponse()" command2="assignBehavior = new ResourceAssign()" command3="releaseBehavior  = new ResourceRelease()" command4="" command5="">
       <label x="58" y="187" text="Do Task"/>
     </taskstep>
-    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="println sc.toString() + &quot; need = &quot; +amount" command3="this.setSourceable(this.getSourceable() - amount)" command4="" command5="">
+    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="println this.toString()" command3="this.setSourceable(this.getSourceable() - amount)" command4="Scanner reader = new Scanner(System.in)\fprintln sc.toString()\fprintln sc.allocated\fint n = reader.nextInt()" command5="">
       <label x="370" y="475" text="Do Task"/>
     </taskstep>
     <taskstep x="265" y="630" comment="This is a task." command1="sc.predecessor += this.jobList" command2="this.assignBehavior.Queue(sc,this)" command3="" command4="" command5="">
       <label x="265" y="615" text="Do Task"/>
     </taskstep>
-    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="println &quot;first assign sc with &quot; +(this.available - this.sourceable).toString()&#xa;" command5="this.needCap.remove(sc)">
+    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="println &quot;first assign sc with &quot;\fprintln this.buffer\fprintln this.jobList" command5="this.needCap.remove(sc)">
       <label x="481" y="618" text="Do Task"/>
     </taskstep>
     <taskstep x="590" y="624" comment="This is a task." command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
@@ -49,7 +49,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="382" y="753"/>
+    <joinstep x="392" y="763"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="476" y="244" comment="This is an agent property." visibility="0" compiledname="sourceable" type="int" defaultvalue="0">
@@ -69,10 +69,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="101" y="349"/>
-    <endstep x="383" y="845"/>
-    <endstep x="599" y="742"/>
-    <endstep x="55" y="791"/>
+    <endstep x="111" y="359"/>
+    <endstep x="393" y="855"/>
+    <endstep x="609" y="752"/>
+    <endstep x="65" y="801"/>
   </endsteps>
   <connections>
     <transitions>

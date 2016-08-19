@@ -55,7 +55,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="90" y="447"/>
+    <endstep x="95" y="452"/>
   </endsteps>
   <connections>
     <transitions>

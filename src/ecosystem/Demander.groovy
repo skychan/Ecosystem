@@ -243,11 +243,6 @@ public class Demander extends ecosystem.User  {
      * @method step
      *
      */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
     public def step() {
 
         // Define the return value variable.

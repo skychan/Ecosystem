@@ -10,8 +10,8 @@
     <behaviorstep x="57" y="336" scheduleannotationstart="0.3" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.9" watchannotationtriggerpriority="" watchannotationpick="" comment="Check if all the candidates are ready" visibility="0" returntype="" compiledname="CheckStatus" parameters="" exceptions="">
       <label x="57" y="321" text="Check Status"/>
     </behaviorstep>
-    <behaviorstep x="285" y="380" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="recall" parameters="" exceptions="">
-      <label x="285" y="365" text="Recall"/>
+    <behaviorstep x="433" y="480" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="recall" parameters="t" exceptions="">
+      <label x="433" y="465" text="Recall"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -30,17 +30,26 @@
     <taskstep x="58" y="673" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus = [:]" command3="" command4="" command5="">
       <label x="58" y="658" text="Do Task"/>
     </taskstep>
-    <taskstep x="157" y="504" comment="This is a task." command1="this.recall()" command2="" command3="" command4="" command5="">
+    <taskstep x="157" y="504" comment="This is a task." command1="this.recall(time)" command2="" command3="" command4="" command5="">
       <label x="157" y="489" text="Do Task"/>
     </taskstep>
-    <taskstep x="220" y="550" comment="This is a task." command1="this.owner.RemoveServiceCall(this)" command2="" command3="" command4="" command5="">
-      <label x="220" y="535" text="Do Task"/>
+    <taskstep x="368" y="650" comment="This is a task." command1="this.owner.RemoveServiceCall(this)" command2="println toString() + &quot; recalled&quot;" command3="" command4="" command5="">
+      <label x="368" y="635" text="Do Task"/>
     </taskstep>
     <taskstep x="64" y="411" comment="This is a task." command1="def time = GetTickCount()" command2="" command3="" command4="" command5="">
       <label x="64" y="396" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="551" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
-      <label x="355" y="536" text="Do Task"/>
+    <taskstep x="503" y="651" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+      <label x="503" y="636" text="Do Task"/>
+    </taskstep>
+    <taskstep x="295" y="509" comment="This is a task." command1="def so = [:]" command2="" command3="" command4="" command5="">
+      <label x="295" y="494" text="Do Task"/>
+    </taskstep>
+    <taskstep x="202" y="592" comment="This is a task." command1="so[res] = res.sourceable" command2="" command3="" command4="" command5="">
+      <label x="202" y="577" text="Do Task"/>
+    </taskstep>
+    <taskstep x="274" y="663" comment="This is a task." command1="Scanner reader = new Scanner(System.in)\fprintln so\fint n = reader.nextInt()" command2="" command3="" command4="" command5="">
+      <label x="274" y="648" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -50,15 +59,18 @@
     <decisionstep x="55" y="584" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="55" y="569" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="55" y="506" comment="This is an agent decision." criteria="time - this.startTime &gt; 100000" branchType="if">
-      <label x="55" y="491" text="Evaluate Criteria"/>
+    <decisionstep x="59" y="498" comment="This is an agent decision." criteria="time - this.startTime &gt; 10" branchType="if">
+      <label x="59" y="483" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="287" y="460" comment="This is an agent decision." criteria="this.allocated" branchType="if">
-      <label x="287" y="445" text="Evaluate Criteria"/>
+    <decisionstep x="435" y="560" comment="This is an agent decision." criteria="this.allocated" branchType="if">
+      <label x="435" y="545" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="288" y="588" comment="This is a loop." criteria="res in this.owner.resourceList" branchType="while">
+      <label x="288" y="573" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="296" y="638"/>
+    <joinstep x="454" y="748"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="161" y="68" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
@@ -69,10 +81,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="58" y="271"/>
-    <endstep x="386" y="336"/>
-    <endstep x="77" y="766"/>
-    <endstep x="297" y="698"/>
+    <endstep x="63" y="276"/>
+    <endstep x="391" y="341"/>
+    <endstep x="82" y="771"/>
+    <endstep x="455" y="808"/>
   </endsteps>
   <connections>
     <transitions>
@@ -122,13 +134,23 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="8" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="8" anchor="2"/>
-        <transitiontarget type="join" index="0" anchor="3"/>
+        <transitionsource type="task" index="9" anchor="2"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="3"/>
+        <transitiontarget type="task" index="6" anchor="1"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -158,14 +180,24 @@
         <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="3" anchor="1"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="3" anchor="3"/>
         <transitiontarget type="task" index="8" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="3" anchor="1"/>
+        <transitiontarget type="task" index="9" anchor="3"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="4" anchor="1"/>
+        <transitiontarget type="task" index="10" anchor="3"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="4" anchor="2"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

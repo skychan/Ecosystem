@@ -173,10 +173,13 @@ public class ServiceCall extends ecosystem.Job  {
         def time = GetTickCount()
 
         // This is an agent decision.
-        if (time - this.startTime >20000000) {
+        if (time - this.startTime > 10) {
 
             // This is a task.
             this.recall()
+            Scanner reader = new Scanner(System.in)
+            println "recall the sevicecall " + this.toString()
+            int n = reader.nextInt()
 
         } else  {
 
@@ -211,29 +214,10 @@ public class ServiceCall extends ecosystem.Job  {
         // This is an agent decision.
         if (this.allocated) {
 
-
-            // This is a loop.
-            for (resdata in this.prepareStatus) {
-
-                // This is a task.
-                resdata.key.available += this.allocation[resdata.key]
-
-                // This is an agent decision.
-                if (resdata.value) {
-
-                    // This is a task.
-                    this.owner.RemoveServiceCall(this)
-
-                } else  {
-
-                    // This is a task.
-                    resdata.key.jobList.remove(this)
-                    this.owner.RemoveServiceCall(this)
-
-                }
-
-            }
-
+            // This is a task.
+            Scanner reader = new Scanner(System.in)
+            println "forget about it"
+            int n = reader.nextInt()
 
         } else  {
 

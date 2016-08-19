@@ -15,7 +15,7 @@
     <taskstep x="391" y="702" comment="This is a task." command1="m.assignBehavior.Buffer(j,m)" command2="m.jobList.remove(j)" command3="m.jobList2.remove(j)" command4="" command5="">
       <label x="391" y="687" text="Do Task"/>
     </taskstep>
-    <taskstep x="272" y="143" comment="This is a task." command1="//m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="//println m.toString()" command4="//println m.jobList" command5="//println m.buffer">
+    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="//println m.toString()" command4="//println m.jobList" command5="//println m.buffer">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
     <taskstep x="583" y="217" comment="This is a task." command1="job.prepareStatus[m] = true" command2="m.jobList.remove(job)\fm.jobList2.remove(job)" command3="m.setAvailable(m.getAvailable() - m.needCap[job])" command4="m.setUseage(m.getUseage() -m.needCap[job])" command5="m.needCap.remove(job)">

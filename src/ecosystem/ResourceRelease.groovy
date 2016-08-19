@@ -126,7 +126,7 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        //m.jobList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
+        m.jobList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
         int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }
         //println m.toString()
         //println m.jobList

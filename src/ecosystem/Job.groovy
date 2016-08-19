@@ -350,6 +350,21 @@ public class Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field predecessor
+     *
+     */
+    @Parameter (displayName = "Predecessor", usageName = "predecessor")
+    public Set getPredecessor() {
+        return predecessor
+    }
+    public void setPredecessor(Set newValue) {
+        predecessor = newValue
+    }
+    public Set predecessor = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -461,28 +476,6 @@ public class Job  {
             this.candidates[competitor.getType()]<<competitor
 
         }
-    }
-
-    /**
-     *
-     * Ready to process means to reset the task status in case
-     * @method Reset
-     *
-     */
-    public def Reset() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.setPrepareStatus([:])
-        this.setInNeed(false)
-        // Return the results.
-        return returnValue
-
     }
 
     /**

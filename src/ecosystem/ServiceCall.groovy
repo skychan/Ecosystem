@@ -173,7 +173,7 @@ public class ServiceCall extends ecosystem.Job  {
         def time = GetTickCount()
 
         // This is an agent decision.
-        if (time - this.startTime >200) {
+        if (time - this.startTime >20000000) {
 
             // This is a task.
             this.recall()

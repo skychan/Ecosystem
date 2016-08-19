@@ -141,17 +141,17 @@ public class Resource extends ecosystem.Machine  {
     /**
      *
      * This is an agent property.
-     * @field responseList
+     * @field useage
      *
      */
-    @Parameter (displayName = "Response List", usageName = "responseList")
-    public List getResponseList() {
-        return responseList
+    @Parameter (displayName = "Useage", usageName = "useage")
+    public int getUseage() {
+        return useage
     }
-    public void setResponseList(List newValue) {
-        responseList = newValue
+    public void setUseage(int newValue) {
+        useage = newValue
     }
-    public List responseList = []
+    public int useage = 0
 
     /**
      *
@@ -204,21 +204,24 @@ public class Resource extends ecosystem.Machine  {
 
         // This is a task.
         this.needCap[ sc ] = amount
+        println sc.toString() + " need = " +amount
         this.setSourceable(this.getSourceable() - amount)
+        println "useage = " + this.useage
 
         // This is an agent decision.
         if (this.getFullLength() == 0) {
 
             // This is a task.
+            this.setUseage(this.getUseage() -amount)
             this.setAvailable(this.getAvailable() - amount)
             sc.prepareStatus[this] = true
-
+            println "first assign sc with " +(this.available - this.sourceable).toString()
             this.needCap.remove(sc)
 
         } else  {
 
             // This is a task.
-            // this.jobList[sc] = this.getSourceable()
+            sc.predecessor += this.jobList
             this.assignBehavior.Queue(sc,this)
 
         }
@@ -256,41 +259,6 @@ public class Resource extends ecosystem.Machine  {
 
 
             }
-
-        } else  {
-
-
-        }
-    }
-
-    /**
-     *
-     * Response to the need call
-     * @method Reply
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.ServiceCall',
-        watcheeFieldNames = 'inNeed',
-        triggerCondition = '$watchee.getInNeed() && $watcher.getSourceable()>0',
-        whenToTrigger = WatcherTriggerSchedule.LATER,
-        scheduleTriggerDelta = 0.1d
-    )
-    public void Reply(ecosystem.ServiceCall watchedAgent) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (this.responseList.size() > 0) {
-
-            // This is a task.
-            def theCall = this.responseList[0]
-            // change the compete state
-            this.competeList << theCall
-            theCall.addCandidates(this)
-            this.responseList = []
 
         } else  {
 

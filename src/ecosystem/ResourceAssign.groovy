@@ -131,7 +131,15 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        t.predecessor += r.jobList.findAll{ it-> it.getClass() == ecosystem.ServiceCall }
+        t.predecessor += r.buffer
+        // This is a task.
         r.jobList << t
+        if(t.getClass()==ecosystem.Task){
+        	r.jobList2[t] = r.sourceable
+        }else{
+        	r.jobList2[t] = r.needCap[t]
+        }
     }
 
     /**

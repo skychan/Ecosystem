@@ -18,26 +18,29 @@
     <taskstep x="11" y="262" comment="This is a task." command1="returnValue = true" command2="" command3="" command4="" command5="">
       <label x="11" y="247" text="Do Task"/>
     </taskstep>
-    <taskstep x="340" y="162" comment="This is a task." command1="r.jobList &lt;&lt; t" command2="" command3="" command4="" command5="">
-      <label x="340" y="147" text="Do Task"/>
+    <taskstep x="348" y="259" comment="This is a task." command1="r.jobList &lt;&lt; t" command2="if(t.getClass()==ecosystem.Task){\f&#x9;r.jobList2[t] = r.sourceable\f}else{\f&#x9;r.jobList2[t] = r.needCap[t]\f}" command3="" command4="" command5="">
+      <label x="348" y="244" text="Do Task"/>
     </taskstep>
     <taskstep x="531" y="195" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])" command3="t.prepareStatus[m] = true" command4="" command5="">
       <label x="531" y="180" text="Do Task"/>
     </taskstep>
+    <taskstep x="345" y="170" comment="This is a task." command1="t.predecessor += r.jobList.findAll{ it-&gt; it.getClass() == ecosystem.ServiceCall }" command2="t.predecessor += r.buffer" command3="" command4="" command5="">
+      <label x="345" y="155" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="94" y="159" comment="This is an agent decision." criteria="m.jobList.size()==0 &amp;&amp; m.getAvailable() &gt;= t.needResourceCapacity[m.getType()]" branchType="if">
-      <label x="94" y="144" text="Evaluate Criteria"/>
+    <decisionstep x="93" y="186" comment="This is an agent decision." criteria="m.jobList.size()==0 &amp;&amp; m.getAvailable() &gt;= t.needResourceCapacity[m.getType()]" branchType="if">
+      <label x="93" y="171" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="136" y="333"/>
+    <joinstep x="146" y="343"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="139" y="415"/>
-    <endstep x="370" y="287"/>
-    <endstep x="558" y="300"/>
+    <endstep x="149" y="425"/>
+    <endstep x="361" y="362"/>
+    <endstep x="568" y="310"/>
   </endsteps>
   <connections>
     <transitions>
@@ -48,7 +51,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="task" index="2" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -77,20 +80,25 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
     <booleantransitions>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="0" anchor="3"/>
-        <transitiontarget type="task" index="0" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="0" anchor="1"/>
         <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="0" anchor="3"/>
+        <transitiontarget type="task" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

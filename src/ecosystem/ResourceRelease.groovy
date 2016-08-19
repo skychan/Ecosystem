@@ -105,6 +105,8 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
             // This is a task.
             r.setAvailable( r.getAvailable() + job.needResourceCapacity[ r.getType() ] )
             r.buffer.remove(job)
+            def bufferamount = [:]
+            println "after release the task " + r.jobList2
 
         } else  {
 
@@ -124,18 +126,18 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        println m.toString()
+        //m.jobList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
         int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }
-        List newList = []
-        println m.jobList
-        println m.buffer
+        //println m.toString()
+        //println m.jobList
+        //println m.buffer
 
         // This is an agent decision.
         if (i == 0) {
 
             // This is a task.
             def job = m.jobList[i]
-            println m.toString() + " ready to process service call "
+            // println m.toString() + " ready to process service call "
 
             // This is an agent decision.
             if (m.buffer == []) {
@@ -143,8 +145,11 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
                 // This is a task.
                 job.prepareStatus[m] = true
                 m.jobList.remove(job)
+                m.jobList2.remove(job)
                 m.setAvailable(m.getAvailable() - m.needCap[job])
-                println job.prepareStatus
+                m.setUseage(m.getUseage() -m.needCap[job])
+                m.needCap.remove(job)
+                // This is a task.
 
             } else  {
 
@@ -153,6 +158,8 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
 
         } else  {
 
+            // This is a task.
+            List newList = []
 
             // This is an agent decision.
             if (i == -1) {
@@ -167,10 +174,17 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
 
             }
             // Sort
+            //newList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
+            println m.toString() + " avialable = " + m.getAvailable()
+            println m.toString() + " sourceable = " + m.getSourceable()
+            println "useage = " + m.getUseage()
+            println newList
 
             // This is a loop.
             for (j in newList) {
 
+                // This is a task.
+                println j.needResourceCapacity[m.getType()]
 
                 // This is an agent decision.
                 if (m.getAvailable() >= j.needResourceCapacity[m.getType()]) {
@@ -178,6 +192,7 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
                     // This is a task.
                     m.assignBehavior.Buffer(j,m)
                     m.jobList.remove(j)
+                    m.jobList2.remove(j)
 
                 } else  {
 

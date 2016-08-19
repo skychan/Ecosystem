@@ -34,7 +34,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="417" y="554"/>
+    <joinstep x="422" y="559"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="211" y="118" comment="This is an agent property." visibility="0" compiledname="resourceComposition" type="def" defaultvalue="[:]">
@@ -42,8 +42,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="77" y="324"/>
-    <endstep x="423" y="632"/>
+    <endstep x="82" y="329"/>
+    <endstep x="428" y="637"/>
   </endsteps>
   <connections>
     <transitions>
@@ -53,13 +53,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="end" index="0" anchor="0"/>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="decision" index="0" anchor="0"/>
+        <transitionsource type="task" index="0" anchor="2"/>
+        <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

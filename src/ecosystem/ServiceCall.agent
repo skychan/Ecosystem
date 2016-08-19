@@ -56,7 +56,7 @@
     <decisionstep x="55" y="584" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="55" y="569" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="55" y="506" comment="This is an agent decision." criteria="time - this.startTime &gt;200" branchType="if">
+    <decisionstep x="55" y="506" comment="This is an agent decision." criteria="time - this.startTime &gt;20000000" branchType="if">
       <label x="55" y="491" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="287" y="460" comment="This is an agent decision." criteria="this.allocated" branchType="if">
@@ -70,7 +70,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="376" y="799"/>
+    <joinstep x="381" y="804"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="161" y="68" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
@@ -81,10 +81,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="53" y="266"/>
-    <endstep x="381" y="331"/>
-    <endstep x="72" y="761"/>
-    <endstep x="377" y="859"/>
+    <endstep x="58" y="271"/>
+    <endstep x="386" y="336"/>
+    <endstep x="77" y="766"/>
+    <endstep x="382" y="864"/>
   </endsteps>
   <connections>
     <transitions>
@@ -99,6 +99,16 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="decision" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -109,18 +119,8 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="10" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="4" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="decision" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -139,13 +139,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
+        <transitionsource type="task" index="10" anchor="2"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="10" anchor="2"/>
-        <transitiontarget type="decision" index="2" anchor="0"/>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -175,14 +175,14 @@
         <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="3" anchor="1"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="3" anchor="3"/>
         <transitiontarget type="decision" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="3" anchor="1"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

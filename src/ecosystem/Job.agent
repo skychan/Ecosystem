@@ -7,9 +7,6 @@
     <behaviorstep x="693" y="88" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="addCandidates" parameters="competitor" exceptions="">
       <label x="693" y="73" text="Add candidates"/>
     </behaviorstep>
-    <behaviorstep x="1212" y="512" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Ready to process means to reset the task status in case" visibility="0" returntype="def" compiledname="Reset" parameters="" exceptions="">
-      <label x="1212" y="497" text="Reset"/>
-    </behaviorstep>
     <behaviorstep x="158" y="141" scheduleannotationstart="0" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="" watchannotationtriggerpriority="" watchannotationpick="" comment="Repeat" visibility="0" returntype="void" compiledname="Need" parameters="" exceptions="">
       <label x="158" y="126" text="Need"/>
     </behaviorstep>
@@ -26,9 +23,6 @@
     </taskstep>
     <taskstep x="763" y="243" comment="This is a task." command1="this.candidates[&apos;service&apos;] &lt;&lt; competitor" command2="" command3="" command4="" command5="">
       <label x="763" y="228" text="Do Task"/>
-    </taskstep>
-    <taskstep x="1212" y="604" comment="This is a task." command1="this.setPrepareStatus([:])" command2="this.setInNeed(false)" command3="" command4="" command5="">
-      <label x="1212" y="589" text="Do Task"/>
     </taskstep>
     <taskstep x="158" y="308" comment="This is a task." command1="this.setInNeed(true)" command2="" command3="" command4="" command5="//println this.toString() + &quot; lack response so publish need again&quot;">
       <label x="158" y="293" text="Do Task"/>
@@ -70,7 +64,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="753" y="369"/>
+    <joinstep x="758" y="374"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -130,13 +124,15 @@
     <agentproperty x="619" y="603" comment="This is an agent property." visibility="0" compiledname="processBehavior" type="ProcessBehavior" defaultvalue="null">
       <label x="624" y="588" text="Process Behavior"/>
     </agentproperty>
+    <agentproperty x="108" y="661" comment="This is an agent property." visibility="0" compiledname="predecessor" type="Set" defaultvalue="[]">
+      <label x="113" y="646" text="Predecessor"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="271" y="538"/>
-    <endstep x="755" y="434"/>
-    <endstep x="1286" y="767"/>
-    <endstep x="169" y="415"/>
-    <endstep x="1185" y="751"/>
+    <endstep x="276" y="543"/>
+    <endstep x="760" y="439"/>
+    <endstep x="174" y="420"/>
+    <endstep x="1190" y="756"/>
   </endsteps>
   <connections>
     <transitions>
@@ -152,22 +148,17 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="2" anchor="0"/>
-        <transitiontarget type="task" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="3" anchor="0"/>
         <transitiontarget type="decision" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="task" index="5" anchor="0"/>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="0" anchor="2"/>
-        <transitiontarget type="task" index="6" anchor="0"/>
+        <transitiontarget type="task" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -192,11 +183,6 @@
       </transition>
       <transition>
         <transitionsource type="task" index="5" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="6" anchor="2"/>
         <transitiontarget type="decision" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -219,7 +205,7 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
+        <transitiontarget type="task" index="3" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -239,7 +225,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="3" anchor="3"/>
-        <transitiontarget type="task" index="7" anchor="1"/>
+        <transitiontarget type="task" index="6" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -249,12 +235,12 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="5" anchor="0"/>
-        <transitiontarget type="task" index="8" anchor="2"/>
+        <transitiontarget type="task" index="7" anchor="2"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="5" anchor="3"/>
-        <transitiontarget type="task" index="9" anchor="1"/>
+        <transitiontarget type="task" index="8" anchor="1"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

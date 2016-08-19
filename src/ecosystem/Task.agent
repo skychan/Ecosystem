@@ -54,6 +54,21 @@
     <taskstep x="401" y="729" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus = [:]" command3="" command4="" command5="">
       <label x="401" y="714" text="Do Task"/>
     </taskstep>
+    <taskstep x="564" y="748" comment="This is a task." command1="println job" command2="println job.prepareStatus" command3="println &quot; need = &quot; + job.needResourceCapacity[mac.getType()]" command4="" command5="">
+      <label x="564" y="733" text="Do Task"/>
+    </taskstep>
+    <taskstep x="670" y="658" comment="This is a task." command1="println &quot; buffer &quot;" command2="" command3="" command4="" command5="">
+      <label x="670" y="643" text="Do Task"/>
+    </taskstep>
+    <taskstep x="763" y="745" comment="This is a task." command1="println job" command2="println job.prepareStatus" command3="println &quot; need = &quot; + job.needResourceCapacity[mac.getType()]" command4="" command5="">
+      <label x="763" y="730" text="Do Task"/>
+    </taskstep>
+    <taskstep x="559" y="576" comment="This is a task." command1="if(mac.getClass() == ecosystem.Resource){\f&#x9;println &quot; sourceable = &quot; + mac.sourceable\f&#x9;println &quot; available = &quot;+ mac.available\f&#x9;println &quot; useage = &quot; + mac.useage\f}" command2="" command3="" command4="" command5="">
+      <label x="559" y="561" text="Do Task"/>
+    </taskstep>
+    <taskstep x="556" y="475" comment="The finish step" command1="" command2="println mac" command3="println &quot;jobList&quot;" command4="" command5="">
+      <label x="556" y="460" text="Afterward"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="274" y="220" comment="This is a loop." criteria="data in tdata.value" branchType="while">
@@ -80,6 +95,12 @@
     <decisionstep x="400" y="632" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="400" y="617" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="563" y="661" comment="This is a loop." criteria="job in mac.jobList" branchType="while">
+      <label x="563" y="646" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="755" y="659" comment="This is a loop." criteria="job in mac.buffer" branchType="while">
+      <label x="755" y="644" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties>
@@ -92,8 +113,8 @@
     <agentproperty x="148" y="538" comment="This is an agent property." visibility="0" compiledname="master" type="ecosystem.Order" defaultvalue="null">
       <label x="153" y="523" text="Master"/>
     </agentproperty>
-    <agentproperty x="565" y="496" comment="This is an agent property." visibility="0" compiledname="remainingTime" type="int" defaultvalue="-1">
-      <label x="570" y="478" text="RemainingTime"/>
+    <agentproperty x="487" y="344" comment="This is an agent property." visibility="0" compiledname="remainingTime" type="int" defaultvalue="-1">
+      <label x="492" y="326" text="RemainingTime"/>
     </agentproperty>
     <agentproperty x="127" y="85" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
       <label x="132" y="70" text="Type"/>
@@ -103,11 +124,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="58" y="317"/>
-    <endstep x="289" y="481"/>
-    <endstep x="649" y="538"/>
-    <endstep x="57" y="812"/>
-    <endstep x="408" y="829"/>
+    <endstep x="63" y="322"/>
+    <endstep x="294" y="486"/>
+    <endstep x="512" y="416"/>
+    <endstep x="62" y="817"/>
+    <endstep x="413" y="834"/>
   </endsteps>
   <connections>
     <transitions>
@@ -132,6 +153,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="decision" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
@@ -147,6 +173,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="5" anchor="1"/>
+        <transitiontarget type="task" index="16" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="7" anchor="2"/>
         <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
@@ -157,13 +188,23 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="decision" index="7" anchor="0"/>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="11" anchor="2"/>
-        <transitiontarget type="end" index="4" anchor="0"/>
+        <transitionsource type="task" index="13" anchor="3"/>
+        <transitiontarget type="decision" index="9" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="15" anchor="2"/>
+        <transitiontarget type="decision" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="16" anchor="2"/>
+        <transitiontarget type="task" index="15" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -226,6 +267,21 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="7" anchor="2"/>
         <transitiontarget type="task" index="11" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="8" anchor="2"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="8" anchor="3"/>
+        <transitiontarget type="task" index="13" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="9" anchor="2"/>
+        <transitiontarget type="task" index="14" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

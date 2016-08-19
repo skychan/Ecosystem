@@ -290,6 +290,36 @@ public class Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field responseList
+     *
+     */
+    @Parameter (displayName = "Response List", usageName = "responseList")
+    public List getResponseList() {
+        return responseList
+    }
+    public void setResponseList(List newValue) {
+        responseList = newValue
+    }
+    public List responseList = []
+
+    /**
+     *
+     * Job list
+     * @field jobList2
+     *
+     */
+    @Parameter (displayName = "Job List", usageName = "jobList2")
+    public Map getJobList2() {
+        return jobList2
+    }
+    public void setJobList2(Map newValue) {
+        jobList2 = newValue
+    }
+    public Map jobList2 = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -338,8 +368,7 @@ public class Machine  {
             if (responseBehavior.Exist(watchedAgent,this)) {
 
                 // change the compete state
-                this.competeList << watchedAgent
-                watchedAgent.addCandidates(this)
+                this.responseList << watchedAgent
 
             } else  {
 
@@ -450,12 +479,14 @@ public class Machine  {
      * @method Assign
      *
      */
-    public void Assign(job) {
+    public void Assign(Task job) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        println job.toString() + " need = " + job.needResourceCapacity[this.getType()]
+        println "useage = " + this.useage
 
         // This is an agent decision.
         if (this.assignBehavior.BufferEnterance(job,this)) {
@@ -490,6 +521,85 @@ public class Machine  {
 
             // This is a task.
             releaseBehavior.Next(this)
+
+        } else  {
+
+
+        }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Reply
+     *
+     */
+    public void Reply(taskReplyList) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (job in taskReplyList) {
+
+            // change the compete state
+            this.competeList << job
+            job.addCandidates(this)
+
+        }
+
+        // This is a task.
+        def scList = competeList.findAll{ it-> it.getClass() == ecosystem.ServiceCall }
+        if(scList.size() >1){
+        	Scanner reader = new Scanner(System.in)
+        	println "Fuck the reply"
+        	int n = reader.nextInt()
+        }
+        this.responseList = []
+    }
+
+    /**
+     *
+     * Response to the need call
+     * @method Reply
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Job',
+        watcheeFieldNames = 'inNeed',
+        whenToTrigger = WatcherTriggerSchedule.LATER,
+        scheduleTriggerDelta = 0.1d
+    )
+    public void Reply(ecosystem.Job watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (this.responseList.size() > 0) {
+
+
+            // This is an agent decision.
+            if (this.responseList.findIndexOf{ it.getClass() == ecosystem.ServiceCall } == -1) {
+
+                // This is a task.
+                this.Reply(this.responseList)
+
+            } else  {
+
+                // This is a task.
+                def scList = this.responseList.findAll{ it-> it.getClass() == ecosystem.ServiceCall }
+                // sort the scList
+                def theCall = scList[0]
+                List taskReplyList = this.responseList.findAll{ it -> it.getClass() == ecosystem.Task }
+                taskReplyList = taskReplyList.findAll{it -> it.needResourceCapacity[this.getType()]  <= this.getSourceable() - theCall.needResourceCapacity[this.getType()] }
+                // change the compete state
+                taskReplyList = [theCall] + taskReplyList
+                this.Reply(taskReplyList)
+
+            }
 
         } else  {
 

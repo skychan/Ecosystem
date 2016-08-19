@@ -266,6 +266,39 @@ public class Task extends ecosystem.Job  {
 
                     // The finish step
                     mac.Release(this)
+                    // The finish step
+                    println mac
+                    println "jobList"
+                    // This is a task.
+                    if(mac.getClass() == ecosystem.Resource){
+                    	println " sourceable = " + mac.sourceable
+                    	println " available = "+ mac.available
+                    	println " useage = " + mac.useage
+                    }
+
+                    // This is a loop.
+                    for (job in mac.jobList) {
+
+                        // This is a task.
+                        println job
+                        println job.prepareStatus
+                        println " need = " + job.needResourceCapacity[mac.getType()]
+
+                    }
+
+                    // This is a task.
+                    println " buffer "
+
+                    // This is a loop.
+                    for (job in mac.buffer) {
+
+                        // This is a task.
+                        println job
+                        println job.prepareStatus
+                        println " need = " + job.needResourceCapacity[mac.getType()]
+
+                    }
+
 
                 }
 

@@ -16,15 +16,21 @@
     <behaviorstep x="306" y="1014" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="int" compiledname="getFullLength" parameters="" exceptions="">
       <label x="306" y="999" text="Full queue length"/>
     </behaviorstep>
-    <behaviorstep x="356" y="384" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Assign" parameters="job" exceptions="">
-      <label x="356" y="369" text="Assign"/>
+    <behaviorstep x="137" y="639" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Assign" parameters="Task job" exceptions="">
+      <label x="137" y="624" text="Assign"/>
     </behaviorstep>
-    <behaviorstep x="532" y="48" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="job" exceptions="">
-      <label x="532" y="33" text="Release"/>
+    <behaviorstep x="668" y="43" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Release" parameters="job" exceptions="">
+      <label x="668" y="28" text="Release"/>
+    </behaviorstep>
+    <behaviorstep x="503" y="35" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Reply" parameters="taskReplyList" exceptions="">
+      <label x="503" y="20" text="Reply"/>
+    </behaviorstep>
+    <behaviorstep x="366" y="25" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="ecosystem.Job" watchannotationtargetfieldnames="inNeed" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="0.1" watchannotationtriggerpriority="" watchannotationpick="" comment="Response to the need call" visibility="0" returntype="void" compiledname="Reply" parameters="ecosystem.Job watchedAgent" exceptions="">
+      <label x="366" y="10" text="Reply the Service Call"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="138" y="279" comment="change the compete state" command1="this.competeList &lt;&lt; watchedAgent" command2="watchedAgent.addCandidates(this)" command3="" command4="" command5="">
+    <taskstep x="138" y="279" comment="change the compete state" command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
       <label x="138" y="264" text="Change the comoete state"/>
     </taskstep>
     <taskstep x="885" y="516" comment="This is a task." command1="Provider user = this.owner[-1]" command2="returnValue = user.getRank()" command3="" command4="" command5="">
@@ -33,14 +39,14 @@
     <taskstep x="770" y="513" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
       <label x="770" y="498" text="Do Task"/>
     </taskstep>
-    <taskstep x="282" y="583" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="" command3="" command4="" command5="">
-      <label x="282" y="568" text="Do Task"/>
+    <taskstep x="63" y="838" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="" command3="" command4="" command5="">
+      <label x="63" y="823" text="Do Task"/>
     </taskstep>
-    <taskstep x="428" y="583" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
-      <label x="428" y="568" text="Do Task"/>
+    <taskstep x="209" y="838" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
+      <label x="209" y="823" text="Do Task"/>
     </taskstep>
-    <taskstep x="355" y="475" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
-      <label x="355" y="460" text="Do Task"/>
+    <taskstep x="136" y="730" comment="This is a task." command1="println job.toString() + &quot; need = &quot; + job.needResourceCapacity[this.getType()]" command2="println &quot;useage = &quot; + this.useage" command3="" command4="" command5="">
+      <label x="136" y="715" text="Do Task"/>
     </taskstep>
     <taskstep x="580" y="767" comment="This is a task." command1="double q = theTask.getProductQuality()" command2="int t = theTask.responseTime[this]" command3="double h = theTask.getHardness()" command4="int p = theTask.getProcessingTime()" command5="this.reviews &lt;&lt;  (h * q / (t+p))">
       <label x="580" y="752" text="Do Task"/>
@@ -51,11 +57,35 @@
     <taskstep x="581" y="844" comment="This is a task." command1="this.owner.addTaskFrequency(theTask)" command2="" command3="" command4="" command5="">
       <label x="581" y="829" text="Do Task"/>
     </taskstep>
-    <taskstep x="531" y="134" comment="This is a task." command1="releaseBehavior.Release(job,this)" command2="" command3="" command4="" command5="">
-      <label x="531" y="119" text="Do Task"/>
+    <taskstep x="667" y="129" comment="This is a task." command1="releaseBehavior.Release(job,this)" command2="" command3="" command4="" command5="">
+      <label x="667" y="114" text="Do Task"/>
     </taskstep>
-    <taskstep x="630" y="219" comment="This is a task." command1="" command2="releaseBehavior.Next(this)" command3="" command4="" command5="">
-      <label x="630" y="204" text="Do Task"/>
+    <taskstep x="764" y="247" comment="This is a task." command1="" command2="releaseBehavior.Next(this)" command3="" command4="" command5="">
+      <label x="764" y="232" text="Do Task"/>
+    </taskstep>
+    <taskstep x="589" y="116" comment="change the compete state" command1="this.competeList &lt;&lt; job" command2="job.addCandidates(this)" command3="" command4="" command5="">
+      <label x="589" y="101" text="compete the tasks"/>
+    </taskstep>
+    <taskstep x="502" y="211" comment="This is a task." command1="def scList = competeList.findAll{ it-&gt; it.getClass() == ecosystem.ServiceCall }" command2="if(scList.size() &gt;1){\f&#x9;Scanner reader = new Scanner(System.in)\f&#x9;println &quot;Fuck the reply&quot;\f&#x9;int n = reader.nextInt()\f}" command3="" command4="" command5="this.responseList = []">
+      <label x="502" y="196" text="Do Task"/>
+    </taskstep>
+    <taskstep x="297" y="356" comment="change the compete state" command1="taskReplyList = [theCall] + taskReplyList" command2="" command3="this.Reply(taskReplyList)" command4="" command5="">
+      <label x="297" y="341" text="Change the comoete state"/>
+    </taskstep>
+    <taskstep x="421" y="253" comment="This is a task." command1="this.Reply(this.responseList)" command2="" command3="" command4="" command5="">
+      <label x="421" y="238" text="Do Task"/>
+    </taskstep>
+    <taskstep x="298" y="250" comment="This is a task." command1="def scList = this.responseList.findAll{ it-&gt; it.getClass() == ecosystem.ServiceCall }" command2="// sort the scList" command3="def theCall = scList[0]" command4="List taskReplyList = this.responseList.findAll{ it -&gt; it.getClass() == ecosystem.Task }" command5="taskReplyList = taskReplyList.findAll{it -&gt; it.needResourceCapacity[this.getType()]  &lt;= this.getSourceable() - theCall.needResourceCapacity[this.getType()] }">
+      <label x="298" y="235" text="sort"/>
+    </taskstep>
+    <taskstep x="755" y="132" comment="This is a task." command1="def buffamount = 0" command2="" command3="" command4="" command5="">
+      <label x="755" y="117" text="Do Task"/>
+    </taskstep>
+    <taskstep x="860" y="57" comment="This is a task." command1="buffamount += jobb.needResourceCapacity[this.getType()]" command2="" command3="" command4="" command5="">
+      <label x="860" y="42" text="Do Task"/>
+    </taskstep>
+    <taskstep x="846" y="202" comment="This is a task." command1="println &quot;after released &quot; + (this.capacity - buffamount - this.available).toString()" command2="" command3="" command4="" command5="">
+      <label x="846" y="187" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -65,28 +95,41 @@
     <decisionstep x="138" y="195" comment="This is an agent decision." criteria="responseBehavior.Exist(watchedAgent,this)" branchType="if">
       <label x="138" y="180" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="354" y="556" comment="This is an agent decision." criteria="this.assignBehavior.BufferEnterance(job,this)" branchType="if">
-      <label x="354" y="541" text="Evaluate Criteria"/>
+    <decisionstep x="135" y="811" comment="This is an agent decision." criteria="this.assignBehavior.BufferEnterance(job,this)" branchType="if">
+      <label x="135" y="796" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="528" y="222" comment="This is an agent decision." criteria="this.jobList.size() &gt; 0" branchType="if">
-      <label x="528" y="207" text="Evaluate Criteria"/>
+    <decisionstep x="663" y="245" comment="This is an agent decision." criteria="this.jobList.size() &gt; 0" branchType="if">
+      <label x="663" y="230" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="500" y="119" comment="This is a loop." criteria="job in taskReplyList" branchType="while">
+      <label x="500" y="104" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="362" y="202" comment="This is an agent decision." criteria="this.responseList.findIndexOf{ it.getClass() == ecosystem.ServiceCall } == -1" branchType="if">
+      <label x="362" y="187" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="364" y="99" comment="This is an agent decision." criteria="this.responseList.size() &gt; 0" branchType="if">
+      <label x="364" y="84" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="842" y="132" comment="This is a loop." criteria="jobb in this.buffer" branchType="while">
+      <label x="842" y="117" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="382" y="715"/>
+    <joinstep x="138" y="973"/>
+    <joinstep x="434" y="358"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
       <label x="48" y="20" text="Type"/>
     </agentproperty>
-    <agentproperty x="282" y="27" comment="This is an agent property." visibility="0" compiledname="responseBehavior" type="ResponseBehavior" defaultvalue="null">
-      <label x="287" y="12" text="ResponseBehavior"/>
+    <agentproperty x="249" y="27" comment="This is an agent property." visibility="0" compiledname="responseBehavior" type="ResponseBehavior" defaultvalue="null">
+      <label x="254" y="12" text="ResponseBehavior"/>
     </agentproperty>
     <agentproperty x="41" y="133" comment="This is an agent property." visibility="0" compiledname="CompeteList" type="def" defaultvalue="[]">
       <label x="46" y="118" text="Compete List"/>
     </agentproperty>
-    <agentproperty x="384" y="286" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
-      <label x="389" y="271" text="Chose"/>
+    <agentproperty x="24" y="581" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
+      <label x="29" y="566" text="Chose"/>
     </agentproperty>
     <agentproperty x="964" y="212" comment="Quality" visibility="0" compiledname="quality" type="double" defaultvalue="0">
       <label x="969" y="197" text="Quality"/>
@@ -94,8 +137,8 @@
     <agentproperty x="677" y="772" comment="Review history" visibility="0" compiledname="reviews" type="def" defaultvalue="[]">
       <label x="682" y="757" text="Review History"/>
     </agentproperty>
-    <agentproperty x="441" y="404" comment="This is the task buffer" visibility="0" compiledname="buffer" type="List" defaultvalue="[]">
-      <label x="446" y="389" text="Buffer"/>
+    <agentproperty x="222" y="659" comment="This is the task buffer" visibility="0" compiledname="buffer" type="List" defaultvalue="[]">
+      <label x="227" y="644" text="Buffer"/>
     </agentproperty>
     <agentproperty x="300" y="894" comment="Mark queue in joblist or not" visibility="0" compiledname="queue" type="boolean" defaultvalue="false">
       <label x="305" y="879" text="Queue Status"/>
@@ -109,27 +152,35 @@
     <agentproperty x="900" y="294" comment="This is an agent property." visibility="0" compiledname="chosenTime" type="double" defaultvalue="0">
       <label x="905" y="279" text="Chosen time"/>
     </agentproperty>
-    <agentproperty x="250" y="414" comment="This is an agent property." visibility="0" compiledname="assignBehavior" type="AssignBehavior" defaultvalue="null">
-      <label x="255" y="399" text="Assign Behavior"/>
+    <agentproperty x="31" y="669" comment="This is an agent property." visibility="0" compiledname="assignBehavior" type="AssignBehavior" defaultvalue="null">
+      <label x="36" y="654" text="Assign Behavior"/>
     </agentproperty>
-    <agentproperty x="619" y="55" comment="This is an agent property." visibility="0" compiledname="releaseBehavior" type="ReleaseBehavior" defaultvalue="null">
-      <label x="624" y="40" text="Release Behavior"/>
+    <agentproperty x="755" y="50" comment="This is an agent property." visibility="0" compiledname="releaseBehavior" type="ReleaseBehavior" defaultvalue="null">
+      <label x="760" y="35" text="Release Behavior"/>
     </agentproperty>
     <agentproperty x="40" y="247" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
       <label x="45" y="232" text="Owner"/>
     </agentproperty>
-    <agentproperty x="250" y="484" comment="Job list" visibility="0" compiledname="jobList" type="List" defaultvalue="[]">
-      <label x="255" y="469" text="Job List"/>
+    <agentproperty x="31" y="739" comment="Job list" visibility="0" compiledname="jobList" type="List" defaultvalue="[]">
+      <label x="36" y="724" text="Job List"/>
+    </agentproperty>
+    <agentproperty x="248" y="135" comment="This is an agent property." visibility="0" compiledname="responseList" type="List" defaultvalue="[]">
+      <label x="253" y="120" text="Response List"/>
+    </agentproperty>
+    <agentproperty x="339" y="749" comment="Job list" visibility="0" compiledname="jobList2" type="Map" defaultvalue="[:]">
+      <label x="344" y="734" text="Job List"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="158" y="412"/>
-    <endstep x="905" y="651"/>
-    <endstep x="789" y="661"/>
-    <endstep x="382" y="817"/>
-    <endstep x="602" y="965"/>
-    <endstep x="327" y="1243"/>
-    <endstep x="551" y="355"/>
+    <endstep x="142" y="386"/>
+    <endstep x="910" y="656"/>
+    <endstep x="794" y="666"/>
+    <endstep x="139" y="1089"/>
+    <endstep x="607" y="970"/>
+    <endstep x="332" y="1248"/>
+    <endstep x="679" y="338"/>
+    <endstep x="515" y="291"/>
+    <endstep x="432" y="440"/>
   </endsteps>
   <connections>
     <transitions>
@@ -223,6 +274,46 @@
         <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="end" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="7" anchor="0"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="13" anchor="3"/>
+        <transitiontarget type="join" index="1" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="1" anchor="2"/>
+        <transitiontarget type="end" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="8" anchor="0"/>
+        <transitiontarget type="decision" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="14" anchor="2"/>
+        <transitiontarget type="join" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="15" anchor="2"/>
+        <transitiontarget type="task" index="13" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="16" anchor="3"/>
+        <transitiontarget type="decision" index="7" anchor="1"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -253,6 +344,41 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="3" anchor="2"/>
         <transitiontarget type="end" index="6" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="4" anchor="3"/>
+        <transitiontarget type="task" index="11" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="4" anchor="2"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="5" anchor="1"/>
+        <transitiontarget type="task" index="15" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="3"/>
+        <transitiontarget type="task" index="14" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="6" anchor="2"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="7" anchor="0"/>
+        <transitiontarget type="task" index="17" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="7" anchor="2"/>
+        <transitiontarget type="task" index="18" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

@@ -57,6 +57,9 @@
     <taskstep x="569" y="216" comment="This is a task." command1="tempOnes &lt;&lt; dataList" command2="" command3="" command4="" command5="">
       <label x="569" y="201" text="Do Task"/>
     </taskstep>
+    <taskstep x="1034" y="339" comment="This is a task." command1="println &quot;Fuck!!! sc&quot;" command2="" command3="" command4="" command5="">
+      <label x="1034" y="324" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="356" y="376" comment="This is an agent decision." criteria="needCap &lt;= res.getSourceable()" branchType="if">
@@ -83,17 +86,20 @@
     <decisionstep x="657" y="215" comment="This is a loop." criteria="dataList in theOnes.values()" branchType="while">
       <label x="657" y="200" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="1029" y="254" comment="This is an agent decision." criteria="data.key.sourceable &lt; data.value" branchType="if">
+      <label x="1029" y="239" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="118" y="370"/>
-    <joinstep x="766" y="316"/>
+    <joinstep x="123" y="375"/>
+    <joinstep x="771" y="321"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="270" y="478"/>
-    <endstep x="117" y="455"/>
-    <endstep x="773" y="404"/>
-    <endstep x="965" y="307"/>
+    <endstep x="275" y="483"/>
+    <endstep x="122" y="460"/>
+    <endstep x="778" y="409"/>
+    <endstep x="970" y="312"/>
   </endsteps>
   <connections>
     <transitions>
@@ -242,6 +248,11 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="7" anchor="2"/>
         <transitiontarget type="task" index="9" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="8" anchor="2"/>
+        <transitiontarget type="task" index="14" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

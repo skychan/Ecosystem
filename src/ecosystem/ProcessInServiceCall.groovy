@@ -99,14 +99,44 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        sc.owner.GenerateService(sc.needResourceCapacity)
-        println "service call fininshed and we should to generate service"
+        //sc.owner.GenerateService(sc.needResourceCapacity)
+        println "service call " + sc + " fininshed and we should to generate service"
 
         // This is a loop.
         for (mac in sc.getAllocation().keySet()) {
 
             // The finish step
             mac.Release(sc)
+            // The finish step
+            println mac
+            println " jobList "
+            println "sourceable = " + mac.sourceable
+            println "available = " + mac.available
+            println "useage = " + mac.useage
+
+            // This is a loop.
+            for (job in mac.jobList) {
+
+                // This is a task.
+                println job
+                println job.prepareStatus
+                println " need = " + job.needResourceCapacity[mac.getType()]
+
+            }
+
+            // This is a task.
+            println " buffer "
+
+            // This is a loop.
+            for (job in mac.buffer) {
+
+                // This is a task.
+                println job
+                println job.prepareStatus
+                println " need = " + job.needResourceCapacity[mac.getType()]
+
+            }
+
 
         }
 

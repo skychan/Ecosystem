@@ -6,7 +6,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call fininshed and we should to generate service&quot;" command3="" command4="" command5="">
+    <taskstep x="146" y="202" comment="This is a task." command1="//sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
     <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
@@ -15,16 +15,34 @@
     <taskstep x="292" y="299" comment="The finish step" command1="mac.Release(sc)" command2="" command3="" command4="" command5="">
       <label x="292" y="284" text="Afterward"/>
     </taskstep>
+    <taskstep x="509" y="302" comment="This is a task." command1="println &quot; buffer &quot;" command2="" command3="" command4="" command5="">
+      <label x="509" y="287" text="Do Task"/>
+    </taskstep>
+    <taskstep x="404" y="397" comment="This is a task." command1="println job" command2="println job.prepareStatus" command3="println &quot; need = &quot; + job.needResourceCapacity[mac.getType()]" command4="" command5="">
+      <label x="404" y="382" text="Do Task"/>
+    </taskstep>
+    <taskstep x="583" y="389" comment="This is a task." command1="println job" command2="println job.prepareStatus" command3="println &quot; need = &quot; + job.needResourceCapacity[mac.getType()]" command4="" command5="">
+      <label x="583" y="374" text="Do Task"/>
+    </taskstep>
+    <taskstep x="293" y="373" comment="The finish step" command1="" command2="println mac" command3="println &quot; jobList &quot;" command4="println &quot;sourceable = &quot; + mac.sourceable" command5="println &quot;available = &quot; + mac.available\fprintln &quot;useage = &quot; + mac.useage">
+      <label x="293" y="358" text="Afterward"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="291" y="204" comment="This is a loop." criteria="mac in sc.getAllocation().keySet()" branchType="while">
       <label x="291" y="189" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="402" y="305" comment="This is a loop." criteria="job in mac.jobList" branchType="while">
+      <label x="402" y="290" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="594" y="303" comment="This is a loop." criteria="job in mac.buffer" branchType="while">
+      <label x="594" y="288" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="408" y="121"/>
+    <endstep x="423" y="136"/>
   </endsteps>
   <connections>
     <transitions>
@@ -43,6 +61,21 @@
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="2" anchor="2"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="3" anchor="3"/>
+        <transitiontarget type="decision" index="2" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="3"/>
+        <transitiontarget type="decision" index="1" anchor="1"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -53,6 +86,21 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="0"/>
         <transitiontarget type="task" index="1" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="3" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="2"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="task" index="5" anchor="2"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

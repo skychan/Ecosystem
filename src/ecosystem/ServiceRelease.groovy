@@ -114,7 +114,7 @@ public class ServiceRelease implements ecosystem.ReleaseBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        // m.jobList = m.jobList.sort{ [ it.getType() ] }
+        m.jobList = m.jobList.sort{ [ it.getType() ] }
         def job = m.jobList[0]
         // This is a task.
         m.assignBehavior.Buffer(job,m)

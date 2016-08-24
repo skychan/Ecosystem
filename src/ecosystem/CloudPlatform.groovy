@@ -185,6 +185,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * This is an agent property.
+     * @field providerList
+     *
+     */
+    @Parameter (displayName = "Providers", usageName = "providerList")
+    public List getProviderList() {
+        return providerList
+    }
+    public void setProviderList(List newValue) {
+        providerList = newValue
+    }
+    public List providerList = []
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -356,29 +371,41 @@ public class CloudPlatform  {
 
         // This is a task.
         List styleList = this.serviceList.findAll{ it-> it.resourceComposition == style }
-        double minq = styleList[0].getQuality()
 
-        // This is a loop.
-        for (ser in styleList) {
+        // This is an agent decision.
+        if (styleList.size() == 0) {
 
             // This is a task.
-            double theq = ser.getQuality()
+            returnValue = 0
 
-            // This is an agent decision.
-            if (theq < minq) {
+        } else  {
+
+            // This is a task.
+            double minq = styleList[0].getQuality()
+
+            // This is a loop.
+            for (ser in styleList) {
 
                 // This is a task.
-                minq = theq
+                double theq = ser.getQuality()
 
-            } else  {
+                // This is an agent decision.
+                if (theq < minq) {
 
+                    // This is a task.
+                    minq = theq
+
+                } else  {
+
+
+                }
 
             }
 
-        }
+            // This is a task.
+            returnValue = minq
 
-        // This is a task.
-        returnValue = minq
+        }
         // Return the results.
         return returnValue
 
@@ -435,19 +462,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is the step behavior.
-     * @method Metabolism
-     *
-     */
-    public void Metabolism() {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-    }
-
-    /**
-     *
      * Return the resource quene length sum
      * @method ResourceQueue
      *
@@ -495,29 +509,41 @@ public class CloudPlatform  {
 
         // This is a task.
         List typeResList = this.resourceList.findAll{ it-> it.getType() == type }
-        double minq = typeResList[0].getQuality()
 
-        // This is a loop.
-        for (res in typeResList) {
+        // This is an agent decision.
+        if (typeResList.size() == 0) {
 
             // This is a task.
-            double theq = res.getQuality()
+            returnValue = 0
 
-            // This is an agent decision.
-            if (theq < minq) {
+        } else  {
+
+            // This is a task.
+            double minq = typeResList[0].getQuality()
+
+            // This is a loop.
+            for (res in typeResList) {
 
                 // This is a task.
-                minq = theq
+                double theq = res.getQuality()
 
-            } else  {
+                // This is an agent decision.
+                if (theq < minq) {
 
+                    // This is a task.
+                    minq = theq
+
+                } else  {
+
+
+                }
 
             }
 
-        }
+            // This is a task.
+            returnValue = minq
 
-        // This is a task.
-        returnValue = minq
+        }
         // Return the results.
         return returnValue
 
@@ -592,11 +618,154 @@ public class CloudPlatform  {
 
             // This is a task.
             AddAgentToContext("Ecosystem", p)
+            this.providerList << p
 
         } else  {
 
 
         }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Metabolism
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public def Metabolism() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        def now = GetTickCount()
+        double rq = Math.exp(2000)
+        double sq = Math.exp(2000)
+        List machineList = this.resourceList + this.serviceList
+        // This is a task.
+        Service s = null
+        Resource r = null
+
+        // This is a loop.
+        for (mac in machineList) {
+
+
+            // This is an agent decision.
+            if (mac.getClass() == ecosystem.Resource) {
+
+
+                // This is an agent decision.
+                if (mac.master.size() == 0) {
+
+                    // This is a task.
+                    double tempq = mac.getQuality()
+
+                    // This is an agent decision.
+                    if (tempq < rq) {
+
+                        // This is a task.
+                        r = mac
+                        rq = tempq
+
+                    } else  {
+
+
+                    }
+
+                } else  {
+
+
+                }
+
+            } else  {
+
+                // This is a task.
+                double tempq = mac.getQuality()
+
+                // This is an agent decision.
+                if (tempq < sq) {
+
+                    // This is a task.
+                    s = mac
+                    sq = tempq
+
+                } else  {
+
+
+                }
+
+            }
+
+        }
+
+        // This is a task.
+        List chosenMac = [r,s]
+
+        // This is a loop.
+        for (mac in chosenMac) {
+
+
+            // This is an agent decision.
+            if (mac != null && mac.getFullLength() == 0 && now - mac.assignTime >20) {
+
+                // This is a task.
+                RemoveAgentFromModel(mac)
+
+                // This is an agent decision.
+                if (mac.getClass() == ecosystem.Resource) {
+
+                    // This is a task.
+                    this.resourceList.remove(mac)
+                    this.resourceTypeAmount[mac.getType()] -= mac.capacity
+                    mac.owner.resourceList.remove(mac)
+
+                } else  {
+
+                    // This is a task.
+                    this.serviceList.remove(mac)
+                    this.serviceStyleAmount[mac.resourceComposition] -= 1
+                    mac.owner.serviceList.remove(mac)
+                    mac.ReturnResources()
+
+                }
+
+            } else  {
+
+
+            }
+
+        }
+
+
+        // This is a loop.
+        for (p in this.providerList.collect()) {
+
+
+            // This is an agent decision.
+            if (p.serviceList.size() + p.resourceList.size() == 0) {
+
+                // This is a task.
+                this.providerList.remove(p)
+                RemoveAgentFromModel(p)
+
+            } else  {
+
+
+            }
+
+        }
+
+        // Return the results.
+        return returnValue
+
     }
 
     /**

@@ -213,16 +213,30 @@ public class CloudPlatform  {
      * @method CreateProvider
      *
      */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
     public void CreateProvider() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // Create Provider at a random distribution
-        Provider pagent = new Provider()
-        // pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
-        pagent.GenerateResource()
-        this.addProvider(pagent)
+
+        // to need or not
+        if (RandomHelper.nextIntFromTo(0, 1)) {
+
+            // Create Provider at a random distribution
+            Provider pagent = new Provider()
+            // pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
+            pagent.GenerateResource()
+            this.addProvider(pagent)
+
+        } else  {
+
+
+        }
     }
 
     /**

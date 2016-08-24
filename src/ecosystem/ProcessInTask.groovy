@@ -101,6 +101,24 @@ public class ProcessInTask implements ecosystem.ProcessBehavior {
         // This is a task.
         t.setRemainingTime(t.getProcessingTime())
         t.setPause(false)
+
+        // This is a loop.
+        for (mac in t.getAllocation().values()) {
+
+
+            // This is an agent decision.
+            if (mac.mu < t.expectQuality) {
+
+                // This is a task.
+                t.expectQuality = mac.mu
+
+            } else  {
+
+
+            }
+
+        }
+
     }
 
     /**

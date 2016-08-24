@@ -75,8 +75,8 @@
     <taskstep x="1630" y="215" comment="This is a task." command1="qlength = theList[0].getFullLength()" command2="" command3="" command4="" command5="">
       <label x="1630" y="200" text="Do Task"/>
     </taskstep>
-    <taskstep x="569" y="376" comment="This is a task." command1="def candidateList = theOnes.values()" command2="candidateList.sort{ [ it.getFullLength(), -it.getQuality() ] }" command3="" command4="" command5="">
-      <label x="569" y="361" text="Do Task"/>
+    <taskstep x="733" y="387" comment="This is a task." command1="def candidateList = theOnes.values()" command2="candidateList.sort{ [ it.getFullLength(), -it.getQuality() ] }" command3="" command4="" command5="">
+      <label x="733" y="372" text="Do Task"/>
     </taskstep>
     <taskstep x="567" y="558" comment="This is a task." command1="returnValue =  [success:true,allocation:[&apos;service&apos;:theOnes[&apos;service&apos;]]]" command2="" command3="" command4="" command5="">
       <label x="567" y="543" text="True"/>
@@ -145,16 +145,16 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="99" y="526"/>
-    <joinstep x="143" y="435"/>
+    <joinstep x="104" y="531"/>
+    <joinstep x="148" y="440"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="265" y="444"/>
-    <endstep x="99" y="644"/>
-    <endstep x="1736" y="712"/>
-    <endstep x="849" y="238"/>
-    <endstep x="956" y="340"/>
+    <endstep x="270" y="449"/>
+    <endstep x="104" y="649"/>
+    <endstep x="1741" y="717"/>
+    <endstep x="854" y="243"/>
+    <endstep x="961" y="345"/>
   </endsteps>
   <connections>
     <transitions>
@@ -239,11 +239,6 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="20" anchor="2"/>
-        <transitiontarget type="decision" index="13" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="24" anchor="2"/>
         <transitiontarget type="join" index="1" anchor="3"/>
         <bendpoints/>
@@ -302,7 +297,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="4" anchor="2"/>
-        <transitiontarget type="task" index="20" anchor="0"/>
+        <transitiontarget type="decision" index="13" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

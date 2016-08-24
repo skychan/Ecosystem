@@ -24,8 +24,8 @@
     <taskstep x="625" y="249" comment="This is a task." command1="this.candidates[competitor.getType()]&lt;&lt;competitor" command2="" command3="" command4="" command5="">
       <label x="625" y="234" text="Do Task"/>
     </taskstep>
-    <taskstep x="763" y="243" comment="This is a task." command1="this.candidates[&apos;service&apos;] &lt;&lt; competitor" command2="" command3="" command4="" command5="">
-      <label x="763" y="228" text="Do Task"/>
+    <taskstep x="767" y="249" comment="This is a task." command1="this.candidates[&apos;service&apos;] &lt;&lt; competitor" command2="" command3="" command4="" command5="">
+      <label x="767" y="234" text="Do Task"/>
     </taskstep>
     <taskstep x="158" y="308" comment="This is a task." command1="this.setInNeed(true)" command2="" command3="" command4="" command5="//println this.toString() + &quot; lack response so publish need again&quot;">
       <label x="158" y="293" text="Do Task"/>
@@ -39,7 +39,7 @@
     <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="//println this.prepareStatus" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
-    <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
+    <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="this.owner[mac.key] = this.remainingTime" command3="" command4="" command5="">
       <label x="362" y="219" text="Do Task"/>
     </taskstep>
     <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="this.owner[mac.value] = this.remainingTime" command3="" command4="" command5="">
@@ -50,8 +50,8 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="685" y="178" comment="This is an agent decision." criteria="competitor.getClass() == ecosystem.Service" branchType="if">
-      <label x="685" y="163" text="Evaluate Criteria"/>
+    <decisionstep x="693" y="172" comment="This is an agent decision." criteria="competitor.getClass() == ecosystem.Service" branchType="if">
+      <label x="693" y="157" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="157" y="221" comment="This is an agent decision." criteria="this.getAllocated() == false" branchType="if">
       <label x="157" y="206" text="Evaluate Criteria"/>
@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="773" y="389"/>
+    <joinstep x="709" y="337"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -103,9 +103,6 @@
     <agentproperty x="23" y="473" comment="This is an agent property." visibility="0" compiledname="span" type="int" defaultvalue="0">
       <label x="28" y="458" text="Span"/>
     </agentproperty>
-    <agentproperty x="812" y="543" comment="This is an agent property." visibility="0" compiledname="productQuality" type="double" defaultvalue="Math.exp(200)">
-      <label x="817" y="528" text="Product Quality"/>
-    </agentproperty>
     <agentproperty x="916" y="443" comment="This is an agent property." visibility="0" compiledname="hardness" type="double" defaultvalue="0">
       <label x="921" y="428" text="Hardness"/>
     </agentproperty>
@@ -130,19 +127,19 @@
     <agentproperty x="61" y="309" comment="This is an agent property." visibility="0" compiledname="allocated" type="boolean" defaultvalue="false">
       <label x="66" y="294" text="Allocated"/>
     </agentproperty>
-    <agentproperty x="619" y="603" comment="This is an agent property." visibility="0" compiledname="processBehavior" type="ProcessBehavior" defaultvalue="null">
-      <label x="624" y="588" text="Process Behavior"/>
+    <agentproperty x="367" y="668" comment="This is an agent property." visibility="0" compiledname="processBehavior" type="ProcessBehavior" defaultvalue="null">
+      <label x="372" y="653" text="Process Behavior"/>
     </agentproperty>
     <agentproperty x="108" y="661" comment="This is an agent property." visibility="0" compiledname="predecessor" type="Set" defaultvalue="[]">
       <label x="113" y="646" text="Predecessor"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="291" y="558"/>
-    <endstep x="775" y="454"/>
-    <endstep x="189" y="435"/>
-    <endstep x="1205" y="771"/>
-    <endstep x="303" y="979"/>
+    <endstep x="264" y="557"/>
+    <endstep x="710" y="432"/>
+    <endstep x="165" y="417"/>
+    <endstep x="1124" y="732"/>
+    <endstep x="271" y="942"/>
   </endsteps>
   <connections>
     <transitions>

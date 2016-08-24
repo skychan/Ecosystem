@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agent version="1" agentcomment="This is an agent." agentclassname="Resource" agentparentclassname="ecosystem.Machine" agentinterfaces="" agentimports="">
   <behaviorsteps>
-    <behaviorstep x="63" y="119" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="" compiledname="Resource" parameters="" exceptions="">
-      <label x="63" y="104" text="Constructor"/>
+    <behaviorstep x="57" y="103" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="" compiledname="Resource" parameters="" exceptions="">
+      <label x="57" y="88" text="Constructor"/>
     </behaviorstep>
     <behaviorstep x="371" y="403" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Assign" parameters="sc,amount" exceptions="">
       <label x="371" y="388" text="Assign"/>
@@ -27,8 +27,8 @@
     <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="" command5="this.needCap.remove(sc)">
       <label x="481" y="618" text="Do Task"/>
     </taskstep>
-    <taskstep x="590" y="624" comment="This is a task." command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
-      <label x="590" y="609" text="Do Task"/>
+    <taskstep x="593" y="631" comment="This is a task." command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
+      <label x="593" y="616" text="Do Task"/>
     </taskstep>
     <taskstep x="48" y="690" comment="This is a task." command1="this.master[ser] = amount" command2="" command3="" command4="" command5="">
       <label x="48" y="675" text="Do Task"/>
@@ -69,9 +69,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="126" y="374"/>
-    <endstep x="381" y="856"/>
-    <endstep x="612" y="776"/>
+    <endstep x="63" y="323"/>
+    <endstep x="380" y="839"/>
+    <endstep x="599" y="744"/>
     <endstep x="52" y="802"/>
   </endsteps>
   <connections>

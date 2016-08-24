@@ -34,6 +34,9 @@
     <behaviorstep x="438" y="686" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="int" compiledname="getQueueLength" parameters="" exceptions="">
       <label x="438" y="671" text="Queue length"/>
     </behaviorstep>
+    <behaviorstep x="432" y="994" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="def" compiledname="getQuality" parameters="" exceptions="">
+      <label x="432" y="979" text="Get Quality"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="138" y="279" comment="change the compete state" command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
@@ -102,6 +105,9 @@
     <taskstep x="439" y="791" comment="This is a task." command1="returnValue = this.jobList.size()" command2="" command3="" command4="" command5="">
       <label x="439" y="776" text="Do Task"/>
     </taskstep>
+    <taskstep x="441" y="1086" comment="This is a task." command1="RandomHelper.createNormal(this.mu,this.sigma)" command2="returnValue = RandomHelper.getNormal().nextDouble()" command3="" command4="" command5="">
+      <label x="441" y="1071" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="139" y="110" comment="Decide to take the task or not" criteria="true " branchType="if">
@@ -146,8 +152,8 @@
     <agentproperty x="24" y="581" comment="Record be chose or not" visibility="0" compiledname="chose" type="boolean" defaultvalue="false">
       <label x="29" y="566" text="Chose"/>
     </agentproperty>
-    <agentproperty x="964" y="212" comment="Quality" visibility="0" compiledname="quality" type="double" defaultvalue="0">
-      <label x="969" y="197" text="Quality"/>
+    <agentproperty x="315" y="977" comment="Quality mu" visibility="0" compiledname="mu" type="double" defaultvalue="0">
+      <label x="320" y="962" text="Quality mu"/>
     </agentproperty>
     <agentproperty x="677" y="772" comment="Review history" visibility="0" compiledname="reviews" type="def" defaultvalue="[]">
       <label x="682" y="757" text="Review History"/>
@@ -176,6 +182,9 @@
     <agentproperty x="248" y="135" comment="This is an agent property." visibility="0" compiledname="responseList" type="List" defaultvalue="[]">
       <label x="253" y="120" text="Response List"/>
     </agentproperty>
+    <agentproperty x="311" y="1047" comment="Quality sigma" visibility="0" compiledname="sigma" type="double" defaultvalue="0">
+      <label x="316" y="1032" text="Quality sigma"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="152" y="396"/>
@@ -189,6 +198,7 @@
     <endstep x="442" y="450"/>
     <endstep x="828" y="946"/>
     <endstep x="447" y="896"/>
+    <endstep x="443" y="1180"/>
   </endsteps>
   <connections>
     <transitions>
@@ -340,6 +350,16 @@
       <transition>
         <transitionsource type="behavior" index="10" anchor="0"/>
         <transitiontarget type="task" index="21" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="11" anchor="0"/>
+        <transitiontarget type="task" index="22" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="22" anchor="2"/>
+        <transitiontarget type="end" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

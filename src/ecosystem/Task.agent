@@ -33,20 +33,20 @@
     <taskstep x="603" y="251" comment="This is a task." command1="this.setRemainingTime(this.getRemainingTime()-1)" command2="" command3="" command4="" command5="">
       <label x="603" y="236" text="Do Task"/>
     </taskstep>
-    <taskstep x="710" y="419" comment="The finish step" command1="mac.Release(this)" command2="" command3="" command4="" command5="">
-      <label x="710" y="404" text="Afterward"/>
+    <taskstep x="707" y="415" comment="The finish step" command1="mac.Release(this)" command2="" command3="" command4="" command5="">
+      <label x="707" y="400" text="Afterward"/>
     </taskstep>
-    <taskstep x="709" y="500" comment="This is a task." command1="this.setProductQuality(tempQuality)" command2="" command3="" command4="" command5="">
-      <label x="709" y="485" text="Set product quality"/>
+    <taskstep x="696" y="533" comment="This is a task." command1="this.setProductQuality(tempQuality)" command2="" command3="" command4="" command5="">
+      <label x="696" y="518" text="Set product quality"/>
     </taskstep>
-    <taskstep x="815" y="419" comment="This is a task." command1="RandomHelper.createNormal(mac.getQuality(),1)" command2="double tempQuality = RandomHelper.getNormal().nextDouble()" command3="" command4="" command5="">
-      <label x="815" y="404" text="Do Task"/>
+    <taskstep x="900" y="592" comment="This is a task." command1="RandomHelper.createNormal(mac.getQuality(),1)" command2="double tempQuality = RandomHelper.getNormal().nextDouble()" command3="" command4="" command5="">
+      <label x="900" y="577" text="Do Task"/>
     </taskstep>
-    <taskstep x="813" y="241" comment="This is a task." command1="" command2="this.setFinish(true)" command3="this.finishTime = GetTickCount()" command4="this.span = (int)(this.finishTime - this.getStartTime())" command5="">
-      <label x="813" y="226" text="Finish"/>
+    <taskstep x="831" y="232" comment="This is a task." command1="" command2="this.setFinish(true)" command3="this.finishTime = GetTickCount()" command4="this.span = (int)(this.finishTime - this.getStartTime())" command5="">
+      <label x="831" y="217" text="Finish"/>
     </taskstep>
-    <taskstep x="931" y="336" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
-      <label x="931" y="321" text="Review"/>
+    <taskstep x="704" y="216" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
+      <label x="704" y="201" text="Review"/>
     </taskstep>
     <taskstep x="47" y="713" comment="add owner to the list" command1="this.owner[user] = p" command2="" command3="" command4="" command5="">
       <label x="47" y="698" text="set owner"/>
@@ -69,8 +69,17 @@
     <taskstep x="556" y="475" comment="The finish step" command1="" command2="println mac" command3="println &quot;jobList&quot;" command4="" command5="">
       <label x="556" y="460" text="Afterward"/>
     </taskstep>
-    <taskstep x="925" y="248" comment="This is a task." command1="mac.Finish(this.needResourceCapacity)" command2="" command3="" command4="" command5="">
-      <label x="925" y="233" text="Finish and count"/>
+    <taskstep x="939" y="330" comment="This is a task." command1="mac.Finish(this.needResourceCapacity)" command2="double realQ = mac.getQuality()" command3="" command4="" command5="">
+      <label x="939" y="315" text="Finish and count"/>
+    </taskstep>
+    <taskstep x="834" y="400" comment="This is a task." command1="this.productQuality = realQ" command2="" command3="" command4="" command5="">
+      <label x="834" y="385" text="Do Task"/>
+    </taskstep>
+    <taskstep x="1064" y="307" comment="This is a task." command1="def res = macData.key" command2="def p= macData.value" command3="double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command4="res.rank += deltaRank" command5="">
+      <label x="1064" y="292" text="Do Task"/>
+    </taskstep>
+    <taskstep x="1167" y="312" comment="This is a task." command1="int amount = macData.key.resourceComposition.values().sum()" command2="double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command3="macData.key.rank += deltaRank" command4="" command5="">
+      <label x="1167" y="297" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -89,11 +98,11 @@
     <decisionstep x="705" y="331" comment="This is a loop." criteria="mac in this.getAllocation().values()" branchType="while">
       <label x="705" y="316" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="820" y="499" comment="This is an agent decision." criteria="tempQuality &lt; this.getProductQuality()" branchType="if">
-      <label x="820" y="484" text="Evaluate Criteria"/>
+    <decisionstep x="795" y="573" comment="This is an agent decision." criteria="tempQuality &lt; this.getProductQuality()" branchType="if">
+      <label x="795" y="558" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="823" y="336" comment="This is a loop." criteria="mac in this.getAllocation().values()" branchType="while">
-      <label x="823" y="321" text="Evaluate Criteria"/>
+    <decisionstep x="835" y="329" comment="This is a loop." criteria="mac in this.getAllocation().values()" branchType="while">
+      <label x="835" y="314" text="Evaluate Criteria"/>
     </decisionstep>
     <decisionstep x="400" y="632" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="400" y="617" text="Evaluate Criteria"/>
@@ -103,6 +112,18 @@
     </decisionstep>
     <decisionstep x="755" y="659" comment="This is a loop." criteria="job in mac.buffer" branchType="while">
       <label x="755" y="644" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="939" y="403" comment="This is an agent decision." criteria="this.productQuality &lt; realQ" branchType="if">
+      <label x="939" y="388" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="944" y="233" comment="This is a loop." criteria="macData in this.owner" branchType="while">
+      <label x="944" y="218" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="1067" y="224" comment="This is an agent decision." criteria="macData.key.getClass() == ecosystem.Resource" branchType="if">
+      <label x="1067" y="209" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="1174" y="221" comment="This is an agent decision." criteria="macData.key.getClass() == ecosystem.Service" branchType="if">
+      <label x="1174" y="206" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -125,11 +146,17 @@
     <agentproperty x="730" y="98" comment="This is an agent property." visibility="0" compiledname="pause" type="boolean" defaultvalue="true">
       <label x="735" y="83" text="Pause Mark"/>
     </agentproperty>
+    <agentproperty x="840" y="111" comment="This is an agent property." visibility="0" compiledname="productQuality" type="double" defaultvalue="Math.exp(2000)">
+      <label x="845" y="96" text="Product Quality"/>
+    </agentproperty>
+    <agentproperty x="951" y="112" comment="This is an agent property." visibility="0" compiledname="expectQuality" type="double" defaultvalue="Math.exp(2000)">
+      <label x="956" y="97" text="Expect Quality"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="50" y="294"/>
     <endstep x="278" y="417"/>
-    <endstep x="522" y="426"/>
+    <endstep x="611" y="419"/>
     <endstep x="51" y="800"/>
     <endstep x="413" y="827"/>
   </endsteps>
@@ -181,6 +208,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="8" anchor="3"/>
+        <transitiontarget type="decision" index="11" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
@@ -203,6 +235,11 @@
       <transition>
         <transitionsource type="task" index="16" anchor="2"/>
         <transitiontarget type="task" index="15" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="17" anchor="2"/>
+        <transitiontarget type="decision" index="10" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>
@@ -285,6 +322,31 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="9" anchor="2"/>
         <transitiontarget type="task" index="14" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="10" anchor="1"/>
+        <transitiontarget type="task" index="18" anchor="3"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="11" anchor="3"/>
+        <transitiontarget type="decision" index="12" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="12" anchor="2"/>
+        <transitiontarget type="task" index="19" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="12" anchor="3"/>
+        <transitiontarget type="decision" index="13" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="13" anchor="2"/>
+        <transitiontarget type="task" index="20" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

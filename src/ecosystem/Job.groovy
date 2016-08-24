@@ -201,21 +201,6 @@ public class Job  {
     /**
      *
      * This is an agent property.
-     * @field productQuality
-     *
-     */
-    @Parameter (displayName = "Product Quality", usageName = "productQuality")
-    public double getProductQuality() {
-        return productQuality
-    }
-    public void setProductQuality(double newValue) {
-        productQuality = newValue
-    }
-    public double productQuality = Math.exp(200)
-
-    /**
-     *
-     * This is an agent property.
      * @field hardness
      *
      */
@@ -430,6 +415,7 @@ public class Job  {
 
                         // This is a task.
                         this.prepareStatus[mac.key] = false
+                        this.owner[mac.key] = this.remainingTime
 
                     } else  {
 

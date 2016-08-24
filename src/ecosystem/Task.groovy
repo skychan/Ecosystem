@@ -155,6 +155,36 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field productQuality
+     *
+     */
+    @Parameter (displayName = "Product Quality", usageName = "productQuality")
+    public double getProductQuality() {
+        return productQuality
+    }
+    public void setProductQuality(double newValue) {
+        productQuality = newValue
+    }
+    public double productQuality = Math.exp(2000)
+
+    /**
+     *
+     * This is an agent property.
+     * @field expectQuality
+     *
+     */
+    @Parameter (displayName = "Expect Quality", usageName = "expectQuality")
+    public double getExpectQuality() {
+        return expectQuality
+    }
+    public void setExpectQuality(double newValue) {
+        expectQuality = newValue
+    }
+    public double expectQuality = Math.exp(2000)
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -275,6 +305,18 @@ public class Task extends ecosystem.Job  {
 
                     // This is a task.
                     mac.Finish(this.needResourceCapacity)
+                    double realQ = mac.getQuality()
+
+                    // This is an agent decision.
+                    if (this.productQuality < realQ) {
+
+                        // This is a task.
+                        this.productQuality = realQ
+
+                    } else  {
+
+
+                    }
 
                 }
 
@@ -282,6 +324,40 @@ public class Task extends ecosystem.Job  {
                 this.setFinish(true)
                 this.finishTime = GetTickCount()
                 this.span = (int)(this.finishTime - this.getStartTime())
+
+                // This is a loop.
+                for (macData in this.owner) {
+
+
+                    // This is an agent decision.
+                    if (macData.key.getClass() == ecosystem.Resource) {
+
+                        // This is a task.
+                        def res = macData.key
+                        def p= macData.value
+                        double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))
+                        res.rank += deltaRank
+
+                    } else  {
+
+
+                        // This is an agent decision.
+                        if (macData.key.getClass() == ecosystem.Service) {
+
+                            // This is a task.
+                            int amount = macData.key.resourceComposition.values().sum()
+                            double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))
+                            macData.key.rank += deltaRank
+
+                        } else  {
+
+
+                        }
+
+                    }
+
+                }
+
 
             } else  {
 

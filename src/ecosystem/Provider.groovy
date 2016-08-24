@@ -254,51 +254,6 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
-     * This is the step behavior.
-     * @method Enter
-     *
-     */
-    public def Enter(platform) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (this.candidates.isEmpty()) {
-
-            // This is a task.
-            returnValue = false
-
-        } else  {
-
-
-            // This is a loop.
-            for (res in this.candidates) {
-
-                // This is a task.
-                AddAgentToContext("Ecosystem", res)
-                this.addResource(res)
-                platform.Indexing(res)
-                platform.NewQueue(res)
-
-            }
-
-            // This is a task.
-            this.candidates = []
-            returnValue = true
-
-        }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * Calculate weighted average
      * @method WM
      *
@@ -319,7 +274,7 @@ public class Provider extends ecosystem.User  {
         for (data in dataMap) {
 
             // This is a task.
-            tempsum += data.key*data.value
+            tempsum += data.key.mu*data.value
             n += data.value
 
         }
@@ -348,13 +303,12 @@ public class Provider extends ecosystem.User  {
         // This is a task.
         double tempsum = 0
         int n = 0
-        double mean = this.WM(dataMap)
 
         // This is a loop.
         for (data in dataMap) {
 
             // This is a task.
-            tempsum += (data.key - mean)*(data.key - mean) *data.value
+            tempsum += data.key.sigma*data.key.sigma*data.value
             n += data.value
 
         }
@@ -435,6 +389,8 @@ public class Provider extends ecosystem.User  {
             s.resourceComposition = serviceData
             // This is a task.
             s.setOwner(this)
+            s.mu = this.WM(serviceData)
+            s.sigma = this.WSTD(serviceData)
 
         } else  {
 
@@ -463,13 +419,14 @@ public class Provider extends ecosystem.User  {
 
             // This is a task.
             Resource res = new Resource()
-            res.setQuality(RandomHelper.nextDoubleFromTo(0,30))
+            res.setMu(RandomHelper.nextDoubleFromTo(0,30))
             res.setType(type)
             res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
             res.setAvailable(res.getCapacity())
             // This is a task.
             res.setOwner(this)
             this.resourceList << res
+            res.setSigma(RandomHelper.nextDoubleFromTo(0,5))
             //this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)
             res.setSourceable(res.getCapacity())
 

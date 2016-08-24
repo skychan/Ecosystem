@@ -125,18 +125,18 @@ public class Machine  {
 
     /**
      *
-     * Quality
-     * @field quality
+     * Quality mu
+     * @field mu
      *
      */
-    @Parameter (displayName = "Quality", usageName = "quality")
-    public double getQuality() {
-        return quality
+    @Parameter (displayName = "Quality mu", usageName = "mu")
+    public double getMu() {
+        return mu
     }
-    public void setQuality(double newValue) {
-        quality = newValue
+    public void setMu(double newValue) {
+        mu = newValue
     }
-    public double quality = 0
+    public double mu = 0
 
     /**
      *
@@ -272,6 +272,21 @@ public class Machine  {
         responseList = newValue
     }
     public List responseList = []
+
+    /**
+     *
+     * Quality sigma
+     * @field sigma
+     *
+     */
+    @Parameter (displayName = "Quality sigma", usageName = "sigma")
+    public double getSigma() {
+        return sigma
+    }
+    public void setSigma(double newValue) {
+        sigma = newValue
+    }
+    public double sigma = 0
 
     /**
      *
@@ -586,6 +601,28 @@ public class Machine  {
 
         // This is a task.
         returnValue = this.jobList.size()
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method getQuality
+     *
+     */
+    public def getQuality() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        RandomHelper.createNormal(this.mu,this.sigma)
+        returnValue = RandomHelper.getNormal().nextDouble()
         // Return the results.
         return returnValue
 

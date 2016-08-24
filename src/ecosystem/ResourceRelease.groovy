@@ -127,9 +127,9 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
         // This is a task.
         m.jobList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
         int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }
-        println m.toString()
-        println m.buffer
-        println m.jobList
+        //println m.toString()
+        //println m.buffer
+        //println m.jobList
 
         // This is an agent decision.
         if (i == 0) {
@@ -173,15 +173,15 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
             }
             // Sort
             //newList.sort{ a,b-> a in b.predecessor? -1: b in a.predecessor? 1:0 }
-            println m.toString() + " avialable = " + m.getAvailable()
-            println m.toString() + " sourceable = " + m.getSourceable()
-            println newList
+            //println m.toString() + " avialable = " + m.getAvailable()
+            //println m.toString() + " sourceable = " + m.getSourceable()
+            //println newList
 
             // This is a loop.
             for (j in newList) {
 
                 // This is a task.
-                println j.needResourceCapacity[m.getType()]
+                // println j.needResourceCapacity[m.getType()]
 
                 // This is an agent decision.
                 if (m.getAvailable() >= j.needResourceCapacity[m.getType()]) {

@@ -85,10 +85,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="394" y="1064"/>
-    <endstep x="588" y="293"/>
-    <endstep x="317" y="523"/>
-    <endstep x="219" y="336"/>
+    <endstep x="399" y="1069"/>
+    <endstep x="593" y="298"/>
+    <endstep x="293" y="510"/>
+    <endstep x="199" y="329"/>
   </endsteps>
   <connections>
     <transitions>

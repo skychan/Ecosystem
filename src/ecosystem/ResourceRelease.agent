@@ -15,7 +15,7 @@
     <taskstep x="391" y="702" comment="This is a task." command1="m.assignBehavior.Buffer(j,m)" command2="m.jobList.remove(j)" command3="m.jobList2.remove(j)" command4="" command5="">
       <label x="391" y="687" text="Do Task"/>
     </taskstep>
-    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="println m.toString()" command4="println m.buffer" command5="println m.jobList">
+    <taskstep x="272" y="143" comment="This is a task." command1="m.jobList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="int i  = m.jobList.findIndexOf{ it.getClass() == ecosystem.ServiceCall }" command3="//println m.toString()" command4="//println m.buffer" command5="//println m.jobList">
       <label x="272" y="128" text="Sort"/>
     </taskstep>
     <taskstep x="583" y="217" comment="This is a task." command1="job.prepareStatus[m] = true" command2="m.jobList.remove(job)\fm.jobList2.remove(job)" command3="m.setAvailable(m.getAvailable() - m.needCap[job])" command4="" command5="m.needCap.remove(job)">
@@ -33,13 +33,13 @@
     <taskstep x="371" y="377" comment="This is a task." command1="newList = m.jobList.clone()" command2="" command3="" command4="" command5="">
       <label x="371" y="362" text="Do Task"/>
     </taskstep>
-    <taskstep x="273" y="503" comment="Sort" command1="//newList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="println m.toString() + &quot; avialable = &quot; + m.getAvailable()" command3="println m.toString() + &quot; sourceable = &quot; + m.getSourceable()" command4="" command5="println newList">
+    <taskstep x="273" y="503" comment="Sort" command1="//newList.sort{ a,b-&gt; a in b.predecessor? -1: b in a.predecessor? 1:0 }" command2="//println m.toString() + &quot; avialable = &quot; + m.getAvailable()" command3="//println m.toString() + &quot; sourceable = &quot; + m.getSourceable()" command4="" command5="//println newList">
       <label x="273" y="488" text="Sort"/>
     </taskstep>
     <taskstep x="193" y="276" comment="This is a task." command1="List newList = []" command2="" command3="" command4="" command5="">
       <label x="193" y="261" text="Do Task"/>
     </taskstep>
-    <taskstep x="353" y="532" comment="This is a task." command1="println j.needResourceCapacity[m.getType()]" command2="" command3="" command4="" command5="">
+    <taskstep x="353" y="532" comment="This is a task." command1="// println j.needResourceCapacity[m.getType()]" command2="" command3="" command4="" command5="">
       <label x="353" y="517" text="Do Task"/>
     </taskstep>
     <taskstep x="585" y="323" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
@@ -76,13 +76,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="298" y="452"/>
+    <joinstep x="303" y="457"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="93" y="616"/>
-    <endstep x="296" y="741"/>
-    <endstep x="14" y="343"/>
+    <endstep x="98" y="621"/>
+    <endstep x="301" y="746"/>
+    <endstep x="19" y="348"/>
   </endsteps>
   <connections>
     <transitions>

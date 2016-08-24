@@ -602,6 +602,21 @@ public class Machine  {
 
     /**
      *
+     * This is the step behavior.
+     * @method Finish
+     *
+     */
+    public void Finish(resConf) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.owner.addTaskFrequency(resConf)
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

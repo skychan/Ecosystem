@@ -103,20 +103,6 @@ public class ResourceResponse implements ecosystem.ResponseBehavior {
 
         // This is a task.
         returnValue = (machine.getType() in job.getNeedResourceCapacity().keySet() && machine.getSourceable() >= job.needResourceCapacity[machine.getType()] )
-
-        // This is an agent decision.
-        if (machine.getType() in job.getNeedResourceCapacity().keySet()) {
-
-            // This is a task.
-            println machine.toString() + " for " + job.toString()
-            println machine.sourceable
-            println job.needResourceCapacity[machine.getType()]
-            println returnValue
-
-        } else  {
-
-
-        }
         // Return the results.
         return returnValue
 

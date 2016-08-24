@@ -30,7 +30,7 @@
     <taskstep x="355" y="462" comment="This is a task." command1="needCap -= res.getSourceable()" command2="chosenMap[candidate.key][res] = res.getSourceable()" command3="" command4="" command5="">
       <label x="355" y="447" text="Do Task"/>
     </taskstep>
-    <taskstep x="253" y="143" comment="This is a task." command1="def chosenMap = [:]" command2="println sc" command3="println candidates" command4="" command5="">
+    <taskstep x="253" y="143" comment="This is a task." command1="def chosenMap = [:]" command2="//println sc" command3="//println candidates" command4="" command5="">
       <label x="253" y="128" text="Do Task"/>
     </taskstep>
     <taskstep x="20" y="264" comment="This is a task." command1="returnValue = []" command2="" command3="" command4="" command5="">
@@ -97,15 +97,15 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="128" y="380"/>
-    <joinstep x="776" y="326"/>
+    <joinstep x="133" y="385"/>
+    <joinstep x="781" y="331"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="252" y="468"/>
-    <endstep x="127" y="465"/>
-    <endstep x="783" y="414"/>
-    <endstep x="975" y="317"/>
+    <endstep x="257" y="473"/>
+    <endstep x="132" y="470"/>
+    <endstep x="788" y="419"/>
+    <endstep x="980" y="322"/>
   </endsteps>
   <connections>
     <transitions>

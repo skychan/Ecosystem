@@ -112,7 +112,7 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
 
         // This is a task.
         sc.setFinish(true)
-        sc.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()
+        sc.finishTime = GetTickCount()
         sc.span = sc.finishTime - sc.getStartTime()
     }
 

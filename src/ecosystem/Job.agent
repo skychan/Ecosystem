@@ -33,10 +33,10 @@
     <taskstep x="1116" y="591" comment="This is a task." command1="int t = this.getReayTime() - this.inBufferTime[theRes]" command2="int t2 = this.getFinishTime() - this.inBufferTime[theRes]" command3="int q = this.needResourceCapacity[theRes.getType()] * t2" command4="this.reviews &lt;&lt; Math.exp(t)*q*theRes.getRank()" command5="">
       <label x="1116" y="576" text="Do Task"/>
     </taskstep>
-    <taskstep x="259" y="336" comment="This is a task." command1="println this.allocated" command2="println this.toString()" command3="println this.allocation" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
+    <taskstep x="259" y="336" comment="This is a task." command1="//println this.allocated" command2="//println this.toString()" command3="//println this.allocation" command4="this.theOnes = [:]" command5="this.candidates.each{ entry -&gt; entry.value = [] }">
       <label x="259" y="321" text="Do Task"/>
     </taskstep>
-    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="println this.prepareStatus" command3="" command4="" command5="">
+    <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="//println this.prepareStatus" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
     <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="768" y="384"/>
+    <joinstep x="773" y="389"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -138,11 +138,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="286" y="553"/>
-    <endstep x="770" y="449"/>
-    <endstep x="184" y="430"/>
-    <endstep x="1200" y="766"/>
-    <endstep x="298" y="974"/>
+    <endstep x="291" y="558"/>
+    <endstep x="775" y="454"/>
+    <endstep x="189" y="435"/>
+    <endstep x="1205" y="771"/>
+    <endstep x="303" y="979"/>
   </endsteps>
   <connections>
     <transitions>
@@ -164,6 +164,11 @@
       <transition>
         <transitionsource type="behavior" index="3" anchor="0"/>
         <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="decision" index="6" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -197,18 +202,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="decision" index="6" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="9" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

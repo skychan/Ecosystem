@@ -69,6 +69,9 @@
     <taskstep x="556" y="475" comment="The finish step" command1="" command2="println mac" command3="println &quot;jobList&quot;" command4="" command5="">
       <label x="556" y="460" text="Afterward"/>
     </taskstep>
+    <taskstep x="925" y="248" comment="This is a task." command1="mac.Finish(this.needResourceCapacity)" command2="" command3="" command4="" command5="">
+      <label x="925" y="233" text="Finish and count"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="274" y="220" comment="This is a loop." criteria="data in tdata.value" branchType="while">
@@ -124,11 +127,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="68" y="327"/>
-    <endstep x="299" y="491"/>
-    <endstep x="517" y="421"/>
-    <endstep x="67" y="822"/>
-    <endstep x="418" y="839"/>
+    <endstep x="50" y="294"/>
+    <endstep x="278" y="417"/>
+    <endstep x="522" y="426"/>
+    <endstep x="51" y="800"/>
+    <endstep x="413" y="827"/>
   </endsteps>
   <connections>
     <transitions>
@@ -245,8 +248,8 @@
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
-        <transitionsource type="decision" index="4" anchor="0"/>
-        <transitiontarget type="task" index="8" anchor="2"/>
+        <transitionsource type="decision" index="4" anchor="3"/>
+        <transitiontarget type="decision" index="6" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -256,7 +259,12 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="6" anchor="3"/>
-        <transitiontarget type="task" index="9" anchor="1"/>
+        <transitiontarget type="task" index="17" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="6" anchor="0"/>
+        <transitiontarget type="task" index="8" anchor="2"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

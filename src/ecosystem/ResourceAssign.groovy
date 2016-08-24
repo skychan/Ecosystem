@@ -135,10 +135,6 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
         t.predecessor += r.buffer
         // This is a task.
         r.jobList << t
-        if(t.getClass()==ecosystem.ServiceCall){
-        	println r.buffer
-        	println r.jobList
-        }
     }
 
     /**

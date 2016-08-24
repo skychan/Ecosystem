@@ -9,7 +9,7 @@
     <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.needResourceCapacity)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
-    <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = RunEnvironment.getInstance().getCurrentSchedule().getTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
+    <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = GetTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
       <label x="291" y="91" text="Finish"/>
     </taskstep>
     <taskstep x="292" y="299" comment="The finish step" command1="mac.Release(sc)" command2="" command3="" command4="" command5="">
@@ -42,7 +42,7 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="423" y="136"/>
+    <endstep x="428" y="141"/>
   </endsteps>
   <connections>
     <transitions>
@@ -83,14 +83,14 @@
         <transitiontarget type="task" index="1" anchor="2"/>
         <bendpoints/>
       </booleantransition>
-      <booleantransition value="false">
-        <transitionsource type="decision" index="1" anchor="3"/>
-        <transitiontarget type="task" index="3" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="3" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

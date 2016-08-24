@@ -269,6 +269,15 @@ public class Task extends ecosystem.Job  {
 
                 }
 
+
+                // This is a loop.
+                for (mac in this.getAllocation().values()) {
+
+                    // This is a task.
+                    mac.Finish(this.needResourceCapacity)
+
+                }
+
                 // This is a task.
                 this.setFinish(true)
                 this.finishTime = GetTickCount()

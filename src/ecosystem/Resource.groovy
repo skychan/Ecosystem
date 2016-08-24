@@ -189,7 +189,7 @@ public class Resource extends ecosystem.Machine  {
 
         // This is a task.
         this.needCap[ sc ] = amount
-        println this.toString()
+        //println this.toString()
         this.setSourceable(this.getSourceable() - amount)
 
         // This is an agent decision.
@@ -198,9 +198,6 @@ public class Resource extends ecosystem.Machine  {
             // This is a task.
             this.setAvailable(this.getAvailable() - amount)
             sc.prepareStatus[this] = true
-            println "first assign sc with "
-            println this.buffer
-            println this.jobList
             this.needCap.remove(sc)
 
         } else  {

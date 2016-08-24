@@ -141,51 +141,6 @@ public class Provider extends ecosystem.User  {
     /**
      *
      * This is an agent property.
-     * @field callContent
-     *
-     */
-    @Parameter (displayName = "Call Content", usageName = "callContent")
-    public def getCallContent() {
-        return callContent
-    }
-    public void setCallContent(def newValue) {
-        callContent = newValue
-    }
-    public def callContent = [:]
-
-    /**
-     *
-     * This is an agent property.
-     * @field serviceCalling
-     *
-     */
-    @Parameter (displayName = "Service Calling", usageName = "serviceCalling")
-    public boolean getServiceCalling() {
-        return serviceCalling
-    }
-    public void setServiceCalling(boolean newValue) {
-        serviceCalling = newValue
-    }
-    public boolean serviceCalling = false
-
-    /**
-     *
-     * This is an agent property.
-     * @field ingredient
-     *
-     */
-    @Parameter (displayName = "Ingredient", usageName = "ingredient")
-    public def getIngredient() {
-        return ingredient
-    }
-    public void setIngredient(def newValue) {
-        ingredient = newValue
-    }
-    public def ingredient = [:]
-
-    /**
-     *
-     * This is an agent property.
      * @field serviceStatus
      *
      */
@@ -197,36 +152,6 @@ public class Provider extends ecosystem.User  {
         serviceStatus = newValue
     }
     public def serviceStatus = [:]
-
-    /**
-     *
-     * denote the task type pattern
-     * @field callPattern
-     *
-     */
-    @Parameter (displayName = "Call Pattern", usageName = "callPattern")
-    public def getCallPattern() {
-        return callPattern
-    }
-    public void setCallPattern(def newValue) {
-        callPattern = newValue
-    }
-    public def callPattern = 0
-
-    /**
-     *
-     * This is an agent property.
-     * @field prototype
-     *
-     */
-    @Parameter (displayName = "Service Prototype", usageName = "prototype")
-    public Service getPrototype() {
-        return prototype
-    }
-    public void setPrototype(Service newValue) {
-        prototype = newValue
-    }
-    public Service prototype = null
 
     /**
      *
@@ -250,6 +175,21 @@ public class Provider extends ecosystem.User  {
 						[1:7,2:6,4:5],
 						[1:7,4:6],
 						[1:5,2:6,3:7,4:6]]
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceConf
+     *
+     */
+    @Parameter (displayName = "Service config count", usageName = "serviceConf")
+    public def getServiceConf() {
+        return serviceConf
+    }
+    public void setServiceConf(def newValue) {
+        serviceConf = newValue
+    }
+    public def serviceConf = [:]
 
     /**
      *
@@ -481,79 +421,25 @@ public class Provider extends ecosystem.User  {
      * @method addTaskFrequency
      *
      */
-    public def addTaskFrequency(theTask) {
-
-        // Define the return value variable.
-        def returnValue
+    public void addTaskFrequency(resConf) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
 
         // This is an agent decision.
-        if (theTask.getType() in this.taskFrequency.keySet()) {
+        if (resConf in this.taskFrequency.keySet()) {
 
             // This is a task.
-            this.taskFrequency[theTask.getType()] += 1
+            this.taskFrequency[resConf] += 1
 
         } else  {
 
             // This is a task.
-            this.taskFrequency[theTask.getType()] = 1
-            this.ingredient[theTask.getType()] = theTask.needResourceCapacity
+            this.taskFrequency[resConf] = 1
+            this.serviceConf[resConf] = 0
 
         }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method ServiceCall
-     *
-     */
-    public def ServiceCall() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (true) {
-
-            // This is a task.
-            this.taskFrequency = this.taskFrequency.sort{ [-it.value,-it.key.getHardness()]}
-            def pattern = this.taskFrequency.iterator()[0]
-
-            // This is an agent decision.
-            if (pattern.value >= 5) {
-
-                // This is a task.
-                this.setServiceCalling(true)
-                this.callContent = this.ingredient[pattern.key]
-                this.callPattern = pattern.key
-                this.prototype = new Service()
-                this.prototype.setAppetite(pattern.key)
-                // This is a task.
-                this.taskFrequency.iterator()[0].value -= 5
-
-            } else  {
-
-
-            }
-
-        } else  {
-
-
-        }
-        // Return the results.
-        return returnValue
-
     }
 
     /**
@@ -645,11 +531,6 @@ public class Provider extends ecosystem.User  {
      * @method generateServiceCall
      *
      */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
     public def generateServiceCall() {
 
         // Define the return value variable.
@@ -683,6 +564,51 @@ public class Provider extends ecosystem.User  {
 
         // This is a task.
         RemoveAgentFromContext("Ecosystem", sc)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method GenerateServiceCall
+     *
+     */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void GenerateServiceCall() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (true) {
+
+            // This is a task.
+            this.taskFrequency = this.taskFrequency.sort{ 5*this.serviceConf[it.key] - it.value }
+            def pattern = this.taskFrequency.iterator()[0]
+
+            // This is an agent decision.
+            if (this.taskFrequency.size() > 0 && pattern.value - 5*this.serviceConf[pattern.key] > 5) {
+
+                // This is a task.
+                ServiceCall sagent = CreateAgent("Ecosystem", "ecosystem.ServiceCall")
+                sagent.setParameters(pattern.key)
+                sagent.setOwner(this)
+                // This is a task.
+                this.serviceConf[pattern.key] += 1
+
+            } else  {
+
+
+            }
+
+        } else  {
+
+
+        }
     }
 
     /**

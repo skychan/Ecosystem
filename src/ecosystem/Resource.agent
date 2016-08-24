@@ -18,13 +18,13 @@
     <taskstep x="58" y="202" comment="This is a task." command1="responseBehavior = new ResourceResponse()" command2="assignBehavior = new ResourceAssign()" command3="releaseBehavior  = new ResourceRelease()" command4="" command5="">
       <label x="58" y="187" text="Do Task"/>
     </taskstep>
-    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="println this.toString()" command3="this.setSourceable(this.getSourceable() - amount)" command4="" command5="">
+    <taskstep x="370" y="490" comment="This is a task." command1="this.needCap[ sc ] = amount" command2="//println this.toString()" command3="this.setSourceable(this.getSourceable() - amount)" command4="" command5="">
       <label x="370" y="475" text="Do Task"/>
     </taskstep>
     <taskstep x="265" y="630" comment="This is a task." command1="sc.predecessor += this.jobList" command2="this.assignBehavior.Queue(sc,this)" command3="" command4="" command5="">
       <label x="265" y="615" text="Do Task"/>
     </taskstep>
-    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="println &quot;first assign sc with &quot;\fprintln this.buffer\fprintln this.jobList" command5="this.needCap.remove(sc)">
+    <taskstep x="481" y="633" comment="This is a task." command1="" command2="this.setAvailable(this.getAvailable() - amount)" command3="sc.prepareStatus[this] = true" command4="" command5="this.needCap.remove(sc)">
       <label x="481" y="618" text="Do Task"/>
     </taskstep>
     <taskstep x="590" y="624" comment="This is a task." command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
@@ -49,7 +49,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="397" y="768"/>
+    <joinstep x="407" y="778"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="476" y="244" comment="This is an agent property." visibility="0" compiledname="sourceable" type="int" defaultvalue="0">
@@ -69,10 +69,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="116" y="364"/>
-    <endstep x="398" y="860"/>
-    <endstep x="614" y="757"/>
-    <endstep x="70" y="806"/>
+    <endstep x="126" y="374"/>
+    <endstep x="408" y="870"/>
+    <endstep x="624" y="767"/>
+    <endstep x="80" y="816"/>
   </endsteps>
   <connections>
     <transitions>

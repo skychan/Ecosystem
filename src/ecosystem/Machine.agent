@@ -13,8 +13,8 @@
     <behaviorstep x="577" y="686" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Review and comment after the task is finished" visibility="0" returntype="def" compiledname="Review" parameters="theTask" exceptions="">
       <label x="577" y="671" text="Review self"/>
     </behaviorstep>
-    <behaviorstep x="306" y="1014" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="int" compiledname="getFullLength" parameters="" exceptions="">
-      <label x="306" y="999" text="Full queue length"/>
+    <behaviorstep x="334" y="684" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="int" compiledname="getFullLength" parameters="" exceptions="">
+      <label x="334" y="669" text="Full queue length"/>
     </behaviorstep>
     <behaviorstep x="137" y="639" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Assign" parameters="Task job" exceptions="">
       <label x="137" y="624" text="Assign"/>
@@ -30,6 +30,9 @@
     </behaviorstep>
     <behaviorstep x="821" y="762" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Finish" parameters="resConf" exceptions="">
       <label x="821" y="747" text="Finish"/>
+    </behaviorstep>
+    <behaviorstep x="438" y="686" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="int" compiledname="getQueueLength" parameters="" exceptions="">
+      <label x="438" y="671" text="Queue length"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -54,8 +57,8 @@
     <taskstep x="580" y="767" comment="This is a task." command1="double q = theTask.getProductQuality()" command2="int t = theTask.responseTime[this]" command3="double h = theTask.getHardness()" command4="int p = theTask.getProcessingTime()" command5="this.reviews &lt;&lt;  (h * q / (t+p))">
       <label x="580" y="752" text="Do Task"/>
     </taskstep>
-    <taskstep x="307" y="1119" comment="This is a task." command1="returnValue = this.jobList.size() + this.buffer.size()" command2="" command3="" command4="" command5="">
-      <label x="307" y="1104" text="Do Task"/>
+    <taskstep x="335" y="789" comment="This is a task." command1="returnValue = this.jobList.size() + this.buffer.size()" command2="" command3="" command4="" command5="">
+      <label x="335" y="774" text="Do Task"/>
     </taskstep>
     <taskstep x="581" y="844" comment="This is a task." command1="this.owner.addTaskFrequency(theTask)" command2="" command3="" command4="" command5="">
       <label x="581" y="829" text="Do Task"/>
@@ -95,6 +98,9 @@
     </taskstep>
     <taskstep x="921" y="869" comment="This is a task." command1="Scanner reader = new Scanner(System.in)" command2="println(&quot;add frequency &quot;)" command3="int n = reader.nextInt()" command4="" command5="">
       <label x="921" y="854" text="停"/>
+    </taskstep>
+    <taskstep x="439" y="791" comment="This is a task." command1="returnValue = this.jobList.size()" command2="" command3="" command4="" command5="">
+      <label x="439" y="776" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -149,12 +155,6 @@
     <agentproperty x="222" y="659" comment="This is the task buffer" visibility="0" compiledname="buffer" type="List" defaultvalue="[]">
       <label x="227" y="644" text="Buffer"/>
     </agentproperty>
-    <agentproperty x="300" y="894" comment="Mark queue in joblist or not" visibility="0" compiledname="queue" type="boolean" defaultvalue="false">
-      <label x="305" y="879" text="Queue Status"/>
-    </agentproperty>
-    <agentproperty x="408" y="940" comment="This is an agent property." visibility="0" compiledname="queueLength" type="int" defaultvalue="0">
-      <label x="413" y="925" text="Queue Length"/>
-    </agentproperty>
     <agentproperty x="44" y="472" comment="This is an agent property." visibility="0" compiledname="shiftTask" type="def" defaultvalue="[]">
       <label x="49" y="457" text="Shift Task"/>
     </agentproperty>
@@ -176,9 +176,6 @@
     <agentproperty x="248" y="135" comment="This is an agent property." visibility="0" compiledname="responseList" type="List" defaultvalue="[]">
       <label x="253" y="120" text="Response List"/>
     </agentproperty>
-    <agentproperty x="339" y="749" comment="Job list" visibility="0" compiledname="jobList2" type="Map" defaultvalue="[:]">
-      <label x="344" y="734" text="Job List"/>
-    </agentproperty>
   </agentproperties>
   <endsteps>
     <endstep x="152" y="396"/>
@@ -186,11 +183,12 @@
     <endstep x="804" y="676"/>
     <endstep x="149" y="1099"/>
     <endstep x="589" y="947"/>
-    <endstep x="342" y="1258"/>
+    <endstep x="340" y="892"/>
     <endstep x="689" y="348"/>
     <endstep x="525" y="301"/>
     <endstep x="442" y="450"/>
     <endstep x="828" y="946"/>
+    <endstep x="447" y="896"/>
   </endsteps>
   <connections>
     <transitions>
@@ -332,6 +330,16 @@
       <transition>
         <transitionsource type="task" index="19" anchor="2"/>
         <transitiontarget type="end" index="9" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="21" anchor="2"/>
+        <transitiontarget type="end" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="10" anchor="0"/>
+        <transitiontarget type="task" index="21" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

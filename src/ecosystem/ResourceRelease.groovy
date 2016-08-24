@@ -144,7 +144,6 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
                 // This is a task.
                 job.prepareStatus[m] = true
                 m.jobList.remove(job)
-                m.jobList2.remove(job)
                 m.setAvailable(m.getAvailable() - m.needCap[job])
                 m.needCap.remove(job)
                 // This is a task.
@@ -189,7 +188,6 @@ public class ResourceRelease implements ecosystem.ReleaseBehavior {
                     // This is a task.
                     m.assignBehavior.Buffer(j,m)
                     m.jobList.remove(j)
-                    m.jobList2.remove(j)
 
                 } else  {
 

@@ -110,36 +110,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * Mark the resource type count with quality [type:[quality:quantity]]
-     * @field typeQuality
-     *
-     */
-    @Parameter (displayName = "Resource type count", usageName = "typeQuality")
-    public def getTypeQuality() {
-        return typeQuality
-    }
-    public void setTypeQuality(def newValue) {
-        typeQuality = newValue
-    }
-    public def typeQuality = [:]
-
-    /**
-     *
-     * This is an agent property.
-     * @field typeQueueLength
-     *
-     */
-    @Parameter (displayName = "Resource Queue", usageName = "typeQueueLength")
-    public def getTypeQueueLength() {
-        return typeQueueLength
-    }
-    public void setTypeQueueLength(def newValue) {
-        typeQueueLength = newValue
-    }
-    public def typeQueueLength = [:]
-
-    /**
-     *
      * Count the fininshed jobs
      * @field serviceGeneratedCount
      *
@@ -152,6 +122,36 @@ public class CloudPlatform  {
         serviceGeneratedCount = newValue
     }
     public int serviceGeneratedCount = 0
+
+    /**
+     *
+     * [type: amount]
+     * @field resourceTypeAmount
+     *
+     */
+    @Parameter (displayName = "Resource Map", usageName = "resourceTypeAmount")
+    public Map getResourceTypeAmount() {
+        return resourceTypeAmount
+    }
+    public void setResourceTypeAmount(Map newValue) {
+        resourceTypeAmount = newValue
+    }
+    public Map resourceTypeAmount = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceList
+     *
+     */
+    @Parameter (displayName = "Resource List registered", usageName = "resourceList")
+    public List getResourceList() {
+        return resourceList
+    }
+    public void setResourceList(List newValue) {
+        resourceList = newValue
+    }
+    public List resourceList = []
 
     /**
      *
@@ -219,9 +219,10 @@ public class CloudPlatform  {
         def time = GetTickCountInTimeUnits()
 
         // Create Provider at a random distribution
-        Provider pagent = CreateAgent("Ecosystem", "ecosystem.Provider")
+        Provider pagent = new Provider()
         // pagent.GenerateResource(this.typeQuality,this.typeQueueLength)
         pagent.GenerateResource()
+        this.addProvider(pagent)
     }
 
     /**
@@ -264,11 +265,11 @@ public class CloudPlatform  {
 
     /**
      *
-     * This is the step behavior.
-     * @method Indexing
+     * Return the resource quene length sum
+     * @method ResourceQueue
      *
      */
-    public def Indexing(res) {
+    public int ResourceQueue(type) {
 
         // Define the return value variable.
         def returnValue
@@ -276,106 +277,143 @@ public class CloudPlatform  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // This is a task.
+        int L = 0
+        List typeResList = this.resourceList.findAll{ it-> it.getType() == type }
 
-        // This is an agent decision.
-        if (res.getType() in this.typeQuality.keySet()) {
+        // This is a loop.
+        for (res in typeResList) {
+
+            // This is a task.
+            L += res.getQueueLength()
+
+        }
+
+        // This is a task.
+        returnValue = L
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method ResourceQuality
+     *
+     */
+    public double ResourceQuality(type) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        List typeResList = this.resourceList.findAll{ it-> it.getType() == type }
+        double minq = typeResList[0].getQuality()
+
+        // This is a loop.
+        for (res in typeResList) {
+
+            // This is a task.
+            double theq = res.getQuality()
+
+            // This is an agent decision.
+            if (theq < minq) {
+
+                // This is a task.
+                minq = theq
+
+            } else  {
+
+
+            }
+
+        }
+
+        // This is a task.
+        returnValue = minq
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addProvider
+     *
+     */
+    public void addProvider(p) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        List resList = p.resourceList.collect()
+
+        // This is a loop.
+        for (res in resList) {
 
 
             // This is an agent decision.
-            if (res.getQuality() in this.typeQuality[res.getType()].keySet()) {
+            if (this.ResourceQueue(res.getType()) == 0) {
+
+
+                // This is an agent decision.
+                if (res.getType() in this.resourceTypeAmount.keySet() && this.ResourceQuality(res.getType()) < res.getQuality()) {
+
+                    // This is a task.
+                    p.resourceList.remove(res)
+
+                } else  {
+
+
+                }
+
+            } else  {
+
+
+            }
+
+        }
+
+
+        // This is a loop.
+        for (res in p.resourceList) {
+
+            // This is a task.
+            AddAgentToContext("Ecosystem", res)
+            this.resourceList << res
+
+            // This is an agent decision.
+            if (res.getType() in this.resourceTypeAmount.keySet()) {
 
                 // This is a task.
-                this.typeQuality[res.getType()][res.getQuality()] += res.getCapacity()
+                this.resourceTypeAmount[res.getType()] += res.getCapacity()
 
             } else  {
 
                 // This is a task.
-                this.typeQuality[res.getType()][res.getQuality()] = res.getCapacity()
+                this.resourceTypeAmount[res.getType()] = res.getCapacity()
 
             }
-            // This is a task.
-            println this.typeQuality
-
-        } else  {
-
-            // This is a task.
-            this.typeQuality[res.getType()] = [:]
-            this.typeQuality[res.getType()][res.getQuality()] = res.getCapacity()
 
         }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Queue
-     *
-     */
-    @Watch(
-        watcheeClassName = 'ecosystem.Resource',
-        watcheeFieldNames = 'queue',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE,
-        scheduleTriggerDelta = 1d
-    )
-    public def Queue(ecosystem.Resource watchedAgent) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
 
 
         // This is an agent decision.
-        if (watchedAgent.getQueue()) {
+        if (p.resourceList.size() > 0) {
 
             // This is a task.
-            this.typeQueueLength[watchedAgent.getType()] += 1
-
-        } else  {
-
-            // This is a task.
-            this.typeQueueLength[watchedAgent.getType()] -= 1
-
-        }
-        // This is a task.
-        println this.typeQueueLength
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method NewQueue
-     *
-     */
-    public def NewQueue(res) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (res.getType() in this.typeQueueLength.keySet()) {
-
-            // This is a task.
-            this.typeQueueLength[res.getType()] = 0
+            AddAgentToContext("Ecosystem", p)
 
         } else  {
 
 
         }
-        // Return the results.
-        return returnValue
-
     }
 
     /**

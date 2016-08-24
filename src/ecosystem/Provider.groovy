@@ -111,21 +111,6 @@ public class Provider extends ecosystem.User  {
     /**
      *
      * This is an agent property.
-     * @field candidates
-     *
-     */
-    @Parameter (displayName = "Resource candidates", usageName = "candidates")
-    public def getCandidates() {
-        return candidates
-    }
-    public void setCandidates(def newValue) {
-        candidates = newValue
-    }
-    public def candidates = []
-
-    /**
-     *
-     * This is an agent property.
      * @field taskFrequency
      *
      */
@@ -214,40 +199,6 @@ public class Provider extends ecosystem.User  {
      *
      */
     protected String agentID = "Provider " + (agentIDCounter++)
-
-    /**
-     *
-     * Generate Resource
-     * @method GenerateResource
-     *
-     */
-    public void GenerateResource(typeQuality, typeQueueLength) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method addResource
-     *
-     */
-    public def addResource(res) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        this.resourceList << res
-        // Return the results.
-        return returnValue
-
-    }
 
     /**
      *
@@ -505,14 +456,15 @@ public class Provider extends ecosystem.User  {
         // This is a task.
         ArrayList types = 1..5
         SimUtilities.shuffle(types,RandomHelper.getUniform())
+        types = types.take(RandomHelper.nextIntFromTo(0,4))
 
         // This is a loop.
-        for (i in 0..4) {
+        for (type in types) {
 
             // This is a task.
-            Resource res = CreateAgent("Ecosystem", "ecosystem.Resource")
+            Resource res = new Resource()
             res.setQuality(RandomHelper.nextDoubleFromTo(0,30))
-            res.setType(types[i])
+            res.setType(type)
             res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
             res.setAvailable(res.getCapacity())
             // This is a task.

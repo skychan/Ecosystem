@@ -170,36 +170,6 @@ public class Machine  {
 
     /**
      *
-     * Mark queue in joblist or not
-     * @field queue
-     *
-     */
-    @Parameter (displayName = "Queue Status", usageName = "queue")
-    public boolean getQueue() {
-        return queue
-    }
-    public void setQueue(boolean newValue) {
-        queue = newValue
-    }
-    public boolean queue = false
-
-    /**
-     *
-     * This is an agent property.
-     * @field queueLength
-     *
-     */
-    @Parameter (displayName = "Queue Length", usageName = "queueLength")
-    public int getQueueLength() {
-        return queueLength
-    }
-    public void setQueueLength(int newValue) {
-        queueLength = newValue
-    }
-    public int queueLength = 0
-
-    /**
-     *
      * This is an agent property.
      * @field shiftTask
      *
@@ -302,21 +272,6 @@ public class Machine  {
         responseList = newValue
     }
     public List responseList = []
-
-    /**
-     *
-     * Job list
-     * @field jobList2
-     *
-     */
-    @Parameter (displayName = "Job List", usageName = "jobList2")
-    public Map getJobList2() {
-        return jobList2
-    }
-    public void setJobList2(Map newValue) {
-        jobList2 = newValue
-    }
-    public Map jobList2 = [:]
 
     /**
      *
@@ -613,6 +568,27 @@ public class Machine  {
 
         // This is a task.
         this.owner.addTaskFrequency(resConf)
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method getQueueLength
+     *
+     */
+    public int getQueueLength() {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        returnValue = this.jobList.size()
+        // Return the results.
+        return returnValue
+
     }
 
     /**

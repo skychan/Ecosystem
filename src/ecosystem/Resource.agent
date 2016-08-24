@@ -49,7 +49,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="407" y="778"/>
+    <joinstep x="380" y="764"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="476" y="244" comment="This is an agent property." visibility="0" compiledname="sourceable" type="int" defaultvalue="0">
@@ -70,9 +70,9 @@
   </agentproperties>
   <endsteps>
     <endstep x="126" y="374"/>
-    <endstep x="408" y="870"/>
-    <endstep x="624" y="767"/>
-    <endstep x="80" y="816"/>
+    <endstep x="381" y="856"/>
+    <endstep x="612" y="776"/>
+    <endstep x="52" y="802"/>
   </endsteps>
   <connections>
     <transitions>

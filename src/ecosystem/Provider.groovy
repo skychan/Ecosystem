@@ -126,21 +126,6 @@ public class Provider extends ecosystem.User  {
     /**
      *
      * This is an agent property.
-     * @field serviceStatus
-     *
-     */
-    @Parameter (displayName = "Record the service status", usageName = "serviceStatus")
-    public def getServiceStatus() {
-        return serviceStatus
-    }
-    public void setServiceStatus(def newValue) {
-        serviceStatus = newValue
-    }
-    public def serviceStatus = [:]
-
-    /**
-     *
-     * This is an agent property.
      * @field serdata
      *
      */
@@ -178,6 +163,21 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
+     * This is an agent property.
+     * @field newService
+     *
+     */
+    @Parameter (displayName = "New Service", usageName = "newService")
+    public def getNewService() {
+        return newService
+    }
+    public void setNewService(def newValue) {
+        newService = newValue
+    }
+    public def newService = null
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -199,58 +199,6 @@ public class Provider extends ecosystem.User  {
      *
      */
     protected String agentID = "Provider " + (agentIDCounter++)
-
-    /**
-     *
-     * Judge the resource to exit
-     * @method ResourceJudege
-     *
-     */
-    public def ResourceJudege(typeQuality, typeQueueLength, type, res) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is an agent decision.
-        if (type in typeQuality.keySet()) {
-
-
-            // This is an agent decision.
-            if (typeQueueLength[type] < 5) {
-
-                // This is a task.
-                double mu = this.WM(typeQuality[type])
-                double sigma = this.WSTD(typeQuality[type])
-                RandomHelper.createNormal(mu,sigma)
-
-                // This is an agent decision.
-                if (RandomHelper.getNormal().nextDouble() > res.getQuality()) {
-
-                    // This is a task.
-                    this.candidates.remove(res)
-
-                } else  {
-
-
-                }
-
-            } else  {
-
-
-            }
-
-        } else  {
-
-
-        }
-        // Return the results.
-        return returnValue
-
-    }
 
     /**
      *
@@ -281,27 +229,6 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
-     * Resource Evaluation
-     * @method Evaluation
-     *
-     */
-    public def Evaluation(resourceList) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        resource.sort{[-it.getSourceable(),-it.getRank()]}
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method GenerateService
      *
@@ -316,10 +243,10 @@ public class Provider extends ecosystem.User  {
         if (true) {
 
             // This is a task.
-            Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
-            Service s = (Service) sagent
+            Service s = new Service()
             s.setValues(serviceData)
             s.setOwner(this)
+            this.newService = s
 
         } else  {
 
@@ -360,32 +287,6 @@ public class Provider extends ecosystem.User  {
             res.setSourceable(res.getCapacity())
 
         }
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method generateServiceCall
-     *
-     */
-    public def generateServiceCall() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        int i = RandomHelper.nextIntFromTo(0,this.serdata.size()-1)
-        def data = this.serdata[i]
-        // This is a task.
-        ServiceCall sagent = CreateAgent("Ecosystem", "ecosystem.ServiceCall")
-        sagent.setParameters(data)
-        sagent.setOwner(this)
-        // Return the results.
-        return returnValue
 
     }
 

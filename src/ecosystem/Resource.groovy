@@ -191,6 +191,7 @@ public class Resource extends ecosystem.Machine  {
         this.needCap[ sc ] = amount
         //println this.toString()
         this.setSourceable(this.getSourceable() - amount)
+        this.assignTime = GetTickCount()
 
         // This is an agent decision.
         if (this.getFullLength() == 0) {

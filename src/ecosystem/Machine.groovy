@@ -290,6 +290,21 @@ public class Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field assignTime
+     *
+     */
+    @Parameter (displayName = "Assign Time", usageName = "assignTime")
+    public double getAssignTime() {
+        return assignTime
+    }
+    public void setAssignTime(double newValue) {
+        assignTime = newValue
+    }
+    public double assignTime = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -454,6 +469,7 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
+        this.assignTime = GetTickCount()
 
         // This is an agent decision.
         if (this.assignBehavior.BufferEnterance(job,this)) {

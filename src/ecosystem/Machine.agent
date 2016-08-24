@@ -54,7 +54,7 @@
     <taskstep x="209" y="838" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
       <label x="209" y="823" text="Do Task"/>
     </taskstep>
-    <taskstep x="136" y="730" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
+    <taskstep x="136" y="730" comment="This is a task." command1="this.assignTime = GetTickCount()" command2="" command3="" command4="" command5="">
       <label x="136" y="715" text="Do Task"/>
     </taskstep>
     <taskstep x="580" y="767" comment="This is a task." command1="double q = theTask.getProductQuality()" command2="int t = theTask.responseTime[this]" command3="double h = theTask.getHardness()" command4="int p = theTask.getProcessingTime()" command5="this.reviews &lt;&lt;  (h * q / (t+p))">
@@ -184,6 +184,9 @@
     </agentproperty>
     <agentproperty x="311" y="1047" comment="Quality sigma" visibility="0" compiledname="sigma" type="double" defaultvalue="0">
       <label x="316" y="1032" text="Quality sigma"/>
+    </agentproperty>
+    <agentproperty x="141" y="525" comment="This is an agent property." visibility="0" compiledname="assignTime" type="double" defaultvalue="0">
+      <label x="146" y="510" text="Assign Time"/>
     </agentproperty>
   </agentproperties>
   <endsteps>

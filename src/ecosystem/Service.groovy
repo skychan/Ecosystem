@@ -298,6 +298,29 @@ public class Service extends ecosystem.Machine  {
 
     /**
      *
+     * This is the step behavior.
+     * @method ReturnResources
+     *
+     */
+    public void ReturnResources() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (resData in this.resourceContribution) {
+
+            // This is a task.
+            resData.key.sourceable += resData.value
+            resData.key.capacity += resData.value
+
+        }
+
+    }
+
+    /**
+     *
      * This method provides a human-readable name for the agent.
      * @method toString
      *

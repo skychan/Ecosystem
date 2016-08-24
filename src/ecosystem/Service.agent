@@ -16,6 +16,9 @@
     <behaviorstep x="593" y="217" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="setValues" parameters="serviceData" exceptions="">
       <label x="593" y="202" text="Set Values"/>
     </behaviorstep>
+    <behaviorstep x="824" y="708" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="ReturnResources" parameters="" exceptions="">
+      <label x="824" y="693" text="Return Resources"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="62" y="213" comment="This is a task." command1="responseBehavior = new ServiceResponse()" command2="assignBehavior = new ServiceAssign()" command3="releaseBehavior  = new ServiceRelease()" command4="" command5="">
@@ -60,6 +63,9 @@
     <taskstep x="664" y="616" comment="This is a task." command1="this.resourceComposition[data.key.getType()] = data.value" command2="" command3="" command4="" command5="">
       <label x="664" y="601" text="Do Task"/>
     </taskstep>
+    <taskstep x="940" y="784" comment="This is a task." command1="resData.key.sourceable += resData.value" command2="resData.key.capacity += resData.value" command3="" command4="" command5="">
+      <label x="940" y="769" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="396" y="183" comment="This is an agent decision." criteria="this.jobList.size() &gt; 0" branchType="if">
@@ -86,6 +92,9 @@
     <decisionstep x="597" y="562" comment="This is an agent decision." criteria="data.key.getType() in this.resourceComposition" branchType="if">
       <label x="597" y="547" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="828" y="789" comment="This is a loop." criteria="resData in this.resourceContribution" branchType="while">
+      <label x="828" y="774" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
     <joinstep x="424" y="666"/>
@@ -105,6 +114,7 @@
     <endstep x="773" y="603"/>
     <endstep x="964" y="608"/>
     <endstep x="609" y="755"/>
+    <endstep x="851" y="864"/>
   </endsteps>
   <connections>
     <transitions>
@@ -203,6 +213,11 @@
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="5" anchor="0"/>
+        <transitiontarget type="decision" index="8" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -263,6 +278,16 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="7" anchor="3"/>
         <transitiontarget type="task" index="13" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="8" anchor="3"/>
+        <transitiontarget type="task" index="14" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="8" anchor="2"/>
+        <transitiontarget type="end" index="5" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

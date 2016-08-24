@@ -126,17 +126,17 @@ public class CloudPlatform  {
     /**
      *
      * [type: amount]
-     * @field resourceTypeAmount
+     * @field serviceStyleAmount
      *
      */
-    @Parameter (displayName = "Resource Map", usageName = "resourceTypeAmount")
-    public Map getResourceTypeAmount() {
-        return resourceTypeAmount
+    @Parameter (displayName = "Service Map", usageName = "serviceStyleAmount")
+    public Map getServiceStyleAmount() {
+        return serviceStyleAmount
     }
-    public void setResourceTypeAmount(Map newValue) {
-        resourceTypeAmount = newValue
+    public void setServiceStyleAmount(Map newValue) {
+        serviceStyleAmount = newValue
     }
-    public Map resourceTypeAmount = [:]
+    public Map serviceStyleAmount = [:]
 
     /**
      *
@@ -152,6 +152,36 @@ public class CloudPlatform  {
         resourceList = newValue
     }
     public List resourceList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceList
+     *
+     */
+    @Parameter (displayName = "Service List", usageName = "serviceList")
+    public List getServiceList() {
+        return serviceList
+    }
+    public void setServiceList(List newValue) {
+        serviceList = newValue
+    }
+    public List serviceList = []
+
+    /**
+     *
+     * [type: amount]
+     * @field resourceTypeAmount
+     *
+     */
+    @Parameter (displayName = "Resource Map", usageName = "resourceTypeAmount")
+    public Map getResourceTypeAmount() {
+        return resourceTypeAmount
+    }
+    public void setResourceTypeAmount(Map newValue) {
+        resourceTypeAmount = newValue
+    }
+    public Map resourceTypeAmount = [:]
 
     /**
      *
@@ -280,6 +310,145 @@ public class CloudPlatform  {
     /**
      *
      * Return the resource quene length sum
+     * @method ServiceQueue
+     *
+     */
+    public int ServiceQueue(style) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        int L = 0
+        List styleList = this.serviceList.findAll{ it-> it.resourceComposition == style }
+
+        // This is a loop.
+        for (ser in styleList) {
+
+            // This is a task.
+            L += ser.getQueueLength()
+
+        }
+
+        // This is a task.
+        returnValue = L
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method ServiceQuality
+     *
+     */
+    public double ServiceQuality(style) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        List styleList = this.serviceList.findAll{ it-> it.resourceComposition == style }
+        double minq = styleList[0].getQuality()
+
+        // This is a loop.
+        for (ser in styleList) {
+
+            // This is a task.
+            double theq = ser.getQuality()
+
+            // This is an agent decision.
+            if (theq < minq) {
+
+                // This is a task.
+                minq = theq
+
+            } else  {
+
+
+            }
+
+        }
+
+        // This is a task.
+        returnValue = minq
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addService
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Provider',
+        watcheeFieldNames = 'newService',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public void addService(ecosystem.Provider watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        Service s = watchedAgent.newService
+        Map style = s.resourceComposition
+
+        // This is an agent decision.
+        if (this.serviceStyleAmount.size()>0 && this.ServiceQueue(style) == 0 && style in this.serviceStyleAmount.keySet() && this.ServiceQuality(style) > s.getQuality()) {
+
+            // This is a task.
+            s.ReturnResources()
+
+        } else  {
+
+            // This is a task.
+            AddAgentToContext("Ecosystem", s)
+            this.serviceList << s
+            watchedAgent.serviceList << s
+
+            // This is an agent decision.
+            if (style in this.serviceStyleAmount.keySet()) {
+
+                // This is a task.
+                this.serviceStyleAmount[style] += 1
+
+            } else  {
+
+                // This is a task.
+                this.serviceStyleAmount[style] = 1
+
+            }
+
+        }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Metabolism
+     *
+     */
+    public void Metabolism() {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+    }
+
+    /**
+     *
+     * Return the resource quene length sum
      * @method ResourceQueue
      *
      */
@@ -377,7 +546,7 @@ public class CloudPlatform  {
 
 
                 // This is an agent decision.
-                if (res.getType() in this.resourceTypeAmount.keySet() && this.ResourceQuality(res.getType()) < res.getQuality()) {
+                if (res.getType() in this.resourceTypeAmount.keySet() && this.ResourceQuality(res.getType()) > res.getQuality()) {
 
                     // This is a task.
                     p.resourceList.remove(res)

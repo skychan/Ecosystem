@@ -415,7 +415,17 @@ public class Job  {
 
                         // This is a task.
                         this.prepareStatus[mac.key] = false
-                        this.owner[mac.key] = this.remainingTime
+
+                        // This is an agent decision.
+                        if (this.getClass() == ecosystem.Task) {
+
+                            // This is a task.
+                            this.owner[mac.key] = this.remainingTime
+
+                        } else  {
+
+
+                        }
 
                     } else  {
 

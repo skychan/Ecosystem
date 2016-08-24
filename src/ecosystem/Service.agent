@@ -7,6 +7,15 @@
     <behaviorstep x="395" y="101" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="OutSource" parameters="" exceptions="">
       <label x="395" y="86" text="OutSource"/>
     </behaviorstep>
+    <behaviorstep x="750" y="233" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Calculate weighted average" visibility="0" returntype="def" compiledname="WM" parameters="dataMap" exceptions="">
+      <label x="750" y="218" text="Weighted mean"/>
+    </behaviorstep>
+    <behaviorstep x="947" y="240" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Calculate the standard variation" visibility="0" returntype="def" compiledname="WSTD" parameters="dataMap" exceptions="">
+      <label x="947" y="225" text="Weighted std"/>
+    </behaviorstep>
+    <behaviorstep x="593" y="217" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="setValues" parameters="serviceData" exceptions="">
+      <label x="593" y="202" text="Set Values"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="62" y="213" comment="This is a task." command1="responseBehavior = new ServiceResponse()" command2="assignBehavior = new ServiceAssign()" command3="releaseBehavior  = new ServiceRelease()" command4="" command5="">
@@ -20,6 +29,36 @@
     </taskstep>
     <taskstep x="501" y="481" comment="This is a task." command1="theTask.setAllocated(false)" command2="" command3="" command4="" command5="">
       <label x="501" y="466" text="Do Task"/>
+    </taskstep>
+    <taskstep x="749" y="312" comment="This is a task." command1="double tempsum = 0" command2="int n = 0" command3="" command4="" command5="">
+      <label x="749" y="297" text="Do Task"/>
+    </taskstep>
+    <taskstep x="851" y="395" comment="This is a task." command1="tempsum += data.key.mu*data.value" command2="n += data.value" command3="" command4="" command5="">
+      <label x="851" y="380" text="Do Task"/>
+    </taskstep>
+    <taskstep x="753" y="478" comment="This is a task." command1="returnValue = tempsum/n" command2="" command3="" command4="" command5="">
+      <label x="753" y="463" text="Do Task"/>
+    </taskstep>
+    <taskstep x="946" y="319" comment="This is a task." command1="double tempsum = 0" command2="int n = 0" command3="" command4="" command5="">
+      <label x="946" y="304" text="Do Task"/>
+    </taskstep>
+    <taskstep x="1048" y="402" comment="This is a task." command1="tempsum += data.key.sigma*data.key.sigma*data.value" command2="n += data.value" command3="" command4="" command5="">
+      <label x="1048" y="387" text="Do Task"/>
+    </taskstep>
+    <taskstep x="950" y="485" comment="This is a task." command1="returnValue = Math.sqrt(tempsum/n)" command2="" command3="" command4="" command5="">
+      <label x="950" y="470" text="Do Task"/>
+    </taskstep>
+    <taskstep x="593" y="389" comment="This is a task." command1="" command2="this.mu = this.WM(serviceData)" command3="this.sigma = this.WSTD(serviceData)" command4="" command5="">
+      <label x="593" y="374" text="Do Task"/>
+    </taskstep>
+    <taskstep x="591" y="297" comment="This is a task." command1="this.resourceContribution = serviceData" command2="" command3="" command4="" command5="">
+      <label x="591" y="282" text="Do Task"/>
+    </taskstep>
+    <taskstep x="530" y="621" comment="This is a task." command1="this.resourceComposition[data.key.getType()] += data.value" command2="" command3="" command4="" command5="">
+      <label x="530" y="606" text="Do Task"/>
+    </taskstep>
+    <taskstep x="664" y="616" comment="This is a task." command1="this.resourceComposition[data.key.getType()] = data.value" command2="" command3="" command4="" command5="">
+      <label x="664" y="601" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -35,18 +74,37 @@
     <decisionstep x="295" y="501" comment="This is an agent decision." criteria="theTask.remainingTime &gt; 1" branchType="if">
       <label x="295" y="486" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="751" y="395" comment="This is a loop." criteria="data in dataMap" branchType="while">
+      <label x="751" y="380" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="948" y="402" comment="This is a loop." criteria="data in dataMap" branchType="while">
+      <label x="948" y="387" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="594" y="472" comment="This is a loop." criteria="data in serviceData" branchType="while">
+      <label x="594" y="457" text="Evaluate Criteria"/>
+    </decisionstep>
+    <decisionstep x="597" y="562" comment="This is an agent decision." criteria="data.key.getType() in this.resourceComposition" branchType="if">
+      <label x="597" y="547" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="419" y="661"/>
+    <joinstep x="424" y="666"/>
+    <joinstep x="609" y="685"/>
   </joinsteps>
   <agentproperties>
-    <agentproperty x="211" y="118" comment="This is an agent property." visibility="0" compiledname="resourceComposition" type="def" defaultvalue="[:]">
-      <label x="216" y="103" text="ResourceComposition"/>
+    <agentproperty x="211" y="118" comment="This is an agent property." visibility="0" compiledname="resourceComposition" type="Map" defaultvalue="[:]">
+      <label x="216" y="103" text="Resource Composition"/>
+    </agentproperty>
+    <agentproperty x="224" y="262" comment="This is an agent property." visibility="0" compiledname="resourceContribution" type="Map" defaultvalue="[:]">
+      <label x="229" y="247" text="Resource Contribution"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="82" y="329"/>
-    <endstep x="421" y="750"/>
+    <endstep x="87" y="334"/>
+    <endstep x="426" y="755"/>
+    <endstep x="773" y="603"/>
+    <endstep x="964" y="608"/>
+    <endstep x="609" y="755"/>
   </endsteps>
   <connections>
     <transitions>
@@ -85,6 +143,66 @@
         <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="2" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="3" anchor="0"/>
+        <transitiontarget type="task" index="7" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="7" anchor="2"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="9" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="10" anchor="2"/>
+        <transitiontarget type="decision" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="4" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="join" index="1" anchor="1"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="13" anchor="2"/>
+        <transitiontarget type="join" index="1" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="1" anchor="2"/>
+        <transitiontarget type="end" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -110,6 +228,41 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="3" anchor="2"/>
         <transitiontarget type="task" index="2" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="4" anchor="3"/>
+        <transitiontarget type="task" index="5" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="4" anchor="2"/>
+        <transitiontarget type="task" index="6" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="3"/>
+        <transitiontarget type="task" index="8" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="5" anchor="2"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="6" anchor="2"/>
+        <transitiontarget type="decision" index="7" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="7" anchor="1"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="7" anchor="3"/>
+        <transitiontarget type="task" index="13" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

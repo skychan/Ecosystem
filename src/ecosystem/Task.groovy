@@ -336,7 +336,7 @@ public class Task extends ecosystem.Job  {
                         def res = macData.key
                         def p= macData.value
                         double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))
-                        res.rank += deltaRank
+                        res.owner.rank += deltaRank
 
                     } else  {
 
@@ -347,7 +347,7 @@ public class Task extends ecosystem.Job  {
                             // This is a task.
                             int amount = macData.key.resourceComposition.values().sum()
                             double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))
-                            macData.key.rank += deltaRank
+                            macData.key.owner.rank += deltaRank
 
                         } else  {
 

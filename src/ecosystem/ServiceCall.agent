@@ -46,7 +46,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="409" y="882"/>
+    <joinstep x="414" y="887"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="161" y="68" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
@@ -57,9 +57,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="68" y="281"/>
-    <endstep x="396" y="346"/>
-    <endstep x="410" y="942"/>
+    <endstep x="73" y="286"/>
+    <endstep x="401" y="351"/>
+    <endstep x="415" y="947"/>
   </endsteps>
   <connections>
     <transitions>
@@ -99,13 +99,13 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="2" anchor="0"/>
+        <transitionsource type="task" index="6" anchor="2"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="6" anchor="2"/>
-        <transitiontarget type="decision" index="2" anchor="0"/>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="2" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

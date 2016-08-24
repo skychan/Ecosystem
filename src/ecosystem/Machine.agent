@@ -42,7 +42,7 @@
     <taskstep x="138" y="279" comment="change the compete state" command1="this.responseList &lt;&lt; watchedAgent" command2="" command3="" command4="" command5="">
       <label x="138" y="264" text="Change the comoete state"/>
     </taskstep>
-    <taskstep x="885" y="516" comment="This is a task." command1="Provider user = this.owner[-1]" command2="returnValue = user.getRank()" command3="" command4="" command5="">
+    <taskstep x="885" y="516" comment="This is a task." command1="" command2="returnValue = this.owner.getRank()" command3="" command4="" command5="">
       <label x="885" y="501" text="Do Task"/>
     </taskstep>
     <taskstep x="770" y="513" comment="This is a task." command1="//println &quot;add demander&apos;s review to the history&quot;" command2="this.reviews &lt;&lt; rvalue" command3="" command4="" command5="">
@@ -100,7 +100,7 @@
       <label x="825" y="816" text="Do Task"/>
     </taskstep>
     <taskstep x="921" y="869" comment="This is a task." command1="Scanner reader = new Scanner(System.in)" command2="println(&quot;add frequency &quot;)" command3="int n = reader.nextInt()" command4="" command5="">
-      <label x="921" y="854" text="停"/>
+      <label x="921" y="854" text="鍋�"/>
     </taskstep>
     <taskstep x="439" y="791" comment="This is a task." command1="returnValue = this.jobList.size()" command2="" command3="" command4="" command5="">
       <label x="439" y="776" text="Do Task"/>
@@ -136,8 +136,8 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="148" y="983"/>
-    <joinstep x="444" y="368"/>
+    <joinstep x="153" y="988"/>
+    <joinstep x="449" y="373"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="43" y="35" comment="This is an agent property." visibility="0" compiledname="type" type="def" defaultvalue="0">
@@ -187,18 +187,18 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="152" y="396"/>
-    <endstep x="920" y="666"/>
-    <endstep x="804" y="676"/>
-    <endstep x="149" y="1099"/>
-    <endstep x="589" y="947"/>
-    <endstep x="340" y="892"/>
-    <endstep x="689" y="348"/>
-    <endstep x="525" y="301"/>
-    <endstep x="442" y="450"/>
-    <endstep x="828" y="946"/>
-    <endstep x="447" y="896"/>
-    <endstep x="443" y="1180"/>
+    <endstep x="157" y="401"/>
+    <endstep x="925" y="671"/>
+    <endstep x="809" y="681"/>
+    <endstep x="154" y="1104"/>
+    <endstep x="594" y="952"/>
+    <endstep x="345" y="897"/>
+    <endstep x="694" y="353"/>
+    <endstep x="530" y="306"/>
+    <endstep x="447" y="455"/>
+    <endstep x="833" y="951"/>
+    <endstep x="452" y="901"/>
+    <endstep x="448" y="1185"/>
   </endsteps>
   <connections>
     <transitions>
@@ -245,6 +245,21 @@
       <transition>
         <transitionsource type="behavior" index="8" anchor="0"/>
         <transitiontarget type="decision" index="6" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="9" anchor="0"/>
+        <transitiontarget type="task" index="19" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="10" anchor="0"/>
+        <transitiontarget type="task" index="21" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="11" anchor="0"/>
+        <transitiontarget type="task" index="22" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -323,21 +338,6 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="join" index="0" anchor="2"/>
-        <transitiontarget type="end" index="3" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="join" index="1" anchor="2"/>
-        <transitiontarget type="end" index="8" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="9" anchor="0"/>
-        <transitiontarget type="task" index="19" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="19" anchor="2"/>
         <transitiontarget type="end" index="9" anchor="0"/>
         <bendpoints/>
@@ -348,18 +348,18 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="behavior" index="10" anchor="0"/>
-        <transitiontarget type="task" index="21" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="11" anchor="0"/>
-        <transitiontarget type="task" index="22" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
         <transitionsource type="task" index="22" anchor="2"/>
         <transitiontarget type="end" index="11" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="1" anchor="2"/>
+        <transitiontarget type="end" index="8" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

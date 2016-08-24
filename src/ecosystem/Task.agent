@@ -75,10 +75,10 @@
     <taskstep x="834" y="400" comment="This is a task." command1="this.productQuality = realQ" command2="" command3="" command4="" command5="">
       <label x="834" y="385" text="Do Task"/>
     </taskstep>
-    <taskstep x="1064" y="307" comment="This is a task." command1="def res = macData.key" command2="def p= macData.value" command3="double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command4="res.rank += deltaRank" command5="">
+    <taskstep x="1064" y="307" comment="This is a task." command1="def res = macData.key" command2="def p= macData.value" command3="double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command4="res.owner.rank += deltaRank" command5="">
       <label x="1064" y="292" text="Do Task"/>
     </taskstep>
-    <taskstep x="1167" y="312" comment="This is a task." command1="int amount = macData.key.resourceComposition.values().sum()" command2="double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command3="macData.key.rank += deltaRank" command4="" command5="">
+    <taskstep x="1167" y="312" comment="This is a task." command1="int amount = macData.key.resourceComposition.values().sum()" command2="double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command3="macData.key.owner.rank += deltaRank" command4="" command5="">
       <label x="1167" y="297" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -154,11 +154,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="50" y="294"/>
-    <endstep x="278" y="417"/>
-    <endstep x="611" y="419"/>
-    <endstep x="51" y="800"/>
-    <endstep x="413" y="827"/>
+    <endstep x="55" y="299"/>
+    <endstep x="283" y="422"/>
+    <endstep x="616" y="424"/>
+    <endstep x="56" y="805"/>
+    <endstep x="418" y="832"/>
   </endsteps>
   <connections>
     <transitions>

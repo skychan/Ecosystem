@@ -254,74 +254,6 @@ public class Provider extends ecosystem.User  {
 
     /**
      *
-     * Calculate weighted average
-     * @method WM
-     *
-     */
-    public def WM(dataMap) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        double tempsum = 0
-        int n = 0
-
-        // This is a loop.
-        for (data in dataMap) {
-
-            // This is a task.
-            tempsum += data.key.mu*data.value
-            n += data.value
-
-        }
-
-        // This is a task.
-        returnValue = tempsum/n
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Calculate the standard variation
-     * @method WSTD
-     *
-     */
-    public def WSTD(dataMap) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        double tempsum = 0
-        int n = 0
-
-        // This is a loop.
-        for (data in dataMap) {
-
-            // This is a task.
-            tempsum += data.key.sigma*data.key.sigma*data.value
-            n += data.value
-
-        }
-
-        // This is a task.
-        returnValue = Math.sqrt(tempsum/n)
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method addTaskFrequency
      *
@@ -386,11 +318,8 @@ public class Provider extends ecosystem.User  {
             // This is a task.
             Object sagent = CreateAgent("Ecosystem", "ecosystem.Service")
             Service s = (Service) sagent
-            s.resourceComposition = serviceData
-            // This is a task.
+            s.setValues(serviceData)
             s.setOwner(this)
-            s.mu = this.WM(serviceData)
-            s.sigma = this.WSTD(serviceData)
 
         } else  {
 

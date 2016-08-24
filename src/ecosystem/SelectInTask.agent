@@ -90,6 +90,12 @@
     <taskstep x="178" y="319" comment="This is a task." command1="candidates.dropWhile{ it in t.owner.keySet() }" command2="candidates.sort{[it.jobList.size()]}" command3="returnValue = candidates[0]" command4="" command5="">
       <label x="176" y="297" text="Do Task"/>
     </taskstep>
+    <taskstep x="427" y="445" comment="This is a task." command1="Scanner reader = new Scanner(System.in)" command2="println(&quot;add frequency &quot;)" command3="int n = reader.nextInt()" command4="" command5="">
+      <label x="427" y="430" text="鍋�"/>
+    </taskstep>
+    <taskstep x="569" y="379" comment="This is a task." command1="def candidateList = theOnes.values()" command2="candidateList.sort{ [it.getFullLength(), -it.getQuality()] }" command3="" command4="" command5="">
+      <label x="569" y="364" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="232" y="211" comment="This is a loop." criteria="candidate in candidates" branchType="while">
@@ -145,16 +151,16 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="104" y="531"/>
-    <joinstep x="148" y="440"/>
+    <joinstep x="109" y="536"/>
+    <joinstep x="153" y="445"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="270" y="449"/>
-    <endstep x="104" y="649"/>
-    <endstep x="1741" y="717"/>
-    <endstep x="854" y="243"/>
-    <endstep x="961" y="345"/>
+    <endstep x="275" y="454"/>
+    <endstep x="109" y="654"/>
+    <endstep x="1746" y="722"/>
+    <endstep x="859" y="248"/>
+    <endstep x="966" y="350"/>
   </endsteps>
   <connections>
     <transitions>
@@ -253,6 +259,11 @@
         <transitiontarget type="join" index="0" anchor="3"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="task" index="26" anchor="2"/>
+        <transitiontarget type="decision" index="13" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -297,7 +308,7 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="4" anchor="2"/>
-        <transitiontarget type="decision" index="13" anchor="0"/>
+        <transitiontarget type="task" index="26" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">

@@ -69,14 +69,29 @@ public class Service extends ecosystem.Machine  {
      * @field resourceComposition
      *
      */
-    @Parameter (displayName = "ResourceComposition", usageName = "resourceComposition")
-    public def getResourceComposition() {
+    @Parameter (displayName = "Resource Composition", usageName = "resourceComposition")
+    public Map getResourceComposition() {
         return resourceComposition
     }
-    public void setResourceComposition(def newValue) {
+    public void setResourceComposition(Map newValue) {
         resourceComposition = newValue
     }
-    public def resourceComposition = [:]
+    public Map resourceComposition = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceContribution
+     *
+     */
+    @Parameter (displayName = "Resource Contribution", usageName = "resourceContribution")
+    public Map getResourceContribution() {
+        return resourceContribution
+    }
+    public void setResourceContribution(Map newValue) {
+        resourceContribution = newValue
+    }
+    public Map resourceContribution = [:]
 
     /**
      *
@@ -173,6 +188,112 @@ public class Service extends ecosystem.Machine  {
 
 
         }
+    }
+
+    /**
+     *
+     * Calculate weighted average
+     * @method WM
+     *
+     */
+    public def WM(dataMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double tempsum = 0
+        int n = 0
+
+        // This is a loop.
+        for (data in dataMap) {
+
+            // This is a task.
+            tempsum += data.key.mu*data.value
+            n += data.value
+
+        }
+
+        // This is a task.
+        returnValue = tempsum/n
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * Calculate the standard variation
+     * @method WSTD
+     *
+     */
+    public def WSTD(dataMap) {
+
+        // Define the return value variable.
+        def returnValue
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        double tempsum = 0
+        int n = 0
+
+        // This is a loop.
+        for (data in dataMap) {
+
+            // This is a task.
+            tempsum += data.key.sigma*data.key.sigma*data.value
+            n += data.value
+
+        }
+
+        // This is a task.
+        returnValue = Math.sqrt(tempsum/n)
+        // Return the results.
+        return returnValue
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method setValues
+     *
+     */
+    public void setValues(serviceData) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.resourceContribution = serviceData
+        // This is a task.
+        this.mu = this.WM(serviceData)
+        this.sigma = this.WSTD(serviceData)
+
+        // This is a loop.
+        for (data in serviceData) {
+
+
+            // This is an agent decision.
+            if (data.key.getType() in this.resourceComposition) {
+
+                // This is a task.
+                this.resourceComposition[data.key.getType()] += data.value
+
+            } else  {
+
+                // This is a task.
+                this.resourceComposition[data.key.getType()] = data.value
+
+            }
+
+        }
+
     }
 
     /**

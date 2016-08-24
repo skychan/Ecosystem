@@ -366,8 +366,7 @@ public class Machine  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        Provider user = this.owner[-1]
-        returnValue = user.getRank()
+        returnValue = this.owner.getRank()
         // Return the results.
         return returnValue
 

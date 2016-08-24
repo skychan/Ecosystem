@@ -39,7 +39,7 @@
     <taskstep x="450" y="434" comment="This is a task." command1="selectBehavior.Assign(watchedAgent.allocation,this)" command2="//println this.prepareStatus" command3="" command4="" command5="">
       <label x="450" y="419" text="Do Task"/>
     </taskstep>
-    <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="this.owner[mac.key] = this.remainingTime" command3="" command4="" command5="">
+    <taskstep x="362" y="234" comment="This is a task." command1="this.prepareStatus[mac.key] = false" command2="" command3="" command4="" command5="">
       <label x="362" y="219" text="Do Task"/>
     </taskstep>
     <taskstep x="448" y="324" comment="This is a task." command1="this.prepareStatus[mac.value] = false" command2="this.owner[mac.value] = this.remainingTime" command3="" command4="" command5="">
@@ -47,6 +47,9 @@
     </taskstep>
     <taskstep x="266" y="849" comment="This is a task." command1="this.processBehavior.Process(this)" command2="this.prepareStatus = [:]" command3="" command4="" command5="">
       <label x="266" y="834" text="Do Task"/>
+    </taskstep>
+    <taskstep x="535" y="420" comment="This is a task." command1="this.owner[mac.key] = this.remainingTime" command2="" command3="" command4="" command5="">
+      <label x="535" y="405" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -71,9 +74,12 @@
     <decisionstep x="265" y="752" comment="This is an agent decision." criteria="this.getPrepareStatus().values().count(false) == 0 &amp;&amp; this.getPrepareStatus().size()&gt;0" branchType="if">
       <label x="265" y="737" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="524" y="243" comment="This is an agent decision." criteria="this.getClass() == ecosystem.Task" branchType="if">
+      <label x="524" y="228" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="709" y="337"/>
+    <joinstep x="714" y="342"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="176" y="46" comment="This is an agent property." visibility="0" compiledname="candidates" type="Map" defaultvalue="[&apos;service&apos;:[]]">
@@ -135,11 +141,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="264" y="557"/>
-    <endstep x="710" y="432"/>
-    <endstep x="165" y="417"/>
-    <endstep x="1124" y="732"/>
-    <endstep x="271" y="942"/>
+    <endstep x="269" y="562"/>
+    <endstep x="715" y="437"/>
+    <endstep x="170" y="422"/>
+    <endstep x="1129" y="737"/>
+    <endstep x="276" y="947"/>
   </endsteps>
   <connections>
     <transitions>
@@ -196,6 +202,11 @@
       <transition>
         <transitionsource type="task" index="5" anchor="2"/>
         <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="7" anchor="3"/>
+        <transitiontarget type="decision" index="7" anchor="1"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -263,6 +274,11 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="6" anchor="2"/>
         <transitiontarget type="task" index="9" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="7" anchor="2"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

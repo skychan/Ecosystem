@@ -99,7 +99,7 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        sc.owner.GenerateService(sc.needResourceCapacity)
+        sc.owner.GenerateService(sc.allocation)
         println "service call " + sc + " fininshed and we should to generate service"
 
         // This is a loop.

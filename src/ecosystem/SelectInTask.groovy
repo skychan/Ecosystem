@@ -223,6 +223,9 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
             } else  {
 
+                // This is a task.
+                def candidateList = theOnes.values()
+                candidateList.sort{ [it.getFullLength(), -it.getQuality()] }
 
                 // This is an agent decision.
                 if (candidateList[0].getClass() == ecosystem.Service) {

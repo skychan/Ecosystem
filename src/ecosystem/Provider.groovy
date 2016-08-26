@@ -323,21 +323,30 @@ public class Provider extends ecosystem.User  {
 
 
         // This is an agent decision.
-        if (true) {
+        if (RunEnvironment.getInstance().getParameters().getValue("Service")) {
 
-            // This is a task.
-            this.taskFrequency = this.taskFrequency.sort{ 5*this.serviceConf[it.key] - it.value }
-            def pattern = this.taskFrequency.iterator()[0]
 
             // This is an agent decision.
-            if (this.taskFrequency.size() > 0 && pattern.value - 5*this.serviceConf[pattern.key] > 5) {
+            if (true) {
 
                 // This is a task.
-                ServiceCall sagent = CreateAgent("Ecosystem", "ecosystem.ServiceCall")
-                sagent.setParameters(pattern.key)
-                sagent.setOwner(this)
-                // This is a task.
-                this.serviceConf[pattern.key] += 1
+                this.taskFrequency = this.taskFrequency.sort{ 5*this.serviceConf[it.key] - it.value }
+                def pattern = this.taskFrequency.iterator()[0]
+
+                // This is an agent decision.
+                if (this.taskFrequency.size() > 0 && pattern.value - 5*this.serviceConf[pattern.key] > 5) {
+
+                    // This is a task.
+                    ServiceCall sagent = CreateAgent("Ecosystem", "ecosystem.ServiceCall")
+                    sagent.setParameters(pattern.key)
+                    sagent.setOwner(this)
+                    // This is a task.
+                    this.serviceConf[pattern.key] += 1
+
+                } else  {
+
+
+                }
 
             } else  {
 

@@ -137,6 +137,11 @@ public class Service extends ecosystem.Machine  {
      * @method OutSource
      *
      */
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
     public void OutSource() {
 
         // Note the simulation time.
@@ -144,11 +149,11 @@ public class Service extends ecosystem.Machine  {
 
 
         // This is an agent decision.
-        if (this.jobList.size() > 0) {
+        if (RunEnvironment.getInstance().getParameters().getValue("Outsource")) {
 
 
             // This is an agent decision.
-            if (RandomHelper.nextIntFromTo(0,5) >3) {
+            if (this.jobList.size() > 0 && RandomHelper.nextIntFromTo(0,5) >3) {
 
                 // This is a task.
                 List tempList = this.buffer + this.jobList

@@ -1,5 +1,5 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>Finish Task Count</name>
+  <name>User Count</name>
   <type>AGGREGATE</type>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
@@ -11,30 +11,26 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1665468714</hashCode>
+    <hashCode>1521344704</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
-  <methodDataSources class="linked-hash-map">
+  <methodDataSources class="linked-hash-map"/>
+  <countSources class="linked-hash-map">
     <entry>
-      <string>Finish Task Count</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Finish Task Count</id>
-        <className>ecosystem.CloudPlatform</className>
-        <methodName>getFinishCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+      <string>Provider Population</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>ecosystem.Provider</typeName>
+        <id>Provider Population</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
     <entry>
-      <string>Finish ServiceCall Count</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Finish ServiceCall Count</id>
-        <className>ecosystem.CloudPlatform</className>
-        <methodName>getServiceGeneratedCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+      <string>Demander Population</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>ecosystem.Demander</typeName>
+        <id>Demander Population</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
-  </methodDataSources>
-  <countSources class="linked-hash-map"/>
+  </countSources>
   <customNADataSources class="linked-hash-map"/>
   <customAggDataSources class="linked-hash-map"/>
 </repast.simphony.data2.engine.DataSetDescriptor>

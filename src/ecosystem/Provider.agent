@@ -13,8 +13,8 @@
     <behaviorstep x="439" y="538" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="RemoveServiceCall" parameters="sc" exceptions="">
       <label x="439" y="523" text="Remove SC"/>
     </behaviorstep>
-    <behaviorstep x="1000" y="159" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="GenerateServiceCall" parameters="" exceptions="">
-      <label x="1000" y="144" text="Generate ServiceCall"/>
+    <behaviorstep x="990" y="65" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="GenerateServiceCall" parameters="" exceptions="">
+      <label x="990" y="50" text="Generate ServiceCall"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
@@ -48,6 +48,9 @@
     <taskstep x="1002" y="542" comment="This is a task." command1="ServiceCall sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.ServiceCall&quot;)" command2="sagent.setParameters(pattern.key)" command3="sagent.setOwner(this)" command4="" command5="">
       <label x="1002" y="527" text="Do Task"/>
     </taskstep>
+    <taskstep x="880" y="119" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Mean&quot;)" command3="RandomHelper.init()" command4="RandomHelper.createPoisson(mean)" command5="">
+      <label x="880" y="104" text="Randomize"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="135" y="248" comment="This is a loop." criteria="type in types" branchType="while">
@@ -65,9 +68,12 @@
     <decisionstep x="804" y="628" comment="This is an agent decision." criteria="true" branchType="if">
       <label x="804" y="613" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="992" y="179" comment="This is an agent decision." criteria="RunEnvironment.getInstance().getParameters().getValue(&quot;Service&quot;)" branchType="if">
+      <label x="992" y="164" text="Env Choice"/>
+    </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="870" y="402"/>
+    <joinstep x="855" y="385"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -85,8 +91,8 @@
     <agentproperty x="883" y="794" comment="This is an agent property." visibility="0" compiledname="serdata" type="def" defaultvalue="[[2:1,3:1,4:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:4],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:1],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[3:5,4:7],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[2:7,3:7,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,2:6,4:5],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:7,4:6],&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[1:5,2:6,3:7,4:6]]">
       <label x="888" y="779" text="Service Call Data"/>
     </agentproperty>
-    <agentproperty x="914" y="80" comment="This is an agent property." visibility="0" compiledname="serviceConf" type="def" defaultvalue="[:]">
-      <label x="919" y="65" text="Service config count"/>
+    <agentproperty x="617" y="211" comment="This is an agent property." visibility="0" compiledname="serviceConf" type="def" defaultvalue="[:]">
+      <label x="622" y="196" text="Service config count"/>
     </agentproperty>
     <agentproperty x="653" y="552" comment="This is an agent property." visibility="0" compiledname="newService" type="def" defaultvalue="null">
       <label x="658" y="537" text="New Service"/>
@@ -94,10 +100,10 @@
   </agentproperties>
   <endsteps>
     <endstep x="166" y="409"/>
-    <endstep x="872" y="486"/>
+    <endstep x="860" y="483"/>
     <endstep x="1026" y="757"/>
     <endstep x="815" y="836"/>
-    <endstep x="480" y="748"/>
+    <endstep x="454" y="747"/>
   </endsteps>
   <connections>
     <transitions>
@@ -123,7 +129,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="4" anchor="0"/>
-        <transitiontarget type="decision" index="2" anchor="0"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -211,6 +217,11 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="4" anchor="2"/>
         <transitiontarget type="task" index="5" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="5" anchor="2"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

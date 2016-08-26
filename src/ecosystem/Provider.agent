@@ -18,10 +18,10 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="135" y="162" comment="This is a task." command1="ArrayList types = 1..5" command2="SimUtilities.shuffle(types,RandomHelper.getUniform())" command3="types = types.take(RandomHelper.nextIntFromTo(0,4))" command4="" command5="">
+    <taskstep x="135" y="162" comment="This is a task." command1="ArrayList types = 1..30" command2="SimUtilities.shuffle(types,RandomHelper.getUniform())" command3="types = types.take(RandomHelper.nextIntFromTo(0,5))" command4="" command5="">
       <label x="135" y="147" text="Do Task"/>
     </taskstep>
-    <taskstep x="257" y="248" comment="This is a task." command1="Resource res = new Resource()" command2="res.setMu(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(type)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
+    <taskstep x="257" y="248" comment="This is a task." command1="Resource res = new Resource()" command2="res.setMu(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(type)" command4="res.setCapacity(RandomHelper.nextIntFromTo(30, 40))" command5="res.setAvailable(res.getCapacity())">
       <label x="257" y="233" text="Create Resource"/>
     </taskstep>
     <taskstep x="259" y="340" comment="This is a task." command1="res.setOwner(this)" command2="this.resourceList &lt;&lt; res" command3="res.setSigma(RandomHelper.nextDoubleFromTo(0,5))" command4="//this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="res.setSourceable(res.getCapacity())">
@@ -67,7 +67,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="865" y="397"/>
+    <joinstep x="870" y="402"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -93,11 +93,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="161" y="404"/>
-    <endstep x="867" y="481"/>
-    <endstep x="1021" y="752"/>
-    <endstep x="810" y="831"/>
-    <endstep x="475" y="743"/>
+    <endstep x="166" y="409"/>
+    <endstep x="872" y="486"/>
+    <endstep x="1026" y="757"/>
+    <endstep x="815" y="836"/>
+    <endstep x="480" y="748"/>
   </endsteps>
   <connections>
     <transitions>

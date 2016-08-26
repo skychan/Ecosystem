@@ -266,9 +266,9 @@ public class Provider extends ecosystem.User  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        ArrayList types = 1..5
+        ArrayList types = 1..30
         SimUtilities.shuffle(types,RandomHelper.getUniform())
-        types = types.take(RandomHelper.nextIntFromTo(0,4))
+        types = types.take(RandomHelper.nextIntFromTo(0,5))
 
         // This is a loop.
         for (type in types) {
@@ -277,7 +277,7 @@ public class Provider extends ecosystem.User  {
             Resource res = new Resource()
             res.setMu(RandomHelper.nextDoubleFromTo(0,30))
             res.setType(type)
-            res.setCapacity(RandomHelper.nextIntFromTo(10, 17))
+            res.setCapacity(RandomHelper.nextIntFromTo(30, 40))
             res.setAvailable(res.getCapacity())
             // This is a task.
             res.setOwner(this)

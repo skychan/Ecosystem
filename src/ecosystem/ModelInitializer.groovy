@@ -151,14 +151,14 @@ public class ModelInitializer  {
         CloudPlatform platform = (CloudPlatform) agent
 
         // This is a loop.
-        for (i in 249..<250) {
+        for (i in 150..<151) {
 
             // This is a task.
             Object dagent = CreateAgent("Ecosystem", "ecosystem.Demander")
             Demander demander = (Demander) dagent
             demander.ReadData((i).toString())
             platform.addUser(demander)
-            demander.GenerateOrder((i).toString())
+            //demander.GenerateOrder((i).toString())
 
         }
 

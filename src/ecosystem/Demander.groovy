@@ -125,6 +125,21 @@ public class Demander extends ecosystem.User  {
 
     /**
      *
+     * This is an agent property.
+     * @field orderID
+     *
+     */
+    @Parameter (displayName = "Order ID", usageName = "orderID")
+    public String getOrderID() {
+        return orderID
+    }
+    public void setOrderID(String newValue) {
+        orderID = newValue
+    }
+    public String orderID = ""
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -153,20 +168,34 @@ public class Demander extends ecosystem.User  {
      * @method GenerateOrder
      *
      */
-    public void GenerateOrder(String orderID) {
+    @ScheduledMethod(
+        start = 1d,
+        interval = 1d,
+        shuffle = true
+    )
+    public void GenerateOrder() {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // have need is to generate order
-        Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
-        //println this.taskMap
-        Order o = (Order) agent
-        o.setOwner(this)
-        o.setType("Order"+orderID)
-        // Set the order parameters
-        this.orderList.add(o)
-        o.setParameters(this.taskMap)
+
+        // to need or not
+        if (RandomHelper.nextIntFromTo(0, 1)) {
+
+            // have need is to generate order
+            Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
+            //println this.taskMap
+            Order o = (Order) agent
+            o.setOwner(this)
+            o.setType("Order"+this.orderID)
+            // Set the order parameters
+            this.orderList.add(o)
+            o.setParameters(this.taskMap)
+
+        } else  {
+
+
+        }
     }
 
     /**
@@ -232,41 +261,7 @@ public class Demander extends ecosystem.User  {
         }
 
         // This is a task.
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method step
-     *
-     */
-    @ScheduledMethod(
-        start = 1d,
-        interval = 1d,
-        shuffle = true
-    )
-    public def step() {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // to need or not
-        if (RandomHelper.nextIntFromTo(0, 1)) {
-
-            // This is a task.
-            GenerateOrder((249).toString())
-
-        } else  {
-
-
-        }
+        this.orderID = orderID
         // Return the results.
         return returnValue
 

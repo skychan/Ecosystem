@@ -176,7 +176,7 @@ public class ServiceCall extends ecosystem.Job  {
         time = GetTickCount()
 
         // This is an agent decision.
-        if (time - this.startTime > 10) {
+        if (time - this.startTime > RunEnvironment.getInstance().getParameters().getValue("Recall")) {
 
 
             // This is an agent decision.

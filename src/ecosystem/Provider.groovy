@@ -266,9 +266,9 @@ public class Provider extends ecosystem.User  {
         def time = GetTickCountInTimeUnits()
 
         // This is a task.
-        ArrayList types = 1..30
+        ArrayList types = 1..12
         SimUtilities.shuffle(types,RandomHelper.getUniform())
-        types = types.take(RandomHelper.nextIntFromTo(0,5))
+        types = types.take(RandomHelper.nextIntFromTo(0,4))
 
         // This is a loop.
         for (type in types) {

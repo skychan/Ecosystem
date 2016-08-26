@@ -18,7 +18,7 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="135" y="162" comment="This is a task." command1="ArrayList types = 1..30" command2="SimUtilities.shuffle(types,RandomHelper.getUniform())" command3="types = types.take(RandomHelper.nextIntFromTo(0,5))" command4="" command5="">
+    <taskstep x="135" y="162" comment="This is a task." command1="ArrayList types = 1..12" command2="SimUtilities.shuffle(types,RandomHelper.getUniform())" command3="types = types.take(RandomHelper.nextIntFromTo(0,4))" command4="" command5="">
       <label x="135" y="147" text="Do Task"/>
     </taskstep>
     <taskstep x="257" y="248" comment="This is a task." command1="Resource res = new Resource()" command2="res.setMu(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(type)" command4="res.setCapacity(RandomHelper.nextIntFromTo(30, 40))" command5="res.setAvailable(res.getCapacity())">
@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="855" y="385"/>
+    <joinstep x="860" y="390"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -99,11 +99,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="166" y="409"/>
-    <endstep x="860" y="483"/>
-    <endstep x="1026" y="757"/>
-    <endstep x="815" y="836"/>
-    <endstep x="454" y="747"/>
+    <endstep x="171" y="414"/>
+    <endstep x="865" y="488"/>
+    <endstep x="1031" y="762"/>
+    <endstep x="820" y="841"/>
+    <endstep x="459" y="752"/>
   </endsteps>
   <connections>
     <transitions>

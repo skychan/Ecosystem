@@ -268,9 +268,13 @@ public class CloudPlatform  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // This is a task.
+        Parameters params = RunEnvironment.getInstance().getParameters()
+        double mean = params.getValue("Provider")
+        RandomHelper.createPoisson(mean)
 
-        // to need or not
-        if (RandomHelper.nextIntFromTo(0, 1)) {
+        // This is a loop.
+        for (int i in RandomHelper.getPoisson().nextInt()) {
 
             // Create Provider at a random distribution
             Provider pagent = new Provider()
@@ -278,10 +282,8 @@ public class CloudPlatform  {
             pagent.GenerateResource()
             this.addProvider(pagent)
 
-        } else  {
-
-
         }
+
     }
 
     /**
@@ -645,35 +647,44 @@ public class CloudPlatform  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        def now = GetTickCount()
-        double rq = Math.exp(2000)
-        double sq = Math.exp(2000)
-        List machineList = this.resourceList + this.serviceList
-        // This is a task.
-        Service s = null
-        Resource r = null
 
-        // This is a loop.
-        for (mac in machineList) {
+        // This is an agent decision.
+        if (RunEnvironment.getInstance().getParameters().getValue("Metabolism")) {
 
+            // This is a task.
+            def now = GetTickCount()
+            double rq = Math.exp(2000)
+            double sq = Math.exp(2000)
+            List machineList = this.resourceList + this.serviceList
+            // This is a task.
+            Service s = null
+            Resource r = null
 
-            // This is an agent decision.
-            if (mac.getClass() == ecosystem.Resource) {
+            // This is a loop.
+            for (mac in machineList) {
 
 
                 // This is an agent decision.
-                if (mac.master.size() == 0) {
+                if (mac.getClass() == ecosystem.Resource) {
 
-                    // This is a task.
-                    double tempq = mac.getQuality()
 
                     // This is an agent decision.
-                    if (tempq < rq) {
+                    if (mac.master.size() == 0) {
 
                         // This is a task.
-                        r = mac
-                        rq = tempq
+                        double tempq = mac.getQuality()
+
+                        // This is an agent decision.
+                        if (tempq < rq) {
+
+                            // This is a task.
+                            r = mac
+                            rq = tempq
+
+                        } else  {
+
+
+                        }
 
                     } else  {
 
@@ -682,20 +693,55 @@ public class CloudPlatform  {
 
                 } else  {
 
+                    // This is a task.
+                    double tempq = mac.getQuality()
+
+                    // This is an agent decision.
+                    if (tempq < sq) {
+
+                        // This is a task.
+                        s = mac
+                        sq = tempq
+
+                    } else  {
+
+
+                    }
 
                 }
 
-            } else  {
+            }
 
-                // This is a task.
-                double tempq = mac.getQuality()
+            // This is a task.
+            List chosenMac = [r,s]
+
+            // This is a loop.
+            for (mac in chosenMac) {
+
 
                 // This is an agent decision.
-                if (tempq < sq) {
+                if (mac != null && mac.getFullLength() == 0 && now - mac.assignTime > RunEnvironment.getInstance().getParameters().getValue("Waiting")) {
 
                     // This is a task.
-                    s = mac
-                    sq = tempq
+                    RemoveAgentFromModel(mac)
+
+                    // This is an agent decision.
+                    if (mac.getClass() == ecosystem.Resource) {
+
+                        // This is a task.
+                        this.resourceList.remove(mac)
+                        this.resourceTypeAmount[mac.getType()] -= mac.capacity
+                        mac.owner.resourceList.remove(mac)
+
+                    } else  {
+
+                        // This is a task.
+                        this.serviceList.remove(mac)
+                        this.serviceStyleAmount[mac.resourceComposition] -= 1
+                        mac.owner.serviceList.remove(mac)
+                        mac.ReturnResources()
+
+                    }
 
                 } else  {
 
@@ -704,65 +750,30 @@ public class CloudPlatform  {
 
             }
 
-        }
 
-        // This is a task.
-        List chosenMac = [r,s]
+            // This is a loop.
+            for (p in this.providerList.collect()) {
 
-        // This is a loop.
-        for (mac in chosenMac) {
-
-
-            // This is an agent decision.
-            if (mac != null && mac.getFullLength() == 0 && now - mac.assignTime >20) {
-
-                // This is a task.
-                RemoveAgentFromModel(mac)
 
                 // This is an agent decision.
-                if (mac.getClass() == ecosystem.Resource) {
+                if (p.serviceList.size() + p.resourceList.size() == 0) {
 
                     // This is a task.
-                    this.resourceList.remove(mac)
-                    this.resourceTypeAmount[mac.getType()] -= mac.capacity
-                    mac.owner.resourceList.remove(mac)
+                    this.providerList.remove(p)
+                    RemoveAgentFromModel(p)
 
                 } else  {
 
-                    // This is a task.
-                    this.serviceList.remove(mac)
-                    this.serviceStyleAmount[mac.resourceComposition] -= 1
-                    mac.owner.serviceList.remove(mac)
-                    mac.ReturnResources()
 
                 }
 
-            } else  {
-
-
             }
 
-        }
 
+        } else  {
 
-        // This is a loop.
-        for (p in this.providerList.collect()) {
-
-
-            // This is an agent decision.
-            if (p.serviceList.size() + p.resourceList.size() == 0) {
-
-                // This is a task.
-                this.providerList.remove(p)
-                RemoveAgentFromModel(p)
-
-            } else  {
-
-
-            }
 
         }
-
         // Return the results.
         return returnValue
 

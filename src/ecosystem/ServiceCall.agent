@@ -41,12 +41,12 @@
     <decisionstep x="393" y="722" comment="This is an agent decision." criteria="this.allocated" branchType="if">
       <label x="393" y="707" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="403" y="601" comment="This is an agent decision." criteria="time - this.startTime &gt; 10" branchType="if">
+    <decisionstep x="403" y="601" comment="This is an agent decision." criteria="time - this.startTime &gt; RunEnvironment.getInstance().getParameters().getValue(&quot;Recall&quot;)" branchType="if">
       <label x="403" y="586" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="414" y="887"/>
+    <joinstep x="419" y="892"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="161" y="68" comment="Record the owners of the task" visibility="0" compiledname="owner" type="ecosystem.Provider" defaultvalue="null">
@@ -57,9 +57,9 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="73" y="286"/>
-    <endstep x="401" y="351"/>
-    <endstep x="415" y="947"/>
+    <endstep x="78" y="291"/>
+    <endstep x="406" y="356"/>
+    <endstep x="420" y="952"/>
   </endsteps>
   <connections>
     <transitions>

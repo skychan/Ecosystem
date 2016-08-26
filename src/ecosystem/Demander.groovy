@@ -178,9 +178,13 @@ public class Demander extends ecosystem.User  {
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
+        // This is a task.
+        Parameters params = RunEnvironment.getInstance().getParameters()
+        double mean = params.getValue("Order")
+        RandomHelper.createPoisson(mean)
 
-        // to need or not
-        if (RandomHelper.nextIntFromTo(0, 1)) {
+        // This is a loop.
+        for (int i in RandomHelper.getPoisson().nextInt()) {
 
             // have need is to generate order
             Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
@@ -192,10 +196,8 @@ public class Demander extends ecosystem.User  {
             this.orderList.add(o)
             o.setParameters(this.taskMap)
 
-        } else  {
-
-
         }
+
     }
 
     /**
@@ -265,6 +267,22 @@ public class Demander extends ecosystem.User  {
         // Return the results.
         return returnValue
 
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Finish
+     *
+     */
+    public void Finish(order) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.orderList.remove(order)
+        RemoveAgentFromModel(order)
     }
 
     /**

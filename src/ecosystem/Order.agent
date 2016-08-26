@@ -4,12 +4,15 @@
     <behaviorstep x="153" y="45" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Set the tasks belongs to this order" visibility="0" returntype="void" compiledname="setParameters" parameters="taskMap" exceptions="">
       <label x="153" y="30" text="Set tasks"/>
     </behaviorstep>
+    <behaviorstep x="538" y="44" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Finish" parameters="task" exceptions="">
+      <label x="538" y="29" text="Finish"/>
+    </behaviorstep>
   </behaviorsteps>
   <tasksteps>
     <taskstep x="155" y="288" comment="This is a task." command1="" command2="" command3="" command4="" command5="">
       <label x="155" y="273" text="Do Task"/>
     </taskstep>
-    <taskstep x="262" y="287" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList &lt;&lt; t">
+    <taskstep x="262" y="287" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList[t] = false">
       <label x="262" y="272" text="Do Task"/>
     </taskstep>
     <taskstep x="264" y="376" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="" command4="" command5="">
@@ -17,6 +20,12 @@
     </taskstep>
     <taskstep x="151" y="115" comment="This is a task." command1="int i = 1" command2="" command3="" command4="" command5="">
       <label x="151" y="100" text="Do Task"/>
+    </taskstep>
+    <taskstep x="533" y="127" comment="This is a task." command1="this.taskList[task] = true" command2="RemoveAgentFromModel(task)" command3="" command4="" command5="">
+      <label x="533" y="112" text="Do Task"/>
+    </taskstep>
+    <taskstep x="633" y="211" comment="This is a task." command1="this.owner.Finish(this)" command2="" command3="" command4="" command5="">
+      <label x="633" y="196" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -26,13 +35,18 @@
     <decisionstep x="262" y="193" comment="This is an agent decision." criteria="tdata.value.size() &gt; 1" branchType="if">
       <label x="262" y="178" text="Evaluate Criteria"/>
     </decisionstep>
+    <decisionstep x="535" y="208" comment="This is an agent decision." criteria="this.taskList.values().count(false) == 0" branchType="if">
+      <label x="535" y="193" text="Evaluate Criteria"/>
+    </decisionstep>
   </decisionsteps>
-  <joinsteps/>
+  <joinsteps>
+    <joinstep x="596" y="312"/>
+  </joinsteps>
   <agentproperties>
     <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="ecosystem.Demander" defaultvalue="null">
       <label x="47" y="19" text="Owner"/>
     </agentproperty>
-    <agentproperty x="258" y="88" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[]">
+    <agentproperty x="258" y="88" comment="Record the task an order contains" visibility="0" compiledname="taskList" type="def" defaultvalue="[:]">
       <label x="263" y="73" text="Task List"/>
     </agentproperty>
     <agentproperty x="383" y="74" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
@@ -40,7 +54,8 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="167" y="395"/>
+    <endstep x="172" y="400"/>
+    <endstep x="602" y="388"/>
   </endsteps>
   <connections>
     <transitions>
@@ -64,6 +79,26 @@
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="4" anchor="2"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="5" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="3"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="join" index="0" anchor="2"/>
+        <transitiontarget type="end" index="1" anchor="0"/>
+        <bendpoints/>
+      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -79,6 +114,16 @@
       <booleantransition value="true">
         <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="task" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="2" anchor="3"/>
+        <transitiontarget type="task" index="5" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="2" anchor="2"/>
+        <transitiontarget type="join" index="0" anchor="1"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

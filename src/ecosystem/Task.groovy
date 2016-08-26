@@ -358,6 +358,8 @@ public class Task extends ecosystem.Job  {
 
                 }
 
+                // This is a task.
+                this.master.Finish(this)
 
             } else  {
 

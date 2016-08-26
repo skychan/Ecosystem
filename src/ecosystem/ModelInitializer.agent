@@ -12,34 +12,13 @@
     <taskstep x="185" y="279" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Demander&quot;)" command2="Demander demander = (Demander) dagent" command3="demander.ReadData((i).toString())" command4="platform.addUser(demander)" command5="//demander.GenerateOrder((i).toString())">
       <label x="185" y="264" text="Create Demander"/>
     </taskstep>
-    <taskstep x="361" y="510" comment="This is a task." command1="Object ragent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Resource&quot;)" command2="Resource res = (Resource) ragent" command3="res.setType(i)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 17))" command5="res.setAvailable(res.getCapacity())">
-      <label x="361" y="495" text="Create Resource"/>
-    </taskstep>
-    <taskstep x="238" y="389" comment="This is a task." command1="ArrayList test = 1..providerCount" command2="RandomHelper.setSeed(2)" command3="//SimUtilities.shuffle(test,RandomHelper.getUniform())" command4="" command5="">
-      <label x="238" y="374" text="Do Task"/>
-    </taskstep>
-    <taskstep x="485" y="511" comment="This is a task." command1="Object pagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.PureProvider&quot;)" command2="PureProvider pureProvider = (PureProvider) pagent" command3="" command4="res.addOwner(pureProvider)" command5="platform.addUser(pureProvider)">
-      <label x="485" y="496" text="Create Provider"/>
-    </taskstep>
-    <taskstep x="609" y="509" comment="This is a task." command1="" command2="pureProvider.addResource(res)" command3="" command4="" command5="">
-      <label x="609" y="494" text="Do Task"/>
-    </taskstep>
     <taskstep x="297" y="279" comment="This is a task." command1="platform.CreateProvider()" command2="" command3="" command4="" command5="">
       <label x="297" y="264" text="Do Task"/>
     </taskstep>
-    <taskstep x="398" y="369" comment="This is a task." command1="Service sagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Service&quot;)" command2="sagent.resourceComposition = data" command3="" command4="" command5="">
-      <label x="398" y="354" text="Do Task"/>
-    </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 150..&lt;151" branchType="while">
+    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 300..&lt;400" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
-    </decisionstep>
-    <decisionstep x="239" y="508" comment="This is a loop." criteria="i in test" branchType="while">
-      <label x="239" y="493" text="Count Provider"/>
-    </decisionstep>
-    <decisionstep x="400" y="277" comment="This is a loop." criteria="data in serdata" branchType="while">
-      <label x="400" y="262" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -55,7 +34,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="105" y="462"/>
+    <endstep x="110" y="467"/>
   </endsteps>
   <connections>
     <transitions>
@@ -69,21 +48,6 @@
         <transitiontarget type="decision" index="0" anchor="0"/>
         <bendpoints/>
       </transition>
-      <transition>
-        <transitionsource type="task" index="2" anchor="3"/>
-        <transitiontarget type="task" index="4" anchor="1"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="3" anchor="2"/>
-        <transitiontarget type="decision" index="1" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="4" anchor="3"/>
-        <transitiontarget type="task" index="5" anchor="1"/>
-        <bendpoints/>
-      </transition>
     </transitions>
     <booleantransitions>
       <booleantransition value="true">
@@ -94,16 +58,6 @@
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="1" anchor="3"/>
-        <transitiontarget type="task" index="2" anchor="1"/>
-        <bendpoints/>
-      </booleantransition>
-      <booleantransition value="true">
-        <transitionsource type="decision" index="2" anchor="2"/>
-        <transitiontarget type="task" index="7" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

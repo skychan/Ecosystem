@@ -45,9 +45,6 @@
     <taskstep x="831" y="232" comment="This is a task." command1="" command2="this.setFinish(true)" command3="this.finishTime = GetTickCount()" command4="this.span = (int)(this.finishTime - this.getStartTime())" command5="">
       <label x="831" y="217" text="Finish"/>
     </taskstep>
-    <taskstep x="704" y="216" comment="This is a task." command1="mac.Review(this)" command2="this.Review(mac)" command3="" command4="" command5="">
-      <label x="704" y="201" text="Review"/>
-    </taskstep>
     <taskstep x="47" y="713" comment="add owner to the list" command1="this.owner[user] = p" command2="" command3="" command4="" command5="">
       <label x="47" y="698" text="set owner"/>
     </taskstep>
@@ -80,6 +77,9 @@
     </taskstep>
     <taskstep x="1167" y="312" comment="This is a task." command1="int amount = macData.key.resourceComposition.values().sum()" command2="double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))" command3="macData.key.owner.rank += deltaRank" command4="" command5="">
       <label x="1167" y="297" text="Do Task"/>
+    </taskstep>
+    <taskstep x="938" y="139" comment="This is a task." command1="this.master.Finish(this)" command2="" command3="" command4="" command5="">
+      <label x="938" y="124" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -149,16 +149,16 @@
     <agentproperty x="840" y="111" comment="This is an agent property." visibility="0" compiledname="productQuality" type="double" defaultvalue="Math.exp(2000)">
       <label x="845" y="96" text="Product Quality"/>
     </agentproperty>
-    <agentproperty x="951" y="112" comment="This is an agent property." visibility="0" compiledname="expectQuality" type="double" defaultvalue="Math.exp(2000)">
-      <label x="956" y="97" text="Expect Quality"/>
+    <agentproperty x="727" y="193" comment="This is an agent property." visibility="0" compiledname="expectQuality" type="double" defaultvalue="Math.exp(2000)">
+      <label x="732" y="178" text="Expect Quality"/>
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="55" y="299"/>
-    <endstep x="283" y="422"/>
-    <endstep x="616" y="424"/>
-    <endstep x="56" y="805"/>
-    <endstep x="418" y="832"/>
+    <endstep x="60" y="304"/>
+    <endstep x="288" y="427"/>
+    <endstep x="621" y="429"/>
+    <endstep x="61" y="810"/>
+    <endstep x="423" y="837"/>
   </endsteps>
   <connections>
     <transitions>
@@ -179,7 +179,7 @@
       </transition>
       <transition>
         <transitionsource type="behavior" index="3" anchor="0"/>
-        <transitiontarget type="task" index="10" anchor="0"/>
+        <transitiontarget type="task" index="9" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -213,32 +213,32 @@
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="10" anchor="2"/>
+        <transitionsource type="task" index="9" anchor="2"/>
         <transitiontarget type="end" index="3" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="11" anchor="2"/>
+        <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="13" anchor="3"/>
+        <transitionsource type="task" index="12" anchor="3"/>
         <transitiontarget type="decision" index="9" anchor="1"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="15" anchor="2"/>
+        <transitionsource type="task" index="14" anchor="2"/>
         <transitiontarget type="decision" index="8" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="16" anchor="2"/>
-        <transitiontarget type="task" index="15" anchor="0"/>
+        <transitionsource type="task" index="15" anchor="2"/>
+        <transitiontarget type="task" index="14" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
-        <transitionsource type="task" index="17" anchor="2"/>
+        <transitionsource type="task" index="16" anchor="2"/>
         <transitiontarget type="decision" index="10" anchor="0"/>
         <bendpoints/>
       </transition>
@@ -296,7 +296,7 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="6" anchor="3"/>
-        <transitiontarget type="task" index="17" anchor="1"/>
+        <transitiontarget type="task" index="16" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
@@ -306,27 +306,27 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="7" anchor="2"/>
-        <transitiontarget type="task" index="11" anchor="0"/>
+        <transitiontarget type="task" index="10" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="8" anchor="2"/>
-        <transitiontarget type="task" index="12" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="8" anchor="3"/>
-        <transitiontarget type="task" index="13" anchor="1"/>
+        <transitiontarget type="task" index="12" anchor="1"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="9" anchor="2"/>
-        <transitiontarget type="task" index="14" anchor="0"/>
+        <transitiontarget type="task" index="13" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="10" anchor="1"/>
-        <transitiontarget type="task" index="18" anchor="3"/>
+        <transitiontarget type="task" index="17" anchor="3"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="true">
@@ -334,9 +334,14 @@
         <transitiontarget type="decision" index="12" anchor="1"/>
         <bendpoints/>
       </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="11" anchor="0"/>
+        <transitiontarget type="task" index="20" anchor="2"/>
+        <bendpoints/>
+      </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="12" anchor="2"/>
-        <transitiontarget type="task" index="19" anchor="0"/>
+        <transitiontarget type="task" index="18" anchor="0"/>
         <bendpoints/>
       </booleantransition>
       <booleantransition value="false">
@@ -346,7 +351,7 @@
       </booleantransition>
       <booleantransition value="true">
         <transitionsource type="decision" index="13" anchor="2"/>
-        <transitiontarget type="task" index="20" anchor="0"/>
+        <transitiontarget type="task" index="19" anchor="0"/>
         <bendpoints/>
       </booleantransition>
     </booleantransitions>

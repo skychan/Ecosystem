@@ -91,7 +91,7 @@ public class Order  {
     public void setTaskList(def newValue) {
         taskList = newValue
     }
-    public def taskList = []
+    public def taskList = [:]
 
     /**
      *
@@ -158,7 +158,7 @@ public class Order  {
                 Task t = (Task) agent
                 t.setMaster( this )
                 t.setParameters(tdata)
-                this.taskList << t
+                this.taskList[t] = false
                 // This is a task.
                 t.setType(this.getType() + "-" + (i).toString())
                 i+=1
@@ -171,6 +171,33 @@ public class Order  {
         }
 
         // This is a task.
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method Finish
+     *
+     */
+    public void Finish(task) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+        // This is a task.
+        this.taskList[task] = true
+        RemoveAgentFromModel(task)
+
+        // This is an agent decision.
+        if (this.taskList.values().count(false) == 0) {
+
+            // This is a task.
+            this.owner.Finish(this)
+
+        } else  {
+
+
+        }
     }
 
     /**

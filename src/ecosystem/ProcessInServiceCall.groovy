@@ -114,6 +114,7 @@ public class ProcessInServiceCall implements ecosystem.ProcessBehavior {
         sc.setFinish(true)
         sc.finishTime = GetTickCount()
         sc.span = sc.finishTime - sc.getStartTime()
+        RemoveAgentFromModel(sc)
     }
 
     /**

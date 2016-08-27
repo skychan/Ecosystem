@@ -160,13 +160,13 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
                 // This is a task.
                 candidates.dropWhile{ it in t.owner.keySet() }
-                candidates.sort{[it.jobList.size()]}
+                candidates.sort{[-it.getQuality(),-it.owner.rank,it.jobList.size()]}
                 returnValue = candidates[0]
 
             } else  {
 
                 // This is a task.
-                candidates.sort{[-it.getAvailable(),it.jobList.size()]}
+                candidates.sort{[-it.mu,-it.owner.rank,-it.getAvailable(),it.jobList.size()]}
                 returnValue = candidates[0]
 
             }
@@ -225,7 +225,7 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
                 // This is a task.
                 def candidateList = theOnes.values()
-                candidateList.sort{ [it.getFullLength(), -it.getQuality()] }
+                candidateList.sort{ [-it.mu, it.getFullLength()] }
 
                 // This is an agent decision.
                 if (candidateList[0].getClass() == ecosystem.Service) {

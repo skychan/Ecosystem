@@ -21,7 +21,7 @@
     <taskstep x="135" y="162" comment="This is a task." command1="ArrayList types = 1..12" command2="SimUtilities.shuffle(types,RandomHelper.getUniform())" command3="types = types.take(RandomHelper.nextIntFromTo(0,4))" command4="" command5="">
       <label x="135" y="147" text="Do Task"/>
     </taskstep>
-    <taskstep x="257" y="248" comment="This is a task." command1="Resource res = new Resource()" command2="res.setMu(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(type)" command4="res.setCapacity(RandomHelper.nextIntFromTo(30, 40))" command5="res.setAvailable(res.getCapacity())">
+    <taskstep x="257" y="248" comment="This is a task." command1="Resource res = new Resource()" command2="res.setMu(RandomHelper.nextDoubleFromTo(0,30))" command3="res.setType(type)" command4="res.setCapacity(RandomHelper.nextIntFromTo(10, 20))" command5="res.setAvailable(res.getCapacity())">
       <label x="257" y="233" text="Create Resource"/>
     </taskstep>
     <taskstep x="259" y="340" comment="This is a task." command1="res.setOwner(this)" command2="this.resourceList &lt;&lt; res" command3="res.setSigma(RandomHelper.nextDoubleFromTo(0,5))" command4="//this.ResourceJudege(typeQuality,typeQueueLength,types[i],res)" command5="res.setSourceable(res.getCapacity())">
@@ -36,10 +36,10 @@
     <taskstep x="802" y="723" comment="This is a task." command1="" command2="Service s = new Service()" command3="s.setValues(serviceData)" command4="s.setOwner(this)" command5="this.newService = s">
       <label x="802" y="708" text="Start to generate service"/>
     </taskstep>
-    <taskstep x="1000" y="348" comment="This is a task." command1="this.taskFrequency = this.taskFrequency.sort{ 5*this.serviceConf[it.key] - it.value }" command2="def pattern = this.taskFrequency.iterator()[0]" command3="" command4="" command5="">
+    <taskstep x="1000" y="348" comment="This is a task." command1="this.taskFrequency = this.taskFrequency.sort{- it.value }" command2="def pattern = this.taskFrequency.iterator()[0]" command3="" command4="" command5="">
       <label x="1000" y="333" text="Do Task"/>
     </taskstep>
-    <taskstep x="1004" y="629" comment="This is a task." command1="this.serviceConf[pattern.key] += 1" command2="" command3="" command4="" command5="">
+    <taskstep x="1004" y="629" comment="This is a task." command1="this.taskFrequency[pattern.key] -= 1" command2="" command3="" command4="" command5="">
       <label x="1004" y="614" text="Do Task"/>
     </taskstep>
     <taskstep x="445" y="626" comment="This is a task." command1="RemoveAgentFromContext(&quot;Ecosystem&quot;, sc)" command2="" command3="" command4="" command5="">
@@ -62,7 +62,7 @@
     <decisionstep x="1000" y="258" comment="This is an agent decision." criteria="true" branchType="if">
       <label x="1000" y="243" text="rank value enough?"/>
     </decisionstep>
-    <decisionstep x="1005" y="445" comment="This is an agent decision." criteria="this.taskFrequency.size() &gt; 0 &amp;&amp; pattern.value - 5*this.serviceConf[pattern.key] &gt; 5" branchType="if">
+    <decisionstep x="1005" y="445" comment="This is an agent decision." criteria="this.taskFrequency.size() &gt; 0 &amp;&amp; pattern.value &gt; 0" branchType="if">
       <label x="1005" y="430" text="frequency"/>
     </decisionstep>
     <decisionstep x="804" y="628" comment="This is an agent decision." criteria="true" branchType="if">
@@ -73,13 +73,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="860" y="390"/>
+    <joinstep x="865" y="395"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
       <label x="971" y="869" text="Service List"/>
     </agentproperty>
-    <agentproperty x="356" y="73" comment="The provider difficulty rank value" visibility="0" compiledname="rank" type="double" defaultvalue="1000">
+    <agentproperty x="356" y="73" comment="The provider difficulty rank value" visibility="0" compiledname="rank" type="double" defaultvalue="0">
       <label x="361" y="58" text="Rank"/>
     </agentproperty>
     <agentproperty x="547" y="86" comment="This is an agent property." visibility="0" compiledname="resourceList" type="def" defaultvalue="[]">
@@ -99,11 +99,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="171" y="414"/>
-    <endstep x="865" y="488"/>
-    <endstep x="1031" y="762"/>
-    <endstep x="820" y="841"/>
-    <endstep x="459" y="752"/>
+    <endstep x="176" y="419"/>
+    <endstep x="870" y="493"/>
+    <endstep x="1036" y="767"/>
+    <endstep x="825" y="846"/>
+    <endstep x="464" y="757"/>
   </endsteps>
   <connections>
     <transitions>

@@ -15,7 +15,7 @@
     <taskstep x="288" y="226" comment="This is a task." command1="m.assignBehavior.Buffer(job,m)" command2="m.jobList.remove(job)" command3="" command4="" command5="">
       <label x="288" y="211" text="Do Task"/>
     </taskstep>
-    <taskstep x="286" y="153" comment="This is a task." command1="m.jobList = m.jobList.sort{ [ it.getType() ] }" command2="def job = m.jobList[0]" command3="" command4="" command5="">
+    <taskstep x="286" y="153" comment="This is a task." command1="//m.jobList = m.jobList.sort{ [ it.getType() ] }" command2="def job = m.jobList[0]" command3="" command4="" command5="">
       <label x="286" y="138" text="Sort"/>
     </taskstep>
   </tasksteps>
@@ -23,8 +23,8 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="108" y="314"/>
-    <endstep x="301" y="334"/>
+    <endstep x="113" y="319"/>
+    <endstep x="306" y="339"/>
   </endsteps>
   <connections>
     <transitions>

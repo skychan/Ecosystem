@@ -125,21 +125,6 @@ public class Demander extends ecosystem.User  {
 
     /**
      *
-     * This is an agent property.
-     * @field orderID
-     *
-     */
-    @Parameter (displayName = "Order ID", usageName = "orderID")
-    public String getOrderID() {
-        return orderID
-    }
-    public void setOrderID(String newValue) {
-        orderID = newValue
-    }
-    public String orderID = ""
-
-    /**
-     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -181,20 +166,24 @@ public class Demander extends ecosystem.User  {
         // This is a task.
         Parameters params = RunEnvironment.getInstance().getParameters()
         double mean = params.getValue("Order")
+        ArrayList types = 300..310
         RandomHelper.createPoisson(mean)
+        SimUtilities.shuffle(types,RandomHelper.getUniform())
+        // This is a task.
+        types = types.take(RandomHelper.nextIntFromTo(0,RandomHelper.getPoisson().nextInt()))
 
         // This is a loop.
-        for (int i in RandomHelper.getPoisson().nextInt()) {
+        for (type in types) {
 
             // have need is to generate order
             Object agent = CreateAgent("Ecosystem", "ecosystem.Order")
             //println this.taskMap
             Order o = (Order) agent
             o.setOwner(this)
-            o.setType("Order"+this.orderID)
+            o.setType("Order"+type.toString())
             // Set the order parameters
             this.orderList.add(o)
-            o.setParameters(this.taskMap)
+            o.setParameters(this.taskMap[type.toString()])
 
         }
 
@@ -220,6 +209,8 @@ public class Demander extends ecosystem.User  {
         int nServices = sc.nextInt()
         sc.nextLine()
         sc.nextLine()
+        // This is a task.
+        Map tempdata = [:]
 
         // This is a loop.
         for (int i in 1..nTasks) {
@@ -248,7 +239,7 @@ public class Demander extends ecosystem.User  {
             }
 
             // This is a task.
-            this.taskMap << [(i): templist]
+            tempdata << [(i): templist]
             int nSuccessor = sc.nextInt()
 
             // This is a loop.
@@ -263,7 +254,7 @@ public class Demander extends ecosystem.User  {
         }
 
         // This is a task.
-        this.orderID = orderID
+        this.taskMap[orderID] = tempdata
         // Return the results.
         return returnValue
 

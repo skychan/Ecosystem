@@ -9,7 +9,7 @@
     <taskstep x="146" y="202" comment="This is a task." command1="sc.owner.GenerateService(sc.allocation)" command2="println &quot;service call &quot; + sc + &quot; fininshed and we should to generate service&quot;" command3="" command4="" command5="">
       <label x="146" y="187" text="Do Task"/>
     </taskstep>
-    <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = GetTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="">
+    <taskstep x="291" y="106" comment="This is a task." command1="" command2="sc.setFinish(true)" command3="sc.finishTime = GetTickCount()" command4="sc.span = sc.finishTime - sc.getStartTime()" command5="RemoveAgentFromModel(sc)">
       <label x="291" y="91" text="Finish"/>
     </taskstep>
     <taskstep x="292" y="299" comment="The finish step" command1="mac.Release(sc)" command2="" command3="" command4="" command5="">
@@ -42,7 +42,7 @@
   <joinsteps/>
   <agentproperties/>
   <endsteps>
-    <endstep x="433" y="146"/>
+    <endstep x="438" y="151"/>
   </endsteps>
   <connections>
     <transitions>

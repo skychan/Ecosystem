@@ -229,7 +229,7 @@ public class Resource extends ecosystem.Machine  {
 
 
         // Decide to take the task or not
-        if (true) {
+        if (!this.exit) {
 
 
             // This is an agent decision.

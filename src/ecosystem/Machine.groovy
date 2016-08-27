@@ -305,6 +305,21 @@ public class Machine  {
 
     /**
      *
+     * This is an agent property.
+     * @field exit
+     *
+     */
+    @Parameter (displayName = "Exit", usageName = "exit")
+    public boolean getExit() {
+        return exit
+    }
+    public void setExit(boolean newValue) {
+        exit = newValue
+    }
+    public boolean exit = false
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -346,7 +361,7 @@ public class Machine  {
 
 
         // Decide to take the task or not
-        if (true ) {
+        if (!this.exit) {
 
 
             // This is an agent decision.
@@ -476,6 +491,7 @@ public class Machine  {
 
             // This is a task.
             this.assignBehavior.Buffer(job,this)
+            job.bufferMark = this
 
         } else  {
 
@@ -569,7 +585,7 @@ public class Machine  {
 
                 // This is a task.
                 def scList = this.responseList.findAll{ it-> it.getClass() == ecosystem.ServiceCall }
-                // sort the scList
+                scList.sort{-it.owner.rank}
                 def theCall = scList[0]
                 List taskReplyList = this.responseList.findAll{ it -> it.getClass() == ecosystem.Task }
                 taskReplyList = taskReplyList.findAll{it -> it.needResourceCapacity[this.getType()]  <= this.getSourceable() - theCall.needResourceCapacity[this.getType()] }

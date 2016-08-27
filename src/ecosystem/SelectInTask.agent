@@ -30,7 +30,7 @@
     <taskstep x="267" y="172" comment="This is a task." command1="def chosenMap = [:]" command2="" command3="" command4="" command5="">
       <label x="267" y="157" text="Do Task"/>
     </taskstep>
-    <taskstep x="79" y="313" comment="This is a task." command1="candidates.sort{[-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
+    <taskstep x="79" y="313" comment="This is a task." command1="candidates.sort{[-it.mu,-it.owner.rank,-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
       <label x="79" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="568" y="130" comment="This is a task." command1="int nullCount = theOnes.values().count(null)" command2="" command3="" command4="" command5="">
@@ -57,13 +57,13 @@
     <taskstep x="1037" y="140" comment="This is a task." command1="mac.Assign(t)" command2="" command3="" command4="" command5="">
       <label x="1037" y="125" text="Do Task"/>
     </taskstep>
-    <taskstep x="178" y="319" comment="This is a task." command1="candidates.dropWhile{ it in t.owner.keySet() }" command2="candidates.sort{[it.jobList.size()]}" command3="returnValue = candidates[0]" command4="" command5="">
+    <taskstep x="178" y="319" comment="This is a task." command1="candidates.dropWhile{ it in t.owner.keySet() }" command2="candidates.sort{[-it.getQuality(),-it.owner.rank,it.jobList.size()]}" command3="returnValue = candidates[0]" command4="" command5="">
       <label x="176" y="297" text="Do Task"/>
     </taskstep>
     <taskstep x="427" y="445" comment="This is a task." command1="Scanner reader = new Scanner(System.in)" command2="println(&quot;add frequency &quot;)" command3="int n = reader.nextInt()" command4="" command5="">
       <label x="427" y="430" text="鍋�"/>
     </taskstep>
-    <taskstep x="569" y="379" comment="This is a task." command1="def candidateList = theOnes.values()" command2="candidateList.sort{ [it.getFullLength(), -it.getQuality()] }" command3="" command4="" command5="">
+    <taskstep x="569" y="379" comment="This is a task." command1="def candidateList = theOnes.values()" command2="candidateList.sort{ [-it.mu, it.getFullLength()] }" command3="" command4="" command5="">
       <label x="569" y="364" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -97,15 +97,15 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="109" y="536"/>
-    <joinstep x="153" y="445"/>
+    <joinstep x="114" y="541"/>
+    <joinstep x="158" y="450"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="275" y="454"/>
-    <endstep x="109" y="654"/>
-    <endstep x="859" y="248"/>
-    <endstep x="966" y="350"/>
+    <endstep x="280" y="459"/>
+    <endstep x="114" y="659"/>
+    <endstep x="864" y="253"/>
+    <endstep x="971" y="355"/>
   </endsteps>
   <connections>
     <transitions>
@@ -170,6 +170,11 @@
         <bendpoints/>
       </transition>
       <transition>
+        <transitionsource type="task" index="16" anchor="2"/>
+        <transitiontarget type="decision" index="5" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
         <transitionsource type="join" index="0" anchor="2"/>
         <transitiontarget type="end" index="1" anchor="0"/>
         <bendpoints/>
@@ -177,11 +182,6 @@
       <transition>
         <transitionsource type="join" index="1" anchor="2"/>
         <transitiontarget type="join" index="0" anchor="3"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="task" index="16" anchor="2"/>
-        <transitiontarget type="decision" index="5" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

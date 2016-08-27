@@ -200,6 +200,36 @@ public class CloudPlatform  {
 
     /**
      *
+     * This is an agent property.
+     * @field exitList
+     *
+     */
+    @Parameter (displayName = "ExitList", usageName = "exitList")
+    public List getExitList() {
+        return exitList
+    }
+    public void setExitList(List newValue) {
+        exitList = newValue
+    }
+    public List exitList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field needResourceCapacity
+     *
+     */
+    @Parameter (displayName = "Need Cap", usageName = "needResourceCapacity")
+    public Map getNeedResourceCapacity() {
+        return needResourceCapacity
+    }
+    public void setNeedResourceCapacity(Map newValue) {
+        needResourceCapacity = newValue
+    }
+    public Map needResourceCapacity = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -574,7 +604,7 @@ public class CloudPlatform  {
 
 
                 // This is an agent decision.
-                if (res.getType() in this.resourceTypeAmount.keySet() && this.ResourceQuality(res.getType()) > res.getQuality()) {
+                if (this.resourceTypeAmount[res.getType()] > 0) {
 
                     // This is a task.
                     p.resourceList.remove(res)
@@ -586,6 +616,26 @@ public class CloudPlatform  {
 
             } else  {
 
+
+                // This is an agent decision.
+                if (res.getType() in this.resourceTypeAmount.keySet()) {
+
+
+                    // This is an agent decision.
+                    if (this.ResourceQuality(res.getType()) > res.getQuality()) {
+
+                        // This is a task.
+                        p.resourceList.remove(res)
+
+                    } else  {
+
+
+                    }
+
+                } else  {
+
+
+                }
 
             }
 
@@ -720,7 +770,45 @@ public class CloudPlatform  {
 
 
                 // This is an agent decision.
-                if (mac != null && mac.getFullLength() == 0 && now - mac.assignTime > RunEnvironment.getInstance().getParameters().getValue("Waiting")) {
+                if (mac != null) {
+
+                    // This is a task.
+                    mac.exit = true
+                    this.exitList << mac
+
+                } else  {
+
+
+                }
+
+            }
+
+
+            // This is a loop.
+            for (p in this.providerList.collect()) {
+
+
+                // This is an agent decision.
+                if (p.serviceList.size() + p.resourceList.size() == 0) {
+
+                    // This is a task.
+                    this.providerList.remove(p)
+                    RemoveAgentFromModel(p)
+
+                } else  {
+
+
+                }
+
+            }
+
+
+            // This is a loop.
+            for (mac in this.exitList.collect()) {
+
+
+                // This is an agent decision.
+                if (mac.getFullLength() == 0) {
 
                     // This is a task.
                     RemoveAgentFromModel(mac)
@@ -751,25 +839,6 @@ public class CloudPlatform  {
             }
 
 
-            // This is a loop.
-            for (p in this.providerList.collect()) {
-
-
-                // This is an agent decision.
-                if (p.serviceList.size() + p.resourceList.size() == 0) {
-
-                    // This is a task.
-                    this.providerList.remove(p)
-                    RemoveAgentFromModel(p)
-
-                } else  {
-
-
-                }
-
-            }
-
-
         } else  {
 
 
@@ -777,6 +846,87 @@ public class CloudPlatform  {
         // Return the results.
         return returnValue
 
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method addNeedCap
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'startTime',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public void addNeedCap(ecosystem.Task watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is a loop.
+        for (data in watchedAgent.needResourceCapacity) {
+
+
+            // This is an agent decision.
+            if (data.key in this.needResourceCapacity.keySet()) {
+
+                // This is a task.
+                this.needResourceCapacity[data.key] += data.value
+                println this.needResourceCapacity
+
+            } else  {
+
+                // This is a task.
+                this.needResourceCapacity[data.key] = data.value
+                println this.needResourceCapacity
+
+            }
+
+        }
+
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method releaseNeedCap
+     *
+     */
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'bufferMark',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public void releaseNeedCap(ecosystem.Task watchedAgent) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (watchedAgent.bufferMark.getClass() == ecosystem.Resource) {
+
+            // This is a task.
+            def type = watchedAgent.bufferMark.getType()
+            this.needResourceCapacity[type] -= watchedAgent.needResourceCapacity[type]
+            println this.needResourceCapacity
+
+        } else  {
+
+
+            // This is a loop.
+            for (resdata in watchedAgent.bufferMark.resourceComposition) {
+
+                // This is a task.
+                this.needResourceCapacity[resdata.key] -= resdata.value
+                println this.needResourceCapacity
+
+            }
+
+
+        }
     }
 
     /**

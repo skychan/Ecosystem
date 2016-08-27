@@ -6,10 +6,10 @@
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="" command4="" command5="">
+    <taskstep x="71" y="193" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.CloudPlatform&quot;)" command2="CloudPlatform platform = (CloudPlatform) agent" command3="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Demander&quot;)" command4="Demander demander = (Demander) dagent" command5="">
       <label x="71" y="178" text="Create Platform"/>
     </taskstep>
-    <taskstep x="185" y="279" comment="This is a task." command1="Object dagent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Demander&quot;)" command2="Demander demander = (Demander) dagent" command3="demander.ReadData((i).toString())" command4="platform.addUser(demander)" command5="//demander.GenerateOrder((i).toString())">
+    <taskstep x="185" y="279" comment="This is a task." command1="" command2="" command3="demander.ReadData((i).toString())" command4="//platform.addUser(demander)" command5="//demander.GenerateOrder((i).toString())">
       <label x="185" y="264" text="Create Demander"/>
     </taskstep>
     <taskstep x="297" y="279" comment="This is a task." command1="platform.CreateProvider()" command2="" command3="" command4="" command5="">
@@ -17,7 +17,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 300..&lt;400" branchType="while">
+    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 300..&lt;350" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
     </decisionstep>
   </decisionsteps>
@@ -34,7 +34,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="110" y="467"/>
+    <endstep x="115" y="472"/>
   </endsteps>
   <connections>
     <transitions>

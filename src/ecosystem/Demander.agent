@@ -4,19 +4,19 @@
     <behaviorstep x="289" y="57" scheduleannotationstart="1" scheduleannotationpick="" scheduleannotationinterval="1" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="0" watchannotationtriggerdelta="0" watchannotationtriggerpriority="" watchannotationpick="" comment="Generate Need" visibility="0" returntype="void" compiledname="GenerateOrder" parameters="" exceptions="">
       <label x="289" y="42" text="Generate Order"/>
     </behaviorstep>
-    <behaviorstep x="708" y="63" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Read data from file" visibility="0" returntype="def" compiledname="ReadData" parameters="String orderID" exceptions="">
-      <label x="708" y="48" text="Read Data"/>
+    <behaviorstep x="709" y="19" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="Read data from file" visibility="0" returntype="def" compiledname="ReadData" parameters="String orderID" exceptions="">
+      <label x="709" y="4" text="Read Data"/>
     </behaviorstep>
     <behaviorstep x="75" y="445" scheduleannotationstart="" scheduleannotationpick="" scheduleannotationinterval="" scheduleannotationpriority="" scheduleannotationduration="" scheduleannotationshuffle="0" watchannotationid="" watchannotationquery="" watchannotationtargetclassname="" watchannotationtargetfieldnames="" watchannotationtriggercondition="" watchannotationtriggerschedule="1" watchannotationtriggerdelta="1" watchannotationtriggerpriority="" watchannotationpick="" comment="This is the step behavior." visibility="0" returntype="void" compiledname="Finish" parameters="order" exceptions="">
       <label x="75" y="430" text="Finish"/>
     </behaviorstep>
   </behaviorsteps>
   <tasksteps>
-    <taskstep x="285" y="307" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.setOwner(this)" command5="o.setType(&quot;Order&quot;+this.orderID)">
-      <label x="285" y="292" text="Generate Order"/>
+    <taskstep x="280" y="361" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.setOwner(this)" command5="o.setType(&quot;Order&quot;+type.toString())">
+      <label x="280" y="346" text="Generate Order"/>
     </taskstep>
-    <taskstep x="286" y="398" comment="Set the order parameters" command1="" command2="" command3="this.orderList.add(o)" command4="" command5="o.setParameters(this.taskMap)">
-      <label x="286" y="383" text="Set parameters"/>
+    <taskstep x="281" y="452" comment="Set the order parameters" command1="" command2="" command3="this.orderList.add(o)" command4="" command5="o.setParameters(this.taskMap[type.toString()])">
+      <label x="281" y="437" text="Set parameters"/>
     </taskstep>
     <taskstep x="937" y="306" comment="This is a task." command1="int amount = sc.nextInt()" command2="" command3="" command4="" command5="">
       <label x="937" y="291" text="Do Task"/>
@@ -30,20 +30,26 @@
     <taskstep x="1085" y="304" comment="This is a task." command1="templist &lt;&lt; [(j):amount]" command2="" command3="" command4="" command5="">
       <label x="1085" y="289" text="Do Task"/>
     </taskstep>
-    <taskstep x="709" y="315" comment="This is a task." command1="this.orderID = orderID" command2="" command3="" command4="" command5="">
+    <taskstep x="709" y="315" comment="This is a task." command1="this.taskMap[orderID] = tempdata" command2="" command3="" command4="" command5="">
       <label x="709" y="300" text="Do Task"/>
     </taskstep>
-    <taskstep x="829" y="390" comment="This is a task." command1="this.taskMap &lt;&lt; [(i): templist]" command2="int nSuccessor = sc.nextInt()" command3="" command4="" command5="">
+    <taskstep x="829" y="390" comment="This is a task." command1="tempdata &lt;&lt; [(i): templist]" command2="int nSuccessor = sc.nextInt()" command3="" command4="" command5="">
       <label x="829" y="375" text="Do Task"/>
     </taskstep>
-    <taskstep x="707" y="137" comment="This is a task." command1="Scanner sc = new Scanner(new File(&quot;cases/Order&quot;+orderID+&quot;.rcp&quot;))" command2="int nTasks = sc.nextInt()" command3="int nServices = sc.nextInt()" command4="sc.nextLine()" command5="sc.nextLine()">
-      <label x="707" y="122" text="Do Task"/>
+    <taskstep x="708" y="93" comment="This is a task." command1="Scanner sc = new Scanner(new File(&quot;cases/Order&quot;+orderID+&quot;.rcp&quot;))" command2="int nTasks = sc.nextInt()" command3="int nServices = sc.nextInt()" command4="sc.nextLine()" command5="sc.nextLine()">
+      <label x="708" y="78" text="Do Task"/>
     </taskstep>
-    <taskstep x="284" y="135" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Order&quot;)" command3="" command4="RandomHelper.createPoisson(mean)" command5="">
+    <taskstep x="284" y="135" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Order&quot;)" command3="ArrayList types = 300..310" command4="RandomHelper.createPoisson(mean)" command5="SimUtilities.shuffle(types,RandomHelper.getUniform())">
       <label x="284" y="120" text="Randomize"/>
     </taskstep>
     <taskstep x="77" y="525" comment="This is a task." command1="this.orderList.remove(order)" command2="RemoveAgentFromModel(order)" command3="" command4="" command5="">
       <label x="77" y="510" text="Do Task"/>
+    </taskstep>
+    <taskstep x="706" y="160" comment="This is a task." command1="Map tempdata = [:]" command2="" command3="" command4="" command5="">
+      <label x="706" y="145" text="Do Task"/>
+    </taskstep>
+    <taskstep x="287" y="210" comment="This is a task." command1="types = types.take(RandomHelper.nextIntFromTo(0,RandomHelper.getPoisson().nextInt()))" command2="" command3="" command4="" command5="">
+      <label x="287" y="195" text="Do Task"/>
     </taskstep>
   </tasksteps>
   <decisionsteps>
@@ -59,8 +65,8 @@
     <decisionstep x="944" y="386" comment="This is a loop." criteria="int s in 0..&lt;nSuccessor" branchType="while">
       <label x="944" y="371" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="282" y="211" comment="This is a loop." criteria="int i in RandomHelper.getPoisson().nextInt()" branchType="while">
-      <label x="282" y="196" text="Evaluate Criteria"/>
+    <decisionstep x="286" y="285" comment="This is a loop." criteria="type in types" branchType="while">
+      <label x="286" y="270" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -77,14 +83,11 @@
     <agentproperty x="63" y="223" comment="This is an agent property." visibility="0" compiledname="hardness" type="double" defaultvalue="0">
       <label x="68" y="208" text="Hardness"/>
     </agentproperty>
-    <agentproperty x="569" y="66" comment="This is an agent property." visibility="0" compiledname="orderID" type="String" defaultvalue="&quot;&quot;">
-      <label x="574" y="51" text="Order ID"/>
-    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="715" y="424"/>
-    <endstep x="303" y="520"/>
-    <endstep x="89" y="609"/>
+    <endstep x="720" y="429"/>
+    <endstep x="291" y="542"/>
+    <endstep x="94" y="614"/>
   </endsteps>
   <connections>
     <transitions>
@@ -135,17 +138,27 @@
       </transition>
       <transition>
         <transitionsource type="task" index="8" anchor="2"/>
-        <transitiontarget type="decision" index="2" anchor="0"/>
+        <transitiontarget type="task" index="11" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="9" anchor="2"/>
-        <transitiontarget type="decision" index="4" anchor="0"/>
+        <transitiontarget type="task" index="12" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
         <transitionsource type="task" index="10" anchor="2"/>
         <transitiontarget type="end" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="11" anchor="2"/>
+        <transitiontarget type="decision" index="2" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="task" index="12" anchor="2"/>
+        <transitiontarget type="decision" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
     </transitions>

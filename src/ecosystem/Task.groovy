@@ -185,6 +185,21 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field bufferMark
+     *
+     */
+    @Parameter (displayName = "BuffMark", usageName = "bufferMark")
+    public def getBufferMark() {
+        return bufferMark
+    }
+    public void setBufferMark(def newValue) {
+        bufferMark = newValue
+    }
+    public def bufferMark = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *

@@ -41,7 +41,7 @@
     <decisionstep x="369" y="571" comment="This is an agent decision." criteria="this.getFullLength() == 0" branchType="if">
       <label x="369" y="556" text="Evaluate Criteria"/>
     </decisionstep>
-    <decisionstep x="594" y="453" comment="Decide to take the task or not" criteria="true" branchType="if">
+    <decisionstep x="594" y="453" comment="Decide to take the task or not" criteria="!this.exit" branchType="if">
       <label x="594" y="438" text="Take it or not"/>
     </decisionstep>
     <decisionstep x="593" y="538" comment="This is an agent decision." criteria="responseBehavior.Exist(watchedAgent,this)" branchType="if">
@@ -49,7 +49,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="385" y="769"/>
+    <joinstep x="390" y="774"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="476" y="244" comment="This is an agent property." visibility="0" compiledname="sourceable" type="int" defaultvalue="0">
@@ -69,10 +69,10 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="68" y="328"/>
-    <endstep x="385" y="844"/>
-    <endstep x="604" y="749"/>
-    <endstep x="57" y="807"/>
+    <endstep x="73" y="333"/>
+    <endstep x="390" y="849"/>
+    <endstep x="609" y="754"/>
+    <endstep x="62" y="812"/>
   </endsteps>
   <connections>
     <transitions>

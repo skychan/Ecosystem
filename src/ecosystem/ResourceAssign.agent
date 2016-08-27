@@ -34,13 +34,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="156" y="353"/>
+    <joinstep x="161" y="358"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="159" y="435"/>
-    <endstep x="371" y="372"/>
-    <endstep x="578" y="320"/>
+    <endstep x="164" y="440"/>
+    <endstep x="376" y="377"/>
+    <endstep x="538" y="304"/>
   </endsteps>
   <connections>
     <transitions>

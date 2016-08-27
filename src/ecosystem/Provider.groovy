@@ -91,7 +91,7 @@ public class Provider extends ecosystem.User  {
     public void setRank(double newValue) {
         rank = newValue
     }
-    public double rank = 1000
+    public double rank = 0
 
     /**
      *
@@ -277,7 +277,7 @@ public class Provider extends ecosystem.User  {
             Resource res = new Resource()
             res.setMu(RandomHelper.nextDoubleFromTo(0,30))
             res.setType(type)
-            res.setCapacity(RandomHelper.nextIntFromTo(30, 40))
+            res.setCapacity(RandomHelper.nextIntFromTo(10, 20))
             res.setAvailable(res.getCapacity())
             // This is a task.
             res.setOwner(this)
@@ -330,18 +330,18 @@ public class Provider extends ecosystem.User  {
             if (true) {
 
                 // This is a task.
-                this.taskFrequency = this.taskFrequency.sort{ 5*this.serviceConf[it.key] - it.value }
+                this.taskFrequency = this.taskFrequency.sort{- it.value }
                 def pattern = this.taskFrequency.iterator()[0]
 
                 // This is an agent decision.
-                if (this.taskFrequency.size() > 0 && pattern.value - 5*this.serviceConf[pattern.key] > 5) {
+                if (this.taskFrequency.size() > 0 && pattern.value > 0) {
 
                     // This is a task.
                     ServiceCall sagent = CreateAgent("Ecosystem", "ecosystem.ServiceCall")
                     sagent.setParameters(pattern.key)
                     sagent.setOwner(this)
                     // This is a task.
-                    this.serviceConf[pattern.key] += 1
+                    this.taskFrequency[pattern.key] -= 1
 
                 } else  {
 

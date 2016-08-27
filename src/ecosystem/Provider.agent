@@ -39,7 +39,7 @@
     <taskstep x="1000" y="348" comment="This is a task." command1="this.taskFrequency = this.taskFrequency.sort{- it.value }" command2="def pattern = this.taskFrequency.iterator()[0]" command3="" command4="" command5="">
       <label x="1000" y="333" text="Do Task"/>
     </taskstep>
-    <taskstep x="1004" y="629" comment="This is a task." command1="this.taskFrequency[pattern.key] -= 1" command2="" command3="" command4="" command5="">
+    <taskstep x="1004" y="629" comment="This is a task." command1="this.taskFrequency[pattern.key] -= 5" command2="" command3="" command4="" command5="">
       <label x="1004" y="614" text="Do Task"/>
     </taskstep>
     <taskstep x="445" y="626" comment="This is a task." command1="RemoveAgentFromContext(&quot;Ecosystem&quot;, sc)" command2="" command3="" command4="" command5="">
@@ -62,7 +62,7 @@
     <decisionstep x="1000" y="258" comment="This is an agent decision." criteria="true" branchType="if">
       <label x="1000" y="243" text="rank value enough?"/>
     </decisionstep>
-    <decisionstep x="1005" y="445" comment="This is an agent decision." criteria="this.taskFrequency.size() &gt; 0 &amp;&amp; pattern.value &gt; 0" branchType="if">
+    <decisionstep x="1005" y="445" comment="This is an agent decision." criteria="this.taskFrequency.size() &gt; 0 &amp;&amp; pattern.value &gt; 5" branchType="if">
       <label x="1005" y="430" text="frequency"/>
     </decisionstep>
     <decisionstep x="804" y="628" comment="This is an agent decision." criteria="true" branchType="if">
@@ -73,7 +73,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="865" y="395"/>
+    <joinstep x="870" y="400"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="966" y="884" comment="Record the service" visibility="0" compiledname="serviceList" type="def" defaultvalue="[]">
@@ -99,11 +99,11 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="176" y="419"/>
-    <endstep x="870" y="493"/>
-    <endstep x="1036" y="767"/>
-    <endstep x="825" y="846"/>
-    <endstep x="464" y="757"/>
+    <endstep x="181" y="424"/>
+    <endstep x="875" y="498"/>
+    <endstep x="1041" y="772"/>
+    <endstep x="830" y="851"/>
+    <endstep x="469" y="762"/>
   </endsteps>
   <connections>
     <transitions>

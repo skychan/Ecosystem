@@ -21,7 +21,7 @@
     <taskstep x="348" y="259" comment="This is a task." command1="r.jobList &lt;&lt; t" command2="" command3="" command4="" command5="">
       <label x="348" y="244" text="Do Task"/>
     </taskstep>
-    <taskstep x="531" y="195" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])" command3="t.prepareStatus[m] = true" command4="t.bufferMark = m" command5="">
+    <taskstep x="531" y="195" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])" command3="t.prepareStatus[m] = true" command4="t.bufferMark = m" command5="t.master.plt.releaseNeedCap(t)">
       <label x="531" y="180" text="Do Task"/>
     </taskstep>
     <taskstep x="345" y="170" comment="This is a task." command1="t.predecessor += r.jobList.findAll{ it-&gt; it.getClass() == ecosystem.ServiceCall }" command2="t.predecessor += r.buffer" command3="" command4="" command5="">
@@ -34,13 +34,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="161" y="358"/>
+    <joinstep x="166" y="363"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="164" y="440"/>
-    <endstep x="376" y="377"/>
-    <endstep x="538" y="304"/>
+    <endstep x="169" y="445"/>
+    <endstep x="381" y="382"/>
+    <endstep x="543" y="309"/>
   </endsteps>
   <connections>
     <transitions>

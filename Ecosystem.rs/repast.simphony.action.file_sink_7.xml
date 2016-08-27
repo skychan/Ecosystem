@@ -1,0 +1,13 @@
+<repast.simphony.data2.engine.FileSinkDescriptor>
+  <name>Job</name>
+  <dataSet>Job</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>Task</string>
+    <string>tick</string>
+    <string>ServiceCall</string>
+  </sourceIds>
+  <fileName>/Users/sky/Documents/123</fileName>
+  <addTimeStamp>true</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>

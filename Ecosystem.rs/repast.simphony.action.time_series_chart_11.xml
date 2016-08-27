@@ -1,6 +1,6 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Finish Task Count</name>
-  <dataSet>Finish Task Count</dataSet>
+  <name>Job</name>
+  <dataSet>Job</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
   <chartTitle></chartTitle>
@@ -21,25 +21,25 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>Finish ServiceCall Count</string>
+      <string>Task</string>
       <SeriesData>
-        <label>Finish ServiceCall Count</label>
+        <label>Task</label>
         <color>
-          <red>255</red>
+          <red>0</red>
           <green>0</green>
-          <blue>0</blue>
+          <blue>255</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>
     </entry>
     <entry>
-      <string>Finish Task Count</string>
+      <string>ServiceCall</string>
       <SeriesData>
-        <label>Finish Task Count</label>
+        <label>ServiceCall</label>
         <color>
-          <red>0</red>
+          <red>255</red>
           <green>0</green>
-          <blue>255</blue>
+          <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>

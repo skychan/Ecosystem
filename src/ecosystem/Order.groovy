@@ -110,6 +110,21 @@ public class Order  {
 
     /**
      *
+     * This is an agent property.
+     * @field plt
+     *
+     */
+    @Parameter (displayName = "Plt", usageName = "plt")
+    public def getPlt() {
+        return plt
+    }
+    public void setPlt(def newValue) {
+        plt = newValue
+    }
+    public def plt = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -162,6 +177,7 @@ public class Order  {
                 // This is a task.
                 t.setType(this.getType() + "-" + (i).toString())
                 i+=1
+                this.plt.addNeedCap(t)
 
             } else  {
 

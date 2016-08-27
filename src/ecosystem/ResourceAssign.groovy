@@ -153,6 +153,7 @@ public class ResourceAssign implements ecosystem.AssignBehavior {
         m.setAvailable(m.getAvailable()-t.needResourceCapacity[m.getType()])
         t.prepareStatus[m] = true
         t.bufferMark = m
+        t.master.plt.releaseNeedCap(t)
     }
 
     /**

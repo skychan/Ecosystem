@@ -125,6 +125,21 @@ public class Demander extends ecosystem.User  {
 
     /**
      *
+     * This is an agent property.
+     * @field plt
+     *
+     */
+    @Parameter (displayName = "Plt", usageName = "plt")
+    public def getPlt() {
+        return plt
+    }
+    public void setPlt(def newValue) {
+        plt = newValue
+    }
+    public def plt = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -183,6 +198,7 @@ public class Demander extends ecosystem.User  {
             o.setType("Order"+type.toString())
             // Set the order parameters
             this.orderList.add(o)
+            o.plt = this.plt
             o.setParameters(this.taskMap[type.toString()])
 
         }

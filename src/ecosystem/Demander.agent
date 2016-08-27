@@ -15,7 +15,7 @@
     <taskstep x="280" y="361" comment="have need is to generate order" command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Order&quot;)" command2="//println this.taskMap" command3="Order o = (Order) agent" command4="o.setOwner(this)" command5="o.setType(&quot;Order&quot;+type.toString())">
       <label x="280" y="346" text="Generate Order"/>
     </taskstep>
-    <taskstep x="281" y="452" comment="Set the order parameters" command1="" command2="" command3="this.orderList.add(o)" command4="" command5="o.setParameters(this.taskMap[type.toString()])">
+    <taskstep x="281" y="452" comment="Set the order parameters" command1="" command2="" command3="this.orderList.add(o)" command4="o.plt = this.plt" command5="o.setParameters(this.taskMap[type.toString()])">
       <label x="281" y="437" text="Set parameters"/>
     </taskstep>
     <taskstep x="937" y="306" comment="This is a task." command1="int amount = sc.nextInt()" command2="" command3="" command4="" command5="">
@@ -83,11 +83,14 @@
     <agentproperty x="63" y="223" comment="This is an agent property." visibility="0" compiledname="hardness" type="double" defaultvalue="0">
       <label x="68" y="208" text="Hardness"/>
     </agentproperty>
+    <agentproperty x="497" y="303" comment="This is an agent property." visibility="0" compiledname="plt" type="def" defaultvalue="0">
+      <label x="502" y="288" text="Plt"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="720" y="429"/>
-    <endstep x="291" y="542"/>
-    <endstep x="94" y="614"/>
+    <endstep x="725" y="434"/>
+    <endstep x="296" y="547"/>
+    <endstep x="99" y="619"/>
   </endsteps>
   <connections>
     <transitions>

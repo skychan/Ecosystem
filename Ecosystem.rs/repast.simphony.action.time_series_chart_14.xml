@@ -1,6 +1,6 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>User Count</name>
-  <dataSet>User Count</dataSet>
+  <name>Rank</name>
+  <dataSet>Qualities</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
   <chartTitle></chartTitle>
@@ -21,23 +21,23 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>Demander Population</string>
+      <string>Rank Mean</string>
       <SeriesData>
-        <label>Demander Population</label>
+        <label>Rank Mean</label>
         <color>
-          <red>255</red>
-          <green>0</green>
+          <red>0</red>
+          <green>255</green>
           <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>
     </entry>
     <entry>
-      <string>Provider Population</string>
+      <string>Rank Std</string>
       <SeriesData>
-        <label>Provider Population</label>
+        <label>Rank Std</label>
         <color>
-          <red>0</red>
+          <red>255</red>
           <green>0</green>
           <blue>255</blue>
           <alpha>255</alpha>

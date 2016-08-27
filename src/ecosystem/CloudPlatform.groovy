@@ -245,6 +245,21 @@ public class CloudPlatform  {
 
     /**
      *
+     * This is an agent property.
+     * @field servicePattern
+     *
+     */
+    @Parameter (displayName = "Serivce Pattern", usageName = "servicePattern")
+    public Map getServicePattern() {
+        return servicePattern
+    }
+    public void setServicePattern(Map newValue) {
+        servicePattern = newValue
+    }
+    public Map servicePattern = [:]
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -375,7 +390,7 @@ public class CloudPlatform  {
      * @method ServiceQuality
      *
      */
-    public double ServiceQuality(style) {
+    public def ServiceQuality(style) {
 
         // Define the return value variable.
         def returnValue
@@ -385,41 +400,32 @@ public class CloudPlatform  {
 
         // This is a task.
         List styleList = this.serviceList.findAll{ it-> it.resourceComposition == style }
+        // This is a task.
+        Service s = styleList[0]
+        double minq = s.getQuality()
 
-        // This is an agent decision.
-        if (styleList.size() == 0) {
-
-            // This is a task.
-            returnValue = 0
-
-        } else  {
+        // This is a loop.
+        for (ser in styleList) {
 
             // This is a task.
-            double minq = styleList[0].getQuality()
+            double theq = ser.getQuality()
 
-            // This is a loop.
-            for (ser in styleList) {
+            // This is an agent decision.
+            if (theq < minq) {
 
                 // This is a task.
-                double theq = ser.getQuality()
+                minq = theq
+                s = ser
 
-                // This is an agent decision.
-                if (theq < minq) {
+            } else  {
 
-                    // This is a task.
-                    minq = theq
-
-                } else  {
-
-
-                }
 
             }
 
-            // This is a task.
-            returnValue = minq
-
         }
+
+        // This is a task.
+        returnValue = s
         // Return the results.
         return returnValue
 
@@ -446,28 +452,69 @@ public class CloudPlatform  {
         Map style = s.resourceComposition
 
         // This is an agent decision.
-        if (this.serviceStyleAmount.size()>0 && this.ServiceQueue(style) == 0 && style in this.serviceStyleAmount.keySet() && this.ServiceQuality(style) > s.getQuality()) {
+        if (s.resourceContribution.keySet().findIndexOf{ it -> it.exit==true } > -1 || this.servicePattern[style] < this.serviceStyleAmount[style]) {
 
             // This is a task.
             s.ReturnResources()
 
         } else  {
 
-            // This is a task.
-            AddAgentToContext("Ecosystem", s)
-            this.serviceList << s
-            watchedAgent.serviceList << s
 
             // This is an agent decision.
-            if (style in this.serviceStyleAmount.keySet()) {
+            if (this.serviceStyleAmount[style] ==null) {
 
                 // This is a task.
-                this.serviceStyleAmount[style] += 1
+                AddAgentToContext("Ecosystem", s)
+                this.serviceList << s
+                watchedAgent.serviceList << s
+
+                // This is an agent decision.
+                if (style in this.serviceStyleAmount.keySet()) {
+
+                    // This is a task.
+                    this.serviceStyleAmount[style] += 1
+
+                } else  {
+
+                    // This is a task.
+                    this.serviceStyleAmount[style] = 1
+
+                }
 
             } else  {
 
                 // This is a task.
-                this.serviceStyleAmount[style] = 1
+                def minSer = this.ServiceQuality(style)
+
+                // This is an agent decision.
+                if (minSer.getQuality() > s.getQuality()) {
+
+                    // This is a task.
+                    s.ReturnResources()
+
+                } else  {
+
+                    // This is a task.
+                    AddAgentToContext("Ecosystem", s)
+                    this.serviceList << s
+                    watchedAgent.serviceList << s
+                    minSer.exit = true
+                    this.serviceRecycleList << minSer
+
+                    // This is an agent decision.
+                    if (style in this.serviceStyleAmount.keySet()) {
+
+                        // This is a task.
+                        this.serviceStyleAmount[style] += 1
+
+                    } else  {
+
+                        // This is a task.
+                        this.serviceStyleAmount[style] = 1
+
+                    }
+
+                }
 
             }
 
@@ -540,19 +587,30 @@ public class CloudPlatform  {
             def type = res.getType()
 
             // This is an agent decision.
-            if (this.resourceTypeAmount[type] > 0 && this.needResourceCapacity[type] < this.resourceTypeAmount[type]/RunEnvironment.getInstance().getParameters().getValue("ScarcityFactor")) {
+            if (this.resourceTypeAmount[type] > 0 && this.needResourceCapacity[type] < this.resourceTypeAmount[type]) {
 
 
                 // This is an agent decision.
-                if (this.ResourceQuality(type) > res.getQuality()) {
+                if (this.needResourceCapacity[type] < this.resourceTypeAmount[type]/RunEnvironment.getInstance().getParameters().getValue("ScarcityFactor")) {
 
                     // This is a task.
                     p.resourceList.remove(res)
 
                 } else  {
 
-                    // This is a task.
-                    this.MetabolismRes(type,res.getCapacity())
+
+                    // This is an agent decision.
+                    if (this.ResourceQuality(type) > res.getQuality()) {
+
+                        // This is a task.
+                        p.resourceList.remove(res)
+
+                    } else  {
+
+                        // This is a task.
+                        this.UpdateResource(type,res.getCapacity())
+
+                    }
 
                 }
 
@@ -705,11 +763,6 @@ public class CloudPlatform  {
      * @method addNeedCap
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'startTime',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
-    )
     public void addNeedCap(ecosystem.Task watchedAgent) {
 
         // Note the simulation time.
@@ -725,18 +778,31 @@ public class CloudPlatform  {
 
                 // This is a task.
                 this.needResourceCapacity[data.key] += data.value
-                println this.needResourceCapacity
+                //println this.needResourceCapacity
 
             } else  {
 
                 // This is a task.
                 this.needResourceCapacity[data.key] = data.value
-                println this.needResourceCapacity
+                //println this.needResourceCapacity
 
             }
 
         }
 
+
+        // This is an agent decision.
+        if (watchedAgent.needResourceCapacity in this.servicePattern.keySet()) {
+
+            // This is a task.
+            this.servicePattern[watchedAgent.needResourceCapacity] += 1
+
+        } else  {
+
+            // This is a task.
+            this.servicePattern[watchedAgent.needResourceCapacity] = 1
+
+        }
     }
 
     /**
@@ -745,11 +811,6 @@ public class CloudPlatform  {
      * @method releaseNeedCap
      *
      */
-    @Watch(
-        watcheeClassName = 'ecosystem.Task',
-        watcheeFieldNames = 'bufferMark',
-        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
-    )
     public void releaseNeedCap(ecosystem.Task watchedAgent) {
 
         // Note the simulation time.
@@ -762,20 +823,22 @@ public class CloudPlatform  {
             // This is a task.
             def type = watchedAgent.bufferMark.getType()
             this.needResourceCapacity[type] -= watchedAgent.needResourceCapacity[type]
-            println this.needResourceCapacity
+            //println this.needResourceCapacity
 
         } else  {
 
 
             // This is a loop.
-            for (resdata in watchedAgent.bufferMark.resourceComposition) {
+            for (resdata in watchedAgent.needResourceCapacity) {
 
                 // This is a task.
                 this.needResourceCapacity[resdata.key] -= resdata.value
-                println this.needResourceCapacity
+                //println this.needResourceCapacity
 
             }
 
+            // This is a task.
+            this.servicePattern[watchedAgent.needResourceCapacity] -= 1
 
         }
     }
@@ -783,10 +846,10 @@ public class CloudPlatform  {
     /**
      *
      * This is the step behavior.
-     * @method MetabolismRes
+     * @method UpdateResource
      *
      */
-    public void MetabolismRes(type, amount) {
+    public void UpdateResource(type, amount) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
@@ -802,7 +865,7 @@ public class CloudPlatform  {
             if (typeList.size() > 0) {
 
                 // This is a task.
-                typeList = typeList.sort{ it.getQuality() }
+                typeList = typeList.sort{ it.mu }
 
                 // This is a loop.
                 for (res in typeList) {

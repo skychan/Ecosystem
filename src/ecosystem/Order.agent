@@ -15,7 +15,7 @@
     <taskstep x="262" y="287" comment="This is a task." command1="Object agent = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Task&quot;)" command2="Task t = (Task) agent" command3="t.setMaster( this )" command4="t.setParameters(tdata)" command5="this.taskList[t] = false">
       <label x="262" y="272" text="Do Task"/>
     </taskstep>
-    <taskstep x="264" y="376" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="" command4="" command5="">
+    <taskstep x="264" y="376" comment="This is a task." command1="t.setType(this.getType() + &quot;-&quot; + (i).toString())" command2="i+=1" command3="this.plt.addNeedCap(t)" command4="" command5="">
       <label x="264" y="361" text="Set task type"/>
     </taskstep>
     <taskstep x="151" y="115" comment="This is a task." command1="int i = 1" command2="" command3="" command4="" command5="">
@@ -40,7 +40,7 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="596" y="312"/>
+    <joinstep x="601" y="317"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="42" y="34" comment="The order owner, if not only one" visibility="0" compiledname="owner" type="ecosystem.Demander" defaultvalue="null">
@@ -52,16 +52,24 @@
     <agentproperty x="383" y="74" comment="This is an agent property." visibility="0" compiledname="type" type="String" defaultvalue="&quot;&quot;">
       <label x="388" y="59" text="Type"/>
     </agentproperty>
+    <agentproperty x="23" y="209" comment="This is an agent property." visibility="0" compiledname="plt" type="def" defaultvalue="0">
+      <label x="28" y="194" text="Plt"/>
+    </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="172" y="400"/>
-    <endstep x="602" y="388"/>
+    <endstep x="177" y="405"/>
+    <endstep x="607" y="393"/>
   </endsteps>
   <connections>
     <transitions>
       <transition>
         <transitionsource type="behavior" index="0" anchor="0"/>
         <transitiontarget type="task" index="3" anchor="0"/>
+        <bendpoints/>
+      </transition>
+      <transition>
+        <transitionsource type="behavior" index="1" anchor="0"/>
+        <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>
@@ -77,11 +85,6 @@
       <transition>
         <transitionsource type="task" index="3" anchor="2"/>
         <transitiontarget type="decision" index="0" anchor="0"/>
-        <bendpoints/>
-      </transition>
-      <transition>
-        <transitionsource type="behavior" index="1" anchor="0"/>
-        <transitiontarget type="task" index="4" anchor="0"/>
         <bendpoints/>
       </transition>
       <transition>

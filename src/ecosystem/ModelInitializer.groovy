@@ -151,6 +151,7 @@ public class ModelInitializer  {
         CloudPlatform platform = (CloudPlatform) agent
         Object dagent = CreateAgent("Ecosystem", "ecosystem.Demander")
         Demander demander = (Demander) dagent
+        demander.plt = platform
 
         // This is a loop.
         for (i in 300..<350) {

@@ -200,6 +200,21 @@ public class Task extends ecosystem.Job  {
 
     /**
      *
+     * This is an agent property.
+     * @field deltaTime
+     *
+     */
+    @Parameter (displayName = "Delta Time", usageName = "deltaTime")
+    public def getDeltaTime() {
+        return deltaTime
+    }
+    public void setDeltaTime(def newValue) {
+        deltaTime = newValue
+    }
+    public def deltaTime = 0
+
+    /**
+     *
      * This value is used to automatically generate agent identifiers.
      * @field serialVersionUID
      *
@@ -323,7 +338,7 @@ public class Task extends ecosystem.Job  {
                     double realQ = mac.getQuality()
 
                     // This is an agent decision.
-                    if (this.productQuality < realQ) {
+                    if (this.productQuality > realQ) {
 
                         // This is a task.
                         this.productQuality = realQ
@@ -339,6 +354,7 @@ public class Task extends ecosystem.Job  {
                 this.setFinish(true)
                 this.finishTime = GetTickCount()
                 this.span = (int)(this.finishTime - this.getStartTime())
+                //println this.span - this.processingTime
 
                 // This is a loop.
                 for (macData in this.owner) {
@@ -350,7 +366,7 @@ public class Task extends ecosystem.Job  {
                         // This is a task.
                         def res = macData.key
                         def p= macData.value
-                        double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))
+                        double deltaRank = (p*this.needResourceCapacity[res.getType()]*(this.productQuality - this.expectQuality))/(Math.exp(this.deltaTime))
                         res.owner.rank += deltaRank
 
                     } else  {
@@ -361,7 +377,7 @@ public class Task extends ecosystem.Job  {
 
                             // This is a task.
                             int amount = macData.key.resourceComposition.values().sum()
-                            double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.span-this.processingTime))
+                            double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.deltaTime))
                             macData.key.owner.rank += deltaRank
 
                         } else  {
@@ -425,6 +441,7 @@ public class Task extends ecosystem.Job  {
             // This is a task.
             this.processBehavior.Process(this)
             this.prepareStatus = [:]
+            this.deltaTime = (GetTickCount() - this.startTime)
 
         } else  {
 

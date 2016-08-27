@@ -21,7 +21,7 @@
     <taskstep x="355" y="177" comment="This is a task." command1="s.jobList &lt;&lt; t " command2="" command3="" command4="" command5="">
       <label x="355" y="162" text="Do Task"/>
     </taskstep>
-    <taskstep x="516" y="180" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="" command3="t.prepareStatus[m] = true" command4="" command5="">
+    <taskstep x="516" y="180" comment="This is a task." command1="m.buffer &lt;&lt; t" command2="t.bufferMark = m" command3="t.prepareStatus[m] = true" command4="t.master.plt.releaseNeedCap(t)" command5="">
       <label x="516" y="165" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -31,13 +31,13 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="116" y="313"/>
+    <joinstep x="121" y="318"/>
   </joinsteps>
   <agentproperties/>
   <endsteps>
-    <endstep x="119" y="395"/>
-    <endstep x="390" y="307"/>
-    <endstep x="543" y="307"/>
+    <endstep x="124" y="400"/>
+    <endstep x="395" y="312"/>
+    <endstep x="548" y="312"/>
   </endsteps>
   <connections>
     <transitions>

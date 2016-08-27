@@ -1,6 +1,6 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Type</name>
-  <dataSet>Type</dataSet>
+  <name>Machine</name>
+  <dataSet>Machine</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
   <chartTitle></chartTitle>
@@ -21,13 +21,25 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>type</string>
+      <string>Resource</string>
       <SeriesData>
-        <label>type</label>
+        <label>Resource</label>
         <color>
           <red>0</red>
           <green>0</green>
           <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>Service</string>
+      <SeriesData>
+        <label>Service</label>
+        <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>

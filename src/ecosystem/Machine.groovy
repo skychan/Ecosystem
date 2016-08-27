@@ -491,7 +491,6 @@ public class Machine  {
 
             // This is a task.
             this.assignBehavior.Buffer(job,this)
-            job.bufferMark = this
 
         } else  {
 

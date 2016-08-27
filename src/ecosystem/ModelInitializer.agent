@@ -15,10 +15,16 @@
     <taskstep x="297" y="279" comment="This is a task." command1="platform.CreateProvider()" command2="" command3="" command4="" command5="">
       <label x="297" y="264" text="Do Task"/>
     </taskstep>
+    <taskstep x="183" y="365" comment="This is a task." command1="Type ta = CreateAgent(&quot;Ecosystem&quot;, &quot;ecosystem.Type&quot;)" command2="ta.type = type" command3="" command4="" command5="">
+      <label x="183" y="350" text="Do Task"/>
+    </taskstep>
   </tasksteps>
   <decisionsteps>
     <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 300..&lt;350" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
+    </decisionstep>
+    <decisionstep x="63" y="376" comment="This is a loop." criteria="type in 1..12" branchType="while">
+      <label x="63" y="361" text="Evaluate Criteria"/>
     </decisionstep>
   </decisionsteps>
   <joinsteps/>
@@ -34,7 +40,7 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="115" y="472"/>
+    <endstep x="74" y="509"/>
   </endsteps>
   <connections>
     <transitions>
@@ -57,6 +63,16 @@
       </booleantransition>
       <booleantransition value="false">
         <transitionsource type="decision" index="0" anchor="2"/>
+        <transitiontarget type="decision" index="1" anchor="0"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="true">
+        <transitionsource type="decision" index="1" anchor="3"/>
+        <transitiontarget type="task" index="3" anchor="1"/>
+        <bendpoints/>
+      </booleantransition>
+      <booleantransition value="false">
+        <transitionsource type="decision" index="1" anchor="2"/>
         <transitiontarget type="end" index="0" anchor="0"/>
         <bendpoints/>
       </booleantransition>

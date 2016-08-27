@@ -21,7 +21,7 @@
     <taskstep x="43" y="187" comment="This is a task." command1="selectBehavior = new SelectInTask()" command2="processBehavior = new ProcessInTask()" command3="" command4="" command5="">
       <label x="43" y="172" text="Do Task"/>
     </taskstep>
-    <taskstep x="273" y="313" comment="This is a task." command1="" command2="this.setStartTime(GetTickCount())" command3="" command4="" command5="">
+    <taskstep x="273" y="313" comment="This is a task." command1="" command2="this.startTime =  GetTickCount()" command3="" command4="" command5="">
       <label x="273" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="380" y="127" comment="This is a task." command1="this.setProcessingTime(data.value)" command2="this.addOwner(this.getMaster().getOwner(),data.value)" command3="this.setRemainingTime(data.value)" command4="" command5="">

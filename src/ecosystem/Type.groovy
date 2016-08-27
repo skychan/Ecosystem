@@ -61,7 +61,37 @@ import static repast.simphony.essentials.RepastEssentials.*
  * This is an agent.
  *
  */
-public class SelectInTask implements ecosystem.SelectBehavior {
+public class Type  {
+
+    /**
+     *
+     * This is an agent property.
+     * @field type
+     *
+     */
+    @Parameter (displayName = "Type", usageName = "type")
+    public def getType() {
+        return type
+    }
+    public void setType(def newValue) {
+        type = newValue
+    }
+    public def type = 0
+
+    /**
+     *
+     * This is an agent property.
+     * @field needCapacity
+     *
+     */
+    @Parameter (displayName = "Need Cap", usageName = "needCapacity")
+    public int getNeedCapacity() {
+        return needCapacity
+    }
+    public void setNeedCapacity(int newValue) {
+        needCapacity = newValue
+    }
+    public int needCapacity = 0
 
     /**
      *
@@ -85,59 +115,20 @@ public class SelectInTask implements ecosystem.SelectBehavior {
      * @field agentID
      *
      */
-    protected String agentID = "SelectInTask " + (agentIDCounter++)
+    protected String agentID = "Type " + (agentIDCounter++)
 
     /**
      *
-     * Select
-     * @method Select
+     * This is the step behavior.
+     * @method add
      *
      */
-    public def Select(t, candidates) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        def chosenMap = [:]
-
-        // This is a loop.
-        for (candidate in candidates) {
-
-            // This is a task.
-            def theType = candidate.key
-            def theList = candidate.value
-            chosenMap[theType] = Evaluation(t,theList)
-
-            // This is a loop.
-            for (res in theList) {
-
-                // This is a task.
-                res.competeList.remove(t)
-
-            }
-
-
-        }
-
-        // This is a task.
-        returnValue = chosenMap
-        //println "after the selection and clear"
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * Evaluation
-     * @method Evaluation
-     *
-     */
-    public def Evaluation(t, candidates) {
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'startTime',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public def add(ecosystem.Task watchedAgent) {
 
         // Define the return value variable.
         def returnValue
@@ -147,29 +138,13 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
 
         // This is an agent decision.
-        if (candidates == []) {
+        if (this.type in watchedAgent.needResourceCapacity.keySet()) {
 
             // This is a task.
-            returnValue = null
+            this.needCapacity += watchedAgent.needResourceCapacity[this.type]
 
         } else  {
 
-
-            // This is an agent decision.
-            if (candidates[0].getClass() == ecosystem.Service) {
-
-                // This is a task.
-                candidates.dropWhile{ it in t.owner.keySet() }
-                candidates.sort{[-it.getQuality(),-it.owner.rank,it.jobList.size()]}
-                returnValue = candidates[0]
-
-            } else  {
-
-                // This is a task.
-                candidates.sort{ [ -it.owner.rank,-it.mu,-it.getAvailable() ] }
-                returnValue = candidates[0]
-
-            }
 
         }
         // Return the results.
@@ -180,35 +155,32 @@ public class SelectInTask implements ecosystem.SelectBehavior {
     /**
      *
      * This is the step behavior.
-     * @method Allocate
+     * @method releaseNeedCap
      *
      */
-    public Map Allocate(theOnes) {
-
-        // Define the return value variable.
-        def returnValue
+    @Watch(
+        watcheeClassName = 'ecosystem.Task',
+        watcheeFieldNames = 'bufferMark',
+        whenToTrigger = WatcherTriggerSchedule.IMMEDIATE
+    )
+    public void releaseNeedCap(ecosystem.Task watchedAgent) {
 
         // Note the simulation time.
         def time = GetTickCountInTimeUnits()
 
-        // This is a task.
-        int nullCount = theOnes.values().count(null)
 
         // This is an agent decision.
-        if (theOnes['service'] == null) {
+        if (watchedAgent.bufferMark.getClass() == ecosystem.Resource) {
 
 
             // This is an agent decision.
-            if (nullCount > 1) {
+            if (this.type == watchedAgent.bufferMark.getType()) {
 
                 // This is a task.
-                returnValue =  [success:false,allocation:[:]]
+                this.needCapacity -= watchedAgent.needResourceCapacity[this.type]
 
             } else  {
 
-                // This is a task.
-                theOnes.remove('service')
-                returnValue =  [success:true,allocation:theOnes]
 
             }
 
@@ -216,59 +188,17 @@ public class SelectInTask implements ecosystem.SelectBehavior {
 
 
             // This is an agent decision.
-            if (nullCount > 0) {
+            if (this.type in watchedAgent.needResourceCapacity.keySet()) {
 
                 // This is a task.
-                returnValue =  [success:true,allocation:['service':theOnes['service']]]
+                this.needCapacity -= watchedAgent.needResourceCapacity[this.type]
 
             } else  {
 
-                // This is a task.
-                def candidateList = theOnes.values()
-                candidateList.sort{ [-it.mu, it.getFullLength()] }
-
-                // This is an agent decision.
-                if (candidateList[0].getClass() == ecosystem.Service) {
-
-                    // This is a task.
-                    returnValue =  [success:true,allocation:['service':theOnes['service']]]
-
-                } else  {
-
-                    // This is a task.
-                    theOnes.remove('service')
-                    returnValue =  [success:true,allocation:theOnes]
-
-                }
 
             }
 
         }
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
-     * This is the step behavior.
-     * @method Assign
-     *
-     */
-    public void Assign(allocation, t) {
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-
-        // This is a loop.
-        for (mac in allocation.values()) {
-
-            // This is a task.
-            mac.Assign(t)
-
-        }
-
     }
 
     /**

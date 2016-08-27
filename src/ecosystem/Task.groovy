@@ -271,7 +271,7 @@ public class Task extends ecosystem.Job  {
         }
 
         // This is a task.
-        this.setStartTime(GetTickCount())
+        this.startTime =  GetTickCount()
     }
 
     /**

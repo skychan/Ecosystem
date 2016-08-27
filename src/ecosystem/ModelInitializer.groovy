@@ -162,6 +162,16 @@ public class ModelInitializer  {
 
         }
 
+
+        // This is a loop.
+        for (type in 1..12) {
+
+            // This is a task.
+            Type ta = CreateAgent("Ecosystem", "ecosystem.Type")
+            ta.type = type
+
+        }
+
         // Return the results.
         return returnValue
 

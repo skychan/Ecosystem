@@ -63,7 +63,7 @@
     <taskstep x="664" y="616" comment="This is a task." command1="this.resourceComposition[data.key.getType()] = data.value" command2="" command3="" command4="" command5="">
       <label x="664" y="601" text="Do Task"/>
     </taskstep>
-    <taskstep x="940" y="784" comment="This is a task." command1="resData.key.sourceable += resData.value" command2="resData.key.capacity += resData.value" command3="" command4="" command5="">
+    <taskstep x="940" y="784" comment="This is a task." command1="resData.key.sourceable += resData.value" command2="resData.key.capacity += resData.value" command3="resData.key.master.remove(this)" command4="" command5="">
       <label x="940" y="769" text="Do Task"/>
     </taskstep>
   </tasksteps>
@@ -97,8 +97,8 @@
     </decisionstep>
   </decisionsteps>
   <joinsteps>
-    <joinstep x="429" y="671"/>
-    <joinstep x="614" y="690"/>
+    <joinstep x="434" y="676"/>
+    <joinstep x="619" y="695"/>
   </joinsteps>
   <agentproperties>
     <agentproperty x="211" y="118" comment="This is an agent property." visibility="0" compiledname="resourceComposition" type="Map" defaultvalue="[:]">
@@ -109,12 +109,12 @@
     </agentproperty>
   </agentproperties>
   <endsteps>
-    <endstep x="92" y="339"/>
-    <endstep x="431" y="760"/>
-    <endstep x="778" y="608"/>
-    <endstep x="969" y="613"/>
-    <endstep x="614" y="760"/>
-    <endstep x="856" y="869"/>
+    <endstep x="97" y="344"/>
+    <endstep x="436" y="765"/>
+    <endstep x="783" y="613"/>
+    <endstep x="974" y="618"/>
+    <endstep x="619" y="765"/>
+    <endstep x="832" y="885"/>
   </endsteps>
   <connections>
     <transitions>

@@ -201,21 +201,6 @@ public class CloudPlatform  {
     /**
      *
      * This is an agent property.
-     * @field exitList
-     *
-     */
-    @Parameter (displayName = "ExitList", usageName = "exitList")
-    public List getExitList() {
-        return exitList
-    }
-    public void setExitList(List newValue) {
-        exitList = newValue
-    }
-    public List exitList = []
-
-    /**
-     *
-     * This is an agent property.
      * @field needResourceCapacity
      *
      */
@@ -227,6 +212,36 @@ public class CloudPlatform  {
         needResourceCapacity = newValue
     }
     public Map needResourceCapacity = [:]
+
+    /**
+     *
+     * This is an agent property.
+     * @field resourceRecycleList
+     *
+     */
+    @Parameter (displayName = "Resource Recycle List", usageName = "resourceRecycleList")
+    public List getResourceRecycleList() {
+        return resourceRecycleList
+    }
+    public void setResourceRecycleList(List newValue) {
+        resourceRecycleList = newValue
+    }
+    public List resourceRecycleList = []
+
+    /**
+     *
+     * This is an agent property.
+     * @field serviceRecycleList
+     *
+     */
+    @Parameter (displayName = "Service Recycle List", usageName = "serviceRecycleList")
+    public List getServiceRecycleList() {
+        return serviceRecycleList
+    }
+    public void setServiceRecycleList(List newValue) {
+        serviceRecycleList = newValue
+    }
+    public List serviceRecycleList = []
 
     /**
      *
@@ -356,39 +371,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * Return the resource quene length sum
-     * @method ServiceQueue
-     *
-     */
-    public int ServiceQueue(style) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        int L = 0
-        List styleList = this.serviceList.findAll{ it-> it.resourceComposition == style }
-
-        // This is a loop.
-        for (ser in styleList) {
-
-            // This is a task.
-            L += ser.getQueueLength()
-
-        }
-
-        // This is a task.
-        returnValue = L
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method ServiceQuality
      *
@@ -494,39 +476,6 @@ public class CloudPlatform  {
 
     /**
      *
-     * Return the resource quene length sum
-     * @method ResourceQueue
-     *
-     */
-    public int ResourceQueue(type) {
-
-        // Define the return value variable.
-        def returnValue
-
-        // Note the simulation time.
-        def time = GetTickCountInTimeUnits()
-
-        // This is a task.
-        int L = 0
-        List typeResList = this.resourceList.findAll{ it-> it.getType() == type }
-
-        // This is a loop.
-        for (res in typeResList) {
-
-            // This is a task.
-            L += res.getQueueLength()
-
-        }
-
-        // This is a task.
-        returnValue = L
-        // Return the results.
-        return returnValue
-
-    }
-
-    /**
-     *
      * This is the step behavior.
      * @method ResourceQuality
      *
@@ -541,41 +490,30 @@ public class CloudPlatform  {
 
         // This is a task.
         List typeResList = this.resourceList.findAll{ it-> it.getType() == type }
+        // This is a task.
+        double minq = typeResList[0].getQuality()
 
-        // This is an agent decision.
-        if (typeResList.size() == 0) {
-
-            // This is a task.
-            returnValue = 0
-
-        } else  {
+        // This is a loop.
+        for (res in typeResList) {
 
             // This is a task.
-            double minq = typeResList[0].getQuality()
+            double theq = res.getQuality()
 
-            // This is a loop.
-            for (res in typeResList) {
+            // This is an agent decision.
+            if (theq < minq) {
 
                 // This is a task.
-                double theq = res.getQuality()
+                minq = theq
 
-                // This is an agent decision.
-                if (theq < minq) {
+            } else  {
 
-                    // This is a task.
-                    minq = theq
-
-                } else  {
-
-
-                }
 
             }
 
-            // This is a task.
-            returnValue = minq
-
         }
+
+        // This is a task.
+        returnValue = minq
         // Return the results.
         return returnValue
 
@@ -598,44 +536,28 @@ public class CloudPlatform  {
         // This is a loop.
         for (res in resList) {
 
+            // This is a task.
+            def type = res.getType()
 
             // This is an agent decision.
-            if (this.ResourceQueue(res.getType()) == 0) {
+            if (this.resourceTypeAmount[type] > 0 && this.needResourceCapacity[type] < this.resourceTypeAmount[type]/RunEnvironment.getInstance().getParameters().getValue("ScarcityFactor")) {
 
 
                 // This is an agent decision.
-                if (this.resourceTypeAmount[res.getType()] > 0) {
+                if (this.ResourceQuality(type) > res.getQuality()) {
 
                     // This is a task.
                     p.resourceList.remove(res)
 
                 } else  {
 
+                    // This is a task.
+                    this.MetabolismRes(type,res.getCapacity())
 
                 }
 
             } else  {
 
-
-                // This is an agent decision.
-                if (res.getType() in this.resourceTypeAmount.keySet()) {
-
-
-                    // This is an agent decision.
-                    if (this.ResourceQuality(res.getType()) > res.getQuality()) {
-
-                        // This is a task.
-                        p.resourceList.remove(res)
-
-                    } else  {
-
-
-                    }
-
-                } else  {
-
-
-                }
 
             }
 
@@ -681,7 +603,7 @@ public class CloudPlatform  {
     /**
      *
      * This is the step behavior.
-     * @method Metabolism
+     * @method Recycle
      *
      */
     @ScheduledMethod(
@@ -689,7 +611,7 @@ public class CloudPlatform  {
         interval = 1d,
         shuffle = true
     )
-    public def Metabolism() {
+    public def Recycle() {
 
         // Define the return value variable.
         def returnValue
@@ -701,80 +623,45 @@ public class CloudPlatform  {
         // This is an agent decision.
         if (RunEnvironment.getInstance().getParameters().getValue("Metabolism")) {
 
-            // This is a task.
-            def now = GetTickCount()
-            double rq = Math.exp(2000)
-            double sq = Math.exp(2000)
-            List machineList = this.resourceList + this.serviceList
-            // This is a task.
-            Service s = null
-            Resource r = null
 
             // This is a loop.
-            for (mac in machineList) {
+            for (ser in this.serviceRecycleList.collect()) {
 
 
                 // This is an agent decision.
-                if (mac.getClass() == ecosystem.Resource) {
+                if (ser.getFullLength() == 0) {
 
-
-                    // This is an agent decision.
-                    if (mac.master.size() == 0) {
-
-                        // This is a task.
-                        double tempq = mac.getQuality()
-
-                        // This is an agent decision.
-                        if (tempq < rq) {
-
-                            // This is a task.
-                            r = mac
-                            rq = tempq
-
-                        } else  {
-
-
-                        }
-
-                    } else  {
-
-
-                    }
+                    // This is a task.
+                    this.serviceList.remove(ser)
+                    this.serviceStyleAmount[ser.resourceComposition] -= 1
+                    ser.owner.serviceList.remove(ser)
+                    ser.ReturnResources()
+                    RemoveAgentFromModel(ser)
+                    // This is a task.
+                    this.serviceRecycleList.remove(ser)
 
                 } else  {
 
-                    // This is a task.
-                    double tempq = mac.getQuality()
-
-                    // This is an agent decision.
-                    if (tempq < sq) {
-
-                        // This is a task.
-                        s = mac
-                        sq = tempq
-
-                    } else  {
-
-
-                    }
 
                 }
 
             }
 
-            // This is a task.
-            List chosenMac = [r,s]
 
             // This is a loop.
-            for (mac in chosenMac) {
+            for (res in this.resourceRecycleList.collect()) {
 
 
                 // This is an agent decision.
-                if (mac != null) {
+                if (res.getFullLength() == 0 && res.master.size() == 0) {
 
                     // This is a task.
-                    mac.exit = true
-                    this.exitList << mac
+                    this.resourceList.remove(res)
+                    this.resourceTypeAmount[res.getType()] -= res.capacity
+                    res.owner.resourceList.remove(res)
+                    RemoveAgentFromModel(res)
+                    // This is a task.
+                    this.resourceRecycleList.remove(res)
 
                 } else  {
 
@@ -794,42 +681,6 @@ public class CloudPlatform  {
                     // This is a task.
                     this.providerList.remove(p)
                     RemoveAgentFromModel(p)
-
-                } else  {
-
-
-                }
-
-            }
-
-
-            // This is a loop.
-            for (mac in this.exitList.collect()) {
-
-
-                // This is an agent decision.
-                if (mac.getFullLength() == 0) {
-
-                    // This is a task.
-                    RemoveAgentFromModel(mac)
-
-                    // This is an agent decision.
-                    if (mac.getClass() == ecosystem.Resource) {
-
-                        // This is a task.
-                        this.resourceList.remove(mac)
-                        this.resourceTypeAmount[mac.getType()] -= mac.capacity
-                        mac.owner.resourceList.remove(mac)
-
-                    } else  {
-
-                        // This is a task.
-                        this.serviceList.remove(mac)
-                        this.serviceStyleAmount[mac.resourceComposition] -= 1
-                        mac.owner.serviceList.remove(mac)
-                        mac.ReturnResources()
-
-                    }
 
                 } else  {
 
@@ -924,6 +775,63 @@ public class CloudPlatform  {
                 println this.needResourceCapacity
 
             }
+
+
+        }
+    }
+
+    /**
+     *
+     * This is the step behavior.
+     * @method MetabolismRes
+     *
+     */
+    public void MetabolismRes(type, amount) {
+
+        // Note the simulation time.
+        def time = GetTickCountInTimeUnits()
+
+
+        // This is an agent decision.
+        if (RunEnvironment.getInstance().getParameters().getValue("Metabolism")) {
+
+            // This is a task.
+            List typeList = this.resourceList.findAll{ it-> it.getType() == type }
+
+            // This is an agent decision.
+            if (typeList.size() > 0) {
+
+                // This is a task.
+                typeList = typeList.sort{ it.getQuality() }
+
+                // This is a loop.
+                for (res in typeList) {
+
+
+                    // This is an agent decision.
+                    if (amount > 0) {
+
+                        // This is a task.
+                        res.exit = true
+                        amount -= res.getCapacity()
+                        this.resourceRecycleList << res
+
+                    } else  {
+
+                        // This is a task.
+                        break
+
+                    }
+
+                }
+
+
+            } else  {
+
+
+            }
+
+        } else  {
 
 
         }

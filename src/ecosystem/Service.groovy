@@ -319,6 +319,7 @@ public class Service extends ecosystem.Machine  {
             // This is a task.
             resData.key.sourceable += resData.value
             resData.key.capacity += resData.value
+            resData.key.master.remove(this)
 
         }
 

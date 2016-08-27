@@ -51,7 +51,7 @@
     <taskstep x="63" y="838" comment="This is a task." command1="this.assignBehavior.Queue(job,this)" command2="" command3="" command4="" command5="">
       <label x="63" y="823" text="Do Task"/>
     </taskstep>
-    <taskstep x="209" y="838" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="job.bufferMark = this" command3="" command4="" command5="">
+    <taskstep x="209" y="838" comment="This is a task." command1="this.assignBehavior.Buffer(job,this)" command2="" command3="" command4="" command5="">
       <label x="209" y="823" text="Do Task"/>
     </taskstep>
     <taskstep x="136" y="730" comment="This is a task." command1="this.assignTime = GetTickCount()" command2="" command3="" command4="" command5="">

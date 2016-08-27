@@ -30,7 +30,7 @@
     <taskstep x="267" y="172" comment="This is a task." command1="def chosenMap = [:]" command2="" command3="" command4="" command5="">
       <label x="267" y="157" text="Do Task"/>
     </taskstep>
-    <taskstep x="79" y="313" comment="This is a task." command1="candidates.sort{[-it.mu,-it.owner.rank,-it.getAvailable(),it.jobList.size()]}" command2="returnValue = candidates[0]" command3="" command4="" command5="">
+    <taskstep x="79" y="313" comment="This is a task." command1="candidates.sort{ [ -it.owner.rank,-it.mu,-it.getAvailable() ] }" command2="returnValue = candidates[0]" command3="" command4="" command5="">
       <label x="79" y="298" text="Do Task"/>
     </taskstep>
     <taskstep x="568" y="130" comment="This is a task." command1="int nullCount = theOnes.values().count(null)" command2="" command3="" command4="" command5="">

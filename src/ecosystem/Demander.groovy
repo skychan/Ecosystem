@@ -181,7 +181,7 @@ public class Demander extends ecosystem.User  {
         // This is a task.
         Parameters params = RunEnvironment.getInstance().getParameters()
         double mean = params.getValue("Order")
-        ArrayList types = 300..310
+        ArrayList types = 345..<355
         RandomHelper.createPoisson(mean)
         SimUtilities.shuffle(types,RandomHelper.getUniform())
         // This is a task.

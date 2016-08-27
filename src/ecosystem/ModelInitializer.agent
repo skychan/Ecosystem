@@ -20,7 +20,7 @@
     </taskstep>
   </tasksteps>
   <decisionsteps>
-    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 300..&lt;350" branchType="while">
+    <decisionstep x="70" y="280" comment="This is a loop." criteria="i in 300..&lt;400" branchType="while">
       <label x="70" y="265" text="Count Demander"/>
     </decisionstep>
     <decisionstep x="63" y="376" comment="This is a loop." criteria="type in 1..12" branchType="while">

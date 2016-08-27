@@ -39,7 +39,7 @@
     <taskstep x="708" y="93" comment="This is a task." command1="Scanner sc = new Scanner(new File(&quot;cases/Order&quot;+orderID+&quot;.rcp&quot;))" command2="int nTasks = sc.nextInt()" command3="int nServices = sc.nextInt()" command4="sc.nextLine()" command5="sc.nextLine()">
       <label x="708" y="78" text="Do Task"/>
     </taskstep>
-    <taskstep x="284" y="135" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Order&quot;)" command3="ArrayList types = 300..310" command4="RandomHelper.createPoisson(mean)" command5="SimUtilities.shuffle(types,RandomHelper.getUniform())">
+    <taskstep x="284" y="135" comment="This is a task." command1="Parameters params = RunEnvironment.getInstance().getParameters()" command2="double mean = params.getValue(&quot;Order&quot;)" command3="ArrayList types = 345..&lt;355" command4="RandomHelper.createPoisson(mean)" command5="SimUtilities.shuffle(types,RandomHelper.getUniform())">
       <label x="284" y="120" text="Randomize"/>
     </taskstep>
     <taskstep x="77" y="525" comment="This is a task." command1="this.orderList.remove(order)" command2="RemoveAgentFromModel(order)" command3="" command4="" command5="">

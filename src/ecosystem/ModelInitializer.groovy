@@ -173,6 +173,9 @@ public class ModelInitializer  {
 
         }
 
+        // This is a task.
+        File file = new File("Results/Quality_"+RunEnvironment.getInstance().getParameters().getValue("Mode")+".csv")
+        file.write("Tick,Quality,type,Task\n")
         // Return the results.
         return returnValue
 

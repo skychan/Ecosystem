@@ -78,7 +78,7 @@
     <taskstep x="1167" y="312" comment="This is a task." command1="int amount = macData.key.resourceComposition.values().sum()" command2="double deltaRank = (amount*macData.value*(this.productQuality - this.expectQuality))/(Math.exp(this.deltaTime))" command3="macData.key.owner.rank += deltaRank" command4="" command5="">
       <label x="1167" y="297" text="Do Task"/>
     </taskstep>
-    <taskstep x="938" y="139" comment="This is a task." command1="this.master.Finish(this)" command2="" command3="" command4="" command5="">
+    <taskstep x="938" y="139" comment="This is a task." command1="this.master.Finish(this)" command2="File file = new File(&quot;Results/Quality_&quot;+RunEnvironment.getInstance().getParameters().getValue(&quot;Mode&quot;)+&quot;.csv&quot;)" command3="file.append(GetTickCount()+&quot;,&quot; +this.productQuality +&quot;,&quot;+ this.getType()+&quot;,&quot;+this.toString()+ &quot;\fn&quot;)" command4="" command5="">
       <label x="938" y="124" text="Do Task"/>
     </taskstep>
   </tasksteps>

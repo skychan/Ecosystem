@@ -391,6 +391,8 @@ public class Task extends ecosystem.Job  {
 
                 // This is a task.
                 this.master.Finish(this)
+                File file = new File("Results/Quality_"+RunEnvironment.getInstance().getParameters().getValue("Mode")+".csv")
+                file.append(GetTickCount()+"," +this.productQuality +","+ this.getType()+","+this.toString()+ "\n")
 
             } else  {
 

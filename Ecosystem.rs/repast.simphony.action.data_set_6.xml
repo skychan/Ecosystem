@@ -16,30 +16,12 @@
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>Quality Mean</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Quality Mean</id>
-        <className>ecosystem.Task</className>
-        <methodName>getProductQuality</methodName>
-        <aggType>MEAN</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
       <string>Quality Std</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
         <id>Quality Std</id>
         <className>ecosystem.Task</className>
         <methodName>getProductQuality</methodName>
         <aggType>STD_DEV</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>Rank Mean</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Rank Mean</id>
-        <className>ecosystem.Provider</className>
-        <methodName>getRank</methodName>
-        <aggType>MEAN</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
@@ -52,15 +34,6 @@
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>Res Queue Mean</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Res Queue Mean</id>
-        <className>ecosystem.Resource</className>
-        <methodName>getQueueLength</methodName>
-        <aggType>MEAN</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
       <string>Res Queue Std</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
         <id>Res Queue Std</id>
@@ -70,21 +43,48 @@
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>Ser Queue Mean</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Ser Queue Mean</id>
-        <className>ecosystem.Service</className>
-        <methodName>getQueueLength</methodName>
-        <aggType>MEAN</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
       <string>Ser Queue Std</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
         <id>Ser Queue Std</id>
         <className>ecosystem.Service</className>
         <methodName>getQueueLength</methodName>
         <aggType>STD_DEV</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Quality Mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Quality Mean</id>
+        <className>ecosystem.Task</className>
+        <methodName>getProductQuality</methodName>
+        <aggType>MAX</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Rank Mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Rank Mean</id>
+        <className>ecosystem.Provider</className>
+        <methodName>getRank</methodName>
+        <aggType>MAX</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Res Queue Mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Res Queue Mean</id>
+        <className>ecosystem.Resource</className>
+        <methodName>getQueueLength</methodName>
+        <aggType>MAX</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Ser Queue Mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Ser Queue Mean</id>
+        <className>ecosystem.Service</className>
+        <methodName>getQueueLength</methodName>
+        <aggType>MAX</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

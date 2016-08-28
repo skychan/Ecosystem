@@ -24,6 +24,12 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
+				<parameter name="Mode" displayName="Mode" type="java.lang.String" 
+						defaultValue="m1" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
+									
+		/>
 				<parameter name="Service" displayName="Service" type="boolean" 
 						defaultValue="false" 
 						isReadOnly="false" 

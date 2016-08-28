@@ -54,6 +54,12 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
+				<parameter name="ServiceFactor" displayName="ServiceFactor" type="double" 
+						defaultValue="1.0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
 				<parameter name="Recall" displayName="Recall" type="int" 
 						defaultValue="30" 
 						isReadOnly="false" 
